@@ -14,6 +14,8 @@ export default function Home() {
 
   return (
     <div className={style.content}>
+      <Navbar />
+
       <div className={style.filtros}>
         <h4>Filtros</h4>
       </div>
@@ -30,6 +32,7 @@ export default function Home() {
             );
           })}
       </div>
+      <Footer />
     </div>
   );
 }

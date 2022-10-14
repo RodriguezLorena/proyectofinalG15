@@ -13,6 +13,7 @@ export default function Card({ name, image, price }) {
         alt=""
         className={style.fondo}
       />
+      <p className={style.view}>View detail</p>
       <h5>{name}</h5>
       <div className={style.precios}>
         <h6>${price}</h6>
