@@ -345,3 +345,17 @@ export function getProducts() {
     }
   };
 }
+
+export function GetDetail(id) {
+  return async function (dispatch) {
+    try {
+      let infoId = dataa.filter((e) => e.id === id);
+      return dispatch({
+        type: "GET_ID",
+        payload: infoId,
+      });
+    } catch (error) {
+      console.log(error);
+    }
+  };
+}
