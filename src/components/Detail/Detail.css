@@ -9,24 +9,26 @@
 }
 .text_detail {
   width: 80%;
+
   color: rgb(22, 24, 26);
   padding: 40px;
-  font-size: 70%;
+  font-size: 100%;
   text-align: left;
   box-shadow: 0 0 20px #77706e, 0 0 60px #77706e, 0 0 20px #77706e;
-  font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande",
-    "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
+  font-family: "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS", sans-serif;
 
   border-radius: 1rem;
 }
 .img_detail img {
+  position: relative;
+  left: 20%;
   height: 100%;
-  width: 50%;
+  width: 60%;
   border-color: #77706e;
   border-radius: 1rem;
   box-shadow: 0 0 20px #77706e, 0 0 60px #77706e, 0 0 20px #77706e;
 }
-.button_compra {
+.button_compra1 {
   position: relative;
   right: 30%;
 }

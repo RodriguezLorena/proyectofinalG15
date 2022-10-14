@@ -46,13 +46,12 @@ export default function ProductDetail() {
         }
       </div>
       <div className="price_detail">
-        <h3>$ {IdProduct[0].price}</h3>
+        <strong>
+          <h3>$ {IdProduct[0].price}</h3>
+        </strong>
       </div>
-      <div className="button_compra">
-        <button>
-          {" "}
-          <strong>Compra ya</strong>
-        </button>
+      <div className="button_compra1">
+        <button>Compra ya</button>
       </div>
     </div>
   );
