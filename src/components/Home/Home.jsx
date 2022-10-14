@@ -4,6 +4,9 @@ import { useDispatch, useSelector } from "react-redux";
 import { getProducts } from "../../redux/action";
 import Card from "../Card/Card";
 import style from "./Home.module.css";
+import Footer from "../Footer/Footer";
+import Navbar from "./Navbar/Navbar";
+
 
 export default function Home() {
   const dispatch = useDispatch();
@@ -35,4 +38,5 @@ export default function Home() {
       <Footer />
     </div>
   );
+
 }
