@@ -27,11 +27,9 @@
   box-shadow: 0 0 20px #77706e, 0 0 60px #77706e, 0 0 20px #77706e;
 }
 .button_compra {
-  position: relative;
   right: 30%;
 }
 .price_detail {
-  position: relative;
   right: 30%;
   font-family: "Inter";
 }
