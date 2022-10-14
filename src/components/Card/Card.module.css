@@ -1,0 +1,52 @@
+.content {
+  background-color: #fff;
+  width: 200px;
+  height: 300px;
+  border-radius: 20px;
+  margin: 20px;
+  padding: 20px 10px 10px 10px;
+  box-shadow: 10px 10px 10px rgba(0, 0, 0, 0.5),
+    inset 5px 5px 5px rgba(0, 0, 0, 0.2);
+  transition: all ease 0.5s;
+}
+
+.content:hover {
+  transform: scale(1.1);
+}
+
+.fondo {
+  border-radius: 20px;
+  width: 80%;
+  height: 60%;
+}
+
+.content h5 {
+  text-align: start;
+  font-size: 18px;
+  height: 50px;
+  border-bottom: 1px solid black;
+  margin: 20px 10px 10px 10px;
+  font-weight: 400;
+}
+
+.precios {
+  height: 10%;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  text-align: center;
+}
+.precios h6 {
+  width: max-content;
+  margin: 0;
+  font-size: 18px;
+  font-weight: 400;
+}
+
+.precios p {
+  margin-left: 70px;
+}
+
+.precios img {
+  width: 30px;
+}
