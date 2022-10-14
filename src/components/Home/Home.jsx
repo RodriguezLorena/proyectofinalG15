@@ -2,7 +2,8 @@ import React from "react";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { getProducts } from "../../redux/action";
-import Layout from "./Layout/Layout";
+import Footer from "../Footer/Footer";
+import Navbar from "./Navbar/Navbar";
 
 export default function Home() {
   const dispatch = useDispatch();
@@ -11,5 +12,8 @@ export default function Home() {
     dispatch(getProducts());
   }, [dispatch]);
 
-  return <Layout></Layout>;
+  return <div>
+    <Navbar/>
+    <Footer/>
+  </div>;
 }
