@@ -25,6 +25,7 @@ export default function Home() {
                 name={element.name}
                 image={element.image}
                 price={element.price}
+                key={element.id}
               />
             );
           })}
