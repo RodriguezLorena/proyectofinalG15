@@ -1,3 +1,7 @@
+.link {
+  text-decoration: none;
+}
+
 .content {
   background-color: #fff;
   width: 200px;

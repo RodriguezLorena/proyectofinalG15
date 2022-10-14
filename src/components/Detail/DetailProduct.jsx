@@ -4,7 +4,7 @@ import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link, useParams } from "react-router-dom";
 import { GetDetail } from "../../redux/action";
-import "../Detail/Detail.css";
+import style from "../Detail/Detail.module.css";
 
 export default function ProductDetail() {
   const dispatch = useDispatch();
@@ -21,11 +21,11 @@ export default function ProductDetail() {
   }
 
   return (
-    <div className="container_detail">
+    <div className={style.container_detail}>
       <div>
         {
-          <div className="container">
-            <div className="img_detail">
+          <div className={style.container}>
+            <div className={style.img_detail}>
               <img
                 src={IdProduct[0].image}
                 alt="img no fount"
@@ -33,7 +33,7 @@ export default function ProductDetail() {
                 width="300px"
               />
             </div>
-            <div className="text_detail">
+            <div className={style.text_detail}>
               <h3>Id: {IdProduct[0].id}</h3>
               <h3>Name: {IdProduct[0].name}</h3>
 
@@ -45,12 +45,11 @@ export default function ProductDetail() {
           </div>
         }
       </div>
-      <div className="price_detail">
+      <div className={style.price_detail}>
         <h3>$ {IdProduct[0].price}</h3>
       </div>
-      <div className="button_compra">
+      <div className={style.button_compra}>
         <button>
-          {" "}
           <strong>Compra ya</strong>
         </button>
       </div>
