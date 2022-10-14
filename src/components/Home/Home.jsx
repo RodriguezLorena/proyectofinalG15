@@ -7,7 +7,6 @@ import style from "./Home.module.css";
 import Footer from "../Footer/Footer";
 import Navbar from "./Navbar/Navbar";
 
-
 export default function Home() {
   const dispatch = useDispatch();
   const productsAll = useSelector((state) => state.productsAll);
@@ -16,27 +15,27 @@ export default function Home() {
   }, [dispatch]);
 
   return (
-    <div className={style.content}>
+    <div>
       <Navbar />
-
-      <div className={style.filtros}>
-        <h4>Filtros</h4>
+      <div className={style.content}>
+        <div className={style.filtros}>
+          <h4>Filtros</h4>
+        </div>
+        <div className={style.cards}>
+          {productsAll &&
+            productsAll.map((element) => {
+              return (
+                <Card
+                  name={element.name}
+                  image={element.image}
+                  price={element.price}
+                  key={element.id}
+                />
+              );
+            })}
+        </div>
+        <Footer />
       </div>
-      <div className={style.cards}>
-        {productsAll &&
-          productsAll.map((element) => {
-            return (
-              <Card
-                name={element.name}
-                image={element.image}
-                price={element.price}
-                key={element.id}
-              />
-            );
-          })}
-      </div>
-      <Footer />
     </div>
   );
-
 }
