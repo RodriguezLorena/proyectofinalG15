@@ -1,0 +1,26 @@
+.content {
+  background-color: #dee2e6;
+  display: flex;
+}
+
+.cards {
+  width: 80%;
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.filtros {
+  background-color: #fff;
+  width: 200px;
+  height: 90vh;
+  margin: 20px 20px;
+  border-radius: 20px;
+  box-shadow: 10px 10px 10px rgba(0, 0, 0, 0.5);
+}
+
+.filtros h4 {
+  font-size: 30px;
+  font-weight: 400;
+  margin: 20px 0;
+}
