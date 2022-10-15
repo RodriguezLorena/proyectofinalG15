@@ -43,7 +43,7 @@ export const Menu = styled.ul`
     top: 70px;
     left: ${({ open }) => (open ? "0" : "-100%")};
     width: 100%;
-    height: 80vh;
+    height: 100vh;
     justify-content: center;
     flex-direction: column;
     align-items: center;
@@ -57,7 +57,7 @@ export const MenuItem = styled.li`
     width: 100%;
     height: 70px;
     display: flex;
-    justify-content: ce;
+    justify-content: center;
     align-items: center;
   }
 `;
