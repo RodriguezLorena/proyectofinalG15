@@ -5,6 +5,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { Link, useParams } from "react-router-dom";
 import { GetDetail } from "../../redux/action";
 import "../Detail/Detail.css";
+import Footer from "../Footer/Footer";
 
 export default function ProductDetail() {
   const dispatch = useDispatch();
@@ -51,8 +52,9 @@ export default function ProductDetail() {
         </strong>
       </div>
       <div className="button_compra1">
-        <button>Compra ya</button>
+        <button>Buy now</button>
       </div>
+      <Footer />
     </div>
   );
 }

@@ -4,6 +4,7 @@ const initialState = {
   productsAll: [],
   filterProducts: [],
   detailProduct: {},
+  filterPrice: [],
 };
 
 export default function reducer(state = initialState, { payload, type }) {
@@ -18,16 +19,17 @@ export default function reducer(state = initialState, { payload, type }) {
       };
     case "FILTER_BY_CATEGORYS":
       let info = state.filterProducts;
-      let data =
+      var dataC =
         payload === "all"
           ? info
           : info.filter((e) => e.category.includes(payload));
       return {
         ...state,
-        productsAll: data,
+        productsAll: dataC,
+        filterPrice: dataC,
       };
     case "ORDER_PRICE":
-      let order = state.filterProducts;
+      let order = state.filterPrice;
 
       if (payload === "+pr") {
         order.sort((a, b) => (a.price < b.price ? 1 : -1));
