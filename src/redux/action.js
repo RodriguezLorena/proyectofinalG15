@@ -359,3 +359,16 @@ export function GetDetail(id) {
     }
   };
 }
+
+export function filterByCategorys(payload) {
+  return {
+    type: "FILTER_BY_CATEGORYS",
+    payload,
+  };
+}
+export function OrderPrice(payload) {
+  return {
+    type: "ORDER_PRICE",
+    payload,
+  };
+}
