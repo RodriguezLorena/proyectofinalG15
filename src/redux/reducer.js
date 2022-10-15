@@ -15,6 +15,9 @@ export default function reducer(state = initialState, { payload, type }) {
         ...state,
         detailProduct: payload,
       };
+
+    case "SEARCH_NAME":
+      return { ...state, productsAll: payload };
     default:
       return { ...state };
   }

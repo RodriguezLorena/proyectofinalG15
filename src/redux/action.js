@@ -12,6 +12,7 @@ const dataa = [
       "sabanas niza 2 1/2 pl. pack x 5 de sabanas súper económicas. 50% algodon- 50% poliester. para colchon de 140x25x190. bolsa pvc medidas finales.",
     value: true,
     category: "varios",
+    bestSellers: true,
   },
   {
     id: "2",
@@ -24,6 +25,7 @@ const dataa = [
       "medida 1,50 x 2,10 cada paño. diseño ilustrativo. gran oferta!",
     value: true,
     category: "varios",
+    bestSellers: true,
   },
   {
     id: "3",
@@ -35,6 +37,7 @@ const dataa = [
       "para 2 plazas y media. 2,20 x 2,40. súper amplios. térmicos y generan mucho calor para el invierno. doble faz en rojo liso y negro liso. súper lavables",
     value: true,
     category: "varios",
+    bestSellers: true,
   },
   {
     id: "4",
@@ -356,6 +359,21 @@ export function GetDetail(id) {
       });
     } catch (error) {
       console.log(error);
+    }
+  };
+}
+
+export function getForName(name) {
+  return async function (dispatch) {
+    try {
+      console.log(name);
+      const search = dataa.filter(
+        (element) =>
+          element.name.toLocaleLowerCase() === name.toLocaleLowerCase()
+      );
+      return dispatch({ type: "SEARCH_NAME", payload: search });
+    } catch (error) {
+      console.log(error, "ruta search fallo");
     }
   };
 }
