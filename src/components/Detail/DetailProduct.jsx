@@ -4,7 +4,10 @@ import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link, useParams } from "react-router-dom";
 import { GetDetail } from "../../redux/action";
+import Navbar from "../Home/Navbar/Navbar";
+
 import style from "../Detail/Detail.module.css";
+import Footer from "../Footer/Footer";
 
 export default function ProductDetail() {
   const dispatch = useDispatch();
@@ -22,6 +25,7 @@ export default function ProductDetail() {
 
   return (
     <div className={style.container_detail}>
+      <Navbar />
       <div>
         {
           <div className={style.container}>
@@ -45,14 +49,16 @@ export default function ProductDetail() {
           </div>
         }
       </div>
+
       <div className={style.price_detail}>
-        <h3>$ {IdProduct[0].price}</h3>
+        <strong>
+          <h3>$ {IdProduct[0].price}</h3>
+        </strong>
       </div>
-      <div className={style.button_compra}>
-        <button>
-          <strong>Compra ya</strong>
-        </button>
+      <div className="button_compra1">
+        <button>Buy now</button>
       </div>
+      <Footer />
     </div>
   );
 }
