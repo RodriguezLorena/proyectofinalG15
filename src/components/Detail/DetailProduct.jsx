@@ -32,7 +32,7 @@ export default function ProductDetail() {
         {
           <div className={style.container}>
             <div className={style.img_detail}>
-              <img src={IdProduct[0].image} alt="img no fount" />
+              <img src={IdProduct[0].images[0].img} alt="img no fount" />
               <div className={style.price_detail}>
                 <strong>
                   <span>$ {IdProduct[0].price}</span>
