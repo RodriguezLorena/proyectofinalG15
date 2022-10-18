@@ -38,7 +38,6 @@ export default function Home() {
   return (
     <div>
       <Navbar />
-
       <div className={style.content}>
         <div className={style.filtros}>
           <select onChange={(e) => handleFilterCategory(e)}>
@@ -59,7 +58,7 @@ export default function Home() {
               return (
                 <Card
                   name={element.name}
-                  image={element.image}
+                  image={element.images[0].img}
                   price={element.price}
                   id={element.id}
                   key={element.id}
@@ -68,16 +67,12 @@ export default function Home() {
             })}
         </div>
       </div>
-      <div>
-        <Paginado
-          setPaginaEnEsteMomento={setPaginaEnEsteMomento}
-          cantidadPorPagina={cantidadPorPagina}
-          paginaEnEsteMomento={paginaEnEsteMomento}
-        />
-      </div>
-      <div>
-        <Footer />
-      </div>
+      <Paginado
+        setPaginaEnEsteMomento={setPaginaEnEsteMomento}
+        cantidadPorPagina={cantidadPorPagina}
+        paginaEnEsteMomento={paginaEnEsteMomento}
+      />
+      <Footer />
     </div>
   );
 }

@@ -1,5 +1,5 @@
 .content {
-  background-color: #dee2e6;
+  background-color: #fff;
   display: flex;
 }
 
@@ -16,7 +16,7 @@
   height: 90vh;
   margin: 20px 20px;
   border-radius: 20px;
-  box-shadow: 10px 10px 10px rgba(0, 0, 0, 0.5);
+  box-shadow: 1px 1px 4px rgba(0, 0, 0, 0.5);
 }
 
 .filtros h4 {
