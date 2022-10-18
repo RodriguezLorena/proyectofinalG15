@@ -143,4 +143,3 @@ export const MobileIcon = styled.div`
     }
   }
 `;
-

@@ -1,12 +1,14 @@
 import React from "react";
 import style from "./Card.module.css";
-import im from "../../img/camiseta.png";
 import { NavLink } from "react-router-dom";
+import meGusta from "../../img/me-gusta.png";
+import carrito from "../../img/carrito-de-compras.png";
 
 export default function Card({ name, image, price, id }) {
   return (
     <NavLink to={`/product/${id}`} className={style.link}>
       <div className={style.content}>
+        <img src={carrito} alt="carrito" className={style.carrito} />
         <img
           src={
             image ||
@@ -15,19 +17,17 @@ export default function Card({ name, image, price, id }) {
           alt=""
           className={style.fondo}
         />
-        <p className={style.view}>View detail</p>
-        <div className={style.titlePrice}>
-          <h5>{name}</h5>
-          <h6>${price}</h6>
+        <div className={style.meGusta}>
+          <img src={meGusta} alt="logo me gusta" />
         </div>
-        <div className={style.tallaColor}>
-          <h6 className={style.colors}> </h6>
+        <h5>{name}</h5>
+        <div className={style.talasPrecio}>
           <div className={style.tallas}>
             <p>M</p>
             <p>S</p>
           </div>
+          <h6>${price}</h6>
         </div>
-        <h4>BUY+</h4>
       </div>
     </NavLink>
   );

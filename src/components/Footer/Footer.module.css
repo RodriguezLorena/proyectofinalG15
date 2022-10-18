@@ -4,7 +4,8 @@
   flex-direction: row;
   justify-content: center;
   align-content: center;
-  background-color: #fff; 
+  background: #fff;
+  border-top: 1px solid #eee;
 }
 
 .ul {

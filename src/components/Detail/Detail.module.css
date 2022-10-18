@@ -9,30 +9,29 @@
 }
 .text_detail {
   width: 80%;
-
+  height: 100%;
   color: rgb(22, 24, 26);
   padding: 40px;
   font-size: 100%;
   text-align: left;
-  box-shadow: 0 0 20px #77706e, 0 0 60px #77706e, 0 0 20px #77706e;
+  background-color: white;
   font-family: "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS", sans-serif;
-  transition: all ease 0.5s;
-  border-radius: 1rem;
 }
 .text_detail:hover {
-  box-shadow: 5px 5px 20px rgba(0, 0, 0, 4);
-  transform: scale(1.1);
+  box-shadow: 5px 5px 10px rgb(247, 241, 241);
+
   opacity: 1;
 }
 
 .img_detail img {
   position: relative;
   left: 20%;
-  height: 100%;
-  width: 60%;
+  top: 2rem;
+  height: 25rem;
+  width: 20rem;
   transition: all ease 0.5s;
-  border-color: #77706e;
-  border-radius: 1rem;
+  border-color: #f3efed;
+
   box-shadow: 0 0 20px #77706e, 0 0 60px #77706e, 0 0 20px #77706e;
 }
 .img_detail img:hover {
@@ -45,7 +44,7 @@
   right: 30%;
 }
 .price_detail {
-  color: rgb(14, 151, 151);
-  right: 30%;
+  color: #ea047e;
+
   font-family: "Inter";
 }

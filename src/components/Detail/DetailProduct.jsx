@@ -25,17 +25,19 @@ export default function ProductDetail() {
 
   return (
     <div className={style.container_detail}>
-      <Navbar />
+      <div className="navbar">
+        <Navbar />
+      </div>
       <div>
         {
           <div className={style.container}>
             <div className={style.img_detail}>
-              <img
-                src={IdProduct[0].image}
-                alt="img no fount"
-                height="300px"
-                width="300px"
-              />
+              <img src={IdProduct[0].image} alt="img no fount" />
+              <div className={style.price_detail}>
+                <strong>
+                  <span>$ {IdProduct[0].price}</span>
+                </strong>
+              </div>
             </div>
             <div className={style.text_detail}>
               <h3>Id: {IdProduct[0].id}</h3>
@@ -50,11 +52,6 @@ export default function ProductDetail() {
         }
       </div>
 
-      <div className={style.price_detail}>
-        <strong>
-          <h3>$ {IdProduct[0].price}</h3>
-        </strong>
-      </div>
       <div className="button_compra1">
         <button>Buy now</button>
       </div>
