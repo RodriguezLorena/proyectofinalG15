@@ -18,6 +18,17 @@
   border-radius: 20px;
   box-shadow: 1px 1px 4px rgba(0, 0, 0, 0.5);
 }
+.filtros select:hover {
+  color: #ea047e;
+}
+.inconfilter {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+}
+.inconfilter h2 {
+  position: relative;
+  right: 70%;
+}
 
 .filtros h4 {
   font-size: 30px;
