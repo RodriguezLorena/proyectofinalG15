@@ -421,6 +421,9 @@ const dataa = [
     description: "medidas largo 40 cm ancho 1.5 cm",
     value: true,
     category: "varios",
+    type: "accesorios",
+    bestSellers: false,
+    size: ["U"],
   },
 ];
 export function getProducts() {
