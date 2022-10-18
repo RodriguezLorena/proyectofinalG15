@@ -30,19 +30,16 @@ export default function reducer(state = initialState, { payload, type }) {
         filterPrice: dataC,
       };
     case "ORDER_PRICE":
-      let order = state.filterPrice;
-
-      if (payload === "+pr") {
-        order.sort((a, b) => (a.price < b.price ? 1 : -1));
-      }
-      if (payload === "-pr") {
-        order.sort((a, b) => (a.price > b.price ? 1 : -1));
-      }
+      let orderPrice = state.filterPrice;
+      let infoPrice = orderPrice.filter(
+        (e) => e.price > payload[0] && e.price < payload[1]
+      );
 
       return {
         ...state,
-        productsAll: order,
+        productsAll: infoPrice,
       };
+
     default:
       return { ...state };
   }
