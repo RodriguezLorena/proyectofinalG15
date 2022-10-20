@@ -1,8 +1,9 @@
 .content {
   background-color: #fff;
   display: flex;
-  flex-wrap: wrap;
+  flex-direction: column;
   justify-content: center;
+  align-items: center;
 }
 
 .carrusel {
@@ -59,62 +60,102 @@
     margin-left: -200%;
   }
 }
-
-.slider {
-  width: 75%;
-  margin: auto;
-  overflow: hidden;
-  margin-bottom: 30px;
+.titleCarrusel {
+  font-size: 2.5rem;
+  text-align: justify;
+  margin: 0 4rem;
+  font-weight: 100;
+  margin-bottom: -3rem;
+  border-bottom: 1px solid #ddd;
+  width: 35rem;
 }
 
-.slider ul {
-  padding: 0;
+.contentCarrousel {
   display: flex;
-  width: 200%;
-  animation: carrusel 20s infinite;
-}
-
-.slider li {
+  flex-wrap: wrap;
   width: 100%;
-  list-style: none;
+  justify-content: center;
 }
 
-@keyframes carrusel {
-  0% {
-    margin-left: 0;
-  }
-  20% {
-    margin-left: 0;
-  }
+.butonsCarrosuel:hover {
+  filter: drop-shadow(0 2px 2px rgba(0, 0, 0, 0.5));
+}
 
-  25% {
-    margin-left: -101%;
-  }
-  45% {
-    margin-left: -101%;
-  }
+.card {
+  width: 300px;
+  height: 450px;
+  margin: 0 4rem;
+}
 
-  50% {
-    margin-left: -202%;
-  }
-  70% {
-    margin-left: -202%;
-  }
+.card h4 {
+  color: #ea047e;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: absolute;
+  width: 300px;
+  height: 450px;
+  /* backdrop-filter: blur(2px); */
+  font-size: 4rem;
+  backdrop-filter: brightness(50%);
+}
 
-  75% {
-    margin-left: -238%;
-  }
-  100% {
-    margin-left: -238%;
-  }
+.card img {
+  width: 100%;
+  height: 450px;
+  border-radius: 10px;
+}
+
+.contentGalery {
+  display: flex;
+  justify-content: center;
+}
+
+.galleryContent {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 200px;
+  height: 200px;
+  background-color: #ea047e;
+  margin: 0 2rem;
+  border-radius: 20px;
+  box-shadow: 4px 4px 4px rgba(0, 0, 0, 0.5);
+}
+
+.marcas {
+  position: absolute;
+  width: 70px;
+  height: 70px;
+  background-color: #fff;
+  border: 1px solid #eee;
+}
+
+.contentFondo {
+  margin-top: -6.4rem;
+  width: 100%;
+  height: 50%;
+  background: url("https://img.freepik.com/vector-premium/fondos-abstractos-formas-geometricas-dibujar-mano-formas-liquidas-colores-pastel_147635-272.jpg?w=2000");
+  background-size: 100%;
+  border-start-start-radius: 20px;
+  border-start-end-radius: 20px;
+}
+
+.titleGalery {
+  font-size: 2.5rem;
+  text-align: justify;
+  margin: 0 4rem;
+  font-weight: 100;
+  border-bottom: 1px solid #ddd;
+  width: 35rem;
 }
 
 .boton {
   background-color: #fff;
   box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.5);
   height: 40px;
-  width: 100%;
-  margin: 20px 400px;
+  width: 50%;
+  margin: 5rem auto;
   text-align: center;
   border-radius: 20px;
   color: #000;

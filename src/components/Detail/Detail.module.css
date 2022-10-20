@@ -1,50 +1,124 @@
-.container_detail {
+.contentDetail {
   width: 100%;
-  height: 100vh;
-  background-color: aliceblue;
-}
-.container {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-}
-.text_detail {
-  width: 80%;
-  height: 100%;
-  color: rgb(22, 24, 26);
-  padding: 40px;
-  font-size: 100%;
-  text-align: left;
-  background-color: white;
-  font-family: "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS", sans-serif;
-}
-.text_detail:hover {
-  box-shadow: 5px 5px 10px rgb(247, 241, 241);
-
-  opacity: 1;
+  height: 40rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
-.img_detail img {
-  position: relative;
-  left: 20%;
-  top: 2rem;
-  height: 25rem;
-  width: 20rem;
-  transition: all ease 0.5s;
-  border-color: #f3efed;
-
-  box-shadow: 0 0 20px #77706e, 0 0 60px #77706e, 0 0 20px #77706e;
-}
-.img_detail img:hover {
-  box-shadow: 5px 5px 20px rgba(0, 0, 0, 4);
-  transform: scale(1.1);
-  opacity: 1;
+.contentImages {
+  width: 50%;
+  height: 500px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
-.button_compra1 {
-  right: 30%;
+.images {
+  display: flex;
+  flex-direction: column;
 }
-.price_detail {
+
+.imageP {
+  width: 450px;
+  height: 450px;
+  margin-left: 3rem;
+}
+
+.images button img {
+  width: 70px;
+  height: 70px;
+  border-radius: 10px;
+  background-color: #eee;
+  margin-top: 10px;
+}
+
+.textContent {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  width: 25%;
+  height: 500px;
+  margin-left: 2rem;
+  padding: 20px;
+  font-weight: 100;
+}
+.contentLike {
+  margin-top: -20px;
+  display: flex;
+  justify-content: end;
+}
+
+.like {
+  margin: 10px 10px 0 0;
+  transition: all 0.5s ease;
+  cursor: pointer;
+}
+
+.like:hover {
   color: #ea047e;
+  filter: drop-shadow(1px 1px 2px #ea047e);
+  transform: scale(1.1);
+}
 
-  font-family: "Inter";
+.title {
+  font-size: 2rem;
+}
+
+.price {
+  font-size: 1.8rem;
+  color: #ea047e;
+}
+
+.stock {
+  font-size: 1.2rem;
+}
+
+.description {
+  font-size: 1rem;
+  font-weight: 100;
+  width: 90%;
+}
+
+.buyCarrito {
+  display: flex;
+  align-items: center;
+  margin-top: 20px;
+}
+
+.buy {
+  background-color: #ea047e;
+  font-size: 1.8rem;
+  border: none;
+  border-radius: 20px;
+  color: #fff;
+  margin: 0 20px 0 0;
+  padding: 0 8px;
+  transition: all 0.5s ease;
+}
+
+.buy:hover {
+  transform: scale(1.05);
+}
+
+.carrito {
+  cursor: pointer;
+}
+
+.contentRealciones {
+  width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.contentRealciones h3 {
+  font-size: 2.5rem;
+  text-align: justify;
+  margin: 0 4rem;
+  font-weight: 100;
+  margin-bottom: -3rem;
+  border-bottom: 1px solid #ddd;
+  width: 35rem;
 }

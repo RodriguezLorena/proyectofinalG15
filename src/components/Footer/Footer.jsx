@@ -21,7 +21,6 @@ const Footer = () => {
           Tu opinion nos ayuda
           <input type="text" placeholder="Dejanos tu Comentario" />
         </label>
-
         <span>Proyecto Final g14-©Todos los derechos reservados </span>
       </div>
     </div>

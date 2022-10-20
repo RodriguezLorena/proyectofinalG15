@@ -30,10 +30,10 @@ export default function reducer(state = initialState, { payload, type }) {
         filterPrice: dataC,
       };
     case "ORDER_PRICE":
-      let orderPrice = state.filterPrice;
-      let infoPrice = orderPrice.filter(
-        (e) => e.price > payload[0] && e.price < payload[1]
-      );
+      console.log(payload);
+      let orderPrice = state.filterProducts;
+      let infoPrice = orderPrice.filter((e) => e.price >= payload);
+      console.log(infoPrice);
 
       return {
         ...state,

@@ -9,7 +9,7 @@
 }
 
 .ul {
-  height: 3rem;
+  height: 7rem;
   width: 100%;
   padding-left: 2rem;
   padding-right: 2rem;
@@ -34,7 +34,14 @@
 .label {
   display: flex;
   flex-direction: column;
+  font-size: 1.2rem;
 }
+
+.label input {
+  border-radius: 20px;
+  border: 1px solid #ea047e;
+}
+
 @media (max-width: 768px) {
   .container {
     flex-direction: column;
