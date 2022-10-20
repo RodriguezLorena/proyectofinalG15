@@ -19,6 +19,8 @@ import {
 import { getForName } from "../../../redux/action";
 import { useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
+import Logo from "../../../img/logoVelvet.png"
+
 
 const Navbar = () => {
   const [showMobileMenu, setShowMobileMenu] = useState(false);
@@ -41,7 +43,7 @@ const Navbar = () => {
       <Wrapper>
         <Link to="/">
           <LogoContainer>
-            <h1>ECOMMERCE</h1>
+            <img src={Logo} alt="logo" width="130" height="130"/>
           </LogoContainer>
         </Link>
 
@@ -53,21 +55,21 @@ const Navbar = () => {
           <MenuItem>
             <MenuItemLink onClick={() => setShowMobileMenu(!showMobileMenu)}>
               <div>
-                <FaUserAlt size="25" />
+                <FaUserAlt size="25" color="#ed8dc0"/>
               </div>
             </MenuItemLink>
           </MenuItem>
           <MenuItem>
             <MenuItemLink onClick={() => setShowMobileMenu(!showMobileMenu)}>
               <div>
-                <FaShoppingCart size="25" />
+                <FaShoppingCart size="25" color="#ea047e"/>
               </div>
             </MenuItemLink>
           </MenuItem>
           <MenuItem>
             <MenuItemLink onClick={() => setShowMobileMenu(!showMobileMenu)}>
               <div>
-                <FaSearch size="20" />
+                <FaSearch size="20" color="#ed8dc0"/>
                 <form action="" onSubmit={(e) => searchForName(e)}>
                   <input
                     type="text"
@@ -75,7 +77,7 @@ const Navbar = () => {
                     value={search}
                     onChange={(e) => handelSearch(e)}
                   />
-                  <input type="submit" name=" " />
+                  <button type="submit" name="serach">Buscar</button>
                 </form>
               </div>
             </MenuItemLink>

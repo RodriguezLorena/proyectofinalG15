@@ -17,6 +17,7 @@ export default function Landing() {
   }, [dispatch]);
 
   return (
+    <div>
     <div className={style.content}>
       <Navbar />
       <div className={style.carrusel}>
@@ -60,10 +61,9 @@ export default function Landing() {
         </ul>
       </div>
       <NavLink to="/home" className={style.boton}>
-        {" "}
         View all
       </NavLink>
-
+      </div>
       <Footer />
     </div>
   );

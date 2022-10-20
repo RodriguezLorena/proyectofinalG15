@@ -1,8 +1,9 @@
 .content {
   background-color: #fff;
   display: flex;
+  width: 100%;
   flex-wrap: wrap;
-  justify-content: center;
+  justify-content: center; 
 }
 
 .carrusel {

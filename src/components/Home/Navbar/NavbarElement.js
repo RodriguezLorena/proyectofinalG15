@@ -2,7 +2,7 @@ import styled from "styled-components";
 
 export const Container = styled.div`
   width: 100%;
-  height: 70px;
+  height: 120px;
   background-color: #fff; ;
 `;
 
@@ -20,16 +20,7 @@ export const LogoContainer = styled.div`
   margin-left: 0.5rem;
   display: flex;
   align-items: center;
-  font-size: 1.2rem;
-  font-family: sans-serif;
-  h1 {
-    color: #000;
-    font-size: 1.5rem;
-  }
-  svg {
-    fill: #000;
-    margin-right: 0.5rem;
-  }
+
 `;
 
 export const Menu = styled.ul`
@@ -38,9 +29,9 @@ export const Menu = styled.ul`
   justify-content: space-between;
   list-style: none;
   @media screen and (max-width: 768px) {
-    background-color: #dee2e6;
+    background-color: #ea047e;
     position: absolute;
-    top: 70px;
+    top: 110px;
     left: ${({ open }) => (open ? "0" : "-100%")};
     width: 100%;
     height: 100vh;
@@ -59,6 +50,7 @@ export const MenuItem = styled.li`
     display: flex;
     justify-content: center;
     align-items: center;
+   
   }
 `;
 
@@ -72,12 +64,14 @@ export const MenuItemLink = styled.a`
   font-weight: 300;
   cursor: pointer;
   transition: 0.5s all ease;
+   
+
   &:hover {
     background-color: #fff;
     transition: 0.5s all ease;
     div {
       svg {
-        fill: #5bfc7f;
+        fill:#ea047e;
       }
     }
   }
@@ -90,6 +84,11 @@ export const MenuItemLink = styled.a`
     svg {
       fill: #000;
       margin-right: 0.5rem;
+    }
+    button{
+      color: #ea047e;
+      font-weight: bold;
+      font-size: 1.2rem;
     }
   }
   @media screen and (max-width: 960px) {

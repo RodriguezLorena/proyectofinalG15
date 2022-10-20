@@ -63,4 +63,5 @@
 
 .swal-overlay {
   background-color: rgba(241, 108, 154, 0.45);
+  align-items:flex-start;
 }
