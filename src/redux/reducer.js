@@ -3,6 +3,7 @@ const initialState = {
   filterProducts: [],
   detailProduct: {},
   filterPrice: [],
+  productCreado: "inicial",
 };
 
 export default function reducer(state = initialState, { payload, type }) {
@@ -38,6 +39,17 @@ export default function reducer(state = initialState, { payload, type }) {
       return {
         ...state,
         productsAll: infoPrice,
+      };
+
+      case "RECETA_CREADA":
+      return {
+        ...state,
+        productCreado: payload,
+      };
+    case "RECETA_NO_CREADA":
+      return {
+        ...state,
+        productCreado: payload,
       };
 
     default:

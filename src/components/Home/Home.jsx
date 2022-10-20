@@ -100,6 +100,9 @@ export default function Home() {
         paginaEnEsteMomento={paginaEnEsteMomento}
       />
       <Footer />
+   
     </div>
   );
 }
+
+
