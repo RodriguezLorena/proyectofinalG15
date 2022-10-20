@@ -12,6 +12,7 @@ import Navbar from "../Home/Navbar/Navbar";
 import Footer from "../Footer/Footer";
 import swal from "sweetalert"
 import "../../App.css"
+import SubirImg from "../SubirImg/SubirImg";
 
 const Formulario = () => {
   const dispatch = useDispatch();
@@ -249,7 +250,7 @@ const Formulario = () => {
             )}
           </div>
           <div className={style.form}>
-            <label>
+            {/* <label>
               IMAGEN:
               <input
                 type="text"
@@ -258,7 +259,8 @@ const Formulario = () => {
                 placeholder="COLOQUE UNA IMAGEN"
                 onChange={(e) => manipuladorInput(e)}
               />
-            </label>
+            </label> */}
+            <SubirImg/>
             {validador.images ? (
               <p className={style.validacion}>{validador.images}</p>
             ) : (
