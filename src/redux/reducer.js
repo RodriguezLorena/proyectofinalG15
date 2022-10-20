@@ -40,6 +40,17 @@ export default function reducer(state = initialState, { payload, type }) {
         productsAll: infoPrice,
       };
 
+    case "RECETA_CREADA":
+      return {
+        ...state,
+        productCreado: payload,
+      };
+    case "RECETA_NO_CREADA":
+      return {
+        ...state,
+        productCreado: payload,
+      };
+
     default:
       return { ...state };
   }

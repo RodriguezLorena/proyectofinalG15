@@ -16,6 +16,9 @@ const dataa = [
     value: true,
     category: "varios",
     bestSellers: true,
+    type: "hogar",
+
+    size: ["1", "1.5", "2"],
   },
   {
     id: "2",
@@ -32,6 +35,9 @@ const dataa = [
     value: true,
     category: "varios",
     bestSellers: true,
+    type: "hogar",
+
+    size: ["1", "1.5", "2"],
   },
   {
     id: "3",
@@ -44,6 +50,9 @@ const dataa = [
     value: true,
     category: "varios",
     bestSellers: true,
+    type: "hogar",
+
+    size: ["1", "1.5", "2"],
   },
   {
     id: "4",
@@ -59,6 +68,9 @@ const dataa = [
     value: true,
     category: "varios",
     bestSellers: true,
+    type: "hogar",
+
+    size: ["1", "1.5", "2"],
   },
   {
     id: "5",
@@ -75,6 +87,9 @@ const dataa = [
     value: true,
     category: "varios",
     bestSellers: true,
+    type: "hogar",
+
+    size: ["1.5"],
   },
   {
     id: "6",
@@ -91,6 +106,9 @@ const dataa = [
     value: true,
     category: "varios",
     bestSellers: true,
+    type: "hogar",
+
+    size: ["1"],
   },
   {
     id: "7",
@@ -106,7 +124,9 @@ const dataa = [
       "flannel con corderito 2 plazas y media medida: 2,30 x 2,50 super abrigado",
     value: true,
     category: "varios",
-    bestSellers: true,
+    bestSellers: false,
+    type: "hogar",
+    size: ["1", "1.5", "2"],
   },
   {
     id: "8",
@@ -122,6 +142,9 @@ const dataa = [
     value: true,
     category: "mujer",
     bestSellers: true,
+    type: "cuero",
+
+    size: ["37", "38", "40", "41"],
   },
   {
     id: "9",
@@ -137,6 +160,9 @@ const dataa = [
     value: true,
     category: "hombre",
     bestSellers: true,
+    type: "remera",
+
+    size: ["1", "1.5", "2"],
   },
   {
     id: "10",
@@ -151,7 +177,10 @@ const dataa = [
     description: "Remera de algodon",
     value: true,
     category: "mujer",
-    bestSellers: true,
+    bestSellers: false,
+    type: "remera",
+
+    size: ["s", "m", "x", "xl"],
   },
   {
     id: "11",
@@ -166,6 +195,9 @@ const dataa = [
     description: "algodon color azul",
     value: true,
     category: "mujer",
+    type: "remera",
+    bestSellers: false,
+    size: ["s", "m", "x", "xl"],
   },
   {
     id: "12",
@@ -180,6 +212,9 @@ const dataa = [
     description: "Joggers de gabardina elastizada",
     value: true,
     category: "hombre",
+    type: "pantalon",
+    bestSellers: true,
+    size: ["s", "m", "x", "xl"],
   },
   {
     id: "13",
@@ -194,6 +229,9 @@ const dataa = [
     description: "Canguro rustico estampados",
     value: true,
     category: "hombre",
+    type: "pantalon",
+    bestSellers: true,
+    size: ["s", "m", "x", "xl"],
   },
   {
     id: "14",
@@ -208,6 +246,9 @@ const dataa = [
     description: "Buzo cuello redondo rustico liso",
     value: true,
     category: "mujer",
+    type: "Buzos",
+    bestSellers: false,
+    size: ["s", "m", "x"],
   },
   {
     id: "15",
@@ -222,6 +263,9 @@ const dataa = [
     description: "blusita frida ondas",
     value: true,
     category: "mujer",
+    type: "remera",
+    bestSellers: false,
+    size: ["s", "m", "x", "xl"],
   },
   {
     id: "16",
@@ -236,6 +280,9 @@ const dataa = [
     description: "remera blanca asdasda",
     value: true,
     category: "mujer",
+    type: "remera",
+    bestSellers: false,
+    size: ["s", "m", "x"],
   },
   {
     id: "17",
@@ -250,6 +297,9 @@ const dataa = [
     description: "Musculosa evase c/est smile today",
     value: true,
     category: "mujer",
+    type: "remera",
+    bestSellers: false,
+    size: ["s", "x", "xl"],
   },
   {
     id: "18",
@@ -264,6 +314,9 @@ const dataa = [
     description: "Tipo de tela: Poplin, poplin estampado",
     value: true,
     category: "mujer",
+    type: "remera",
+    bestSellers: false,
+    size: ["s", "x"],
   },
   {
     id: "19",
@@ -274,6 +327,9 @@ const dataa = [
     description: "Tipo de tela: viscosa, corte mariposa con brillos",
     value: true,
     category: "mujer",
+    type: "remera",
+    bestSellers: false,
+    size: ["s", "m", "x", "xl"],
   },
   {
     id: "20",
@@ -284,6 +340,9 @@ const dataa = [
     description: "Tipo de tela: Acetato",
     value: true,
     category: "mujer",
+    type: "remera",
+    bestSellers: false,
+    size: ["s", "m", "x", "xl"],
   },
   {
     id: "21",
@@ -294,6 +353,9 @@ const dataa = [
     description: "56 cm de circunferencia regulable",
     value: true,
     category: "mujer",
+    type: "accesorio",
+    bestSellers: false,
+    size: ["s", "m", "x"],
   },
   {
     id: "22",
@@ -308,6 +370,9 @@ const dataa = [
     description: "hebilla romboide medida hebilla: 12,5 x 2,5 cm",
     value: true,
     category: "varios",
+    type: "accesorio",
+    bestSellers: false,
+    size: ["s", "m", "x", "xl"],
   },
   {
     id: "23",
@@ -322,6 +387,9 @@ const dataa = [
     description: "talle unico regulable del 34 al 42 ancho: 2,6 cm",
     value: true,
     category: "varios",
+    type: "accesorios",
+    bestSellers: false,
+    size: ["s", "m", "x", "xl"],
   },
   {
     id: "24",
@@ -336,6 +404,9 @@ const dataa = [
     description: "medidas: 20,5 x 10 x 2,6 cm",
     value: true,
     category: "varios",
+    type: "accesorios",
+    bestSellers: false,
+    size: ["U"],
   },
   {
     id: "25",
@@ -350,6 +421,9 @@ const dataa = [
     description: "medidas largo 40 cm ancho 1.5 cm",
     value: true,
     category: "varios",
+    type: "accesorios",
+    bestSellers: false,
+    size: ["U"],
   },
 ];
 export function getProducts() {
@@ -403,3 +477,16 @@ export function OrderPrice(payload) {
     payload,
   };
 }
+
+export const formularioDeCreacion = async (payload) => {
+  try {
+    console.log("ACA ESTA PAYLOAD FORMULARIO ", JSON.stringify(payload));
+    let crearProduct = await axios.post(
+      "https://velvet.up.railway.app/product",
+      payload
+    );
+    return crearProduct;
+  } catch (error) {
+    console.log("ERROR EN LA RUTA DE CREACION ", error);
+  }
+};
