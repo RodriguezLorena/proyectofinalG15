@@ -36,14 +36,17 @@ export default function NavBar() {
             </Dropdown.Item>
           </Dropdown>
         </div>
+
         <form action="" onSubmit={(e) => searchForName(e)}>
-          <input
-            type="text"
-            placeholder="Buscar Producto..."
-            value={search}
-            onChange={(e) => handelSearch(e)}
-            className={style.inputSearch}
-          />
+          <Link to="/home">
+            <input
+              type="text"
+              placeholder="Buscar Producto..."
+              value={search}
+              onChange={(e) => handelSearch(e)}
+              className={style.inputSearch}
+            />
+          </Link>
           <button type="submit" name="serach" className=" h-10">
             <FaSearch size="20" />
           </button>
