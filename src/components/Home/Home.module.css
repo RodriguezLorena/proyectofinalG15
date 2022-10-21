@@ -94,3 +94,16 @@
   border-radius: 20px;
   border: 1px solid #ddd;
 }
+
+.filterType {
+  background-color: #fff;
+  margin-top: 1.5rem;
+  background-color: #fff;
+  padding: 15px 15px 20px 15px;
+  border-radius: 10px;
+}
+
+.filterType select {
+  border-radius: 20px;
+  border: 1px solid #ddd;
+}

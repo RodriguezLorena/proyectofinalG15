@@ -3,11 +3,24 @@ import style from "./Card.module.css";
 import { NavLink } from "react-router-dom";
 import { MdOutlineShoppingCart } from "react-icons/md";
 import { AiFillHeart } from "react-icons/ai";
+import { addToCart } from "../../redux/action";
+import { useDispatch } from "react-redux";
 
 export default function Card({ name, image, price, id }) {
+  const dispach = useDispatch();
+
+  const addCart = (id) => {
+    console.log(id);
+    dispach(addToCart(id));
+  };
+
   return (
     <div className={style.content}>
-      <MdOutlineShoppingCart className={style.carrito} size="40px" />
+      <MdOutlineShoppingCart
+        className={style.carrito}
+        size="40px"
+        onClick={() => addCart(id)}
+      />
       <NavLink to={`/product/${id}`} className={style.link}>
         <img
           src={

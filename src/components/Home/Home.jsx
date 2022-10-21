@@ -1,13 +1,18 @@
 import React from "react";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { filterByCategorys, getProducts, OrderPrice } from "../../redux/action";
+import {
+  filterByCategorys,
+  getProducts,
+  OrderPrice,
+  filterSize,
+  filterType,
+} from "../../redux/action";
 import Card from "../Card/Card";
 import style from "./Home.module.css";
 import Footer from "../Footer/Footer";
-import Navbar from "./Navbar/Navbar";
+import NavBar from "../NavBar/NavBar";
 import Paginado from "../Paginado/Paginado";
-import CartList from "../CartList/CartList";
 
 export default function Home() {
   const dispatch = useDispatch();
@@ -38,11 +43,23 @@ export default function Home() {
     dispatch(OrderPrice(range));
     setPaginaEnEsteMomento(1);
   };
+
+  function handelFilterSize(e) {
+    e.preventDefault();
+    dispatch(filterSize(e.target.value));
+    setPaginaEnEsteMomento(1);
+  }
+
+  function handelFilterType(e) {
+    e.preventDefault();
+    dispatch(filterType(e.target.value));
+    setPaginaEnEsteMomento(1);
+  }
+
   return (
     <div>
-      <Navbar />
+      <NavBar />
       <div className={style.content}>
-        <CartList />
         <div className={style.filters}>
           <h2>Filtros:</h2>
           <div className={style.contentFilterCategory}>
@@ -76,12 +93,24 @@ export default function Home() {
 
           <div className={style.fiterSize}>
             <h3 className={style.titleFilters}>Talla</h3>
-            <select name="" id="">
-              <option value="M">M</option>
-              <option value="L">L</option>
-              <option value="S">S</option>
-              <option value="XL">XL</option>
-              <option value="XXL">XXL</option>
+            <select name="" id="" onChange={(e) => handelFilterSize(e)}>
+              <option value="todos">Todos</option>
+              <option value="m">M</option>
+              <option value="s">S</option>
+              <option value="xl">XL</option>
+              <option value="xxl">XXL</option>
+            </select>
+          </div>
+
+          <div className={style.filterType}>
+            <h3 className={style.titleFilters}>Tipo</h3>
+            <select name="" id="" onChange={(e) => handelFilterType(e)}>
+              <option value="todos">Todos</option>
+              <option value="hogar">Hogar</option>
+              <option value="remera">Remeras</option>
+              <option value="pantalon">Pantalones</option>
+              <option value="buzos">Buzos</option>
+              <option value="accesorio">Accesorios</option>
             </select>
           </div>
         </div>

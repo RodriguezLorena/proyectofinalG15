@@ -1,6 +1,6 @@
 import React from "react";
 import Card from "../Card/Card";
-import Navbar from "../Home/Navbar/Navbar";
+import NavBar from "../NavBar/NavBar";
 import Footer from "../Footer/Footer";
 import style from "./Landing.module.css";
 import { useDispatch, useSelector } from "react-redux";
@@ -30,8 +30,7 @@ export default function Landing() {
   return (
     <div>
       <div className={style.content}>
-        <Navbar />
-
+        <NavBar />
         <div className={style.carrusel}>
           <ul>
             <li>
@@ -56,7 +55,7 @@ export default function Landing() {
         </div>
 
         <div className={style.contentCarrousel}>
-          <div className="h-56  sm:h-1/2  xl:h-screen  w-full mt-20 2xl:h-96">
+          <div className="h-56  sm:h-screen  xl:h-screen  w-full mt-0  2xl:h-screen">
             <h3 className={style.titleCarrusel}>Productos mas vendidos</h3>
             <Carousel
               leftControl={
@@ -69,11 +68,11 @@ export default function Landing() {
                 />
               }
             >
-              <div className="flex">
+              <div className="flex ">
                 {productsBuy &&
                   productsBuy.slice(0, 3).map((element, i) => {
                     return (
-                      <div className="flex items-center  h-full w-max  px-10">
+                      <div className="flex items-center justify-center  h-full w-full  px-10">
                         <Card
                           name={element.name}
                           image={element.images[0].img}
@@ -120,7 +119,7 @@ export default function Landing() {
             </Carousel>
           </div>
 
-          <div className="h-56  sm:h-1/2  xl:h-screen mb-0 w-full  2xl:h-96">
+          <div className="h-56  sm:h-1/2  xl:h-96  w-full  2xl:h-96">
             <h3 className={style.titleCarrusel}>Categorias</h3>
             <Carousel
               leftControl={
@@ -133,7 +132,7 @@ export default function Landing() {
                 />
               }
             >
-              <div className="flex">
+              <div className="flex  items-center justify-center">
                 <div className={style.card}>
                   <h4>Hombre</h4>
                   <img
@@ -145,6 +144,13 @@ export default function Landing() {
                   <h4>Mujer</h4>
                   <img
                     src="https://st3.depositphotos.com/1441511/13049/i/450/depositphotos_130492510-stock-photo-fashion-model-style-fashionable-woman.jpg"
+                    alt=""
+                  />
+                </div>
+                <div className={style.card}>
+                  <h4>Niños</h4>
+                  <img
+                    src="https://childrens-spaces.com/wp-content/uploads/2019/02/moda-infantil-4.jpg"
                     alt=""
                   />
                 </div>
@@ -247,7 +253,7 @@ export default function Landing() {
         </div>
 
         <NavLink to="/home" className={style.boton}>
-          View all
+          Ver todos los productos
         </NavLink>
       </div>
       <Footer />

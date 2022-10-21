@@ -1,4 +1,5 @@
 import axios from "axios";
+import { CONSTANTES } from "./constantes";
 
 const dataa = [
   {
@@ -246,7 +247,7 @@ const dataa = [
     description: "Buzo cuello redondo rustico liso",
     value: true,
     category: "mujer",
-    type: "Buzos",
+    type: "buzos",
     bestSellers: false,
     size: ["s", "m", "x"],
   },
@@ -478,6 +479,20 @@ export function OrderPrice(payload) {
   };
 }
 
+export function filterSize(payload) {
+  return {
+    type: "FILTER_SIZE",
+    payload,
+  };
+}
+
+export function filterType(payload) {
+  return {
+    type: "FILTER_TYPE",
+    payload,
+  };
+}
+
 export const formularioDeCreacion = async (payload) => {
   try {
     console.log("ACA ESTA PAYLOAD FORMULARIO ", JSON.stringify(payload));
@@ -490,3 +505,28 @@ export const formularioDeCreacion = async (payload) => {
     console.log("ERROR EN LA RUTA DE CREACION ", error);
   }
 };
+//-------------------------------------//
+
+export function addToCart(payload) {
+  return {
+    type: CONSTANTES.ADD_TO_CART,
+    payload,
+  };
+}
+export function removeOneProduct(id) {
+  return {
+    type: CONSTANTES.DELETE_ONE_PRODUCT,
+    payload: id,
+  };
+}
+export function removeAll(id) {
+  return {
+    type: CONSTANTES.DELETE_ALL_PRODUCT,
+    payload: id,
+  };
+}
+export function clearCart() {
+  return {
+    type: CONSTANTES.CLEAR_CART,
+  };
+}

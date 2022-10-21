@@ -20,7 +20,6 @@ export const LogoContainer = styled.div`
   margin-left: 0.5rem;
   display: flex;
   align-items: center;
-
 `;
 
 export const Menu = styled.ul`
@@ -50,7 +49,6 @@ export const MenuItem = styled.li`
     display: flex;
     justify-content: center;
     align-items: center;
-   
   }
 `;
 
@@ -64,14 +62,13 @@ export const MenuItemLink = styled.a`
   font-weight: 300;
   cursor: pointer;
   transition: 0.5s all ease;
-   
 
   &:hover {
     background-color: #fff;
     transition: 0.5s all ease;
     div {
       svg {
-        fill:#ea047e;
+        fill: #ea047e;
       }
     }
   }
@@ -85,7 +82,7 @@ export const MenuItemLink = styled.a`
       fill: #000;
       margin-right: 0.5rem;
     }
-    button{
+    button {
       color: #ea047e;
       font-weight: bold;
       font-size: 1.2rem;

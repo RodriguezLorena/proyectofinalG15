@@ -15,12 +15,13 @@ import {
   FaShoppingCart,
   FaSearch,
 } from "react-icons/fa";
+import CartList from "../../CartList/CartList";
+import { Dropdown } from "flowbite-react";
 
 import { getForName } from "../../../redux/action";
 import { useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
-import Logo from "../../../img/logoVelvet.png"
-
+import Logo from "../../../img/logoVelvet.png";
 
 const Navbar = () => {
   const [showMobileMenu, setShowMobileMenu] = useState(false);
@@ -43,7 +44,7 @@ const Navbar = () => {
       <Wrapper>
         <Link to="/">
           <LogoContainer>
-            <img src={Logo} alt="logo" width="130" height="130"/>
+            <img src={Logo} alt="logo" width="130" height="130" />
           </LogoContainer>
         </Link>
 
@@ -55,21 +56,23 @@ const Navbar = () => {
           <MenuItem>
             <MenuItemLink onClick={() => setShowMobileMenu(!showMobileMenu)}>
               <div>
-                <FaUserAlt size="25" color="#ed8dc0"/>
+                <FaUserAlt size="25" color="#ed8dc0" />
               </div>
             </MenuItemLink>
           </MenuItem>
           <MenuItem>
             <MenuItemLink onClick={() => setShowMobileMenu(!showMobileMenu)}>
-              <div>
-                <FaShoppingCart size="25" color="#ea047e"/>
-              </div>
+              <Dropdown label={<FaShoppingCart />}>
+                <Dropdown.Item className="w-max flex bg-black">
+                  <CartList />
+                </Dropdown.Item>
+              </Dropdown>
             </MenuItemLink>
           </MenuItem>
           <MenuItem>
             <MenuItemLink onClick={() => setShowMobileMenu(!showMobileMenu)}>
               <div>
-                <FaSearch size="20" color="#ed8dc0"/>
+                <FaSearch size="20" color="#ed8dc0" />
                 <form action="" onSubmit={(e) => searchForName(e)}>
                   <input
                     type="text"
@@ -77,7 +80,9 @@ const Navbar = () => {
                     value={search}
                     onChange={(e) => handelSearch(e)}
                   />
-                  <button type="submit" name="serach">Buscar</button>
+                  <button type="submit" name="serach">
+                    Buscar
+                  </button>
                 </form>
               </div>
             </MenuItemLink>
