@@ -4,7 +4,6 @@ import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link, useParams } from "react-router-dom";
 import { GetDetail } from "../../redux/action";
-import Navbar from "../Home/Navbar/Navbar";
 import style from "../Detail/Detail.module.css";
 import Footer from "../Footer/Footer";
 import { MdOutlineShoppingCart } from "react-icons/md";
@@ -12,6 +11,7 @@ import { AiOutlineHeart } from "react-icons/ai";
 import Card from "../Card/Card";
 import { Carousel } from "flowbite-react";
 import { IoIosArrowBack, IoIosArrowForward } from "react-icons/io";
+import NavBar from "../NavBar/NavBar";
 
 export default function ProductDetail() {
   const dispatch = useDispatch();
@@ -35,7 +35,7 @@ export default function ProductDetail() {
 
   return (
     <div className={style.content}>
-      <Navbar />
+      <NavBar />
       <div className={style.contentDetail}>
         <div className={style.contentImages}>
           <div className={style.images}>
