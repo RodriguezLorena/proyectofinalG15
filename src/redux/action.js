@@ -458,7 +458,7 @@ export function getForName(name) {
     try {
       console.log(name);
       const search = dataa.filter((element) =>
-        element.name.toLocaleLowerCase().includes(name.toLocaleLowerCase())
+        element.name.toLowerCase().includes(name.toLowerCase())
       );
       return dispatch({ type: "SEARCH_NAME", payload: search });
     } catch (error) {
