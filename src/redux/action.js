@@ -427,6 +427,7 @@ const dataa = [
     size: ["U"],
   },
 ];
+
 export function getProducts() {
   return async function (dispatch) {
     try {
