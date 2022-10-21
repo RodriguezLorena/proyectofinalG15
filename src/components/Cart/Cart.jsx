@@ -1,9 +1,7 @@
 import React from "react";
 import style from "./Cart.module.css";
-import { useSelector, useDispatch } from "react-redux";
 import { MdOutlineDelete } from "react-icons/md";
 import { NavLink } from "react-router-dom";
-import CartView from "../CartView/CartView";
 
 export default function Cart({ data, deleteCart }) {
   const { id, name, price, images, cantidad } = data;
@@ -15,16 +13,14 @@ export default function Cart({ data, deleteCart }) {
           className={style.butonDelate}
           onClick={() => deleteCart(id)}
         />
-        <button onClick={() => deleteCart(id, true)}>Eliminar el item</button>
+        <button onClick={() => deleteCart(id, true)}></button>
       </div>
       <img src={images[0].img} alt="" />
       <div className={style.preceTitle}>
         <h3>{name}</h3>
         <p>
-          {" "}
-          $ {price} x {cantidad}{" "}
+          $ {price} x {cantidad} = {price * cantidad}
         </p>
-        <p>Total del mismo producto: {price * cantidad}</p>
       </div>
       <div className={style.butons}>
         <button>Comprar ya</button>

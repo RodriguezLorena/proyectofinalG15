@@ -457,9 +457,8 @@ export function getForName(name) {
   return async function (dispatch) {
     try {
       console.log(name);
-      const search = dataa.filter(
-        (element) =>
-          element.name.toLocaleLowerCase() === name.toLocaleLowerCase()
+      const search = dataa.filter((element) =>
+        element.name.toLocaleLowerCase().includes(name.toLocaleLowerCase())
       );
       return dispatch({ type: "SEARCH_NAME", payload: search });
     } catch (error) {

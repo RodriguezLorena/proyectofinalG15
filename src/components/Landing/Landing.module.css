@@ -8,7 +8,6 @@
 
 .carrusel {
   width: 95%;
-
   overflow: hidden;
   border-radius: 20px;
   margin: 2rem 0;
@@ -29,6 +28,7 @@
 .carrusel img {
   width: 100%;
   height: 500px;
+  border-radius: 20px;
 }
 
 @keyframes carruselimg {
@@ -62,18 +62,19 @@
 }
 .titleCarrusel {
   font-size: 2.5rem;
-  text-align: justify;
+  text-align: start;
   margin: 0 4rem;
   font-weight: 100;
   margin-bottom: -3rem;
   border-bottom: 1px solid #ddd;
-  width: 35rem;
+  width: max-content;
 }
 
 .contentCarrousel {
   display: flex;
   flex-wrap: wrap;
   width: 100%;
+  height: max-content;
   justify-content: center;
 }
 
@@ -84,7 +85,7 @@
 .card {
   width: 250px;
   height: 250px;
-  margin: 0 0 0 4rem;
+  margin: 0 2rem 0 2rem;
   overflow: hidden;
   border-radius: 10px;
 }

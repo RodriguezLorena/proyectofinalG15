@@ -35,19 +35,19 @@ export default function Landing() {
           <ul>
             <li>
               <img
-                src="https://carruselmoda.com/wp-content/uploads/2022/06/Carrusel-moda-envios-gratis-ropa.jpg"
+                src="https://www.bezzia.com/wp-content/uploads/2021/01/prendas-pata-gallo.jpg.webp"
                 alt=""
               />
             </li>
             <li>
               <img
-                src="https://cdn.shopify.com/s/files/1/0273/7884/3785/articles/que-ropa-favorece-segun-cuerpo_1600x.jpg?v=1599819540"
+                src="https://www.bezzia.com/wp-content/uploads/2021/12/un-estampado-varios-colores.jpg"
                 alt=""
               />
             </li>
             <li>
               <img
-                src="https://media.meer.com/attachments/d3375ae9e0beb2d7b550a04fe6ae2d2d5aadc69d/store/fill/1090/613/5b50f51699c787b0a66dd3c24259c59233be4fe27405b44d9678bac58b9f/Todo-un-armario-del-que-tomar-prestada-la-ropa.jpg"
+                src="https://www.moncloa.com/wp-content/uploads/2020/12/Zapatos-de-piel-para-hombre-y-mujer-por-menos-de-30-euros-hoy-en-Aliexpress.jpg"
                 alt=""
               />
             </li>
@@ -55,7 +55,7 @@ export default function Landing() {
         </div>
 
         <div className={style.contentCarrousel}>
-          <div className="h-56  sm:h-screen  xl:h-screen  w-full mt-0  2xl:h-screen">
+          <div className="h-screen  sm:h-screen  xl:h-screen  w-full mt-0  2xl:h-screen">
             <h3 className={style.titleCarrusel}>Productos mas vendidos</h3>
             <Carousel
               leftControl={
@@ -119,7 +119,7 @@ export default function Landing() {
             </Carousel>
           </div>
 
-          <div className="h-56  sm:h-1/2  xl:h-96  w-full  2xl:h-96">
+          <div className="h-96 w-full  sm:h-96  w-full xl:h-96  w-full  2xl:h-96">
             <h3 className={style.titleCarrusel}>Categorias</h3>
             <Carousel
               leftControl={
@@ -132,7 +132,7 @@ export default function Landing() {
                 />
               }
             >
-              <div className="flex  items-center justify-center">
+              <div className="flex items-center justify-center">
                 <div className={style.card}>
                   <h4>Hombre</h4>
                   <img
@@ -164,92 +164,92 @@ export default function Landing() {
               </div>
             </Carousel>
           </div>
-        </div>
 
-        <div className="h-56  sm:h-1/2  xl:h-96 mb-0 w-full  2xl:h-96">
-          <h4 className={style.titleGalery}>Tus marcas favoritas estan aqui</h4>
-          <Carousel
-            leftControl={
-              <IoIosArrowBack size="40px" className={style.butonsCarrosuel} />
-            }
-            rightControl={
-              <IoIosArrowForward
-                size="40px"
-                className={style.butonsCarrosuel}
-              />
-            }
-          >
-            <div className={style.contentGalery}>
-              <div className={style.galleryContent}>
-                <img
-                  src="https://images.squarespace-cdn.com/content/v1/5188263be4b0b44af63109d8/1547527530533-9G8VMVFOZAUCS2G5LK11/nike-logo-square.png"
-                  alt=""
-                  className={style.marcas}
+          <div className="h-96 w-full sm:h-96 w-full xl:h-96 mb-0 w-full  2xl:h-96 w-full">
+            <h4 className={style.titleGalery}>Tus marcas favoritas</h4>
+            <Carousel
+              leftControl={
+                <IoIosArrowBack size="40px" className={style.butonsCarrosuel} />
+              }
+              rightControl={
+                <IoIosArrowForward
+                  size="40px"
+                  className={style.butonsCarrosuel}
                 />
-                <div className={style.contentFondo}></div>
-              </div>
-              <div className={style.galleryContent}>
-                <img
-                  className={style.marcas}
-                  src="https://i.pinimg.com/474x/4d/3b/a4/4d3ba43ddac94977dc7d28663a566f69.jpg"
-                  alt=""
-                />
+              }
+            >
+              <div className={style.contentGalery}>
+                <div className={style.galleryContent}>
+                  <img
+                    src="https://images.squarespace-cdn.com/content/v1/5188263be4b0b44af63109d8/1547527530533-9G8VMVFOZAUCS2G5LK11/nike-logo-square.png"
+                    alt=""
+                    className={style.marcas}
+                  />
+                  <div className={style.contentFondo}></div>
+                </div>
+                <div className={style.galleryContent}>
+                  <img
+                    className={style.marcas}
+                    src="https://i.pinimg.com/474x/4d/3b/a4/4d3ba43ddac94977dc7d28663a566f69.jpg"
+                    alt=""
+                  />
 
-                <div className={style.contentFondo}></div>
+                  <div className={style.contentFondo}></div>
+                </div>
+                <div className={style.galleryContent}>
+                  <img
+                    src="https://i.pinimg.com/originals/c0/8b/bb/c08bbbd32ac78859882278ffdf236e89.jpg"
+                    alt=""
+                    className={style.marcas}
+                  />
+                  <div className={style.contentFondo}></div>
+                </div>
+                <div className={style.galleryContent}>
+                  <img
+                    src="https://i.pinimg.com/originals/b9/2a/d8/b92ad82c88edc9690a7a2268fa5e3acd.png"
+                    alt=""
+                    className={style.marcas}
+                  />
+                  <div className={style.contentFondo}></div>
+                </div>
               </div>
-              <div className={style.galleryContent}>
-                <img
-                  src="https://i.pinimg.com/originals/c0/8b/bb/c08bbbd32ac78859882278ffdf236e89.jpg"
-                  alt=""
-                  className={style.marcas}
-                />
-                <div className={style.contentFondo}></div>
-              </div>
-              <div className={style.galleryContent}>
-                <img
-                  src="https://i.pinimg.com/originals/b9/2a/d8/b92ad82c88edc9690a7a2268fa5e3acd.png"
-                  alt=""
-                  className={style.marcas}
-                />
-                <div className={style.contentFondo}></div>
-              </div>
-            </div>
-            <div className={style.contentGalery}>
-              <div className={style.galleryContent}>
-                <img
-                  src="https://images.squarespace-cdn.com/content/v1/5188263be4b0b44af63109d8/1547527530533-9G8VMVFOZAUCS2G5LK11/nike-logo-square.png"
-                  alt=""
-                  className={style.marcas}
-                />
-                <div className={style.contentFondo}></div>
-              </div>
-              <div className={style.galleryContent}>
-                <img
-                  className={style.marcas}
-                  src="https://i.pinimg.com/474x/4d/3b/a4/4d3ba43ddac94977dc7d28663a566f69.jpg"
-                  alt=""
-                />
+              <div className={style.contentGalery}>
+                <div className={style.galleryContent}>
+                  <img
+                    src="https://images.squarespace-cdn.com/content/v1/5188263be4b0b44af63109d8/1547527530533-9G8VMVFOZAUCS2G5LK11/nike-logo-square.png"
+                    alt=""
+                    className={style.marcas}
+                  />
+                  <div className={style.contentFondo}></div>
+                </div>
+                <div className={style.galleryContent}>
+                  <img
+                    className={style.marcas}
+                    src="https://i.pinimg.com/474x/4d/3b/a4/4d3ba43ddac94977dc7d28663a566f69.jpg"
+                    alt=""
+                  />
 
-                <div className={style.contentFondo}></div>
+                  <div className={style.contentFondo}></div>
+                </div>
+                <div className={style.galleryContent}>
+                  <img
+                    src="https://i.pinimg.com/originals/c0/8b/bb/c08bbbd32ac78859882278ffdf236e89.jpg"
+                    alt=""
+                    className={style.marcas}
+                  />
+                  <div className={style.contentFondo}></div>
+                </div>
+                <div className={style.galleryContent}>
+                  <img
+                    src="https://i.pinimg.com/originals/b9/2a/d8/b92ad82c88edc9690a7a2268fa5e3acd.png"
+                    alt=""
+                    className={style.marcas}
+                  />
+                  <div className={style.contentFondo}></div>
+                </div>
               </div>
-              <div className={style.galleryContent}>
-                <img
-                  src="https://i.pinimg.com/originals/c0/8b/bb/c08bbbd32ac78859882278ffdf236e89.jpg"
-                  alt=""
-                  className={style.marcas}
-                />
-                <div className={style.contentFondo}></div>
-              </div>
-              <div className={style.galleryContent}>
-                <img
-                  src="https://i.pinimg.com/originals/b9/2a/d8/b92ad82c88edc9690a7a2268fa5e3acd.png"
-                  alt=""
-                  className={style.marcas}
-                />
-                <div className={style.contentFondo}></div>
-              </div>
-            </div>
-          </Carousel>
+            </Carousel>
+          </div>
         </div>
 
         <NavLink to="/home" className={style.boton}>

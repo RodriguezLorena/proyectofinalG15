@@ -1,6 +1,8 @@
-.content {
+.contentCarts {
   width: 100%;
-  height: 80vh;
+  margin: auto;
   display: flex;
+  flex-wrap: wrap;
   justify-content: center;
+  align-items: center;
 }

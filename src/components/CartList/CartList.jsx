@@ -21,9 +21,11 @@ export default function CartList() {
   };
   return (
     <div className={style.cart}>
-      {cartState.map((ele) => {
-        return <Cart key={ele.id} data={ele} deleteCart={deleteCart} />;
-      })}
+      {cartState.length < 1
+        ? "Carrito vacio"
+        : cartState.slice(0, 3).map((ele) => {
+            return <Cart key={ele.id} data={ele} deleteCart={deleteCart} />;
+          })}
       <div className={style.contentAll}>
         <NavLink to="/carrito" className={style.viewAll}>
           Mostrar todos

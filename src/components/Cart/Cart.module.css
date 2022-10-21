@@ -5,7 +5,7 @@
   display: flex;
   flex-wrap: wrap;
   border-radius: 20px;
-  margin-top: 1rem;
+  margin: 1rem 2rem 0 2rem;
   box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
 }
 
@@ -24,17 +24,18 @@
   width: 100px;
   height: 100px;
   margin-top: -1.5rem;
+  margin-left: 1rem;
 }
 
 .preceTitle {
   text-align: justify;
-
   width: 40%;
-  margin: 0 0 3rem 2rem;
+  margin: -1rem 0 3rem 1rem;
 }
 
 .preceTitle h3 {
   font-size: 1.5rem;
+  margin-bottom: 1rem;
 }
 
 .content p {
