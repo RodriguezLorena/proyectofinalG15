@@ -19,14 +19,11 @@ export default function ProductDetail() {
   const { id } = useParams();
   const IdProduct = useSelector((state) => state.detailProduct);
   const productsAll = useSelector((state) => state.productsAll);
-  const dispath=useDispatch()
+  const dispath = useDispatch();
   const addCart = (id) => {
     console.log(id);
     dispath(addToCart(id));
   };
-  const filterForCategory = productsAll.filter(
-    (element) => element.category == IdProduct[0].category
-  );
 
   const [state, setState] = useState(true);
 
@@ -34,12 +31,13 @@ export default function ProductDetail() {
     dispatch(GetDetail(id)).then(() => setState(false));
   }, [dispatch, id]);
 
+  // const filterForCategory = productsAll.filter(
+  //   (element) => element.category == IdProduct[0].category
+  // );
   if (state) {
     return <div>Cargando...</div>;
   }
-  
 
-  
   return (
     <div className={style.content}>
       <NavBar />
@@ -79,12 +77,16 @@ export default function ProductDetail() {
           </h3>
           <div className={style.buyCarrito}>
             <button className={style.buy}>Comparar ya</button>
-            <MdOutlineShoppingCart className={style.carrito} size="40px" onClick={()=>addCart(id)}/>
+            <MdOutlineShoppingCart
+              className={style.carrito}
+              size="40px"
+              onClick={() => addCart(id)}
+            />
           </div>
         </div>
       </div>
 
-      <div className={style.contentRealciones}>
+      {/* <div className={style.contentRealciones}>
         <div className="h-56  sm:h-1/2  xl:h-screen  w-full mt-20 2xl:h-96">
           <h3 className={style.titleCarrusel}>Productos Relacionados</h3>
           <Carousel
@@ -148,19 +150,8 @@ export default function ProductDetail() {
             </div>
           </Carousel>
         </div>
-        {/* {filterForCategory &&
-          filterForCategory.map((element) => {
-            return (
-              <Card
-                name={element.name}
-                image={element.images[0].img}
-                price={element.price}
-                id={element.id}
-                key={element.id}
-              />
-            );
-          })} */}
-      </div>
+       
+      </div> */}
       <Footer />
     </div>
   );
