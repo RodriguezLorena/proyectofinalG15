@@ -495,11 +495,12 @@ export function filterType(payload) {
 
 export const formularioDeCreacion = async (payload) => {
   try {
-    console.log("ACA ESTA PAYLOAD FORMULARIO ", JSON.stringify(payload));
     let crearProduct = await axios.post(
       "https://velvet.up.railway.app/product",
-      payload
+      payload,
+    
     );
+      console.log(crearProduct)
     return crearProduct;
   } catch (error) {
     console.log("ERROR EN LA RUTA DE CREACION ", error);

@@ -20,7 +20,12 @@ const Formulario = () => {
   const [creacion, setCreacion] = useState("inicial");
 
   const productsAll = useSelector((state) => state.productsAll);
+  const [data, setData] = useState('Inicio');
 
+  const childToParent =  (childdata) => {
+            setData(childdata);
+          }
+    
   useEffect(() => {
    
     dispatch(getProducts());
@@ -61,9 +66,11 @@ const Formulario = () => {
   });
 
   const manipuladorInput = (e) => {
+    console.log(data)
     setNuevoProduct({
       ...nuevoProduct,
       [e.target.name]: e.target.value,
+     
     });
     setValidador(
       validacion({
@@ -157,15 +164,15 @@ const Formulario = () => {
     if (Number(nuevoProduct.stock) < 1)
       validar.stock = "TIENE QUE SER UN VALOR MAYOR A 1 ";
 
-    if (!nuevoProduct.images) {
-      validar.images = "IMAGEN ES REQUERIDA";
-    } else if (
-      !/(?:(?:https?:\/\/))[-a-zA-Z0-9@:%._\+~#=]{2,256}\.[a-z]{2,4}\b(?:[-a-zA-Z0-9@:%_\+.~#?&\/=]*(\.jpg|\.png|\.jpeg|\.webp))/.test(
-        nuevoProduct.images
-      )
-    ) {
-      validar.images = "INGRESE UNA URL VALIDA";
-    }
+    // if (!nuevoProduct.images) {
+    //   validar.images = "IMAGEN ES REQUERIDA";
+    // } else if (
+    //   !/(?:(?:https?:\/\/))[-a-zA-Z0-9@:%._\+~#=]{2,256}\.[a-z]{2,4}\b(?:[-a-zA-Z0-9@:%_\+.~#?&\/=]*(\.jpg|\.png|\.jpeg|\.webp))/.test(
+    //     nuevoProduct.images
+    //   )
+    // ) {
+    //   validar.images = "INGRESE UNA URL VALIDA";
+    // }
 
    
     return validar;
@@ -260,7 +267,8 @@ const Formulario = () => {
                 onChange={(e) => manipuladorInput(e)}
               />
             </label> */}
-            <SubirImg/>
+
+           <SubirImg  childToParent={childToParent}></SubirImg> 
             {validador.images ? (
               <p className={style.validacion}>{validador.images}</p>
             ) : (
