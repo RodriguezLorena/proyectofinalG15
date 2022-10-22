@@ -9,6 +9,7 @@ import { MdOutlineDelete } from "react-icons/md";
 
 export default function CartView() {
   const cartState = useSelector((state) => state.cart);
+  const total = useSelector((state)=> state.cartTotal)
   const dispach = useDispatch();
 
   const deleteCart = (id, todos = false) => {
@@ -29,7 +30,7 @@ export default function CartView() {
         {cartState.map((ele) => {
           return <Cart key={ele.id} data={ele} deleteCart={deleteCart} />;
         })}
-
+       
         <Tooltip content="Limpiar Carrito">
           <MdOutlineDelete
             onClick={limpiarCart}
@@ -38,6 +39,7 @@ export default function CartView() {
           />
         </Tooltip>
       </div>
+         {<h2>total a pagar: {total}</h2>}  
     </div>
   );
 }
