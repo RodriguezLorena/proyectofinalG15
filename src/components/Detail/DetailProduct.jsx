@@ -12,13 +12,18 @@ import Card from "../Card/Card";
 import { Carousel } from "flowbite-react";
 import { IoIosArrowBack, IoIosArrowForward } from "react-icons/io";
 import NavBar from "../NavBar/NavBar";
+import { addToCart } from "../../redux/action";
 
 export default function ProductDetail() {
   const dispatch = useDispatch();
   const { id } = useParams();
   const IdProduct = useSelector((state) => state.detailProduct);
   const productsAll = useSelector((state) => state.productsAll);
-
+  const dispath=useDispatch()
+  const addCart = (id) => {
+    console.log(id);
+    dispath(addToCart(id));
+  };
   const filterForCategory = productsAll.filter(
     (element) => element.category == IdProduct[0].category
   );
@@ -32,7 +37,9 @@ export default function ProductDetail() {
   if (state) {
     return <div>Cargando...</div>;
   }
+  
 
+  
   return (
     <div className={style.content}>
       <NavBar />
@@ -72,7 +79,7 @@ export default function ProductDetail() {
           </h3>
           <div className={style.buyCarrito}>
             <button className={style.buy}>Comparar ya</button>
-            <MdOutlineShoppingCart className={style.carrito} size="40px" />
+            <MdOutlineShoppingCart className={style.carrito} size="40px" onClick={()=>addCart(id)}/>
           </div>
         </div>
       </div>
