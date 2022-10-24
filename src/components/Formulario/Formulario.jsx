@@ -57,8 +57,8 @@ const Formulario = () => {
     type: "",
     mainImage: "",
     size: [],
-    images: [],
-    categories: "",
+    image: [],
+    category: "",
   });
 
   const manipuladorInput = (e) => {
