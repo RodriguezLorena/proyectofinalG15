@@ -1,40 +1,37 @@
 import React from "react";
 import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import {
-  formularioDeCreacion,
-  getProducts
-} from "../../redux/action";
+import { formularioDeCreacion, getProducts } from "../../redux/action";
 import { Link, useNavigate } from "react-router-dom";
-
+import NavBar from "../NavBar/NavBar";
 import style from "./Formulario.module.css";
-import Navbar from "../Home/Navbar/Navbar";
-import Footer from "../Footer/Footer";
-import swal from "sweetalert"
-import "../../App.css"
+
+import swal from "sweetalert";
+import "../../App.css";
 import SubirImg from "../SubirImg/SubirImg";
+import SubirPrincipal from "../SubirImg/SubirPrincipal";
 
 const Formulario = () => {
   const dispatch = useDispatch();
-  
+
   const [creacion, setCreacion] = useState("inicial");
 
   const productsAll = useSelector((state) => state.productsAll);
 
   useEffect(() => {
-   
     dispatch(getProducts());
   }, [dispatch]);
 
   const navegacionAutomatica = useNavigate();
+
   useEffect(() => {
     if (creacion === "creada") {
       swal({
-        title:"BRAVO!!!",
+        title: "BRAVO!!!",
         text: "El nuevo producto se creo exitosamente",
         icon: "success",
         className: "swal-modal",
-        className:"swal-title"
+        className: "swal-title",
       });
       setTimeout(() => {
         navegacionAutomatica("/home");
@@ -42,11 +39,11 @@ const Formulario = () => {
     }
     if (creacion === "noCreada") {
       swal({
-        title:"UPSS!!!",
+        title: "UPSS!!!",
         text: "Algo salio mal, no se pudo crear el producto",
         icon: "error",
         className: "swal-modal",
-        className:"swal-title"
+        className: "swal-title",
       });
     }
   }, [creacion, navegacionAutomatica]);
@@ -57,7 +54,11 @@ const Formulario = () => {
     stock: 0,
     description: "",
     value: true,
-    images:[]
+    type: "",
+    mainImage: "",
+    size: [],
+    images: [],
+    categories: "",
   });
 
   const manipuladorInput = (e) => {
@@ -72,27 +73,76 @@ const Formulario = () => {
       })
     );
   };
+  const categoria = ["Hombre", "Mujer", "Niños", "varios"];
 
+  const talles = ["s", "m", "l", "xl"];
 
+  const manipuladorSelectSize = (e) => {
+    const selec = nuevoProduct.size.filter(
+      (elemento) => elemento !== e.target.innerHTML
+    );
+    console.log("ACA ESTA EL NUEVO PRODUCTO ", selec);
+    if (selec.includes(e.target.value)) {
+      swal({
+        title: "UPSS!!!",
+        text: "Ese talle ya fue seleccionado",
+        icon: "error",
+        className: "swal-modal",
+        className: "swal-title",
+      });
+    } else {
+      setNuevoProduct({
+        ...nuevoProduct,
+        size: [...nuevoProduct.size, e.target.value],
+      });
+      setValidador(
+        validacion({
+          ...nuevoProduct,
+          size: [...nuevoProduct.size, e.target.value],
+        })
+      );
+    }
+    console.log("aca esta el nuevo producto ", nuevoProduct.size);
+  };
+
+  const eliminarSelect = (e) => {
+    const seleccion = nuevoProduct.size.filter(
+      (elemento) => elemento !== e.target.innerHTML
+    );
+
+    setNuevoProduct({
+      ...nuevoProduct,
+      size: seleccion,
+    });
+
+    setValidador(
+      validacion({
+        ...nuevoProduct,
+        size: [...seleccion],
+      })
+    );
+  };
+
+  const manipuladorCkeck = (e) => {};
 
   const manipuladorDeCreacion = (e) => {
     e.preventDefault();
     if (Object.keys(validador).length) {
       swal({
-        title:"UPS!!!",
+        title: "UPS!!!",
         text: "Algun campo le quedo sin rellenar",
         icon: "error",
         className: "swal-modal",
-        className:"swal-title"
+        className: "swal-title",
       });
     } else {
       if (Object.keys(validacion(nuevoProduct)).length) {
         swal({
-        title:"OH, OH!!!",
-        text: "Creo que se olvido de cargar los datos, los campos no deben estar vacios",
-        icon: "error",
-        className: "swal-modal",
-        className:"swal-title"
+          title: "OH, OH!!!",
+          text: "Creo que se olvido de cargar los datos, los campos no deben estar vacios",
+          icon: "error",
+          className: "swal-modal",
+          className: "swal-title",
         });
       } else {
         formularioDeCreacion(nuevoProduct)
@@ -122,15 +172,9 @@ const Formulario = () => {
       validar.name = "TIENE QUE PONER TEXTO VALIDO, LOS ESPACIOS NO SE VALEN";
     if (noContieneNumero.test(nuevoProduct.name))
       validar.name = "NO PUEDE CONTENER NUMEROS";
-    if (
-      productsAll.find(
-        (elemento) =>
-          elemento.name === nuevoProduct.name
-      )
-    ) {
+    if (productsAll.find((elemento) => elemento.name === nuevoProduct.name)) {
       const productoExistente = productsAll.find(
-        (elemento) =>
-          elemento.name === nuevoProduct.name
+        (elemento) => elemento.name === nuevoProduct.name
       );
       validar.name = (
         <Link to={`/product/${productoExistente.id}`}>
@@ -147,38 +191,25 @@ const Formulario = () => {
     if (sinEspacios.test(nuevoProduct.description[0]))
       validar.description = "NO PUEDE SER ESPACIOS EN BLANCO";
 
- 
-
     if (Number(nuevoProduct.price) < 1)
       validar.price = "TIENE QUE SER UN PRECIO MAYOR A $1 ";
     if (Number(nuevoProduct.price) > 150000)
       validar.price = "NO PUEDE SER MAYOR A 150.000";
-      
+
     if (Number(nuevoProduct.stock) < 1)
       validar.stock = "TIENE QUE SER UN VALOR MAYOR A 1 ";
 
-    if (!nuevoProduct.images) {
-      validar.images = "IMAGEN ES REQUERIDA";
-    } else if (
-      !/(?:(?:https?:\/\/))[-a-zA-Z0-9@:%._\+~#=]{2,256}\.[a-z]{2,4}\b(?:[-a-zA-Z0-9@:%_\+.~#?&\/=]*(\.jpg|\.png|\.jpeg|\.webp))/.test(
-        nuevoProduct.images
-      )
-    ) {
-      validar.images = "INGRESE UNA URL VALIDA";
-    }
-
-   
     return validar;
   };
 
   return (
     <div>
-        <Navbar/>
-        
+      <NavBar />
       <div className={style.contenedor}>
-      <div><h2 className={style.title}>Cargar Producto</h2></div>
+        <div>
+          <h2 className={style.title}>Cargar Producto</h2>
+        </div>
         <form className={style.contenedorForm} onSubmit={manipuladorDeCreacion}>
-        
           <div className={style.form}>
             <label>
               NOMBRE:
@@ -214,7 +245,7 @@ const Formulario = () => {
               <p className={style.validacion}> </p>
             )}
           </div>
-        
+
           <div className={style.form}>
             <label>
               PRECIO:
@@ -234,7 +265,7 @@ const Formulario = () => {
           </div>
           <div className={style.form}>
             <label>
-             STOCK 
+              STOCK
               <input
                 type="number"
                 name="stock"
@@ -249,37 +280,68 @@ const Formulario = () => {
               <p className={style.validacion}> </p>
             )}
           </div>
+
           <div className={style.form}>
-            {/* <label>
-              IMAGEN:
+            <label>
+              Tipos
               <input
                 type="text"
-                name="images"
-                value={nuevoProduct.images}
-                placeholder="COLOQUE UNA IMAGEN"
+                name="type"
+                value={nuevoProduct.type}
+                placeholder="COLOQUE EL TIPO DE PRODUCTO"
                 onChange={(e) => manipuladorInput(e)}
               />
-            </label> */}
-            <SubirImg/>
-            {validador.images ? (
-              <p className={style.validacion}>{validador.images}</p>
+            </label>
+            {validador.stock ? (
+              <p className={style.validacion}>{validador.stock}</p>
             ) : (
               <p className={style.validacion}> </p>
             )}
           </div>
+
+          <div className={style.form}>
+            <label>
+              SELECCIONA UN TALLE:
+              <select
+                defaultValue={"default"}
+                onChange={(e) => manipuladorSelectSize(e)}
+              >
+                <option value="default" disabled>
+                  ELEGIR TALLA:
+                </option>
+                {talles &&
+                  talles.map((elemento, index) => {
+                    return (
+                      <option key={index} value={elemento}>
+                        {elemento}
+                      </option>
+                    );
+                  })}
+              </select>
+            </label>
+          </div>
+          <div>
+            <ul>
+              {nuevoProduct.size.map((elemento) => (
+                <li key={elemento} onClick={(e) => eliminarSelect(e)}>
+                  {elemento}
+                </li>
+              ))}
+            </ul>
+          </div>
+
           <div className={style.contentBtn}>
-          <button
-            className={style.boton}
-            onClick={(e) => {
-              manipuladorDeCreacion(e);
-            }}
-          >
-            CREAR PRODUCTO
-          </button>
+            <button
+              className={style.boton}
+              onClick={(e) => {
+                manipuladorDeCreacion(e);
+              }}
+            >
+              CREAR PRODUCTO
+            </button>
           </div>
         </form>
       </div>
-      <Footer/>
     </div>
   );
 };

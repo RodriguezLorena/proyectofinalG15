@@ -6,10 +6,11 @@ import Cart from "../Cart/Cart";
 import NavBar from "../NavBar/NavBar";
 import { Tooltip } from "flowbite-react";
 import { MdOutlineDelete } from "react-icons/md";
+import { NavLink } from "react-router-dom";
 
 export default function CartView() {
   const cartState = useSelector((state) => state.cart);
-  const total = useSelector((state)=> state.cartTotal)
+  const total = useSelector((state) => state.cartTotal);
   const dispach = useDispatch();
 
   const deleteCart = (id, todos = false) => {
@@ -30,7 +31,7 @@ export default function CartView() {
         {cartState.map((ele) => {
           return <Cart key={ele.id} data={ele} deleteCart={deleteCart} />;
         })}
-       
+
         <Tooltip content="Limpiar Carrito">
           <MdOutlineDelete
             onClick={limpiarCart}
@@ -38,8 +39,13 @@ export default function CartView() {
             className="  p-1 cursor-pointer mt-10 w-screen"
           />
         </Tooltip>
+        <div className={style.pagos}>
+          {<h2>total a pagar: {total}</h2>}
+          <NavLink to="/pagos">
+            <button>Pagar Compra</button>
+          </NavLink>
+        </div>
       </div>
-         {<h2>total a pagar: {total}</h2>}  
     </div>
   );
 }

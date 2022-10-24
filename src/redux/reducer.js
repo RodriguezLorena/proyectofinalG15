@@ -11,6 +11,7 @@ const initialState = {
   cartTotal: localStorage.getItem("cartTotal")
     ? JSON.parse(localStorage.getItem("cartTotal"))
     : 0,
+  cartTotalItems: JSON.parse(localStorage.getItem("cartTotalItems")) || 0,
 };
 
 function setInLocalStorage(key, state) {
@@ -107,6 +108,10 @@ export default function reducer(state = initialState, { payload, type }) {
         ...state,
         cart: setInLocalStorage("cart", newCart),
         cartTotal: setInLocalStorage("cartTotal", calcularTotal(newCart)),
+        cartTotalItems: setInLocalStorage(
+          "cartTotalItems",
+          state.cartTotalItems + 1
+        ),
       };
     case CONSTANTES.DELETE_ONE_PRODUCT:
       const productExist = state.cart.find((ele) => ele.id === payload);
@@ -125,6 +130,10 @@ export default function reducer(state = initialState, { payload, type }) {
         ...state,
         cart: setInLocalStorage("cart", newCart2),
         cartTotal: setInLocalStorage("cartTotal", calcularTotal(newCart2)),
+        cartTotalItems: setInLocalStorage(
+          "cartTotalItems",
+          state.cartTotalItems - 1
+        ),
       };
     case CONSTANTES.DELETE_ALL_PRODUCT:
       const existProduct = state.cart.find((ele) => ele.id === payload);
@@ -135,6 +144,10 @@ export default function reducer(state = initialState, { payload, type }) {
         ...state,
         cart: setInLocalStorage("cart", newCart3),
         cartTotal: setInLocalStorage("cartTotal", calcularTotal(newCart3)),
+        cartTotalItems: setInLocalStorage(
+          "cartTotalItems",
+          state.cartTotalItems - existProduct.cantidad
+        ),
       };
 
     case CONSTANTES.CLEAR_CART:
@@ -142,6 +155,12 @@ export default function reducer(state = initialState, { payload, type }) {
         ...state,
         cart: setInLocalStorage("cart", []),
         cartTotal: setInLocalStorage("cartTotal", 0),
+        cartTotalItems: setInLocalStorage("cartTotalItems", 0),
+      };
+    case CONSTANTES.DESMONTAR_DETALLE:
+      return {
+        ...state,
+        detailProduct: {},
       };
     default:
       return { ...state };

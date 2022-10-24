@@ -531,3 +531,8 @@ export function clearCart() {
   };
 }
 
+export function desmontarDetalle() {
+  return {
+    type: CONSTANTES.DESMONTAR_DETALLE,
+  };
+}

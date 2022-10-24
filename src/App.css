@@ -36,3 +36,19 @@
     transform: rotate(360deg);
   }
 } */
+
+.swal-modal {
+  border: 3px solid white;
+}
+.swal-overlay {
+  background-color: rgba(183, 86, 105, 0.63);
+}
+.swal-title {
+  font-size: 1.5rem;
+  text-align: center;
+}
+
+.swal-text {
+  color: black;
+  font-size: 1rem;
+}

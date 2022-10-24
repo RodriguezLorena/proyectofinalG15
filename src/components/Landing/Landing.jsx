@@ -10,6 +10,7 @@ import { NavLink } from "react-router-dom";
 import { Carousel } from "flowbite-react";
 
 import { IoIosArrowBack, IoIosArrowForward } from "react-icons/io";
+import Navegation from "../Navegation/Navegation";
 
 export default function Landing() {
   const dispatch = useDispatch();
@@ -31,6 +32,7 @@ export default function Landing() {
     <div>
       <div className={style.content}>
         <NavBar />
+        <Navegation home={true} products={false} />
         <div className={style.carrusel}>
           <ul>
             <li>
@@ -119,27 +121,16 @@ export default function Landing() {
             </Carousel>
           </div>
 
-          <div className="h-96 w-full  sm:h-96  w-full xl:h-96  w-full  2xl:h-96">
-            <h3 className={style.titleCarrusel}>Categorias</h3>
-            <Carousel
-              leftControl={
-                <IoIosArrowBack size="40px" className={style.butonsCarrosuel} />
-              }
-              rightControl={
-                <IoIosArrowForward
-                  size="40px"
-                  className={style.butonsCarrosuel}
+          <div className={style.categoris}>
+            <div className="flex items-center justify-center">
+              <div className={style.categotiImportant}>
+                <h4>Hombre</h4>
+                <img
+                  src="https://thumbs.dreamstime.com/b/hombre-joven-hermoso-modelo-de-moda-en-la-ropa-sport-elegante-que-mira-c%C3%A1mara-sobre-fondo-gris-154379876.jpg"
+                  alt=""
                 />
-              }
-            >
-              <div className="flex items-center justify-center">
-                <div className={style.card}>
-                  <h4>Hombre</h4>
-                  <img
-                    src="https://thumbs.dreamstime.com/b/hombre-joven-hermoso-modelo-de-moda-en-la-ropa-sport-elegante-que-mira-c%C3%A1mara-sobre-fondo-gris-154379876.jpg"
-                    alt=""
-                  />
-                </div>
+              </div>
+              <div className={style.contentSecundari}>
                 <div className={style.card}>
                   <h4>Mujer</h4>
                   <img
@@ -162,7 +153,7 @@ export default function Landing() {
                   />
                 </div>
               </div>
-            </Carousel>
+            </div>
           </div>
 
           <div className="h-96 w-full sm:h-96 w-full xl:h-96 mb-0 w-full  2xl:h-96 w-full">
@@ -251,10 +242,6 @@ export default function Landing() {
             </Carousel>
           </div>
         </div>
-
-        <NavLink to="/home" className={style.boton}>
-          Ver todos los productos
-        </NavLink>
       </div>
       <Footer />
     </div>

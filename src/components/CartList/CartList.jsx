@@ -5,10 +5,9 @@ import { NavLink } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { clearCart, removeOneProduct, removeAll } from "../../redux/action";
 
-
 export default function CartList() {
   const cartState = useSelector((state) => state.cart);
-  const total= useSelector((state)=> state.cartTotal)
+  const total = useSelector((state) => state.cartTotal);
   const dispach = useDispatch();
 
   const deleteCart = (id, todos = false) => {
@@ -22,24 +21,19 @@ export default function CartList() {
     dispach(clearCart());
   };
 
- 
   return (
     <div className={style.cart}>
       {cartState.length < 1
         ? "Carrito vacio"
         : cartState.slice(0, 3).map((ele) => {
-            return <Cart key={ele.id} data={ele} deleteCart={deleteCart}/>;
+            return <Cart key={ele.id} data={ele} deleteCart={deleteCart} />;
           })}
       <div className={style.contentAll}>
         <NavLink to="/carrito" className={style.viewAll}>
           Mostrar todos
         </NavLink>
       </div>
-      <div>
-        {
-          <h2>Total de compra{total}</h2> 
-        }
-      </div>
+      <div>{<h2>Total de compra ${total}</h2>}</div>
     </div>
   );
 }

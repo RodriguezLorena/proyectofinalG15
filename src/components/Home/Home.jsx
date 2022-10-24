@@ -13,6 +13,7 @@ import style from "./Home.module.css";
 import Footer from "../Footer/Footer";
 import NavBar from "../NavBar/NavBar";
 import Paginado from "../Paginado/Paginado";
+import Navegation from "../Navegation/Navegation";
 
 export default function Home() {
   const dispatch = useDispatch();
@@ -59,6 +60,7 @@ export default function Home() {
   return (
     <div>
       <NavBar />
+      <Navegation home={false} products={true} />
       <div className={style.content}>
         <div className={style.filters}>
           <h2>Filtros:</h2>

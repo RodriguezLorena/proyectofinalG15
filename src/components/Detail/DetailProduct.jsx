@@ -3,7 +3,7 @@ import { useState } from "react";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link, useParams } from "react-router-dom";
-import { GetDetail } from "../../redux/action";
+import { GetDetail, desmontarDetalle } from "../../redux/action";
 import style from "../Detail/Detail.module.css";
 import Footer from "../Footer/Footer";
 import { MdOutlineShoppingCart } from "react-icons/md";
@@ -29,6 +29,9 @@ export default function ProductDetail() {
 
   useEffect(() => {
     dispatch(GetDetail(id)).then(() => setState(false));
+    return () => {
+      dispatch(desmontarDetalle());
+    };
   }, [dispatch, id]);
 
   // const filterForCategory = productsAll.filter(
