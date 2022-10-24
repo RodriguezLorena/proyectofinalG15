@@ -1,7 +1,7 @@
 import axios from "axios";
 import { CONSTANTES } from "./constantes";
 
-const dataa = [
+export let dataa = [
   {
     id: "1",
     name: "Juego de sabanas",
@@ -492,7 +492,12 @@ export function filterType(payload) {
     payload,
   };
 }
-
+export function agreadoNuevoEstado(payload){
+  return{
+    type: "AGREGAR",
+    payload,
+  }
+}
 export const formularioDeCreacion = async (payload) => {
   try {
     console.log("ACA ESTA PAYLOAD FORMULARIO ", JSON.stringify(payload));

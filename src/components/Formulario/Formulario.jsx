@@ -1,7 +1,7 @@
 import React from "react";
 import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { formularioDeCreacion, getProducts } from "../../redux/action";
+import { formularioDeCreacion, getProducts,agreadoNuevoEstado,dataa } from "../../redux/action";
 import { Link, useNavigate } from "react-router-dom";
 import NavBar from "../NavBar/NavBar";
 import style from "./Formulario.module.css";
@@ -49,16 +49,19 @@ const Formulario = () => {
   }, [creacion, navegacionAutomatica]);
 
   const [nuevoProduct, setNuevoProduct] = useState({
+    id:"123",
     name: "",
     price: 0,
     stock: 0,
     description: "",
     value: true,
     type: "",
-    mainImage: "",
+    mainImage: "https://st3.depositphotos.com/16122460/33452/i/1600/depositphotos_334524320-stock-photo-window-elegant-curtains-empty-room.jpg",
     size: [],
-    image: [],
+    images: [{img:"https://st3.depositphotos.com/16122460/33452/i/1600/depositphotos_334524320-stock-photo-window-elegant-curtains-empty-room.jpg"}],
     category: "",
+
+
   });
 
   const manipuladorInput = (e) => {
@@ -145,6 +148,7 @@ const Formulario = () => {
           className: "swal-title",
         });
       } else {
+       dataa.push(nuevoProduct)
         formularioDeCreacion(nuevoProduct)
           .then(() => {
             setCreacion("creada");
