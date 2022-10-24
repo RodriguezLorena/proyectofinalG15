@@ -5,6 +5,7 @@ const initialState = {
   filterProducts: [],
   detailProduct: {},
   filterPrice: [],
+  estadoType: [],
   cart: localStorage.getItem("cart")
     ? JSON.parse(localStorage.getItem("cart"))
     : [],
@@ -55,30 +56,67 @@ export default function reducer(state = initialState, { payload, type }) {
       };
     case "ORDER_PRICE":
       console.log(payload);
-      let orderPrice = state.filterProducts;
+      let orderPrice = state.filterPrice;
       let infoPrice = orderPrice.filter((e) => e.price <= payload);
       console.log(infoPrice);
+      let orderPrice2 = state.filterProducts;
+      let infoPrice2 = orderPrice2.filter((e) => e.price <= payload);
 
+      let orderPrice3 = state.estadoType;
+      let infoPrice3 = orderPrice3.filter((e) => e.price <= payload);
       return {
         ...state,
-        productsAll: infoPrice,
+        productsAll: infoPrice3.length
+          ? infoPrice3
+          : infoPrice.length
+          ? infoPrice
+          : infoPrice2,
       };
 
     case "FILTER_SIZE":
-      let filterSize = state.filterProducts;
+      let filterSize = state.filterPrice;
       let filtrado =
         payload == "todos"
           ? filterSize
           : filterSize.filter((e) => e.size.includes(payload));
-      return { ...state, productsAll: filtrado };
+
+      let filterSize2 = state.filterProducts;
+      let filtrado2 =
+        payload == "todos"
+          ? filterSize2
+          : filterSize2.filter((e) => e.size.includes(payload));
+
+      let filterSize3 = state.estadoType;
+      let filtrado3 =
+        payload == "todos"
+          ? filterSize3
+          : filterSize3.filter((e) => e.size.includes(payload));
+      return {
+        ...state,
+        productsAll: filtrado3.length
+          ? filtrado3
+          : filtrado.length
+          ? filtrado
+          : filtrado2,
+      };
 
     case "FILTER_TYPE":
-      let filterType = state.filterProducts;
+      let filterType = state.filterPrice;
       let filtradoo =
         payload == "todos"
           ? filterType
           : filterType.filter((e) => e.type.includes(payload));
-      return { ...state, productsAll: filtradoo };
+
+      let filterType2 = state.filterProducts;
+      let filtradoo2 =
+        payload == "todos"
+          ? filterType2
+          : filterType2.filter((e) => e.type.includes(payload));
+      return {
+        ...state,
+        productsAll: filtradoo.length ? filtradoo : filtradoo2,
+        estadoType: filtradoo.length ? filtradoo : filtradoo2,
+      };
 
     case "RECETA_CREADA":
       return {
