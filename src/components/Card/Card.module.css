@@ -1,75 +1,120 @@
+.link {
+  text-decoration: none;
+  color: #000;
+}
+
 .content {
   background-color: #fff;
-  width: 200px;
-  height: 300px;
+  width: 300px;
+  height: 400px;
   margin: 20px;
-  box-shadow: 10px 10px 10px rgba(0, 0, 0, 0.5);
+  box-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
   transition: all ease 0.5s;
   cursor: pointer;
-  border-radius: 10px;
+  border-radius: 5px;
 }
 
-.content:hover {
+.carrito {
+  width: 40px;
+  color: #ea047e;
+  position: absolute;
+  margin: 10px 0 0 250px;
+  transition: all 0.5s ease;
+}
+.carrito:hover {
   transform: scale(1.1);
 }
-
-.content:hover .fondo {
-  filter: brightness(50%);
+.contnetMeGusta {
+  width: 100%;
+  display: flex;
+  justify-content: end;
+  color: #fff;
+}
+.meGusta {
+  margin: 10px 10px 0 0;
+  transition: all 0.5s ease;
+  transform: rotate(0deg);
 }
 
-.content:hover .view {
-  opacity: 1;
-}
-
-.view {
-  opacity: 0;
-  transition: all ease 0.5s;
-  position: absolute;
-  transform: translateY(-120px);
-  width: 180px;
-  margin: 0 10px;
-  font-size: 20px;
-  color: #000;
-  background-color: #fff;
+.meGusta:hover {
+  color: #ea047e;
+  filter: drop-shadow(1px 1px 2px rgba(255, 255, 255, 1));
+  transform: scale(1.1);
 }
 
 .fondo {
   transition: all ease 0.5s;
   width: 100%;
-  height: 60%;
-  border-radius: 10px;
+  height: 70%;
 }
 
 .content h5 {
-  text-align: start;
-  font-size: 18px;
-  height: 50px;
-  border-bottom: 1px solid black;
-  margin: 20px 10px 10px 10px;
-  font-weight: 400;
+  font-size: 15px;
+  color: #fff;
+  height: 60px;
+  width: 100%;
+  margin-top: 10px;
+  font-size: 20px;
+  text-align: center;
+  font-weight: 100;
+  transform: rotate(0deg);
 }
 
-.precios {
-  height: 10%;
-  width: 70%;
+.talasPrecio {
+  display: flex;
+  justify-content: space-between;
+  margin: 0 10px;
+  width: 90%;
+  margin-top: 0.2rem;
+
+  transform: rotate(0deg);
+}
+.talasPrecio h6 {
+  font-size: 18px;
+  font-weight: 300;
+  background-color: #fff;
+  color: #ea047e;
+  border-radius: 20px;
+  height: max-content;
+  padding: 5px 10px;
+}
+
+.tallas {
   display: flex;
   align-items: center;
-  justify-content: space-around;
+  justify-content: center;
+}
+
+.tallas p {
+  border-radius: 50%;
+  width: 25px;
+  height: 25px;
   text-align: center;
-  margin: 0 20px;
-}
-.precios h6 {
-  width: max-content;
-  margin: 0 0 0 10px;
-  font-size: 18px;
-  font-weight: 600;
-  color: #2a9d8f;
+  font-size: 13px;
+  padding: 2px;
+  margin-left: 5px;
+  color: #555;
+  background-color: #fff;
 }
 
-.precios p {
-  margin-left: 50px;
+.contentInfo {
+  overflow: hidden;
+  background: transparent;
+  transform: rotate(0deg);
+  height: 200px;
+  width: 300px;
+  padding-top: 2rem;
+  position: absolute;
+  margin-top: -5rem;
+  border-end-end-radius: 5px;
+  border-end-start-radius: 5px;
 }
 
-.precios img {
-  width: 30px;
+.fondoRotado {
+  background-color: #ea047e;
+  transform: rotate(-10deg);
+  width: 350px;
+  height: 280px;
+  margin-top: 1.2rem;
+  position: absolute;
 }

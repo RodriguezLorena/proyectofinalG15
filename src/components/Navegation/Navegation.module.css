@@ -1,0 +1,32 @@
+.content {
+  width: 100%;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+  height: max-content;
+}
+
+.content ul {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  width: 20%;
+  height: 3rem;
+}
+.boton {
+  transition: all 0.2s ease;
+  height: max-content;
+}
+
+.botonHover {
+  transition: all 0.2s ease;
+  height: max-content;
+  border-bottom: 2px solid #ea047e;
+}
+.content li:hover {
+  border-bottom: 2px solid #ea047e;
+  cursor: pointer;
+}
