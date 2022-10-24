@@ -35,11 +35,8 @@
   to {
     transform: rotate(360deg);
   }
-<<<<<<< HEAD
-=======
-} */
-
-.swal-modal {
+}
+*/ .swal-modal {
   border: 3px solid white;
 }
 .swal-overlay {
@@ -53,5 +50,4 @@
 .swal-text {
   color: black;
   font-size: 1rem;
->>>>>>> 10a4479d6eb9470c5b5edb263b337bc25336f31c
 }

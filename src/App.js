@@ -1,8 +1,4 @@
 import "./App.css";
-<<<<<<< HEAD
-import Home from "./components/Home/Home";
-import { Route, Routes } from "react-router-dom";
-=======
 import ProductDetail from "./components/Detail/DetailProduct";
 import Home from "./components/Home/Home";
 import { Route, Routes } from "react-router-dom";
@@ -10,7 +6,6 @@ import Landing from "./components/Landing/Landing";
 import Formulario from "./components/Formulario/Formulario";
 import CartView from "./components/CartView/CartView";
 import Pagos from "../src/components/Pagos/Pagos";
->>>>>>> 10a4479d6eb9470c5b5edb263b337bc25336f31c
 
 function App() {
   return (

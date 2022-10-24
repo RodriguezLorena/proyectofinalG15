@@ -10,13 +10,10 @@ import {
 } from "../../redux/action";
 import Card from "../Card/Card";
 import style from "./Home.module.css";
-<<<<<<< HEAD
-=======
 import Footer from "../Footer/Footer";
 import NavBar from "../NavBar/NavBar";
 import Paginado from "../Paginado/Paginado";
 import Navegation from "../Navegation/Navegation";
->>>>>>> 10a4479d6eb9470c5b5edb263b337bc25336f31c
 
 export default function Home() {
   const dispatch = useDispatch();
