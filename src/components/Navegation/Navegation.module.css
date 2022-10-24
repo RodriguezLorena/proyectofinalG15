@@ -19,12 +19,14 @@
 .boton {
   transition: all 0.2s ease;
   height: max-content;
+  font-weight: 600;
 }
 
 .botonHover {
   transition: all 0.2s ease;
   height: max-content;
   border-bottom: 2px solid #ea047e;
+  font-weight: 600;
 }
 .content li:hover {
   border-bottom: 2px solid #ea047e;
