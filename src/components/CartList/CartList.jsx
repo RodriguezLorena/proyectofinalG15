@@ -7,6 +7,7 @@ import { clearCart, removeOneProduct, removeAll } from "../../redux/action";
 
 export default function CartList() {
   const cartState = useSelector((state) => state.cart);
+  const total = useSelector((state) => state.cartTotal);
   const dispach = useDispatch();
 
   const deleteCart = (id, todos = false) => {
@@ -19,6 +20,7 @@ export default function CartList() {
   const limpiarCart = () => {
     dispach(clearCart());
   };
+
   return (
     <div className={style.cart}>
       {cartState.length < 1
@@ -31,6 +33,7 @@ export default function CartList() {
           Mostrar todos
         </NavLink>
       </div>
+      <div>{<h2>Total de compra ${total}</h2>}</div>
     </div>
   );
 }

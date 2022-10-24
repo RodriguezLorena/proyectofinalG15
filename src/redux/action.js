@@ -530,3 +530,9 @@ export function clearCart() {
     type: CONSTANTES.CLEAR_CART,
   };
 }
+
+export function desmontarDetalle() {
+  return {
+    type: CONSTANTES.DESMONTAR_DETALLE,
+  };
+}

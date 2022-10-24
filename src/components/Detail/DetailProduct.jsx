@@ -3,7 +3,7 @@ import { useState } from "react";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link, useParams } from "react-router-dom";
-import { GetDetail } from "../../redux/action";
+import { GetDetail, desmontarDetalle } from "../../redux/action";
 import style from "../Detail/Detail.module.css";
 import Footer from "../Footer/Footer";
 import { MdOutlineShoppingCart } from "react-icons/md";
@@ -12,23 +12,31 @@ import Card from "../Card/Card";
 import { Carousel } from "flowbite-react";
 import { IoIosArrowBack, IoIosArrowForward } from "react-icons/io";
 import NavBar from "../NavBar/NavBar";
+import { addToCart } from "../../redux/action";
 
 export default function ProductDetail() {
   const dispatch = useDispatch();
   const { id } = useParams();
   const IdProduct = useSelector((state) => state.detailProduct);
   const productsAll = useSelector((state) => state.productsAll);
-
-  const filterForCategory = productsAll.filter(
-    (element) => element.category == IdProduct[0].category
-  );
+  const dispath = useDispatch();
+  const addCart = (id) => {
+    console.log(id);
+    dispath(addToCart(id));
+  };
 
   const [state, setState] = useState(true);
 
   useEffect(() => {
     dispatch(GetDetail(id)).then(() => setState(false));
+    return () => {
+      dispatch(desmontarDetalle());
+    };
   }, [dispatch, id]);
 
+  // const filterForCategory = productsAll.filter(
+  //   (element) => element.category == IdProduct[0].category
+  // );
   if (state) {
     return <div>Cargando...</div>;
   }
@@ -72,12 +80,16 @@ export default function ProductDetail() {
           </h3>
           <div className={style.buyCarrito}>
             <button className={style.buy}>Comparar ya</button>
-            <MdOutlineShoppingCart className={style.carrito} size="40px" />
+            <MdOutlineShoppingCart
+              className={style.carrito}
+              size="40px"
+              onClick={() => addCart(id)}
+            />
           </div>
         </div>
       </div>
 
-      <div className={style.contentRealciones}>
+      {/* <div className={style.contentRealciones}>
         <div className="h-56  sm:h-1/2  xl:h-screen  w-full mt-20 2xl:h-96">
           <h3 className={style.titleCarrusel}>Productos Relacionados</h3>
           <Carousel
@@ -141,19 +153,8 @@ export default function ProductDetail() {
             </div>
           </Carousel>
         </div>
-        {/* {filterForCategory &&
-          filterForCategory.map((element) => {
-            return (
-              <Card
-                name={element.name}
-                image={element.images[0].img}
-                price={element.price}
-                id={element.id}
-                key={element.id}
-              />
-            );
-          })} */}
-      </div>
+       
+      </div> */}
       <Footer />
     </div>
   );

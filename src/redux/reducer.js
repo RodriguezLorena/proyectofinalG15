@@ -8,11 +8,24 @@ const initialState = {
   cart: localStorage.getItem("cart")
     ? JSON.parse(localStorage.getItem("cart"))
     : [],
+  cartTotal: localStorage.getItem("cartTotal")
+    ? JSON.parse(localStorage.getItem("cartTotal"))
+    : 0,
+  cartTotalItems: JSON.parse(localStorage.getItem("cartTotalItems")) || 0,
 };
 
 function setInLocalStorage(key, state) {
   localStorage.setItem(key, JSON.stringify(state));
   return state;
+}
+
+function calcularTotal(arrayDeProduct) {
+  if (!arrayDeProduct.length) return 0;
+  let total = 0;
+  for (let i = 0; i < arrayDeProduct.length; i++) {
+    total = total + arrayDeProduct[i].price * arrayDeProduct[i].cantidad;
+  }
+  return total;
 }
 
 export default function reducer(state = initialState, { payload, type }) {
@@ -83,73 +96,72 @@ export default function reducer(state = initialState, { payload, type }) {
     case CONSTANTES.ADD_TO_CART:
       const product = state.productsAll.find((ele) => ele.id === payload);
       const itemExist = state.cart.find((ele) => ele.id === product.id);
-      return itemExist
-        ? {
-            ...state,
-            cart: setInLocalStorage(
-              "cart",
-              state.cart.map((ele) =>
-                itemExist.id === ele.id
-                  ? { ...ele, cantidad: ele.cantidad + 1 }
-                  : ele
-              )
-            ),
-          }
-        : {
-            ...state,
-            cart: setInLocalStorage("cart", [
-              ...state.cart,
-              { ...product, cantidad: 1 },
-            ]),
-          };
-    case CONSTANTES.DELETE_ONE_PRODUCT:
-      const productExist = state.cart.find((ele) => ele.id === payload);
-      if (productExist) {
-        if (productExist.cantidad > 1) {
-          return {
-            ...state,
-            cart: setInLocalStorage(
-              "cart",
-              state.cart.map((item) =>
-                item.id === productExist.id
-                  ? { ...item, cantidad: item.cantidad - 1 }
-                  : item
-              )
-            ),
-          };
-        }
-        return {
-          ...state,
-          cart: setInLocalStorage(
-            "cart",
-            state.cart.filter((item) => item.id !== productExist.id)
-          ),
-        };
-      }
+      let newCart = itemExist
+        ? state.cart.map((ele) =>
+            itemExist.id === ele.id
+              ? { ...ele, cantidad: ele.cantidad + 1 }
+              : ele
+          )
+        : [...state.cart, { ...product, cantidad: 1 }];
+
       return {
         ...state,
+        cart: setInLocalStorage("cart", newCart),
+        cartTotal: setInLocalStorage("cartTotal", calcularTotal(newCart)),
+        cartTotalItems: setInLocalStorage(
+          "cartTotalItems",
+          state.cartTotalItems + 1
+        ),
+      };
+    case CONSTANTES.DELETE_ONE_PRODUCT:
+      const productExist = state.cart.find((ele) => ele.id === payload);
+      const newCart2 =
+        productExist && productExist.cantidad > 1
+          ? state.cart.map((item) =>
+              item.id === productExist.id
+                ? { ...item, cantidad: item.cantidad - 1 }
+                : item
+            )
+          : productExist
+          ? state.cart.filter((item) => item.id !== productExist.id)
+          : state.cart;
+
+      return {
+        ...state,
+        cart: setInLocalStorage("cart", newCart2),
+        cartTotal: setInLocalStorage("cartTotal", calcularTotal(newCart2)),
+        cartTotalItems: setInLocalStorage(
+          "cartTotalItems",
+          state.cartTotalItems - 1
+        ),
       };
     case CONSTANTES.DELETE_ALL_PRODUCT:
       const existProduct = state.cart.find((ele) => ele.id === payload);
-      if (existProduct) {
-        return {
-          ...state,
-          cart: setInLocalStorage(
-            "cart",
-            state.cart.filter((item) => item.id !== existProduct.id)
-          ),
-        };
-      }
+      const newCart3 = existProduct
+        ? state.cart.filter((item) => item.id !== existProduct.id)
+        : state.cart;
       return {
         ...state,
+        cart: setInLocalStorage("cart", newCart3),
+        cartTotal: setInLocalStorage("cartTotal", calcularTotal(newCart3)),
+        cartTotalItems: setInLocalStorage(
+          "cartTotalItems",
+          state.cartTotalItems - existProduct.cantidad
+        ),
       };
 
     case CONSTANTES.CLEAR_CART:
       return {
         ...state,
         cart: setInLocalStorage("cart", []),
+        cartTotal: setInLocalStorage("cartTotal", 0),
+        cartTotalItems: setInLocalStorage("cartTotalItems", 0),
       };
-
+    case CONSTANTES.DESMONTAR_DETALLE:
+      return {
+        ...state,
+        detailProduct: {},
+      };
     default:
       return { ...state };
   }
