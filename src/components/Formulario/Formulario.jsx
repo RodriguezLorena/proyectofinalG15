@@ -56,9 +56,9 @@ const Formulario = () => {
     value: true,
     type: "",
     mainImage: "",
-    size: [],
+    sizes: [],
     images: [],
-    categories: "",
+    categories:[],
   });
 
   const manipuladorInput = (e) => {
@@ -75,10 +75,10 @@ const Formulario = () => {
   };
   const categoria = ["Hombre", "Mujer", "Niños", "varios"];
 
-  const talles = ["s", "m", "l", "xl"];
+  const talles = ["s", "m", "l", "xl", "1","1.5", "2", "36", "37", "38", "39", "40", "41" ];
 
   const manipuladorSelectSize = (e) => {
-    const selec = nuevoProduct.size.filter(
+    const selec = nuevoProduct.sizes.filter(
       (elemento) => elemento !== e.target.innerHTML
     );
     console.log("ACA ESTA EL NUEVO PRODUCTO ", selec);
@@ -93,32 +93,32 @@ const Formulario = () => {
     } else {
       setNuevoProduct({
         ...nuevoProduct,
-        size: [...nuevoProduct.size, e.target.value],
+        sizes: [...nuevoProduct.sizes, e.target.value],
       });
       setValidador(
         validacion({
           ...nuevoProduct,
-          size: [...nuevoProduct.size, e.target.value],
+          sizes: [...nuevoProduct.sizes, e.target.value],
         })
       );
     }
-    console.log("aca esta el nuevo producto ", nuevoProduct.size);
+    console.log("aca esta el nuevo producto ", nuevoProduct.sizes);
   };
 
   const eliminarSelect = (e) => {
-    const seleccion = nuevoProduct.size.filter(
+    const seleccion = nuevoProduct.sizes.filter(
       (elemento) => elemento !== e.target.innerHTML
     );
 
     setNuevoProduct({
       ...nuevoProduct,
-      size: seleccion,
+      sizes: seleccion,
     });
 
     setValidador(
       validacion({
         ...nuevoProduct,
-        size: [...seleccion],
+        sizes: [...seleccion],
       })
     );
   };
@@ -322,7 +322,7 @@ const Formulario = () => {
           </div>
           <div>
             <ul>
-              {nuevoProduct.size.map((elemento) => (
+              {nuevoProduct.sizes.map((elemento) => (
                 <li key={elemento} onClick={(e) => eliminarSelect(e)}>
                   {elemento}
                 </li>
