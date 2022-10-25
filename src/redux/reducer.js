@@ -118,10 +118,9 @@ export default function reducer(state = initialState, { payload, type }) {
         estadoType: filtradoo.length ? filtradoo : filtradoo2,
       };
 
-    case "RECETA_CREADA":
+    case "PRODUCT_CREATE":
       return {
         ...state,
-        productCreado: payload,
       };
     case "RECETA_NO_CREADA":
       return {

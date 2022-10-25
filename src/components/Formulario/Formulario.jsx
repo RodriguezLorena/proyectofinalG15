@@ -56,9 +56,9 @@ const Formulario = () => {
     value: true,
     type: "",
     mainImage: "",
-    sizes: [],
-    images: [],
-    categories:[],
+    size: [],
+    image: ["Imagen random"],
+    category:"",
   });
 
   const manipuladorInput = (e) => {
@@ -78,7 +78,7 @@ const Formulario = () => {
   const talles = ["s", "m", "l", "xl", "1","1.5", "2", "36", "37", "38", "39", "40", "41" ];
 
   const manipuladorSelectSize = (e) => {
-    const selec = nuevoProduct.sizes.filter(
+    const selec = nuevoProduct.size.filter(
       (elemento) => elemento !== e.target.innerHTML
     );
     console.log("ACA ESTA EL NUEVO PRODUCTO ", selec);
@@ -93,32 +93,32 @@ const Formulario = () => {
     } else {
       setNuevoProduct({
         ...nuevoProduct,
-        sizes: [...nuevoProduct.sizes, e.target.value],
+        size: [...nuevoProduct.size, e.target.value],
       });
       setValidador(
         validacion({
           ...nuevoProduct,
-          sizes: [...nuevoProduct.sizes, e.target.value],
+          size: [...nuevoProduct.size, e.target.value],
         })
       );
     }
-    console.log("aca esta el nuevo producto ", nuevoProduct.sizes);
+    console.log("aca esta el nuevo producto ", nuevoProduct.size);
   };
 
   const eliminarSelect = (e) => {
-    const seleccion = nuevoProduct.sizes.filter(
+    const seleccion = nuevoProduct.size.filter(
       (elemento) => elemento !== e.target.innerHTML
     );
 
     setNuevoProduct({
       ...nuevoProduct,
-      sizes: seleccion,
+      size: seleccion,
     });
 
     setValidador(
       validacion({
         ...nuevoProduct,
-        sizes: [...seleccion],
+        size: [...seleccion],
       })
     );
   };
@@ -322,7 +322,7 @@ const Formulario = () => {
           </div>
           <div>
             <ul>
-              {nuevoProduct.sizes.map((elemento) => (
+              {nuevoProduct.size.map((elemento) => (
                 <li key={elemento} onClick={(e) => eliminarSelect(e)}>
                   {elemento}
                 </li>
