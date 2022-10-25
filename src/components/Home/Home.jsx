@@ -122,7 +122,7 @@ export default function Home() {
               return (
                 <Card
                   name={element.name}
-                  image={element.images[0].img}
+                  image={element.mainImage}
                   price={element.price}
                   id={element.id}
                   key={element.id}

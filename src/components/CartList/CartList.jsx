@@ -4,6 +4,7 @@ import style from "./CartList.module.css";
 import { NavLink } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { clearCart, removeOneProduct, removeAll } from "../../redux/action";
+import swal from "sweetalert";
 
 export default function CartList() {
   const cartState = useSelector((state) => state.cart);
@@ -13,13 +14,19 @@ export default function CartList() {
   const deleteCart = (id, todos = false) => {
     if (todos) {
       dispach(removeAll(id));
+      swal("todos los productos eliminados");
     } else {
       dispach(removeOneProduct(id));
+      swal({
+        title: "Producto eliminado correctamente",
+        icon: "success",
+        className: "swal-title",
+        className:"swal-modal"
+
+      });
     }
   };
-  const limpiarCart = () => {
-    dispach(clearCart());
-  };
+ 
 
   return (
     <div className={style.cart}>

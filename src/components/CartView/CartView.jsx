@@ -7,6 +7,7 @@ import NavBar from "../NavBar/NavBar";
 import { Tooltip } from "flowbite-react";
 import { MdOutlineDelete } from "react-icons/md";
 import { NavLink } from "react-router-dom";
+import swal from "sweetalert";
 
 export default function CartView() {
   const cartState = useSelector((state) => state.cart);
@@ -22,6 +23,7 @@ export default function CartView() {
   };
   const limpiarCart = () => {
     dispach(clearCart());
+    swal("Su carrito esta vacio");
   };
 
   return (

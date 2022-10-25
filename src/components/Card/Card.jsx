@@ -5,6 +5,7 @@ import { MdOutlineShoppingCart } from "react-icons/md";
 import { AiFillHeart } from "react-icons/ai";
 import { addToCart } from "../../redux/action";
 import { useDispatch } from "react-redux";
+import swal from "sweetalert";
 
 export default function Card({ name, image, price, id }) {
   const dispach = useDispatch();
@@ -12,6 +13,14 @@ export default function Card({ name, image, price, id }) {
   const addCart = (id) => {
     console.log(id);
     dispach(addToCart(id));
+    swal({
+      title: "Producto agregado al carrito",
+      icon: "success",
+      button: "Aceptar",
+      className: "swal-modal",
+      className: "swal-overlay",
+      className: "swal-title",
+    });
   };
 
   return (

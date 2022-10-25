@@ -78,7 +78,7 @@ export default function Landing() {
                       <div className="flex items-center justify-center  h-full w-full  px-10">
                         <Card
                           name={element.name}
-                          image={element.images[0].img}
+                          image={element.mainImage}
                           price={element.price}
                           id={element.id}
                           key={element.id}
@@ -94,7 +94,7 @@ export default function Landing() {
                       <div className="flex items-center justify-center  h-full w-full px-10">
                         <Card
                           name={element.name}
-                          image={element.images[0].img}
+                          image={element.mainImage}
                           price={element.price}
                           id={element.id}
                           key={element.id}
@@ -110,7 +110,7 @@ export default function Landing() {
                       <div className="flex items-center justify-center h-full w-full px-10">
                         <Card
                           name={element.name}
-                          image={element.images[0].img}
+                          image={element.mainImage}
                           price={element.price}
                           id={element.id}
                           key={element.id}

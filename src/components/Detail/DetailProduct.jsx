@@ -18,6 +18,7 @@ export default function ProductDetail() {
   const dispatch = useDispatch();
   const { id } = useParams();
   const IdProduct = useSelector((state) => state.detailProduct);
+  console.log("aca esta idproduct", IdProduct);
   const productsAll = useSelector((state) => state.productsAll);
   const dispath = useDispatch();
   const addCart = (id) => {
@@ -48,20 +49,20 @@ export default function ProductDetail() {
         <div className={style.contentImages}>
           <div className={style.images}>
             <button>
-              <img src={IdProduct[0].images[0].img} alt="img no fount" />
+              <img src={IdProduct[0].images[0]} alt="img no fount" />
             </button>
             <button>
-              <img src={IdProduct[0].images[0].img} alt="img no fount" />
+              <img src={IdProduct[0].images[0]} alt="img no fount" />
             </button>
             <button>
-              <img src={IdProduct[0].images[0].img} alt="img no fount" />
+              <img src={IdProduct[0].images[0]} alt="img no fount" />
             </button>
             <button>
-              <img src={IdProduct[0].images[0].img} alt="img no fount" />
+              <img src={IdProduct[0].images[0]} alt="img no fount" />
             </button>
           </div>
           <img
-            src={IdProduct[0].images[0].img}
+            src={IdProduct[0].mainImage}
             alt="img no fount"
             className={style.imageP}
           />
