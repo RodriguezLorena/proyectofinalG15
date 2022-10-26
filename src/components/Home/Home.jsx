@@ -133,7 +133,7 @@ export default function Home() {
           <div className={style.fiterSize}>
             <h3 className={style.titleFilters}>Talla</h3>
             <select name="" id="" onChange={(e) => handelFilterSize(e)}>
-              <option value="todos">Todos</option>
+              <option value="all">Todos</option>
               {auxiliarSize?.map((e) => {
                 return <option value={e}>{e}</option>;
               })}
@@ -142,7 +142,8 @@ export default function Home() {
 
           <div className={style.filterType}>
             <h3 className={style.titleFilters}>Tipo</h3>
-            <select name="" id="" onChange={(e) => handelFilterType(e)}>
+            <select onChange={(e) => handelFilterType(e)}>
+            <option value="all">Todos</option>
               {auxiliarType?.map((e) => {
                 return <option value={e}>{e}</option>;
               })}
