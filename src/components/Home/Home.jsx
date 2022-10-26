@@ -42,24 +42,24 @@ export default function Home() {
   // });
 
   // //ACA ESTA ARREGLO DE TALLAS:
-  // const auxiliarSize = [];
-  // const dataSize = productsAll
-  //   ?.map((elemento) => elemento.sizes?.map((elem) => elem))
-  //   .flat();
-  // dataSize.forEach((elemento) => {
-  //   if (!auxiliarSize.includes(elemento)) {
-  //     auxiliarSize.push(elemento);
-  //   }
-  // });
+  const auxiliarSize = [];
+  const dataSize = productsAll
+    ?.map((elemento) => elemento.sizes?.map((elem) => elem))
+    .flat();
+  dataSize.forEach((elemento) => {
+    if (!auxiliarSize.includes(elemento)) {
+      auxiliarSize.push(elemento);
+    }
+  });
 
   // //ACA ESTA EL ARREGLO DE TIPOS:
-  // const auxiliarType = [];
-  // const dataType = productsAll?.map((elemento) => elemento.type);
-  // dataType.forEach((elemento) => {
-  //   if (!auxiliarType.includes(elemento)) {
-  //     auxiliarType.push(elemento);
-  //   }
-  // });
+  const auxiliarType = [];
+  const dataType = productsAll?.map((elemento) => elemento.type);
+  dataType.forEach((elemento) => {
+    if (!auxiliarType.includes(elemento)) {
+      auxiliarType.push(elemento);
+    }
+  });
 
   useEffect(() => {
     dispatch(getProducts());
@@ -90,33 +90,7 @@ export default function Home() {
     setPaginaEnEsteMomento(1);
   }
   const arrayCategories = ["mujer", "hombre", "varios", "niños"];
-  const arraySize = [
-    "s",
-    "m",
-    "l",
-    "xl",
-    "36",
-    "37",
-    "38",
-    "39",
-    "40",
-    "41",
-    "1",
-    "1.5",
-    "2",
-    "u",
-  ];
-  const arrayType = [
-    "camisa",
-    "pantalon",
-    "remera",
-    "zapatilla",
-    "sandalia",
-    "zapato",
-    "accesorio",
-    "hogar",
-    "vestido",
-  ];
+
   return (
     <div>
       <NavBar />
@@ -162,7 +136,7 @@ export default function Home() {
             <h3 className={style.titleFilters}>Talla</h3>
             <select name="" id="" onChange={(e) => handelFilterSize(e)}>
               <option value="all">Todos</option>
-              {arraySize?.map((e) => {
+              {auxiliarSize?.map((e) => {
                 return <option value={e}>{e}</option>;
               })}
             </select>
@@ -172,7 +146,7 @@ export default function Home() {
             <h3 className={style.titleFilters}>Tipo</h3>
             <select onChange={(e) => handelFilterType(e)}>
               <option value="all">Todos</option>
-              {arrayType?.map((e) => {
+              {auxiliarType?.map((e) => {
                 return <option value={e}>{e}</option>;
               })}
             </select>
