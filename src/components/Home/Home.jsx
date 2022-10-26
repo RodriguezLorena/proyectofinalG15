@@ -28,38 +28,38 @@ export default function Home() {
   const indiceUno = paginaEnEsteMomento * cantidadPorPagina;
   const ultimoIndice = indiceUno - cantidadPorPagina;
   const productsList = productsAll.slice(ultimoIndice, indiceUno);
-
+  //  <<<¡POR FAVOR NO BORRAR ESTO!>>>
   //ACA SE HACE EL FILTRO POR CATEGORIA:
-  const auxiliar = [];
-  const data = productsAll
-    ?.map((elemento) => elemento.categories.map((e) => e.name))
-    .flat();
+  // const auxiliar = [];
+  // const data = productsAll
+  //   ?.map((elemento) => elemento.categories.map((e) => e.name))
+  //   .flat();
 
-  data.forEach((elemento) => {
-    if (!auxiliar.includes(elemento)) {
-      auxiliar.push(elemento);
-    }
-  });
+  // data.forEach((elemento) => {
+  //   if (!auxiliar.includes(elemento)) {
+  //     auxiliar.push(elemento);
+  //   }
+  // });
 
-  //ACA ESTA ARREGLO DE TALLAS:
-  const auxiliarSize = [];
-  const dataSize = productsAll
-    ?.map((elemento) => elemento.sizes?.map((elem) => elem))
-    .flat();
-  dataSize.forEach((elemento) => {
-    if (!auxiliarSize.includes(elemento)) {
-      auxiliarSize.push(elemento);
-    }
-  });
+  // //ACA ESTA ARREGLO DE TALLAS:
+  // const auxiliarSize = [];
+  // const dataSize = productsAll
+  //   ?.map((elemento) => elemento.sizes?.map((elem) => elem))
+  //   .flat();
+  // dataSize.forEach((elemento) => {
+  //   if (!auxiliarSize.includes(elemento)) {
+  //     auxiliarSize.push(elemento);
+  //   }
+  // });
 
-  //ACA ESTA EL ARREGLO DE TIPOS:
-  const auxiliarType = [];
-  const dataType = productsAll?.map((elemento) => elemento.type);
-  dataType.forEach((elemento) => {
-    if (!auxiliarType.includes(elemento)) {
-      auxiliarType.push(elemento);
-    }
-  });
+  // //ACA ESTA EL ARREGLO DE TIPOS:
+  // const auxiliarType = [];
+  // const dataType = productsAll?.map((elemento) => elemento.type);
+  // dataType.forEach((elemento) => {
+  //   if (!auxiliarType.includes(elemento)) {
+  //     auxiliarType.push(elemento);
+  //   }
+  // });
 
   useEffect(() => {
     dispatch(getProducts());
@@ -89,7 +89,34 @@ export default function Home() {
     dispatch(filterType(e.target.value));
     setPaginaEnEsteMomento(1);
   }
-
+  const arrayCategories = ["mujer", "hombre", "varios", "niños"];
+  const arraySize = [
+    "s",
+    "m",
+    "l",
+    "xl",
+    "36",
+    "37",
+    "38",
+    "39",
+    "40",
+    "41",
+    "1",
+    "1.5",
+    "2",
+    "u",
+  ];
+  const arrayType = [
+    "camisa",
+    "pantalon",
+    "remera",
+    "zapatilla",
+    "sandalia",
+    "zapato",
+    "accesorio",
+    "hogar",
+    "vestido",
+  ];
   return (
     <div>
       <NavBar />
@@ -101,7 +128,8 @@ export default function Home() {
             <h3 className={style.titleFilters}>Productos</h3>
             <select onChange={(e) => handleFilterCategory(e)}>
               <option value="all">Todos los productos</option>
-              {auxiliar?.map((e, index) => {
+
+              {arrayCategories?.map((e, index) => {
                 return (
                   <option key={index} value={e}>
                     {e}
@@ -134,7 +162,7 @@ export default function Home() {
             <h3 className={style.titleFilters}>Talla</h3>
             <select name="" id="" onChange={(e) => handelFilterSize(e)}>
               <option value="all">Todos</option>
-              {auxiliarSize?.map((e) => {
+              {arraySize?.map((e) => {
                 return <option value={e}>{e}</option>;
               })}
             </select>
@@ -143,8 +171,8 @@ export default function Home() {
           <div className={style.filterType}>
             <h3 className={style.titleFilters}>Tipo</h3>
             <select onChange={(e) => handelFilterType(e)}>
-            <option value="all">Todos</option>
-              {auxiliarType?.map((e) => {
+              <option value="all">Todos</option>
+              {arrayType?.map((e) => {
                 return <option value={e}>{e}</option>;
               })}
             </select>
