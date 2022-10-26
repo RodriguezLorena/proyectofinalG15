@@ -6,6 +6,7 @@ import Landing from "./components/Landing/Landing";
 import Formulario from "./components/Formulario/Formulario";
 import CartView from "./components/CartView/CartView";
 import Pagos from "../src/components/Pagos/Pagos";
+import Sidebar from "./components/Sidebar/sidebar";
 
 function App() {
   return (
@@ -17,6 +18,7 @@ function App() {
         <Route exact path="/formulario" element={<Formulario />} />
         <Route path="/carrito" element={<CartView />} />
         <Route path="/pagos" element={<Pagos />} />
+        <Route path="/admin" element={<Sidebar />} />
       </Routes>
     </div>
   );

@@ -119,7 +119,7 @@ export default function Home() {
                 type="range"
                 onChange={(e) => handleSelectPrice(e)}
                 min="0"
-                max="90000"
+                max="500"
                 className={style.range}
               />
 
