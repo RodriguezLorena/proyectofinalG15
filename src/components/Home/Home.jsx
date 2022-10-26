@@ -28,29 +28,19 @@ export default function Home() {
   const indiceUno = paginaEnEsteMomento * cantidadPorPagina;
   const ultimoIndice = indiceUno - cantidadPorPagina;
   const productsList = productsAll.slice(ultimoIndice, indiceUno);
-   
-  
+
   //PROBANDO CAMBIOS DE FILTROS:
- const auxiliar=[]
- const data = productsAll?.map((elemento)=> elemento.categories).flat()
- const algo = data?.map((elemento)=> elemento.name)
- auxiliar.push(algo)
- console.log("aca esta algo", auxiliar)
-    
- const result = auxiliar.reduce((acc,item)=>{
-  if(!acc.includes(item)){
-    acc.push(item);
-  }
-  return acc;
-},[])
-
-
-    console.log("ACA ESTA FILTRADO ", result)
-
- 
- 
-
-
+  const auxiliar = [];
+  const data = productsAll
+    ?.map((elemento) => elemento.categories.map((e) => e.name))
+    .flat();
+  console.log("ACA ESTA FLAT", data);
+  data.forEach((elemento) => {
+    if (!auxiliar.includes(elemento)) {
+      auxiliar.push(elemento);
+    }
+  });
+  console.log("ACA ESTA ARRAY LIMPIO", auxiliar);
   useEffect(() => {
     dispatch(getProducts());
   }, [dispatch]);
@@ -91,7 +81,9 @@ export default function Home() {
             <h3 className={style.titleFilters}>Productos</h3>
             <select onChange={(e) => handleFilterCategory(e)}>
               <option value="all">Todos los productos</option>
-             
+              {auxiliar?.map((e) => {
+                return <option value={e}>{e}</option>;
+              })}
             </select>
           </div>
           <div>
@@ -149,7 +141,6 @@ export default function Home() {
                   sizes={element.sizes}
                   categories={element.categories}
                   key={element.id}
-                 
                 />
               );
             })}
