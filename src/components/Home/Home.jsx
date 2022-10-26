@@ -29,7 +29,7 @@ export default function Home() {
   const ultimoIndice = indiceUno - cantidadPorPagina;
   const productsList = productsAll.slice(ultimoIndice, indiceUno);
 
-  //PROBANDO CAMBIOS DE FILTROS:
+  //ACA SE HACE EL FILTRO POR CATEGORIA:
   const auxiliar = [];
   const data = productsAll
     ?.map((elemento) => elemento.categories.map((e) => e.name))
@@ -38,6 +38,26 @@ export default function Home() {
   data.forEach((elemento) => {
     if (!auxiliar.includes(elemento)) {
       auxiliar.push(elemento);
+    }
+  });
+
+  //ACA ESTA ARREGLO DE TALLAS:
+  const auxiliarSize = [];
+  const dataSize = productsAll
+    ?.map((elemento) => elemento.sizes?.map((elem) => elem))
+    .flat();
+  dataSize.forEach((elemento) => {
+    if (!auxiliarSize.includes(elemento)) {
+      auxiliarSize.push(elemento);
+    }
+  });
+
+  //ACA ESTA EL ARREGLO DE TIPOS:
+  const auxiliarType = [];
+  const dataType = productsAll?.map((elemento) => elemento.type);
+  dataType.forEach((elemento) => {
+    if (!auxiliarType.includes(elemento)) {
+      auxiliarType.push(elemento);
     }
   });
 
@@ -97,7 +117,7 @@ export default function Home() {
                 type="range"
                 onChange={(e) => handleSelectPrice(e)}
                 min="0"
-                max="13000"
+                max="90000"
                 className={style.range}
               />
 
@@ -114,22 +134,18 @@ export default function Home() {
             <h3 className={style.titleFilters}>Talla</h3>
             <select name="" id="" onChange={(e) => handelFilterSize(e)}>
               <option value="todos">Todos</option>
-              <option value="m">M</option>
-              <option value="s">S</option>
-              <option value="xl">XL</option>
-              <option value="xxl">XXL</option>
+              {auxiliarSize?.map((e) => {
+                return <option value={e}>{e}</option>;
+              })}
             </select>
           </div>
 
           <div className={style.filterType}>
             <h3 className={style.titleFilters}>Tipo</h3>
             <select name="" id="" onChange={(e) => handelFilterType(e)}>
-              <option value="todos">Todos</option>
-              <option value="hogar">Hogar</option>
-              <option value="remera">Remeras</option>
-              <option value="pantalon">Pantalones</option>
-              <option value="buzos">Buzos</option>
-              <option value="accesorio">Accesorios</option>
+              {auxiliarType?.map((e) => {
+                return <option value={e}>{e}</option>;
+              })}
             </select>
           </div>
         </div>
