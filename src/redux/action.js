@@ -53,7 +53,7 @@ export const getForName = (name) => {
 
 export function filterByCategorys(payload) {
   return {
-    type: "FILTER_BY_CATEGORYS",
+    type: CONSTANTES.FILTER_BY_CATEGORYS,
     payload,
   };
 }

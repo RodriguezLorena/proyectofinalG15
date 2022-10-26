@@ -193,7 +193,7 @@ const Formulario = () => {
 
     if (Number(nuevoProduct.price) < 1)
       validar.price = "TIENE QUE SER UN PRECIO MAYOR A $1 ";
-    if (Number(nuevoProduct.price) > 150000)
+    if (Number(nuevoProduct.price) > 90000)
       validar.price = "NO PUEDE SER MAYOR A 150.000";
 
     if (Number(nuevoProduct.stock) < 1)
