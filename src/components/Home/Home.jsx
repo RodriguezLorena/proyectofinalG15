@@ -34,13 +34,13 @@ export default function Home() {
   const data = productsAll
     ?.map((elemento) => elemento.categories.map((e) => e.name))
     .flat();
-  console.log("ACA ESTA FLAT", data);
+
   data.forEach((elemento) => {
     if (!auxiliar.includes(elemento)) {
       auxiliar.push(elemento);
     }
   });
-  console.log("ACA ESTA ARRAY LIMPIO", auxiliar);
+
   useEffect(() => {
     dispatch(getProducts());
   }, [dispatch]);
@@ -81,8 +81,12 @@ export default function Home() {
             <h3 className={style.titleFilters}>Productos</h3>
             <select onChange={(e) => handleFilterCategory(e)}>
               <option value="all">Todos los productos</option>
-              {auxiliar?.map((e) => {
-                return <option value={e}>{e}</option>;
+              {auxiliar?.map((e, index) => {
+                return (
+                  <option key={index} value={e}>
+                    {e}
+                  </option>
+                );
               })}
             </select>
           </div>

@@ -41,10 +41,10 @@ export default function reducer(state = initialState, { payload, type }) {
       };
 
     // case "SEARCH_NAME":
-    //   return { 
+    //   return {
     //   ...state,
     //   productsAll: payload };
-     case CONSTANTES.SEARCH_NAME:
+    case CONSTANTES.SEARCH_NAME:
       console.log("ACA ESTA PAYLOAD ", payload);
       if (!payload) {
         return alert("NO SE ENCUENTRA UN PRODUCTO CON ESE NOMBRE");
@@ -61,7 +61,9 @@ export default function reducer(state = initialState, { payload, type }) {
       var dataC =
         payload === "all"
           ? info
-          : info.filter((e) => e.category.includes(payload));
+          : info.filter((e) =>
+              e.categories.map((e) => e.name).includes(payload)
+            );
       return {
         ...state,
         productsAll: dataC,
