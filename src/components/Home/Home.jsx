@@ -18,6 +18,7 @@ import Navegation from "../Navegation/Navegation";
 export default function Home() {
   const dispatch = useDispatch();
   const productsAll = useSelector((state) => state.productsAll);
+  console.log("aca esta productsAll", productsAll);
   const [range, setRange] = useState(0);
   const [Order, setOrder] = useState("");
 
@@ -27,6 +28,28 @@ export default function Home() {
   const indiceUno = paginaEnEsteMomento * cantidadPorPagina;
   const ultimoIndice = indiceUno - cantidadPorPagina;
   const productsList = productsAll.slice(ultimoIndice, indiceUno);
+   
+  
+  //PROBANDO CAMBIOS DE FILTROS:
+ const auxiliar=[]
+ const data = productsAll?.map((elemento)=> elemento.categories).flat()
+ const algo = data?.map((elemento)=> elemento.name)
+ auxiliar.push(algo)
+ console.log("aca esta algo", auxiliar)
+    
+ const result = auxiliar.reduce((acc,item)=>{
+  if(!acc.includes(item)){
+    acc.push(item);
+  }
+  return acc;
+},[])
+
+
+    console.log("ACA ESTA FILTRADO ", result)
+
+ 
+ 
+
 
   useEffect(() => {
     dispatch(getProducts());
@@ -68,9 +91,7 @@ export default function Home() {
             <h3 className={style.titleFilters}>Productos</h3>
             <select onChange={(e) => handleFilterCategory(e)}>
               <option value="all">Todos los productos</option>
-              <option value="varios">Variedades</option>;
-              <option value="mujer">Mujer</option>;
-              <option value="hombre">Hombre</option>;
+             
             </select>
           </div>
           <div>
@@ -125,7 +146,10 @@ export default function Home() {
                   image={element.mainImage}
                   price={element.price}
                   id={element.id}
+                  sizes={element.sizes}
+                  categories={element.categories}
                   key={element.id}
+                 
                 />
               );
             })}

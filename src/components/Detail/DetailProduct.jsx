@@ -77,7 +77,7 @@ export default function ProductDetail() {
           <h3 className={style.stock}>Stock: {IdProduct[0].stock}</h3>
           <h3 className={style.description}>{IdProduct[0].description}</h3>
           <h3>
-            <b>Category:</b> {IdProduct[0].category}
+            <b>Category:</b> {IdProduct[0].categories.map((e) => e.name)}
           </h3>
           <div className={style.buyCarrito}>
             <button className={style.buy}>Comparar ya</button>

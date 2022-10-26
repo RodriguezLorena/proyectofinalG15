@@ -40,8 +40,21 @@ export default function reducer(state = initialState, { payload, type }) {
         detailProduct: payload,
       };
 
-    case "SEARCH_NAME":
-      return { ...state, productsAll: payload };
+    // case "SEARCH_NAME":
+    //   return { 
+    //   ...state,
+    //   productsAll: payload };
+     case CONSTANTES.SEARCH_NAME:
+      console.log("ACA ESTA PAYLOAD ", payload);
+      if (!payload) {
+        return alert("NO SE ENCUENTRA UN PRODUCTO CON ESE NOMBRE");
+      } else {
+        console.log("ENCONTRE ALGO ", payload);
+        return {
+          ...state,
+          productsAll: payload,
+        };
+      }
 
     case "FILTER_BY_CATEGORYS":
       let info = state.filterProducts;

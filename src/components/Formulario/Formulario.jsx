@@ -55,7 +55,7 @@ const Formulario = () => {
     description: "",
     value: true,
     type: "",
-    mainImage: "",
+    mainImage: "https://i.pinimg.com/236x/58/11/f4/5811f41de74bdc7c867926c1ee8297a4.jpg",
     size: [],
     image: ["Imagen random"],
     category:"",
@@ -73,7 +73,7 @@ const Formulario = () => {
       })
     );
   };
-  const categoria = ["Hombre", "Mujer", "Niños", "varios"];
+  
 
   const talles = ["s", "m", "l", "xl", "1","1.5", "2", "36", "37", "38", "39", "40", "41" ];
 
@@ -123,7 +123,7 @@ const Formulario = () => {
     );
   };
 
-  const manipuladorCkeck = (e) => {};
+ 
 
   const manipuladorDeCreacion = (e) => {
     e.preventDefault();
@@ -328,6 +328,16 @@ const Formulario = () => {
                 </li>
               ))}
             </ul>
+          </div>
+
+          <div>
+            <label> categoregoria </label>
+           <input type="text" name="category"  value={nuevoProduct.category}
+                placeholder="COLOQUE LA CATEGORIA EJ: CAMISA"
+                onChange={(e) => manipuladorInput(e)}/>
+          </div>
+          <div>
+            <SubirPrincipal/>
           </div>
 
           <div className={style.contentBtn}>

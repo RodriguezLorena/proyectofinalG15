@@ -1,4 +1,5 @@
 import axios from "axios";
+import swal from "sweetalert";
 import { CONSTANTES } from "./constantes";
 
 
@@ -28,29 +29,35 @@ export function GetDetail(id) {
   };
 }
 
-export function getForName(name) {
+
+export const getForName = (name) => {
   return async function (dispatch) {
     try {
-      console.log(name);
-      const search = await axios.get(`datosdeploy?name=${name}`);
-      search.filter((element)=> element.name.toLowerCase().includes(name.toLowerCase()))
-      return dispatch({
-        type: "GET_NAME",
-        payload: search,
-      });
-
-      
+      if (name) {
+        let respuesta = await axios(
+          `https://velvet.up.railway.app/products?search=${name}`
+        );
+        return dispatch({
+          type: CONSTANTES.SEARCH_NAME,
+          payload: respuesta.data,
+        });
+      } else {
+        swal("INGRESA UN NOMBRE DEL PRODUCTO");
+      }
     } catch (error) {
-      console.log(error, "ruta search fallo");
+      console.log("ERROR EN LA LLAMADA POR QUERY NOMBRE ", error);
+      alert("NO EXISTE El PRODUCTO QUE BUSCA");
     }
   };
-}
+};
+
 export function filterByCategorys(payload) {
   return {
     type: "FILTER_BY_CATEGORYS",
     payload,
   };
 }
+
 export function OrderPrice(payload) {
   return {
     type: "ORDER_PRICE",

@@ -7,7 +7,7 @@ import { addToCart } from "../../redux/action";
 import { useDispatch } from "react-redux";
 import swal from "sweetalert";
 
-export default function Card({ name, image, price, id }) {
+export default function Card({ name, image, price, id, sizes, categories}) {
   const dispach = useDispatch();
 
   const addCart = (id) => {
@@ -49,8 +49,8 @@ export default function Card({ name, image, price, id }) {
           <h5>{name}</h5>
           <div className={style.talasPrecio}>
             <div className={style.tallas}>
-              <p>M</p>
-              <p>S</p>
+              {sizes.map((e) =>{
+              return(<p key={e}>{e}</p>)})}
             </div>
             <h6>${price}</h6>
           </div>
