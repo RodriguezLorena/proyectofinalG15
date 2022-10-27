@@ -14,11 +14,13 @@ import { IoIosArrowBack, IoIosArrowForward } from "react-icons/io";
 import NavBar from "../NavBar/NavBar";
 import { addToCart } from "../../redux/action";
 
+import Review from "../Review/Review";
+import Reviews from "../Review/Reviews";
+
 export default function ProductDetail() {
   const dispatch = useDispatch();
   const { id } = useParams();
   const IdProduct = useSelector((state) => state.detailProduct);
-  console.log("aca esta idproduct", IdProduct);
   const productsAll = useSelector((state) => state.productsAll);
   const dispath = useDispatch();
   const addCart = (id) => {
@@ -90,6 +92,9 @@ export default function ProductDetail() {
         </div>
       </div>
 
+      <Review IdProduct={IdProduct}></Review>
+
+      <Reviews></Reviews>
       {/* <div className={style.contentRealciones}>
         <div className="h-56  sm:h-1/2  xl:h-screen  w-full mt-20 2xl:h-96">
           <h3 className={style.titleCarrusel}>Productos Relacionados</h3>
