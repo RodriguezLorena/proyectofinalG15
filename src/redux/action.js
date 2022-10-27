@@ -3,7 +3,7 @@ import swal from "sweetalert";
 import { CONSTANTES } from "./constantes";
 
 
-const datosdeploy= "https://velvet.up.railway.app/product"
+const datosdeploy = "https://velvet.up.railway.app/product"
 export function getProducts() {
   return async function (dispatch) {
     try {
@@ -82,15 +82,15 @@ export function filterType(payload) {
 export const formularioDeCreacion = async (payload) => {
   try {
 
-   
+
     let crearProduct = await axios.post(
       "https://velvet.up.railway.app/product",
-     payload
+      payload
     );
     console.log(crearProduct)
     return {
-      type:'PRODUCT_CREATE',
-      payload:crearProduct
+      type: 'PRODUCT_CREATE',
+      payload: crearProduct
     };
   } catch (error) {
     console.log("ERROR EN LA RUTA DE CREACION ", error);
@@ -126,4 +126,46 @@ export function desmontarDetalle() {
   return {
     type: CONSTANTES.DESMONTAR_DETALLE,
   };
+}
+
+export function getAllReviews(payload) {
+  return async function (dispatch) {
+    let traeReviews = await axios.get(`http://localhost:3001/review/${payload}`)
+    console.log(traeReviews.data);
+    return dispatch({
+      type: CONSTANTES.GET_ALL_REVIEW,
+      payload: traeReviews.data
+    })
+
+  }
+}
+
+
+///----------POST FORM------------
+export function postProducts(payload) {
+  console.log(payload, ' payload de postProducts');
+
+  return async function (dispatch) {
+    const postJson = await axios.post(`http://localhost:3001/product`, payload)
+    return dispatch({
+      type: CONSTANTES.POST_PRODUCT,
+      payload: postJson
+    });
+  }
+}
+
+
+//--------------IMAGENES-------------
+
+export function postImages() {
+  // console.log(payload, ' payload de post imagenes');
+
+  return async function (dispatch) {
+    const postJson1 = await axios.post(`http://localhost:3001/product/images`)
+    return dispatch({
+      type: CONSTANTES.POST_IMAGES,
+      
+    });
+  }
+
 }
