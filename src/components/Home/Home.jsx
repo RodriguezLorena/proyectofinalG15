@@ -28,20 +28,20 @@ export default function Home() {
   const indiceUno = paginaEnEsteMomento * cantidadPorPagina;
   const ultimoIndice = indiceUno - cantidadPorPagina;
   const productsList = productsAll.slice(ultimoIndice, indiceUno);
-
+  //  <<<¡POR FAVOR NO BORRAR ESTO!>>>
   //ACA SE HACE EL FILTRO POR CATEGORIA:
-  const auxiliar = [];
-  const data = productsAll
-    ?.map((elemento) => elemento.categories.map((e) => e.name))
-    .flat();
+  // const auxiliar = [];
+  // const data = productsAll
+  //   ?.map((elemento) => elemento.categories.map((e) => e.name))
+  //   .flat();
 
-  data.forEach((elemento) => {
-    if (!auxiliar.includes(elemento)) {
-      auxiliar.push(elemento);
-    }
-  });
+  // data.forEach((elemento) => {
+  //   if (!auxiliar.includes(elemento)) {
+  //     auxiliar.push(elemento);
+  //   }
+  // });
 
-  //ACA ESTA ARREGLO DE TALLAS:
+  // //ACA ESTA ARREGLO DE TALLAS:
   const auxiliarSize = [];
   const dataSize = productsAll
     ?.map((elemento) => elemento.sizes?.map((elem) => elem))
@@ -52,7 +52,7 @@ export default function Home() {
     }
   });
 
-  //ACA ESTA EL ARREGLO DE TIPOS:
+  // //ACA ESTA EL ARREGLO DE TIPOS:
   const auxiliarType = [];
   const dataType = productsAll?.map((elemento) => elemento.type);
   dataType.forEach((elemento) => {
@@ -89,6 +89,7 @@ export default function Home() {
     dispatch(filterType(e.target.value));
     setPaginaEnEsteMomento(1);
   }
+  const arrayCategories = ["mujer", "hombre", "varios", "niños"];
 
   return (
     <div>
@@ -101,7 +102,8 @@ export default function Home() {
             <h3 className={style.titleFilters}>Productos</h3>
             <select onChange={(e) => handleFilterCategory(e)}>
               <option value="all">Todos los productos</option>
-              {auxiliar?.map((e, index) => {
+
+              {arrayCategories?.map((e, index) => {
                 return (
                   <option key={index} value={e}>
                     {e}
@@ -117,7 +119,7 @@ export default function Home() {
                 type="range"
                 onChange={(e) => handleSelectPrice(e)}
                 min="0"
-                max="90000"
+                max="500"
                 className={style.range}
               />
 
@@ -143,7 +145,7 @@ export default function Home() {
           <div className={style.filterType}>
             <h3 className={style.titleFilters}>Tipo</h3>
             <select onChange={(e) => handelFilterType(e)}>
-            <option value="all">Todos</option>
+              <option value="all">Todos</option>
               {auxiliarType?.map((e) => {
                 return <option value={e}>{e}</option>;
               })}

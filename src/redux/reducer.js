@@ -90,7 +90,7 @@ export default function reducer(state = initialState, { payload, type }) {
     case "FILTER_SIZE":
       let filterSize = state.filterPrice;
       let filtrado =
-        payload == "all"
+        payload === "all"
           ? filterSize
           : filterSize.filter((e) => e.sizes.includes(payload));
 
@@ -115,11 +115,17 @@ export default function reducer(state = initialState, { payload, type }) {
       };
 
     case "FILTER_TYPE":
-
       let filterType = state.filterPrice;
+
       let filtradoo = payload === "all"
         ? filterType
         : filterType.filter((e) => e.type === payload);
+
+      let filtradoo =
+        payload === "all"
+          ? filterType
+          : filterType.filter((e) => e.type === payload);
+
       console.log("ESTOY EN EL REDUCER ", filtradoo);
       let filterType2 = state.filterProducts;
       console.log("ESTOY EN EL REDUCER 2 ", filterType2);
@@ -127,7 +133,10 @@ export default function reducer(state = initialState, { payload, type }) {
         payload === "all"
           ? filterType2
           : filterType2.filter((e) => e.type === payload);
+
       console.log("ACA ESTA TYPE ", filtradoo2)
+
+      console.log("ACA ESTA TYPE ", filtradoo2);
       return {
         ...state,
         productsAll: filtradoo.length ? filtradoo : filtradoo2,
