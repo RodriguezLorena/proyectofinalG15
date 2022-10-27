@@ -116,14 +116,12 @@ export default function reducer(state = initialState, { payload, type }) {
 
     case "FILTER_TYPE":
       let filterType = state.filterPrice;
-
       let filtradoo =
         payload === "all"
           ? filterType
           : filterType.filter((e) => e.type === payload);
 
       let filterType2 = state.filterProducts;
-
       let filtradoo2 =
         payload === "all"
           ? filterType2
