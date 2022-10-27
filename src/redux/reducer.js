@@ -60,8 +60,8 @@ export default function reducer(state = initialState, { payload, type }) {
         payload === "all"
           ? info
           : info.filter((e) =>
-            e.categories.map((e) => e.name).includes(payload)
-          );
+              e.categories.map((e) => e.name).includes(payload)
+            );
       return {
         ...state,
         productsAll: dataC,
@@ -83,8 +83,8 @@ export default function reducer(state = initialState, { payload, type }) {
         productsAll: infoPrice3.length
           ? infoPrice3
           : infoPrice.length
-            ? infoPrice
-            : infoPrice2,
+          ? infoPrice
+          : infoPrice2,
       };
 
     case "FILTER_SIZE":
@@ -110,33 +110,25 @@ export default function reducer(state = initialState, { payload, type }) {
         productsAll: filtrado3.length
           ? filtrado3
           : filtrado.length
-            ? filtrado
-            : filtrado2,
+          ? filtrado
+          : filtrado2,
       };
 
     case "FILTER_TYPE":
       let filterType = state.filterPrice;
-
-      let filtradoo = payload === "all"
-        ? filterType
-        : filterType.filter((e) => e.type === payload);
 
       let filtradoo =
         payload === "all"
           ? filterType
           : filterType.filter((e) => e.type === payload);
 
-      console.log("ESTOY EN EL REDUCER ", filtradoo);
       let filterType2 = state.filterProducts;
-      console.log("ESTOY EN EL REDUCER 2 ", filterType2);
+
       let filtradoo2 =
         payload === "all"
           ? filterType2
           : filterType2.filter((e) => e.type === payload);
 
-      console.log("ACA ESTA TYPE ", filtradoo2)
-
-      console.log("ACA ESTA TYPE ", filtradoo2);
       return {
         ...state,
         productsAll: filtradoo.length ? filtradoo : filtradoo2,
@@ -160,10 +152,10 @@ export default function reducer(state = initialState, { payload, type }) {
       const itemExist = state.cart.find((ele) => ele.id === product.id);
       let newCart = itemExist
         ? state.cart.map((ele) =>
-          itemExist.id === ele.id
-            ? { ...ele, cantidad: ele.cantidad + 1 }
-            : ele
-        )
+            itemExist.id === ele.id
+              ? { ...ele, cantidad: ele.cantidad + 1 }
+              : ele
+          )
         : [...state.cart, { ...product, cantidad: 1 }];
 
       return {
@@ -180,13 +172,13 @@ export default function reducer(state = initialState, { payload, type }) {
       const newCart2 =
         productExist && productExist.cantidad > 1
           ? state.cart.map((item) =>
-            item.id === productExist.id
-              ? { ...item, cantidad: item.cantidad - 1 }
-              : item
-          )
+              item.id === productExist.id
+                ? { ...item, cantidad: item.cantidad - 1 }
+                : item
+            )
           : productExist
-            ? state.cart.filter((item) => item.id !== productExist.id)
-            : state.cart;
+          ? state.cart.filter((item) => item.id !== productExist.id)
+          : state.cart;
 
       return {
         ...state,
@@ -225,22 +217,21 @@ export default function reducer(state = initialState, { payload, type }) {
         detailProduct: {},
       };
 
-
     case CONSTANTES.GET_ALL_REVIEW:
       return {
         ...state,
-        reviewsProducts: payload
+        reviewsProducts: payload,
       };
-    
+
     case CONSTANTES.POST_PRODUCT:
-      return{
-        ...state
+      return {
+        ...state,
       };
-    
+
     case CONSTANTES.POST_IMAGES:
-      return{
-        ...state
-      }
+      return {
+        ...state,
+      };
     default:
       return { ...state };
   }
