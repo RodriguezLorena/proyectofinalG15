@@ -29,7 +29,7 @@ function App() {
           path="/createProduct"
           element={<CreateProduct></CreateProduct>}
         />
-        <Route path="/putUser/:id" element={<PutUser />} />
+        <Route path="/user/:id" element={<PutUser />} />
         <Route path="/admin" element={<Sidebar />} />
       </Routes>
     </div>

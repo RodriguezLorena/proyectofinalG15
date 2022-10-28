@@ -1,0 +1,47 @@
+.content {
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+
+  background-color: #fff;
+}
+
+.content form {
+  display: flex;
+  flex-direction: column;
+
+  margin-top: 3rem;
+  height: max-content;
+}
+
+.content input {
+  border-radius: 40px;
+  border: 1px solid #ddd;
+}
+
+.perileImage {
+  border-radius: 50%;
+  width: 300px;
+  height: 300px;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.perileImage img {
+  width: 200px;
+}
+
+.perileImage input {
+  width: 100px;
+}
+
+.butonApli {
+  background-color: rgb(86, 86, 242);
+  width: max-content;
+  padding: 0.6rem 2rem;
+  color: #fff;
+  border-radius: 40px;
+  margin-top: 1rem;
+}

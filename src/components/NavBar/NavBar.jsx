@@ -6,19 +6,19 @@ import { Dropdown } from "flowbite-react";
 import style from "./NavBar.module.css";
 import CartList from "../CartList/CartList";
 import Logo from "../../img/logoVelvet.png";
-import { getForName, login, creatAcount } from "../../redux/action";
+import { getForName, login, creatAcount, clearUser } from "../../redux/action";
 import { useDispatch, useSelector } from "react-redux";
-import { NavLink } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 import { Button, Modal, Label, TextInput, Checkbox } from "flowbite-react";
 import { IoClose } from "react-icons/io5";
 import { BsArrowLeftShort } from "react-icons/bs";
 
 export default function NavBar({ home, products }) {
   const dispatch = useDispatch();
+  const navegation = useNavigate();
   const [search, setSearch] = useState("");
   const cantidadCarrito = useSelector((state) => state.cartTotalItems);
   const user = useSelector((state) => state.user);
-  console.log(user, "user de mavabar");
 
   function handelSearch(e) {
     e.preventDefault();
@@ -70,6 +70,12 @@ export default function NavBar({ home, products }) {
     });
   }
 
+  function handelClearUser(e) {
+    e.preventDefault();
+    dispatch(clearUser());
+    navegation("/");
+  }
+
   //-------------------//
 
   return (
@@ -118,14 +124,25 @@ export default function NavBar({ home, products }) {
               <IoPersonOutline className="mr-10" size="30" />
             </button>
           ) : (
-            <div className=" mr-10 mt-2">
-              <NavLink
-                to="/perfil"
-                className="flex colum justify-center flex-col items-center"
+            <div className="flex flex-col justify-center items-center  mr-10 mt-2">
+              <Dropdown
+                label={<IoPersonOutline size="30" />}
+                inline={true}
+                arrowIcon={false}
               >
-                <IoPersonOutline size="30" />
-                <h5>{user.userName}</h5>
-              </NavLink>
+                <Dropdown.Item>
+                  <NavLink
+                    to={`user/${user.id}`}
+                    className="flex colum justify-center flex-col items-center"
+                  >
+                    perfil
+                  </NavLink>
+                </Dropdown.Item>
+                <Dropdown.Item onClick={(e) => handelClearUser(e)}>
+                  Cerrar sesion
+                </Dropdown.Item>
+              </Dropdown>
+              <h5>{user.userName}</h5>
             </div>
           )}
 

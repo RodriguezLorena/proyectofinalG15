@@ -171,11 +171,22 @@ export function login(payload) {
       "https://velvet.up.railway.app/login",
       payload
     );
+
     const users = await axios("https://velvet.up.railway.app/users");
     const user = users.data.filter(
       (element) => element.id === respuesta.data.id
     );
-
+    console.log(respuesta.data, "respuesta");
+    if (respuesta.data.hasOwnProperty("menssage")) {
+      return swal({
+        title: "Usuario y/o password son incorrectos",
+        icon: "error",
+      });
+    }
+    swal({
+      title: "Ingreasaste correctamente",
+      icon: "success",
+    });
     return dispatch({ type: "LOGIN", payload: user[0] });
   };
 }
@@ -192,6 +203,14 @@ export function creatAcount(payload) {
     );
     return dispatch({ type: "LOGIN", payload: user[0] });
   };
+}
+
+export function clearUser(payload) {
+  swal({
+    title: "Sesion cerrada correctamente",
+    icon: "success",
+  });
+  return { type: "CLEAR_USER", payload };
 }
 
 //---------------------Usuarios---------------------//

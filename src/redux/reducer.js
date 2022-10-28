@@ -14,7 +14,9 @@ const initialState = {
     : 0,
   cartTotalItems: JSON.parse(localStorage.getItem("cartTotalItems")) || 0,
   reviewsProducts: [],
-  user: {},
+  user: localStorage.getItem("user")
+    ? JSON.parse(localStorage.getItem("user"))
+    : {},
 };
 
 function setInLocalStorage(key, state) {
@@ -232,7 +234,10 @@ export default function reducer(state = initialState, { payload, type }) {
       };
 
     case "LOGIN":
-      return { ...state, user: payload };
+      return { ...state, user: setInLocalStorage("user", payload) };
+
+    case "CLEAR_USER":
+      return { ...state, user: setInLocalStorage("user", {}) };
 
     case CONSTANTES.GET_USER:
       console.log(payload);
