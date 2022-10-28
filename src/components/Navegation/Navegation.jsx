@@ -4,7 +4,7 @@ import { NavLink } from "react-router-dom";
 
 export default function Navegation({ home, products }) {
   return (
-    <div className={style.content}>
+    <div className={style.contentNavegation}>
       <ul>
         <li className={home == true ? style.botonHover : style.boton}>
           <NavLink to="/">Inicio</NavLink>

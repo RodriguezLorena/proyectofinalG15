@@ -8,10 +8,13 @@
 
 .carrusel {
   width: 100%;
+  height: 90vh;
   overflow: hidden;
+  background: url("https://img.freepik.com/fotos-premium/modelo-ropa-casual-sobre-fondo-gris_213455-3996.jpg?w=2000");
+  background-size: 100%;
 }
 
-.carrusel ul {
+/* .carrusel ul {
   padding: 0;
   display: flex;
   width: 300%;
@@ -56,7 +59,8 @@
   100% {
     margin-left: -200%;
   }
-}
+} */
+
 .titleCarrusel {
   font-size: 2.5rem;
   text-align: start;
@@ -75,22 +79,34 @@
   justify-content: center;
 }
 
+.butonsCarrosuel {
+  color: #eee;
+
+  transition: all 0.2s ease;
+}
+
 .butonsCarrosuel:hover {
+  color: #555;
   filter: drop-shadow(0 2px 2px rgba(0, 0, 0, 0.5));
 }
 /*-----------caterogias------------------  */
 .categoris {
   display: flex;
-  justify-content: center;
-  padding: 2rem;
 }
 
 .categotiImportant {
-  width: 40%;
+  width: 50%;
+  height: 100%;
   display: flex;
   align-items: flex-end;
   justify-content: center;
   cursor: pointer;
+  transition: all 0.5s ease;
+}
+
+.categotiImportant img {
+  width: 100%;
+  height: 100%;
 }
 
 .categotiImportant h4 {
@@ -102,27 +118,36 @@
   margin-bottom: 2rem;
 }
 
+.categotiImportant:hover {
+  transform: scale(0.99);
+}
+
 .contentSecundari {
   height: 100%;
-  width: 50%;
+  width: 60%;
   display: flex;
   flex-wrap: wrap;
 }
 
 .card {
   cursor: pointer;
-  width: 250px;
-  height: 250px;
-  margin: 1rem 1rem;
+  width: 350px;
+  height: 350px;
+  background-color: aqua;
   overflow: hidden;
   display: flex;
   align-items: flex-end;
   justify-content: center;
+  transition: all 0.5s ease;
+}
+
+.card:hover {
+  transform: scale(0.99);
 }
 
 .card img {
   width: 100%;
-  height: 250px;
+  height: 100%;
 }
 
 .card h4 {

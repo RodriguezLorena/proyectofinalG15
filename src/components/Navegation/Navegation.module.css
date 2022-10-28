@@ -1,6 +1,6 @@
-.content {
+.contentNavegation {
   width: 100%;
-
+  background-color: #fff;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -8,7 +8,7 @@
   height: max-content;
 }
 
-.content ul {
+.contentNavegation ul {
   display: flex;
   flex-wrap: wrap;
   align-items: center;
@@ -26,7 +26,7 @@
   height: max-content;
   border-bottom: 2px solid #ea047e;
 }
-.content li:hover {
+.contentNavegation li:hover {
   border-bottom: 2px solid #ea047e;
   cursor: pointer;
 }

@@ -8,8 +8,9 @@ import style from "./Formulario.module.css";
 
 import swal from "sweetalert";
 import "../../App.css";
-import SubirImg from "../SubirImg/SubirImg";
-import SubirPrincipal from "../SubirImg/SubirPrincipal";
+import axios from "axios";
+import { MdOutlineShoppingCart } from "react-icons/md";
+import { AiFillHeart } from "react-icons/ai";
 
 const Formulario = () => {
   const dispatch = useDispatch();
@@ -55,10 +56,10 @@ const Formulario = () => {
     description: "",
     value: true,
     type: "",
-    mainImage: "https://i.pinimg.com/236x/58/11/f4/5811f41de74bdc7c867926c1ee8297a4.jpg",
     size: [],
-    image: ["Imagen random"],
-    category:"",
+    mainImage: "",
+    image: [],
+    category: [],
   });
 
   const manipuladorInput = (e) => {
@@ -73,10 +74,71 @@ const Formulario = () => {
       })
     );
   };
-  
 
-  const talles = ["s", "m", "l", "xl", "1","1.5", "2", "36", "37", "38", "39", "40", "41" ];
+  //manipulo la seleccion de categorias
+  const arrayCategories = ["mujer", "hombre", "varios", "niños"];
+  const manipuladorSelectCategory = (e) => {
+    const selec = nuevoProduct.category.filter(
+      (elemento) => elemento !== e.target.innerHTML
+    );
+    if (selec.includes(e.target.value)) {
+      swal({
+        title: "UPSS!!!",
+        text: "Esa categoria ya fue seleccionada",
+        icon: "error",
+        className: "swal-modal",
+        className: "swal-title",
+      });
+    } else {
+      setNuevoProduct({
+        ...nuevoProduct,
+        category: [...nuevoProduct.category, e.target.value],
+      });
+      setValidador(
+        validacion({
+          ...nuevoProduct,
+          category: [...nuevoProduct.category, e.target.value],
+        })
+      );
+    }
+  };
 
+  //manipulo la eliminacion de categorias
+  const eliminarSelectCategory = (e) => {
+    const seleccion = nuevoProduct.mainImage.filter(
+      (elemento) => elemento !== e.target.innerHTML
+    );
+
+    setNuevoProduct({
+      ...nuevoProduct,
+      category: seleccion,
+    });
+
+    setValidador(
+      validacion({
+        ...nuevoProduct,
+        category: [...seleccion],
+      })
+    );
+  };
+
+  //manipulo la seleccion de talles
+  const talles = [
+    "s",
+    "m",
+    "l",
+    "xl",
+    "U",
+    "1",
+    "1.5",
+    "2",
+    "36",
+    "37",
+    "38",
+    "39",
+    "40",
+    "41",
+  ];
   const manipuladorSelectSize = (e) => {
     const selec = nuevoProduct.size.filter(
       (elemento) => elemento !== e.target.innerHTML
@@ -105,6 +167,7 @@ const Formulario = () => {
     console.log("aca esta el nuevo producto ", nuevoProduct.size);
   };
 
+  //manipulo la eliminacion de talles
   const eliminarSelect = (e) => {
     const seleccion = nuevoProduct.size.filter(
       (elemento) => elemento !== e.target.innerHTML
@@ -123,7 +186,44 @@ const Formulario = () => {
     );
   };
 
- 
+  //manipulador de imagen principal
+
+  const [mainImage, setMainImage] = useState("");
+  const [loading, setLoading] = useState(false);
+
+  const [images, setImages] = useState([]);
+  nuevoProduct.image = images;
+
+  nuevoProduct.mainImage = mainImage;
+
+  console.log(nuevoProduct, "este es el body");
+
+  const handleFiles = (e) => {
+    setMainImage(e.target.files[0]);
+  };
+
+  const handleAPI = async () => {
+    const url = "https://velvet.up.railway.app/product/image";
+    let formData = new FormData();
+    formData.append("imagen1", mainImage);
+    setLoading(true);
+    const pedidoCloudUno = await axios.post(url, formData);
+    setMainImage(pedidoCloudUno.data);
+    setLoading(false);
+  };
+
+  const handleImagenes = async () => {
+    let formData = new FormData();
+    Array.from(images).forEach((item) => {
+      formData.append("imagen", item);
+    });
+
+    const pedidoClud = await axios.post(
+      `https://velvet.up.railway.app/product/images`,
+      formData
+    );
+    setImages(pedidoClud.data);
+  };
 
   const manipuladorDeCreacion = (e) => {
     e.preventDefault();
@@ -205,152 +305,236 @@ const Formulario = () => {
   return (
     <div>
       <NavBar />
+
+      <div>
+        <h2 className={style.title}>Cargar Producto</h2>
+      </div>
       <div className={style.contenedor}>
-        <div>
-          <h2 className={style.title}>Cargar Producto</h2>
-        </div>
-        <form className={style.contenedorForm} onSubmit={manipuladorDeCreacion}>
-          <div className={style.form}>
-            <label>
-              NOMBRE:
-              <input
-                id="nombreInput"
-                type="text"
-                name="name"
-                value={nuevoProduct.name}
-                placeholder="ESCRIBE EL NOMBRE DEL PRODUCTO AQUÍ"
-                onChange={(e) => manipuladorInput(e)}
-              />
-            </label>
-            {validador.name ? (
-              <p className={style.validacion}>{validador.name}</p>
-            ) : (
-              <p className={style.validacion}> </p>
-            )}
-          </div>
-          <div className={style.form}>
-            <label>
-              DESCRIPCION:
-              <textarea
-                type="text"
-                name="description"
-                value={nuevoProduct.description}
-                placeholder="ESCRIBA UNA DESCRIPCION DEL PRODUCTO"
-                onChange={(e) => manipuladorInput(e)}
-              />
-            </label>
-            {validador.description ? (
-              <p className={style.validacion}>{validador.description}</p>
-            ) : (
-              <p className={style.validacion}> </p>
-            )}
-          </div>
-
-          <div className={style.form}>
-            <label>
-              PRECIO:
-              <input
-                type="number"
-                name="price"
-                value={nuevoProduct.price}
-                placeholder="COLOQUE EL PRECIO"
-                onChange={(e) => manipuladorInput(e)}
-              />
-            </label>
-            {validador.price ? (
-              <p className={style.validacion}>{validador.price}</p>
-            ) : (
-              <p className={style.validacion}> </p>
-            )}
-          </div>
-          <div className={style.form}>
-            <label>
-              STOCK
-              <input
-                type="number"
-                name="stock"
-                value={nuevoProduct.stock}
-                placeholder="COLOQUE EL STOCK"
-                onChange={(e) => manipuladorInput(e)}
-              />
-            </label>
-            {validador.stock ? (
-              <p className={style.validacion}>{validador.stock}</p>
-            ) : (
-              <p className={style.validacion}> </p>
-            )}
-          </div>
-
-          <div className={style.form}>
-            <label>
-              Tipos
-              <input
-                type="text"
-                name="type"
-                value={nuevoProduct.type}
-                placeholder="COLOQUE EL TIPO DE PRODUCTO"
-                onChange={(e) => manipuladorInput(e)}
-              />
-            </label>
-            {validador.stock ? (
-              <p className={style.validacion}>{validador.stock}</p>
-            ) : (
-              <p className={style.validacion}> </p>
-            )}
-          </div>
-
-          <div className={style.form}>
-            <label>
-              SELECCIONA UN TALLE:
-              <select
-                defaultValue={"default"}
-                onChange={(e) => manipuladorSelectSize(e)}
-              >
-                <option value="default" disabled>
-                  ELEGIR TALLA:
-                </option>
-                {talles &&
-                  talles.map((elemento, index) => {
-                    return (
-                      <option key={index} value={elemento}>
-                        {elemento}
-                      </option>
-                    );
-                  })}
-              </select>
-            </label>
-          </div>
+        <div className={style.cargaImg}>
+          <p>PRIMER PASO: cargar imagenes</p>
           <div>
-            <ul>
-              {nuevoProduct.size.map((elemento) => (
-                <li key={elemento} onClick={(e) => eliminarSelect(e)}>
-                  {elemento}
-                </li>
-              ))}
-            </ul>
-          </div>
-
-          <div>
-            <label> categoregoria </label>
-           <input type="text" name="category"  value={nuevoProduct.category}
-                placeholder="COLOQUE LA CATEGORIA EJ: CAMISA"
-                onChange={(e) => manipuladorInput(e)}/>
-          </div>
-          <div>
-            <SubirPrincipal/>
-          </div>
-
-          <div className={style.contentBtn}>
-            <button
-              className={style.boton}
-              onClick={(e) => {
-                manipuladorDeCreacion(e);
-              }}
-            >
-              CREAR PRODUCTO
+            IMAGEN PRINCIPAL
+            <input name="imagen1" type="file" onChange={handleFiles} />
+            {loading ? (
+              <h3>Cargando...</h3>
+            ) : (
+              <img src={images} alt="img" style={{ width: "50px" }} />
+            )}
+            <button className={style.btnImg} onClick={handleAPI}>
+              SUBIR IMAGEN PRINCIPAL
             </button>
           </div>
-        </form>
+
+          <div>
+            IMAGEN SECUNDARIA
+            <input
+              name="imagen"
+              type="file"
+              multiple
+              onChange={(e) => {
+                setImages(e.target.files);
+              }}
+            ></input>
+            <button className={style.btnImg} onClick={handleImagenes}>
+              SUBIR IMAGENES SECUNDARIAS
+            </button>
+          </div>
+        </div>
+        <div className={style.cargaDatos}>
+          <p>SEGUNDO PASOS: cargar datos</p>
+          <form
+            className={style.contenedorForm}
+            onSubmit={manipuladorDeCreacion}
+          >
+            <div className={style.form}>
+              <label>
+                NOMBRE:
+                <input
+                  id="nombreInput"
+                  type="text"
+                  name="name"
+                  value={nuevoProduct.name}
+                  placeholder="ESCRIBE EL NOMBRE DEL PRODUCTO AQUÍ"
+                  onChange={(e) => manipuladorInput(e)}
+                />
+              </label>
+              {validador.name ? (
+                <p className={style.validacion}>{validador.name}</p>
+              ) : (
+                <p className={style.validacion}> </p>
+              )}
+            </div>
+            <div className={style.form}>
+              <label>
+                DESCRIPCION:
+                <textarea
+                  type="text"
+                  name="description"
+                  value={nuevoProduct.description}
+                  placeholder="ESCRIBA UNA DESCRIPCION DEL PRODUCTO"
+                  onChange={(e) => manipuladorInput(e)}
+                />
+              </label>
+              {validador.description ? (
+                <p className={style.validacion}>{validador.description}</p>
+              ) : (
+                <p className={style.validacion}> </p>
+              )}
+            </div>
+
+            <div className={style.form}>
+              <label>
+                PRECIO $USD:
+                <input
+                  type="number"
+                  name="price"
+                  value={nuevoProduct.price}
+                  placeholder="COLOQUE EL PRECIO"
+                  onChange={(e) => manipuladorInput(e)}
+                />
+              </label>
+              {validador.price ? (
+                <p className={style.validacion}>{validador.price}</p>
+              ) : (
+                <p className={style.validacion}> </p>
+              )}
+            </div>
+            <div className={style.form}>
+              <label>
+                STOCK
+                <input
+                  type="number"
+                  name="stock"
+                  value={nuevoProduct.stock}
+                  placeholder="COLOQUE EL STOCK"
+                  onChange={(e) => manipuladorInput(e)}
+                />
+              </label>
+              {validador.stock ? (
+                <p className={style.validacion}>{validador.stock}</p>
+              ) : (
+                <p className={style.validacion}> </p>
+              )}
+            </div>
+
+            <div className={style.form}>
+              <label>
+                Tipos
+                <input
+                  type="text"
+                  name="type"
+                  value={nuevoProduct.type}
+                  placeholder="COLOQUE EL TIPO DE PRODUCTO"
+                  onChange={(e) => manipuladorInput(e)}
+                />
+              </label>
+              {validador.stock ? (
+                <p className={style.validacion}>{validador.stock}</p>
+              ) : (
+                <p className={style.validacion}> </p>
+              )}
+            </div>
+
+            <div className={style.form}>
+              <label>
+                SELECCIONA UN TALLE:
+                <select
+                  defaultValue={"default"}
+                  onChange={(e) => manipuladorSelectSize(e)}
+                >
+                  <option value="default" disabled>
+                    ELEGIR TALLA:
+                  </option>
+                  {talles &&
+                    talles.map((elemento, index) => {
+                      return (
+                        <option key={index} value={elemento}>
+                          {elemento}
+                        </option>
+                      );
+                    })}
+                </select>
+              </label>
+            </div>
+            <div>
+              <ul>
+                {nuevoProduct.size.map((elemento) => (
+                  <li key={elemento} onClick={(e) => eliminarSelect(e)}>
+                    {elemento}
+                  </li>
+                ))}
+              </ul>
+            </div>
+
+            <div className={style.form}>
+              <label>
+                SELECCIONA UNA CATEGORIA:
+                <select
+                  defaultValue={"default"}
+                  onChange={(e) => manipuladorSelectCategory(e)}
+                >
+                  <option value="default" disabled>
+                    ELIGE UNA CATEGORIA:
+                  </option>
+                  {arrayCategories &&
+                    arrayCategories.map((elemento, index) => {
+                      return (
+                        <option key={index} value={elemento}>
+                          {elemento}
+                        </option>
+                      );
+                    })}
+                </select>
+              </label>
+            </div>
+            <div>
+              <ul>
+                {nuevoProduct.category.map((elemento) => (
+                  <li key={elemento} onClick={(e) => eliminarSelectCategory(e)}>
+                    {elemento}
+                  </li>
+                ))}
+              </ul>
+            </div>
+            <div className={style.contentBtn}>
+              <button
+                className={style.btnImg}
+                onClick={(e) => {
+                  manipuladorDeCreacion(e);
+                }}
+              >
+                CREAR PRODUCTO
+              </button>
+            </div>
+          </form>
+        </div>
+
+        <div>
+          <h2>PREVISUALIZACION</h2>
+          <div className={style.content}>
+            <MdOutlineShoppingCart className={style.carrito} size="40px" />
+
+            <img src={nuevoProduct.mainImage} alt="" className={style.fondo} />
+
+            <div className={style.contentInfo}>
+              <div className={style.fondoRotado}></div>
+              <div className={style.contnetMeGusta}>
+                <AiFillHeart className={style.meGusta} size="30px" />
+              </div>
+
+              <h5>{nuevoProduct.name}</h5>
+              <div className={style.talasPrecio}>
+                <div className={style.tallas}>
+                  <p>{nuevoProduct.size}</p>
+                </div>
+                <div>
+                  <p> descripcion: {nuevoProduct.description}</p>
+                </div>
+                <h6>${nuevoProduct.price}</h6>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   );

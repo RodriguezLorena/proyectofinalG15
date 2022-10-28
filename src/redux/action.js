@@ -1,9 +1,9 @@
 import axios from "axios";
+import { MdArrowBackIos } from "react-icons/md";
 import swal from "sweetalert";
 import { CONSTANTES } from "./constantes";
 
-
-const datosdeploy = "https://velvet.up.railway.app/product"
+const datosdeploy = "https://velvet.up.railway.app/product";
 export function getProducts() {
   return async function (dispatch) {
     try {
@@ -28,7 +28,6 @@ export function GetDetail(id) {
     }
   };
 }
-
 
 export const getForName = (name) => {
   return async function (dispatch) {
@@ -81,16 +80,14 @@ export function filterType(payload) {
 
 export const formularioDeCreacion = async (payload) => {
   try {
-
-
     let crearProduct = await axios.post(
       "https://velvet.up.railway.app/product",
       payload
     );
-    console.log(crearProduct)
+    console.log(crearProduct);
     return {
-      type: 'PRODUCT_CREATE',
-      payload: crearProduct
+      type: "PRODUCT_CREATE",
+      payload: crearProduct,
     };
   } catch (error) {
     console.log("ERROR EN LA RUTA DE CREACION ", error);
@@ -130,30 +127,29 @@ export function desmontarDetalle() {
 
 export function getAllReviews(payload) {
   return async function (dispatch) {
-    let traeReviews = await axios.get(`http://localhost:3001/review/${payload}`)
+    let traeReviews = await axios.get(
+      `http://localhost:3001/review/${payload}`
+    );
     console.log(traeReviews.data);
     return dispatch({
       type: CONSTANTES.GET_ALL_REVIEW,
-      payload: traeReviews.data
-    })
-
-  }
+      payload: traeReviews.data,
+    });
+  };
 }
-
 
 ///----------POST FORM------------
 export function postProducts(payload) {
-  console.log(payload, ' payload de postProducts');
+  console.log(payload, " payload de postProducts");
 
   return async function (dispatch) {
-    const postJson = await axios.post(`http://localhost:3001/product`, payload)
+    const postJson = await axios.post(`http://localhost:3001/product`, payload);
     return dispatch({
       type: CONSTANTES.POST_PRODUCT,
-      payload: postJson
+      payload: postJson,
     });
-  }
+  };
 }
-
 
 //--------------IMAGENES-------------
 
@@ -161,11 +157,73 @@ export function postImages() {
   // console.log(payload, ' payload de post imagenes');
 
   return async function (dispatch) {
-    const postJson1 = await axios.post(`http://localhost:3001/product/images`)
+    const postJson1 = await axios.post(`http://localhost:3001/product/images`);
     return dispatch({
       type: CONSTANTES.POST_IMAGES,
-      
     });
-  }
-
+  };
 }
+
+//-------------LOGIN------------------//
+export function login(payload) {
+  return async function (dispatch) {
+    const respuesta = await axios.post(
+      "https://velvet.up.railway.app/login",
+      payload
+    );
+    const users = await axios("https://velvet.up.railway.app/users");
+    const user = users.data.filter(
+      (element) => element.id === respuesta.data.id
+    );
+
+    return dispatch({ type: "LOGIN", payload: user[0] });
+  };
+}
+export function creatAcount(payload) {
+  console.log(payload, "creandoooo");
+  return async function (dispatch) {
+    const respuesta = await axios.post(
+      "https://velvet.up.railway.app/users",
+      payload
+    );
+    const users = await axios("https://velvet.up.railway.app/users");
+    const user = users.data.filter(
+      (element) => element.userName === payload.userName
+    );
+    return dispatch({ type: "LOGIN", payload: user[0] });
+  };
+}
+
+//---------------------Usuarios---------------------//
+
+export const putUser = (id, payload) => {
+  return async (dispatch) => {
+    console.log("tendria que ser los input", payload);
+    let json = await axios.put(
+      `https://velvet.up.railway.app/users/${id}`,
+      payload
+    );
+    console.log("esto es el put", json);
+    return dispatch({
+      type: CONSTANTES.PUT_USER,
+      payload: json.data,
+    });
+  };
+};
+
+export const getUser = () => {
+  return async (dispatch) => {
+    let json = await axios.get("https://velvet.up.railway.app/users");
+    return dispatch({
+      type: CONSTANTES.GET_USER,
+      payload: json.data,
+    });
+  };
+};
+
+export const getUserId = (id) => {
+  return {
+    type: CONSTANTES.GET_USER_ID,
+    payload: id,
+  };
+};

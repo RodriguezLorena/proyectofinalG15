@@ -8,9 +8,7 @@ import { getProducts } from "../../redux/action";
 import { useEffect, useState } from "react";
 import { NavLink, Link } from "react-router-dom";
 import { Carousel } from "flowbite-react";
-
-import { IoIosArrowBack, IoIosArrowForward } from "react-icons/io";
-import Navegation from "../Navegation/Navegation";
+import { IoIosArrowDropright, IoIosArrowDropleft } from "react-icons/io";
 
 export default function Landing() {
   const dispatch = useDispatch();
@@ -31,41 +29,22 @@ export default function Landing() {
   return (
     <div>
       <div className={style.content}>
-        <NavBar />
-        <Navegation home={true} products={false} />
-        <Link to="/home">
-          <div className={style.carrusel}>
-            <ul>
-              <li>
-                <img
-                  src="https://www.bezzia.com/wp-content/uploads/2021/01/prendas-pata-gallo.jpg.webp"
-                  alt=""
-                />
-              </li>
-              <li>
-                <img
-                  src="https://www.bezzia.com/wp-content/uploads/2021/12/un-estampado-varios-colores.jpg"
-                  alt=""
-                />
-              </li>
-              <li>
-                <img
-                  src="https://www.moncloa.com/wp-content/uploads/2020/12/Zapatos-de-piel-para-hombre-y-mujer-por-menos-de-30-euros-hoy-en-Aliexpress.jpg"
-                  alt=""
-                />
-              </li>
-            </ul>
-          </div>
-        </Link>
+        <div className={style.carrusel}>
+          <NavBar home={true} products={false} />
+        </div>
+
         <div className={style.contentCarrousel}>
           <div className="h-screen  sm:h-screen  xl:h-screen  w-full mt-0  2xl:h-screen">
             <h3 className={style.titleCarrusel}>Productos mas vendidos</h3>
             <Carousel
               leftControl={
-                <IoIosArrowBack size="40px" className={style.butonsCarrosuel} />
+                <IoIosArrowDropleft
+                  size="40px"
+                  className={style.butonsCarrosuel}
+                />
               }
               rightControl={
-                <IoIosArrowForward
+                <IoIosArrowDropright
                   size="40px"
                   className={style.butonsCarrosuel}
                 />
@@ -161,10 +140,13 @@ export default function Landing() {
             <h4 className={style.titleGalery}>Tus marcas favoritas</h4>
             <Carousel
               leftControl={
-                <IoIosArrowBack size="40px" className={style.butonsCarrosuel} />
+                <IoIosArrowDropleft
+                  size="40px"
+                  className={style.butonsCarrosuel}
+                />
               }
               rightControl={
-                <IoIosArrowForward
+                <IoIosArrowDropright
                   size="40px"
                   className={style.butonsCarrosuel}
                 />
