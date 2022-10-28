@@ -33,10 +33,7 @@ const Formulario = () => {
         icon: "success",
         className: "swal-modal",
         className: "swal-title",
-      });
-      setTimeout(() => {
-        navegacionAutomatica("/home");
-      }, 1000);
+      }).then(navegacionAutomatica("/admin"));
     }
     if (creacion === "noCreada") {
       swal({
