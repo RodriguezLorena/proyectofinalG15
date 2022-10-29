@@ -37,11 +37,13 @@ const Pagos = () => {
   // document.getElementById('enlace').setAttribute('href', `${pago}`);
 
 
+
   return (
     <div>
       <NavBar />
       <div className={style.content}>
         <h1>Velvet, PAGOS!</h1>
+
         <form className={style.tagFrom}>
           <label>Nombre:</label>
           <input type="text" name="nombre" autoComplete="off" value="" />
@@ -80,6 +82,7 @@ const Pagos = () => {
 
 
         {/* <h1 onclick="location.href=''">MP</h1> */}
+
 
       </div>
     </div >

@@ -3,12 +3,13 @@ import style from "./Card.module.css";
 import { NavLink } from "react-router-dom";
 import { MdOutlineShoppingCart } from "react-icons/md";
 import { AiFillHeart } from "react-icons/ai";
-import { addToCart } from "../../redux/action";
-import { useDispatch } from "react-redux";
+import { addToCart, putProduct } from "../../redux/action";
+import { useDispatch, useSelector } from "react-redux";
 import swal from "sweetalert";
 
 export default function Card({ name, image, price, id, sizes, categories }) {
   const dispach = useDispatch();
+  const user = useSelector((state) => state.user);
 
   const addCart = (id) => {
     console.log(id);
@@ -22,6 +23,10 @@ export default function Card({ name, image, price, id, sizes, categories }) {
       className: "swal-title",
     });
   };
+
+  function handelBan() {
+    dispach(putProduct({ value: false }, id));
+  }
 
   return (
     <div className={style.content}>
@@ -58,6 +63,22 @@ export default function Card({ name, image, price, id, sizes, categories }) {
           </div>
         </NavLink>
       </div>
+      {user.role == "admin" ? (
+        <div className={style.admin}>
+          <NavLink
+            to={`/editproduct/${id}`}
+            className="bg-emerald-300 py-2 px-2 rounded-3xl rounded-3xl"
+          >
+            Editar
+          </NavLink>
+          <NavLink
+            className="bg-emerald-300 py-2 px-2 rounded-3xl rounded-3xl"
+            onClick={() => handelBan()}
+          >
+            Banear
+          </NavLink>
+        </div>
+      ) : null}
     </div>
   );
 }

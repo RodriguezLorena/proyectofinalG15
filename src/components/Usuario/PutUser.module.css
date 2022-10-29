@@ -1,9 +1,14 @@
 .content {
-  height: 100vh;
+  display: flex;
+  flex-wrap: wrap;
+  background-color: #fff;
+  padding-bottom: 4rem;
+}
+
+.contentPerfile {
   display: flex;
   justify-content: center;
-
-  background-color: #fff;
+  width: 100%;
 }
 
 .content form {
@@ -12,11 +17,6 @@
 
   margin-top: 3rem;
   height: max-content;
-}
-
-.content input {
-  border-radius: 40px;
-  border: 1px solid #ddd;
 }
 
 .perileImage {
@@ -44,4 +44,50 @@
   color: #fff;
   border-radius: 40px;
   margin-top: 1rem;
+}
+
+.visible {
+}
+
+.invisible {
+  visibility: hidden;
+}
+
+.inputs {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+}
+
+.inputs input {
+  border-radius: 40px;
+  border: 1px solid #ddd;
+}
+
+.inputs h6 {
+  margin: 0 1rem;
+}
+
+.carrito {
+  margin: 5rem;
+  width: 600px;
+  height: max-content;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.carrito h5 {
+  margin-left: 3rem;
+  font-size: 2.5rem;
+  border-bottom: 1px solid #ea047e;
+  width: max-content;
+}
+.viewAll {
+  border-radius: 40px;
+  padding: 0.6rem 1rem;
+  border: 1px solid #999;
+  width: max-content;
+  margin-top: 2rem;
 }

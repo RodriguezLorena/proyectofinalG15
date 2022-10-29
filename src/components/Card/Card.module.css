@@ -118,3 +118,17 @@
   margin-top: 1.2rem;
   position: absolute;
 }
+
+.admin {
+  display: flex;
+  justify-content: space-between;
+  position: relative;
+  width: 100%;
+  top: 7rem;
+}
+
+.admin button {
+  background-color: aquamarine;
+  padding: 0.5rem 1rem;
+  border-radius: 40px;
+}

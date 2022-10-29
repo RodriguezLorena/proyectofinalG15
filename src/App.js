@@ -10,8 +10,9 @@ import PutUser from "./components/Usuario/PutUser";
 import Review from "./components/Review/Review";
 import Reviews from "./components/Review/Reviews";
 import CreateProduct from "./components/createProduct/createProduct";
-
+import Verifico from "./Verification/Verification";
 import Sidebar from "./components/Sidebar/sidebar";
+import EditProducts from "./components/EditProducts/EditProducts";
 
 function App() {
   return (
@@ -23,6 +24,7 @@ function App() {
         <Route exact path="/formulario" element={<Formulario />} />
         <Route path="/carrito" element={<CartView />} />
         <Route path="/pagos" element={<Pagos />} />
+        <Route exact path="/verification/:id" element={<Verifico />} />
         <Route path="/review" element={<Review></Review>} />
         <Route path="/reviews" element={<Reviews></Reviews>} />
         <Route
@@ -31,6 +33,7 @@ function App() {
         />
         <Route path="/user/:id" element={<PutUser />} />
         <Route path="/admin" element={<Sidebar />} />
+        <Route path="/editProduct/:id" element={<EditProducts />} />
       </Routes>
     </div>
   );

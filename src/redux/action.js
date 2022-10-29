@@ -15,7 +15,7 @@ export function getProducts() {
   };
 }
 
-export function GetDetail(id) {
+export function getDetail(id) {
   return async function (dispatch) {
     try {
       let infoId = await axios.get(`${datosdeploy}/${id}`);
@@ -26,6 +26,15 @@ export function GetDetail(id) {
     } catch (error) {
       console.log(error);
     }
+  };
+}
+export function putProduct(payload, id) {
+  return async function (dispatch) {
+    let respuesta = await axios.put(
+      `https://velvet.up.railway.app/product/${id}`,
+      payload
+    );
+    console.log(respuesta.data, "put products");
   };
 }
 
@@ -166,12 +175,12 @@ export function postImages() {
 
 //-------------LOGIN------------------//
 export function login(payload) {
+  console.log(payload, "loginnnnn");
   return async function (dispatch) {
     const respuesta = await axios.post(
       "https://velvet.up.railway.app/login",
       payload
     );
-
     const users = await axios("https://velvet.up.railway.app/users");
     const user = users.data.filter(
       (element) => element.id === respuesta.data.id
@@ -182,6 +191,13 @@ export function login(payload) {
         title: "Usuario y/o password son incorrectos",
         icon: "error",
       });
+    }
+    if (user[0].role == "admin") {
+      swal({
+        title: "Bienvenido ADMIN",
+        icon: "success",
+      });
+      return dispatch({ type: "LOGIN", payload: user[0] });
     }
     swal({
       title: "Ingreasaste correctamente",
@@ -201,6 +217,10 @@ export function creatAcount(payload) {
     const user = users.data.filter(
       (element) => element.userName === payload.userName
     );
+    swal({
+      title: "Usuario crado correctamente",
+      icon: "success",
+    });
     return dispatch({ type: "LOGIN", payload: user[0] });
   };
 }
@@ -239,7 +259,16 @@ export const getUser = () => {
     });
   };
 };
-
+export const Verify = (id,payload)=>{
+  console.log(payload)
+  return async (dispatch)=>{
+    let json = await axios.put(`https://velvet.up.railway.app/verification/${id}`,payload);
+    return dispatch({
+      type : "VERIFY",
+      payload: json.data
+    })
+  }
+}
 export const getUserId = (id) => {
   return {
     type: CONSTANTES.GET_USER_ID,
