@@ -137,7 +137,7 @@ export function desmontarDetalle() {
 export function getAllReviews(payload) {
   return async function (dispatch) {
     let traeReviews = await axios.get(
-      `http://localhost:3001/review/${payload}`
+      `https://velvet.up.railway.app/review/${payload}`
     );
     console.log(traeReviews.data);
     return dispatch({

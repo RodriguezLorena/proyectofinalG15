@@ -4,9 +4,9 @@ import { useDispatch, useSelector } from 'react-redux';
 import { getAllReviews } from "../../redux/action";
 import ReviewCard from "./ReviewCard";
 import styles from "./Reviews.module.css"
-export default function Reviews() {
+export default function Reviews({IdProduct}) {
 
-    const product_id = "6a0ec2fe-15af-4d2c-87c6-c3bd5d335222";
+    const product_id = IdProduct[0].id;
 
     const productsRevs = useSelector(state => state.reviewsProducts)
 

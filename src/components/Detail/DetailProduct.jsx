@@ -21,6 +21,12 @@ export default function ProductDetail() {
   const { id } = useParams();
   const IdProduct = useSelector((state) => state.detailProduct);
   const productsAll = useSelector((state) => state.productsAll);
+  const IdUser=useSelector((state)=>state.user)
+
+  // console.log(IdUser.id,'PROBANMDO ID USER'); 
+
+
+
   const dispath = useDispatch();
   const addCart = (id) => {
     console.log(id);
@@ -91,9 +97,9 @@ export default function ProductDetail() {
         </div>
       </div>
 
-      <Review IdProduct={IdProduct}></Review>
+      <Review IdProduct={IdProduct} IdUser={IdUser}></Review>
 
-      <Reviews></Reviews>
+      <Reviews IdProduct={IdProduct}></Reviews>
       {/* <div className={style.contentRealciones}>
         <div className="h-56  sm:h-1/2  xl:h-screen  w-full mt-20 2xl:h-96">
           <h3 className={style.titleCarrusel}>Productos Relacionados</h3>

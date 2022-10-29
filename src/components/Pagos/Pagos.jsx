@@ -1,90 +1,91 @@
 import { Navbar } from "flowbite-react";
-import React, { useEffect } from "react";
-import { useState } from "react";
+import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import style from "./Pagos.module.css";
 import NavBar from "../NavBar/NavBar";
-import { useDispatch, useSelector } from "react-redux";
-import BotonMercadopago from "./BotonMercadopago";
+import { useSelector } from "react-redux";
 import axios from "axios";
-// const parse = require('html-react-parser');
+
 const Pagos = () => {
-  const [pagar, setPagar] = useState(true);
-  const cartState = useSelector((state) => state.cart);
-  const total = useSelector((state) => state.cartTotal);
-  const [preferenceId, setPreferenceId] = useState(null);
-  //const [prueba,setPrueba] =useState(null)
-  //console.log(cartState[0],"aaaaaaaaa",total)
+
+  const productCarro = useSelector((state) => state.cart);
+  console.log(productCarro, 'TODOS LO DEL CARRO');
+
+  const [pago, setPago] = useState('');
+  const [pago2, setPago2] = useState(false)
+
   const orderData = {
-    title: cartState[0].name,
-    stock: cartState[0].cantidad,
-    price: cartState[0].price,
-  };
-  //   useEffect(()=>
-  //   {
-  //     async function render() {
-  //       const Render = await axios.get(`http://localhost:3001/prueba?=${preferenceId}`)
-  //       console.log(Render.data)
+    title: productCarro[0].name,
+    price: productCarro[0].price,
+    quantity: productCarro[0].stock
 
-  //      setPrueba(Render.data)
-  // }
-  //   render();
-  //   },[preferenceId])
-  // async function render() {
-  //   const Render = await axios.get(`http://localhost:3001/prueba?=${preferenceId}`)
-
-  //   return Render.data
-  //   }
-  async function handlePay(e) {
-    e.preventDefault();
-    const preference = await axios.post(
-      `http://localhost:3001/payment`,
-      orderData
-    );
-
-    //console.log(preference.data, 'este es el body');
-    setPreferenceId(preference.data);
-    setPagar(!pagar);
-    // var script = document.createElement("script");
-
-    // // The source domain must be completed according to the site for which you are integrating.
-    // // For example: for Argentina ".com.ar" or for Brazil ".com.br".
-    // script.src = "https://sdk.mercadopago.com/js/v2";
-    // script.type = "text/javascript";
-    // script.dataset.preferenceId = preferenceId;
-    // document.getElementById("page-content").innerHTML = "";
-    // document.querySelector("#page-content").appendChild(script);
   }
+  async function handlePay(e) {
+    const mp = await axios.post(`http://localhost:3001/payment`, orderData)
+    console.log(mp);
+    console.log(mp.data);
+    setPago(mp.data)
+    setPago2(true)
+
+  }
+
+  console.log(typeof pago, 'este es pago');
+
+  function Redirecionar() {
+    window.location.href = pago;
+  }
+  // document.getElementById('enlace').setAttribute('href', `${pago}`);
+
+
+
   return (
     <div>
       <NavBar />
       <div className={style.content}>
         <h1>Velvet, PAGOS!</h1>
 
-        {pagar ? (
-          <form className={style.tagFrom}>
-            <label>Nombre:</label>
-            <input type="text" name="nombre" autoComplete="off" value="" />
-            <label>Apellido:</label>
-            <input type="text" name="nombre" autoComplete="off" value="" />
-            <label>E-mail:</label>
-            <input type="text" name="email" autoComplete="off" value="" />
+        <form className={style.tagFrom}>
+          <label>Nombre:</label>
+          <input type="text" name="nombre" autoComplete="off" value="" />
+          <label>Apellido:</label>
+          <input type="text" name="nombre" autoComplete="off" value="" />
+          <label>E-mail:</label>
+          <input type="text" name="email" autoComplete="off" value="" />
+          <label>Tarjeta:</label>
+          <input
+            type="text"
+            name="tajeta"
+            placeholder="Coloque el tipo de tarjeta"
+            value=""
+          />
+          <label>Codigo:</label>
+          <input
+            type="text"
+            name="tajeta"
+            placeholder="Coloque el codigos"
+            value=""
+          />
 
-            <button>Solicitar pago</button>
-            <button onClick={handlePay} orderData={orderData}>
-              pagareee
-            </button>
-            <button onClick={handlePay} orderData={orderData}>
-              Pagaraaaa
-            </button>
-          </form>
-        ) : (
-          <a href={`http://localhost:3001/prueba?preference=` + preferenceId}>
-            Link
-          </a>
-        )}
+
+          <div>
+
+          </div>
+
+
+        </form>
+
+        <button onClick={e => handlePay(e)}>solicitar pago</button>
+        {
+          pago2? <button type="button" onClick={e => Redirecionar(e)}>MP</button> : null
+
+        }
+
+
+        {/* <h1 onclick="location.href=''">MP</h1> */}
+
+
       </div>
-    </div>
+    </div >
   );
 };
 
