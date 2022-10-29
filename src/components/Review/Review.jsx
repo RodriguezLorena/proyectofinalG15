@@ -4,9 +4,9 @@ import styles from "../Review/Review.module.css"
 import { FaStar } from 'react-icons/fa';
 import axios from "axios";
 
-export default function Review({ IdProduct }) {
+export default function Review({ IdProduct, IdUser }) {
     console.log(IdProduct);
-
+    console.log(IdUser);
     // const dispatch = useDispatch();
     const [score, setScore] = useState(null);
     const [input, setInput] = useState('');
@@ -18,12 +18,12 @@ export default function Review({ IdProduct }) {
     }
 
 
-    const user_id = "e17fa82e-ede3-4b2a-91b1-d17c786c988b";
+    const user_id =IdUser.id;
     // const product_id = "6a0ec2fe-15af-4d2c-87c6-c3bd5d335222";
 
     async function addReview(e) {
         e.preventDefault()
-        await axios.post(`http://localhost:3001/review/${IdProduct[0].id}`, {
+        await axios.post(`https://velvet.up.railway.app/review/${IdProduct[0].id}`, {
             score,
             description: input,
             user_id
