@@ -10,8 +10,8 @@ import PutUser from "./components/Usuario/PutUser";
 import Review from "./components/Review/Review";
 import Reviews from "./components/Review/Reviews";
 import CreateProduct from "./components/createProduct/createProduct";
-
 import Sidebar from "./components/Sidebar/sidebar";
+import EditProducts from "./components/EditProducts/EditProducts";
 
 function App() {
   return (
@@ -31,6 +31,7 @@ function App() {
         />
         <Route path="/user/:id" element={<PutUser />} />
         <Route path="/admin" element={<Sidebar />} />
+        <Route path="/editProduct/:id" element={<EditProducts />} />
       </Routes>
     </div>
   );

@@ -17,6 +17,9 @@ import Paginado from "../Paginado/Paginado";
 export default function Home() {
   const dispatch = useDispatch();
   const productsAll = useSelector((state) => state.productsAll);
+  const productsFilters = productsAll.filter(
+    (element) => element.value === true
+  );
   console.log("aca esta productsAll", productsAll);
   const [range, setRange] = useState(0);
   const [Order, setOrder] = useState("");
@@ -26,7 +29,7 @@ export default function Home() {
   const cantidadPorPagina = 12;
   const indiceUno = paginaEnEsteMomento * cantidadPorPagina;
   const ultimoIndice = indiceUno - cantidadPorPagina;
-  const productsList = productsAll.slice(ultimoIndice, indiceUno);
+  const productsList = productsFilters.slice(ultimoIndice, indiceUno);
   //  <<<¡POR FAVOR NO BORRAR ESTO!>>>
   //ACA SE HACE EL FILTRO POR CATEGORIA:
   // const auxiliar = [];

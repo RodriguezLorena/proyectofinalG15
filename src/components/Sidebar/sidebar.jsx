@@ -1,22 +1,20 @@
 import React from "react";
 import NavBar from "../NavBar/NavBar";
-import { Link } from "react-router-dom";
+import { NavLink } from "react-router-dom";
+import style from "./Sidebar.module.css";
 
 const sidebar = () => {
   return (
     <div>
       <NavBar />
-      <ul>
-        <li>
-          <Link to="">Inicio</Link>
-        </li>
-        <li>
-          <Link to="">Ventas</Link>
-        </li>
-        <li>
-          <Link to="">Clientes</Link>
-        </li>
-      </ul>
+      <div className="flex justify-center items-center h-screen ">
+        <NavLink to="/formulario" className={style.butons}>
+          Crear Producto
+        </NavLink>
+        <NavLink to="" className={style.butons}>
+          Clientes
+        </NavLink>
+      </div>
     </div>
   );
 };

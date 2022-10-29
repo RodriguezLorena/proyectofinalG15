@@ -3,7 +3,7 @@ import { useState } from "react";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link, useParams } from "react-router-dom";
-import { GetDetail, desmontarDetalle } from "../../redux/action";
+import { getDetail, desmontarDetalle } from "../../redux/action";
 import style from "../Detail/Detail.module.css";
 import Footer from "../Footer/Footer";
 import { MdOutlineShoppingCart } from "react-icons/md";
@@ -13,7 +13,6 @@ import { Carousel } from "flowbite-react";
 import { IoIosArrowBack, IoIosArrowForward } from "react-icons/io";
 import NavBar from "../NavBar/NavBar";
 import { addToCart } from "../../redux/action";
-
 import Review from "../Review/Review";
 import Reviews from "../Review/Reviews";
 
@@ -31,7 +30,7 @@ export default function ProductDetail() {
   const [state, setState] = useState(true);
 
   useEffect(() => {
-    dispatch(GetDetail(id)).then(() => setState(false));
+    dispatch(getDetail(id)).then(() => setState(false));
     return () => {
       dispatch(desmontarDetalle());
     };
