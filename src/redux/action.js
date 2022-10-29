@@ -239,7 +239,16 @@ export const getUser = () => {
     });
   };
 };
-
+export const Verify = (id,payload)=>{
+  console.log(payload)
+  return async (dispatch)=>{
+    let json = await axios.put(`https://velvet.up.railway.app/verification/${id}`,payload);
+    return dispatch({
+      type : "VERIFY",
+      payload: json.data
+    })
+  }
+}
 export const getUserId = (id) => {
   return {
     type: CONSTANTES.GET_USER_ID,
