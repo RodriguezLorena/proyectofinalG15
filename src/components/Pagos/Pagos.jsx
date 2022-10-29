@@ -1,5 +1,5 @@
 import { Navbar } from "flowbite-react";
-import React from "react";
+import React, { useEffect } from "react";
 import {useState} from "react"
 import { Link } from "react-router-dom";
 import style from "./Pagos.module.css";
@@ -7,18 +7,34 @@ import NavBar from "../NavBar/NavBar";
 import { useDispatch, useSelector } from "react-redux";
 import BotonMercadopago from './BotonMercadopago'
 import axios from "axios";
+const parse = require('html-react-parser');
 const Pagos = () => {
  const [pagar,setPagar]= useState(true)
   const cartState = useSelector((state) => state.cart);
   const total = useSelector((state) => state.cartTotal);
   const [preferenceId, setPreferenceId] = useState(null);
-
+  //const [prueba,setPrueba] =useState(null)
   //console.log(cartState[0],"aaaaaaaaa",total)
   const orderData = {
     title: cartState[0].name,
     stock: cartState[0].cantidad,
     price: cartState[0].price
   };
+//   useEffect(()=>
+//   {
+//     async function render() {
+//       const Render = await axios.get(`http://localhost:3001/prueba?=${preferenceId}`)
+//       console.log(Render.data)
+
+//      setPrueba(Render.data)
+// }
+//   render();
+//   },[preferenceId])
+      // async function render() {
+      //   const Render = await axios.get(`http://localhost:3001/prueba?=${preferenceId}`)
+        
+      //   return Render.data
+      //   }
   async function handlePay(e) {
 
     e.preventDefault()
@@ -55,8 +71,8 @@ const Pagos = () => {
             <button >Solicitar pago</button>
             <button onClick={handlePay} orderData={orderData}>pagareee</button>
          <button onClick={handlePay} orderData={orderData}>Pagaraaaa</button></form>:
-          <BotonMercadopago preferenceId={preferenceId}></BotonMercadopago>}
-       
+         <a href={`http://localhost:3001/prueba?preference=`+preferenceId}>Link</a>
+         }
          
         
         
