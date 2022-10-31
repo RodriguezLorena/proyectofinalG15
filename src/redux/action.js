@@ -181,6 +181,7 @@ export function login(payload) {
       "https://velvet.up.railway.app/login",
       payload
     );
+    console.log(respuesta.data, "login respuestsa");
     const users = await axios("https://velvet.up.railway.app/users");
     const user = users.data.filter(
       (element) => element.id === respuesta.data.id
@@ -259,16 +260,19 @@ export const getUser = () => {
     });
   };
 };
-export const Verify = (id,payload)=>{
-  console.log(payload)
-  return async (dispatch)=>{
-    let json = await axios.put(`https://velvet.up.railway.app/verification/${id}`,payload);
+export const Verify = (id, payload) => {
+  console.log(payload);
+  return async (dispatch) => {
+    let json = await axios.put(
+      `https://velvet.up.railway.app/verification/${id}`,
+      payload
+    );
     return dispatch({
-      type : "VERIFY",
-      payload: json.data
-    })
-  }
-}
+      type: "VERIFY",
+      payload: json.data,
+    });
+  };
+};
 export const getUserId = (id) => {
   return {
     type: CONSTANTES.GET_USER_ID,

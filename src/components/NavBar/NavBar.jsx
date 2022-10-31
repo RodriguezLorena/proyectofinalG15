@@ -28,7 +28,10 @@ export default function NavBar({ home, products }) {
 
   function searchForName(e) {
     e.preventDefault();
-    dispatch(getForName(search));
+    navegation("/home");
+    setTimeout(function () {
+      dispatch(getForName(search));
+    }, 500);
     setSearch("");
   }
 
@@ -282,6 +285,7 @@ export default function NavBar({ home, products }) {
                       Crear cuenta
                     </button>
                   </div>
+
                   <div className="text-sm font-medium text-gray-500 dark:text-gray-300">
                     <button
                       onClick={() => {
@@ -311,15 +315,14 @@ export default function NavBar({ home, products }) {
           </div>
 
           <form action="" onSubmit={(e) => searchForName(e)}>
-            <NavLink to="/home">
-              <input
-                type="text"
-                placeholder="Buscar..."
-                value={search}
-                onChange={(e) => handelSearch(e)}
-                className={style.inputSearch}
-              />
-            </NavLink>
+            <input
+              type="text"
+              placeholder="Buscar..."
+              value={search}
+              onChange={(e) => handelSearch(e)}
+              className={style.inputSearch}
+            />
+
             <button type="submit" name="serach" className=" h-10">
               <FiSearch size="30" />
             </button>

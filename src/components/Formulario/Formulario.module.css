@@ -1,6 +1,6 @@
 .contenedor {
   width: 100%;
-  height: 90vh;
+  height: 100%;
   background-position-x: left;
   display: flex;
   flex-direction: row;
@@ -124,6 +124,17 @@ select {
   color: black;
 }
 
+.previsualizaciones {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  gap: 1rem;
+  border: #000 solid 1px;
+  margin-bottom: 1rem;
+  padding: 1rem;
+}
+
 .content {
   background-color: #fff;
   width: 300px;
@@ -227,4 +238,144 @@ select {
   height: 280px;
   margin-top: 1.2rem;
   position: absolute;
+}
+
+/* detalle*/
+/* .contenedorDetalle{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 1rem;
+  border: #000 solid 1px;
+  margin-bottom: 1rem;
+  padding: 1rem;
+  width: 30%;
+} */
+
+.contentDetail {
+  width: 70%;
+  height: auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #fff;
+  margin: 0 auto;
+}
+
+.contentImages {
+  width: 50%;
+  height: 500px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.images {
+  display: flex;
+  flex-direction: column;
+}
+
+.imageP {
+  width: 250px;
+  height: 250px;
+  margin-left: 3rem;
+}
+
+.images button img {
+  width: 70px;
+  height: 70px;
+  border-radius: 10px;
+  background-color: #eee;
+  margin-top: 10px;
+}
+
+.textContent {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  border: 1px solid rgb(219, 217, 217);
+  border-radius: 5px;
+  width: 40%;
+  height: 400px;
+  margin-left: 2rem;
+  padding: 10px;
+  font-weight: 100;
+}
+.contentLike {
+  margin-top: -20px;
+  display: flex;
+  justify-content: end;
+}
+
+.like {
+  margin: 10px 10px 0 0;
+  transition: all 0.5s ease;
+  cursor: pointer;
+}
+
+.like:hover {
+  color: #ea047e;
+  filter: drop-shadow(1px 1px 2px #ea047e);
+  transform: scale(1.1);
+}
+
+.title {
+  font-size: 1.5rem;
+}
+
+.price {
+  font-size: 1.3rem;
+  color: #ea047e;
+}
+
+.stock {
+  font-size: 1.2rem;
+}
+
+.description {
+  font-size: 1rem;
+  font-weight: 100;
+  width: 90%;
+}
+
+.buyCarrito {
+  display: flex;
+  align-items: center;
+  margin-top: 20px;
+}
+
+.buy {
+  background-color: #ea047e;
+  font-size: 1.2rem;
+  border: none;
+  border-radius: 20px;
+  color: #fff;
+  margin: 0 20px 0 0;
+  padding: 0 8px;
+  transition: all 0.5s ease;
+}
+
+.buy:hover {
+  transform: scale(1.05);
+}
+
+.carrito {
+  cursor: pointer;
+}
+
+.contentRealciones {
+  width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.contentRealciones h3 {
+  font-size: 2.5rem;
+  text-align: justify;
+  margin: 0 4rem;
+  font-weight: 100;
+  margin-bottom: -3rem;
+  border-bottom: 1px solid #ddd;
+  width: 35rem;
 }

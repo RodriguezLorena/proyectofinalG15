@@ -11,6 +11,7 @@ import "../../App.css";
 import axios from "axios";
 import { MdOutlineShoppingCart } from "react-icons/md";
 import { AiFillHeart } from "react-icons/ai";
+import { AiOutlineHeart } from "react-icons/ai";
 
 const Formulario = () => {
   const dispatch = useDispatch();
@@ -57,6 +58,7 @@ const Formulario = () => {
     mainImage: "",
     image: [],
     category: [],
+    bestSellers: false,
   });
 
   const manipuladorInput = (e) => {
@@ -71,7 +73,15 @@ const Formulario = () => {
       })
     );
   };
+  //manipulador de checkbox
 
+  const manipuladorCheckbox = (e) => {
+    console.log("e.target.checked", e.target.checked);
+    setNuevoProduct({
+      ...nuevoProduct,
+      [e.target.name]: e.target.checked,
+    });
+  };
   //manipulo la seleccion de categorias
   const arrayCategories = ["mujer", "hombre", "varios", "niños"];
   const manipuladorSelectCategory = (e) => {
@@ -102,7 +112,7 @@ const Formulario = () => {
 
   //manipulo la eliminacion de categorias
   const eliminarSelectCategory = (e) => {
-    const seleccion = nuevoProduct.mainImage.filter(
+    const seleccion = nuevoProduct.category.filter(
       (elemento) => elemento !== e.target.innerHTML
     );
 
@@ -493,6 +503,31 @@ const Formulario = () => {
                 ))}
               </ul>
             </div>
+
+            <div>
+              <label>
+                VALUE:
+                <input
+                  type="checkbox"
+                  name="value"
+                  checked={nuevoProduct.value}
+                  onChange={(e) => manipuladorCheckbox(e)}
+                />
+              </label>
+            </div>
+
+            <div>
+              <label>
+                MAS VENDIDOS:
+                <input
+                  type="checkbox"
+                  name="bestSeller"
+                  checked={nuevoProduct.bestSeller}
+                  onChange={(e) => manipuladorCheckbox(e)}
+                />
+              </label>
+            </div>
+
             <div className={style.contentBtn}>
               <button
                 className={style.btnImg}
@@ -505,9 +540,9 @@ const Formulario = () => {
             </div>
           </form>
         </div>
-
-        <div>
-          <h2>PREVISUALIZACION</h2>
+      </div>
+      <div>
+        <div className={style.previsualizaciones}>
           <div className={style.content}>
             <MdOutlineShoppingCart className={style.carrito} size="40px" />
 
@@ -524,10 +559,57 @@ const Formulario = () => {
                 <div className={style.tallas}>
                   <p>{nuevoProduct.size}</p>
                 </div>
-                <div>
-                  <p> descripcion: {nuevoProduct.description}</p>
-                </div>
                 <h6>${nuevoProduct.price}</h6>
+              </div>
+            </div>
+          </div>
+
+          <div className={style.contenedorDetalle}>
+            <h2>PREVISUALIZACION</h2>
+
+            <div className={style.contentDetail}>
+              <div className={style.contentImages}>
+                <div className={style.images}>
+                  <button>
+                    <img src={nuevoProduct.image[0]} alt="img no fount" />
+                  </button>
+                  <button>
+                    <img src={nuevoProduct.image[0]} alt="img no fount" />
+                  </button>
+                  <button>
+                    <img src={nuevoProduct.image[0]} alt="img no fount" />
+                  </button>
+                  <button>
+                    <img src={nuevoProduct.image[0]} alt="img no fount" />
+                  </button>
+                </div>
+                <img
+                  src={nuevoProduct.mainImage}
+                  alt="img no fount"
+                  className={style.imageP}
+                />
+              </div>
+
+              <div className={style.textContent}>
+                <div className={style.contentLike}>
+                  <AiOutlineHeart className={style.like} size="30px" />
+                </div>
+                <h2 className={style.title}> {nuevoProduct.name}</h2>
+                <span className={style.price}> ${nuevoProduct.price}</span>
+                <h3 className={style.stock}>Stock: {nuevoProduct.stock}</h3>
+                <h3 className={style.description}>
+                  {nuevoProduct.description}
+                </h3>
+                {/* <h3>
+            <b>Category:</b> {nuevoProduct.category.map((e) => e.name)}
+          </h3> */}
+                <div className={style.buyCarrito}>
+                  <button className={style.buy}>Comparar ya</button>
+                  <MdOutlineShoppingCart
+                    className={style.carrito}
+                    size="30px"
+                  />
+                </div>
               </div>
             </div>
           </div>

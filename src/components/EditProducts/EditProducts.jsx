@@ -99,6 +99,7 @@ export default function EditProducts() {
     else valuesNew.value = false;
     if (valuesNew.bestSellers == "1") valuesNew.bestSellers = true;
     else valuesNew.bestSellers = false;
+    console.log(valuesNew, "valoresss");
     dispatch(putProduct(valuesNew, id));
     setValuesNew({
       name: "",
@@ -113,9 +114,9 @@ export default function EditProducts() {
       categories: [],
       bestSellers: false,
     });
-    setTimeout(function () {
-      window.location.reload(true);
-    }, 2000);
+    // setTimeout(function () {
+    //   window.location.reload(true);
+    // }, 2000);
   }
 
   if (state) {

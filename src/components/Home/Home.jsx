@@ -20,7 +20,6 @@ export default function Home() {
   const productsFilters = productsAll.filter(
     (element) => element.value === true
   );
-  console.log("aca esta productsAll", productsAll);
   const [range, setRange] = useState(0);
   const [Order, setOrder] = useState("");
 

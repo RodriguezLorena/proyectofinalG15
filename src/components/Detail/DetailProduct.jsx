@@ -21,11 +21,9 @@ export default function ProductDetail() {
   const { id } = useParams();
   const IdProduct = useSelector((state) => state.detailProduct);
   const productsAll = useSelector((state) => state.productsAll);
-  const IdUser=useSelector((state)=>state.user)
+  const IdUser = useSelector((state) => state.user);
 
-  // console.log(IdUser.id,'PROBANMDO ID USER'); 
-
-
+  // console.log(IdUser.id,'PROBANMDO ID USER');
 
   const dispath = useDispatch();
   const addCart = (id) => {
@@ -81,7 +79,7 @@ export default function ProductDetail() {
           </div>
           <h2 className={style.title}> {IdProduct[0].name}</h2>
           <span className={style.price}> ${IdProduct[0].price}</span>
-          <h3 className={style.stock}>Stock: {IdProduct[0].stock}</h3>
+          {/* <h3 className={style.stock}>Stock: {IdProduct[0].stock}</h3> */}
           <h3 className={style.description}>{IdProduct[0].description}</h3>
           <h3>
             <b>Category:</b> {IdProduct[0].categories.map((e) => e.name)}
