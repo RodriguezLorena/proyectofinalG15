@@ -14,6 +14,12 @@ import { IoClose } from "react-icons/io5";
 import { BsArrowLeftShort } from "react-icons/bs";
 import Admin from "../Admin/Admin";
 
+//-----------------importaciones de google----------------
+import CreateAcountWithGoogle from "../Login/CreateAccountAndLoginWithGoogle";
+import { gapi } from "gapi-script";
+import CreateAccountWithGoogle from "../Login/CreateAccountAndLoginWithGoogle";
+const clientId = process.env.REACT_APP_GOOGLE_CLIENT_ID;
+
 export default function NavBar({ home, products }) {
   const dispatch = useDispatch();
   const navegation = useNavigate();
@@ -206,6 +212,9 @@ export default function NavBar({ home, products }) {
                       Crear cuenta
                     </button>
                   </div>
+                  <div>
+                    <CreateAccountWithGoogle text={"Iniciar con Google"} />
+                  </div>
                 </div>
               </Modal.Body>
             </Modal>
@@ -284,6 +293,9 @@ export default function NavBar({ home, products }) {
                     >
                       Crear cuenta
                     </button>
+                    <div>
+                    <CreateAccountWithGoogle text={"Crear con Google"} />
+                  </div>
                   </div>
 
                   <div className="text-sm font-medium text-gray-500 dark:text-gray-300">
