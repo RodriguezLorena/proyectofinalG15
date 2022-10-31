@@ -23,7 +23,7 @@ const PutUser = () => {
   const cartState = useSelector((state) => state.cart);
 
   useEffect(() => {
-    dispatch(getUser());
+    dispatch(getUser(user.token));
   }, []);
 
   const [input, setInput] = useState({

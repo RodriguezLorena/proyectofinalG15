@@ -2,7 +2,6 @@ import axios from "axios";
 import { MdArrowBackIos } from "react-icons/md";
 import swal from "sweetalert";
 import { CONSTANTES } from "./constantes";
-
 const datosdeploy = "https://velvet.up.railway.app/product";
 export function getProducts() {
   return async function (dispatch) {
@@ -175,35 +174,36 @@ export function postImages() {
 
 //-------------LOGIN------------------//
 export function login(payload) {
-  console.log(payload, "loginnnnn");
+  //console.log(payload, "loginnnnn");
   return async function (dispatch) {
     const respuesta = await axios.post(
       "https://velvet.up.railway.app/login",
       payload
     );
-    const users = await axios("https://velvet.up.railway.app/users");
-    const user = users.data.filter(
-      (element) => element.id === respuesta.data.id
-    );
-    console.log(respuesta.data, "respuesta");
-    if (respuesta.data.hasOwnProperty("menssage")) {
-      return swal({
-        title: "Usuario y/o password son incorrectos",
-        icon: "error",
-      });
-    }
-    if (user[0].role == "admin") {
-      swal({
-        title: "Bienvenido ADMIN",
-        icon: "success",
-      });
-      return dispatch({ type: "LOGIN", payload: user[0] });
-    }
-    swal({
-      title: "Ingreasaste correctamente",
-      icon: "success",
-    });
-    return dispatch({ type: "LOGIN", payload: user[0] });
+    console.log(respuesta)
+    // const users = await axios("https://velvet.up.railway.app/users");
+    // const user = users.data.filter(
+    //   (element) => element.id === respuesta.data.id
+    // );
+    // console.log(respuesta.data, "respuesta");
+    // if (respuesta.data.hasOwnProperty("menssage")) {
+    //   return swal({
+    //     title: "Usuario y/o password son incorrectos",
+    //     icon: "error",
+    //   });
+    // }
+    // if (user[0].role == "admin") {
+    //   swal({
+    //     title: "Bienvenido ADMIN",
+    //     icon: "success",
+    //   });
+    //   return dispatch({ type: "LOGIN", payload: respuesta.data });
+    // }
+    // swal({
+    //   title: "Ingreasaste correctamente",
+    //   icon: "success",
+    // });
+    return dispatch({ type: "LOGIN", payload: respuesta.data });
   };
 }
 export function creatAcount(payload) {
@@ -250,9 +250,14 @@ export const putUser = (id, payload) => {
   };
 };
 
-export const getUser = () => {
+export const getUser = (payload) => {
+  console.log(payload)
   return async (dispatch) => {
-    let json = await axios.get("https://velvet.up.railway.app/users");
+    let json = await axios.get("https://velvet.up.railway.app/users", 
+   { headers: {
+      authorization: 'Bearer '+`${payload}`
+    }}
+    );
     return dispatch({
       type: CONSTANTES.GET_USER,
       payload: json.data,
