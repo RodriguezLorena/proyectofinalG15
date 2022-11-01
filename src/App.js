@@ -11,7 +11,7 @@ import Review from "./components/Review/Review";
 import Reviews from "./components/Review/Reviews";
 import CreateProduct from "./components/createProduct/createProduct";
 import Verifico from "./Verification/Verification";
-import Sidebar from "./components/Sidebar/Sidebar";
+import Sidebar from "./components/Sidebar/sidebar";
 import EditProducts from "./components/EditProducts/EditProducts";
 
 function App() {
