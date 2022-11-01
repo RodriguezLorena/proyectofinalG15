@@ -85,7 +85,17 @@ export default function ProductDetail() {
             <b>Category:</b> {IdProduct[0].categories.map((e) => e.name)}
           </h3>
           <div className={style.buyCarrito}>
-            <button className={style.buy}>Comparar ya</button>
+            <div>
+              <button
+                className={IdUser.role == "inactive" ? style.buyNo : style.buy}
+              >
+                Comparar ya
+              </button>
+              {IdUser.role == "inactive" ? (
+                <p>Debes confirmar tu correo para comprar</p>
+              ) : null}
+            </div>
+
             <MdOutlineShoppingCart
               className={style.carrito}
               size="40px"

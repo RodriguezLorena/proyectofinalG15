@@ -309,7 +309,7 @@ export default function EditProducts() {
                 <ul>
                   {valuesNew.sizes.map((elemento) => (
                     <li key={elemento} onClick={(e) => eliminarSelect(e)}>
-                      {elemento}
+                      {elemento},
                     </li>
                   ))}
                 </ul>

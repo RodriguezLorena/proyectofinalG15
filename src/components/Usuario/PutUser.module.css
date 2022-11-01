@@ -11,6 +11,14 @@
   width: 100%;
 }
 
+.confirmarEmail {
+  margin-top: 1rem;
+  padding: 0.5rem 1rem;
+  border-radius: 40px;
+  background-color: #ea047e;
+  color: #fff;
+}
+
 .content form {
   display: flex;
   flex-direction: column;
@@ -69,6 +77,9 @@
 }
 
 .carrito {
+  box-shadow: 1px 2px 4px rgba(0, 0, 0, 0.5);
+  border-radius: 20px;
+  padding: 1rem 0;
   margin: 5rem;
   width: 600px;
   height: max-content;
@@ -79,11 +90,18 @@
 }
 
 .carrito h5 {
-  margin-left: 3rem;
   font-size: 2.5rem;
   border-bottom: 1px solid #ea047e;
   width: max-content;
 }
+.carrito h6 {
+  font-size: 2rem;
+  margin-top: 1rem;
+  border-radius: 40px;
+  padding: 0 1rem;
+  border: 1px solid #ddd;
+}
+
 .viewAll {
   border-radius: 40px;
   padding: 0.6rem 1rem;

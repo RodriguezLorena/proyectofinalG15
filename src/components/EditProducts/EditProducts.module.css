@@ -68,7 +68,22 @@
 .productModifi div {
   display: flex;
   flex-direction: column;
-  margin: 0.5rem 1rem;
+  margin: 0.1rem 1rem;
+}
+
+.productModifi div p {
+  width: max-content;
+  font-size: 0.7rem;
+  color: red;
+}
+
+.productModifi div ul {
+  display: flex;
+}
+
+.productModifi div ul li {
+  margin-right: 5px;
+  cursor: pointer;
 }
 
 .productModifi input {

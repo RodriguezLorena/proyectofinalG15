@@ -28,13 +28,10 @@ const Sidebar = () => {
   function handelSearch(e) {
     setSearch(e.target.value);
   }
+  console.log(user.token);
   useEffect(() => {
     console.log("enviooo");
-    dispatch(
-      getUser(
-        "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJjaGVjayI6dHJ1ZSwiaWF0IjoxNjY3MjQyNjQzLCJleHAiOjE2NjczMjkwNDN9.063hBX_uTKj018NzACALWVsN4UsPdSpaZxe4owqOpCc"
-      )
-    );
+    dispatch(getUser(user.token));
   }, [dispatch]);
 
   const [toggleState, setToggleState] = useState(1);

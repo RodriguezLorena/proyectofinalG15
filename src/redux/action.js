@@ -203,6 +203,8 @@ export function login(payload) {
       });
     }
     if (user[0].role == "admin") {
+      console.log(user[0], "users admin");
+      user[0].token = respuesta.data.token;
       swal({
         title: "Bienvenido ADMIN",
         icon: "success",
@@ -223,7 +225,18 @@ export function creatAcount(payload) {
       "https://velvet.up.railway.app/users",
       payload
     );
-    const users = await axios("https://velvet.up.railway.app/users");
+
+    console.log(respuesta, "ress create");
+    if (respuesta.data == "email ya registrado")
+      return swal({
+        title: "Email ya registrado",
+        icon: "error",
+      });
+    const users = await axios("https://velvet.up.railway.app/users", {
+      headers: {
+        authorization: `Bearer ${localStorage.getItem("token")}`,
+      },
+    });
     const user = users.data.filter(
       (element) => element.userName === payload.userName
     );
