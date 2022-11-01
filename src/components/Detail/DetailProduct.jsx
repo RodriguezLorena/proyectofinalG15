@@ -22,7 +22,12 @@ export default function ProductDetail() {
   const IdProduct = useSelector((state) => state.detailProduct);
   const productsAll = useSelector((state) => state.productsAll);
   const IdUser = useSelector((state) => state.user);
+  const [imageProduct, setImageProduct] = useState("");
 
+  function handelChangueImagens(e) {
+    e.preventDefault();
+    setImageProduct(e.target.src);
+  }
   // console.log(IdUser.id,'PROBANMDO ID USER');
 
   const dispath = useDispatch();
@@ -54,20 +59,41 @@ export default function ProductDetail() {
         <div className={style.contentImages}>
           <div className={style.images}>
             <button>
-              <img src={IdProduct[0].images[0]} alt="img no fount" />
+              <img
+                src={IdProduct[0].mainImage}
+                alt=""
+                onClick={(e) => handelChangueImagens(e)}
+              />
+              <img
+                src={IdProduct[0].images[0]}
+                alt="img no fount"
+                onClick={(e) => handelChangueImagens(e)}
+              />
             </button>
             <button>
-              <img src={IdProduct[0].images[0]} alt="img no fount" />
+              <img
+                src={IdProduct[0].images[1]}
+                alt="img no fount"
+                onClick={(e) => handelChangueImagens(e)}
+              />
             </button>
             <button>
-              <img src={IdProduct[0].images[0]} alt="img no fount" />
+              <img
+                src={IdProduct[0].images[2]}
+                alt="img no fount"
+                onClick={(e) => handelChangueImagens(e)}
+              />
             </button>
             <button>
-              <img src={IdProduct[0].images[0]} alt="img no fount" />
+              <img
+                src={IdProduct[0].images[3]}
+                alt="img no fount"
+                onClick={(e) => handelChangueImagens(e)}
+              />
             </button>
           </div>
           <img
-            src={IdProduct[0].mainImage}
+            src={imageProduct == "" ? IdProduct[0].mainImage : imageProduct}
             alt="img no fount"
             className={style.imageP}
           />
@@ -78,7 +104,7 @@ export default function ProductDetail() {
             <AiOutlineHeart className={style.like} size="30px" />
           </div>
           <h2 className={style.title}> {IdProduct[0].name}</h2>
-          <span className={style.price}> ${IdProduct[0].price}</span>
+          <span className={style.price}> $USD {IdProduct[0].price}</span>
           {/* <h3 className={style.stock}>Stock: {IdProduct[0].stock}</h3> */}
           <h3 className={style.description}>{IdProduct[0].description}</h3>
           <h3>

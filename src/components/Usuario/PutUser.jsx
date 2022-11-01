@@ -17,6 +17,7 @@ import Cart from "../Cart/Cart";
 import swal from "sweetalert";
 import { Toast } from "flowbite-react";
 import { HiOutlineMail } from "react-icons/hi";
+import FavoriteList from "../FavoriteList/FavoriteList";
 
 const PutUser = () => {
   const dispatch = useDispatch();
@@ -77,23 +78,22 @@ const PutUser = () => {
   return (
     <div className="bg-white">
       <NavBar />
-      <Toast>
-        <div className="inline-flex h-8 w-8 shrink-0 items-center justify-center rounded-lg bg-blue-100 text-blue-500 dark:bg-blue-800 dark:text-blue-200">
-          <HiOutlineMail size="30" />
-        </div>
-        <div className="ml-3 text-sm font-normal">
-          {" "}
-          <NavLink
-            to={`/verification/${user.id}`}
-            className={style.confirmarEmail}
-          >
-            Confirmar email
-          </NavLink>
-        </div>
-        <Toast.Toggle />
-      </Toast>
 
       <div className={style.content}>
+        {user.role == "inactive" ? (
+          <Toast>
+            <div className="inline-flex h-8 w-8 shrink-0 items-center justify-center rounded-lg bg-blue-100 text-blue-500 dark:bg-blue-800 dark:text-blue-200">
+              <NavLink to={`/verification/${user.id}`}>
+                <HiOutlineMail size="30" />
+              </NavLink>
+            </div>
+            <NavLink to={`/verification/${user.id}`}>
+              <div className="ml-3 text-sm font-normal"> Confirmar email</div>
+            </NavLink>
+            <Toast.Toggle />
+          </Toast>
+        ) : null}
+
         <div className={style.contentPerfile}>
           <div className={style.perileImage}>
             {input.image.length ? (
@@ -175,19 +175,25 @@ const PutUser = () => {
             ) : null}
           </form>
         </div>
+        <div className={style.contentCarrFav}>
+          <div className={style.carrito}>
+            <h5>Carrito</h5>
+            {cartState.length < 1 ? (
+              <h6>Carrito vacio</h6>
+            ) : (
+              cartState.slice(0, 3).map((ele) => {
+                return <Cart key={ele.id} data={ele} deleteCart={deleteCart} />;
+              })
+            )}
+            <NavLink to="/carrito" className={style.viewAll}>
+              Mostrar todos
+            </NavLink>
+          </div>
 
-        <div className={style.carrito}>
-          <h5>Carrito</h5>
-          {cartState.length < 1 ? (
-            <h6>Carrito vacio</h6>
-          ) : (
-            cartState.slice(0, 3).map((ele) => {
-              return <Cart key={ele.id} data={ele} deleteCart={deleteCart} />;
-            })
-          )}
-          <NavLink to="/carrito" className={style.viewAll}>
-            Mostrar todos
-          </NavLink>
+          <div className={style.favoritos}>
+            <h5>Favoritos</h5>
+            <FavoriteList />
+          </div>
         </div>
       </div>
     </div>

@@ -57,7 +57,7 @@ const Formulario = () => {
     size: [],
     mainImage: "",
     image: [],
-    category: [],
+    category: "",
     bestSellers: false,
   });
 
@@ -82,60 +82,21 @@ const Formulario = () => {
       [e.target.name]: e.target.checked,
     });
   };
-  //manipulo la seleccion de categorias
-  const arrayCategories = ["mujer", "hombre", "varios", "niños"];
-  const manipuladorSelectCategory = (e) => {
-    const selec = nuevoProduct.category.filter(
-      (elemento) => elemento !== e.target.innerHTML
-    );
-    if (selec.includes(e.target.value)) {
-      swal({
-        title: "UPSS!!!",
-        text: "Esa categoria ya fue seleccionada",
-        icon: "error",
-        className: "swal-modal",
-        className: "swal-title",
-      });
-    } else {
-      setNuevoProduct({
-        ...nuevoProduct,
-        category: [...nuevoProduct.category, e.target.value],
-      });
-      setValidador(
-        validacion({
-          ...nuevoProduct,
-          category: [...nuevoProduct.category, e.target.value],
-        })
-      );
-    }
-  };
 
-  //manipulo la eliminacion de categorias
-  const eliminarSelectCategory = (e) => {
-    const seleccion = nuevoProduct.category.filter(
-      (elemento) => elemento !== e.target.innerHTML
-    );
-
+  // manipular category
+  const categorias = ["mujer", "hombre", "varios", "niños"];
+  const manipuladorCategory = (e) => {
+    console.log("aca esta el nuevo producto ", nuevoProduct);
     setNuevoProduct({
       ...nuevoProduct,
-      category: seleccion,
+      category: e.target.value,
     });
-
-    setValidador(
-      validacion({
-        ...nuevoProduct,
-        category: [...seleccion],
-      })
-    );
   };
-
-  //manipulo la seleccion de talles
+  //Manipulo el array de talle
   const talles = [
     "s",
     "m",
     "l",
-    "xl",
-    "U",
     "1",
     "1.5",
     "2",
@@ -292,17 +253,19 @@ const Formulario = () => {
 
     if (nuevoProduct.description.length > 100)
       validar.description = "NO PUEDE TENER MAS DE 100 CARACTERES";
-    if (nuevoProduct.description.length < 30)
-      validar.description = "NECESITA TENER UN MINIMO DE 30 CARACTERES";
+    if (nuevoProduct.description.length < 20)
+      validar.description = "NECESITA TENER UN MINIMO DE 20 CARACTERES";
     if (sinEspacios.test(nuevoProduct.description[0]))
       validar.description = "NO PUEDE SER ESPACIOS EN BLANCO";
 
     if (Number(nuevoProduct.price) < 1)
-      validar.price = "REQUIERE PRECIO MAYOR A $1 ";
+      validar.price = "REQUIERE PRECIO MAYOR A A $USD1 ";
     if (Number(nuevoProduct.price) > 90000)
-      validar.price = "NO PUEDE SER MAYOR A 150.000";
+      validar.price = "NO PUEDE SER MAYOR A $USD 500";
 
-    if (Number(nuevoProduct.stock) < 1) validar.stock = "VALOR MAYOR A 1 ";
+    if (Number(nuevoProduct.stock) < 1) validar.stock = "VALOR MAYOR A 0 ";
+    if (Number(nuevoProduct.stock) > 10000000)
+      validar.stock = "NO ES RECIONAL LA CANTIDAD QUE INTENTA PONER";
 
     return validar;
   };
@@ -463,8 +426,7 @@ const Formulario = () => {
             </div>
 
             <div className={style.form}>
-              <label>
-                CATEGORIA:
+              {/* CATEGORIA:
                 <select
                   defaultValue={"default"}
                   onChange={(e) => manipuladorSelectCategory(e)}
@@ -480,8 +442,24 @@ const Formulario = () => {
                         </option>
                       );
                     })}
-                </select>
-              </label>
+
+                </select> */}
+              <select
+                defaultValue={"default"}
+                onChange={(e) => manipuladorCategory(e)}
+              >
+                <option value="default" disabled>
+                  ELIGE UNA CATEGORIA:
+                </option>
+                {categorias &&
+                  categorias.map((elemento, index) => {
+                    return (
+                      <option key={index} value={elemento}>
+                        {elemento}
+                      </option>
+                    );
+                  })}
+              </select>
             </div>
             <div className={style.form}>
               <label>
@@ -500,7 +478,8 @@ const Formulario = () => {
                 <p className={style.validacion}> </p>
               )}
             </div>
-            <div>
+
+            {/* <div>
               <ul>
                 {nuevoProduct.category.map((elemento) => (
                   <li key={elemento} onClick={(e) => eliminarSelectCategory(e)}>
@@ -508,27 +487,15 @@ const Formulario = () => {
                   </li>
                 ))}
               </ul>
-            </div>
+            </div> */}
             <div className={style.contentCheckboxs}>
-              <div className={style.contentCheckbox}>
-                <label>
-                  VALUE:
-                  <input
-                    type="checkbox"
-                    name="value"
-                    checked={nuevoProduct.value}
-                    onChange={(e) => manipuladorCheckbox(e)}
-                  />
-                </label>
-              </div>
-
               <div className={style.contentCheckbox}>
                 <label>
                   MAS VENDIDOS:
                   <input
                     type="checkbox"
                     name="bestSeller"
-                    checked={nuevoProduct.bestSeller}
+                    checked={nuevoProduct.bestSellers}
                     onChange={(e) => manipuladorCheckbox(e)}
                   />
                 </label>
@@ -578,13 +545,13 @@ const Formulario = () => {
                     <img src={nuevoProduct.image[0]} alt="img no fount" />
                   </button>
                   <button>
-                    <img src={nuevoProduct.image[0]} alt="img no fount" />
+                    <img src={nuevoProduct.image[1]} alt="img no fount" />
                   </button>
                   <button>
-                    <img src={nuevoProduct.image[0]} alt="img no fount" />
+                    <img src={nuevoProduct.image[2]} alt="img no fount" />
                   </button>
                   <button>
-                    <img src={nuevoProduct.image[0]} alt="img no fount" />
+                    <img src={nuevoProduct.image[3]} alt="img no fount" />
                   </button>
                 </div>
                 <img
@@ -604,9 +571,6 @@ const Formulario = () => {
                 <h3 className={style.description}>
                   {nuevoProduct.description}
                 </h3>
-                {/* <h3>
-            <b>Category:</b> {nuevoProduct.category.map((e) => e.name)}
-          </h3> */}
                 <div className={style.buyCarrito}>
                   <button className={style.buy}>Comparar ya</button>
                   <MdOutlineShoppingCart

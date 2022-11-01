@@ -22,6 +22,7 @@ export default function EditProducts() {
 
   const product = useSelector((state) => state.detailProduct);
   const [state, setState] = useState(true);
+
   const [valuesNew, setValuesNew] = useState({
     name: "",
     price: 0,
@@ -32,16 +33,14 @@ export default function EditProducts() {
     mainImage: "",
     sizes: [],
     images: [],
-    categories: [],
+    categories: "",
     bestSellers: false,
   });
-  const cargaCategories = ["mujer", "hombre", "varios", "niños"];
+
   const sizess = [
     "s",
     "m",
     "l",
-    "xl",
-    "U",
     "1",
     "1.5",
     "2",
@@ -72,7 +71,7 @@ export default function EditProducts() {
     if (valuesNew.description.length > 100)
       validar.description = "NO PUEDE TENER MAS DE 100 CARACTERES";
     if (valuesNew.description.length < 20)
-      validar.description = "NECESITA TENER UN MINIMO DE 30 CARACTERES";
+      validar.description = "NECESITA TENER UN MINIMO DE 20 CARACTERES";
     if (sinEspacios.test(valuesNew.description[0]))
       validar.description = "NO PUEDE SER ESPACIOS EN BLANCO";
 
@@ -126,6 +125,7 @@ export default function EditProducts() {
   }
 
   const handelSizes = (e) => {
+    console.log("aca esta el nuevo producto ", valuesNew);
     const selec = valuesNew.sizes.filter(
       (elemento) => elemento !== e.target.innerHTML
     );
@@ -149,7 +149,6 @@ export default function EditProducts() {
         })
       );
     }
-    console.log("aca esta el nuevo producto ", valuesNew.sizes);
   };
 
   const eliminarSelect = (e) => {
@@ -174,56 +173,14 @@ export default function EditProducts() {
       images: [...valuesNew.images, e.target.value],
     });
   }
-  // function handelCateogoties(e) {
-  //   setValuesNew({
-  //     ...valuesNew,
-  //     categories: [...valuesNew.categories, e.target.value],
-  //   });
-  // }
 
+  const categorias = ["mujer", "hombre", "varios", "niños"];
   const handelCateogoties = (e) => {
-    const selec = valuesNew.categories.filter(
-      (elemento) => elemento !== e.target.innerHTML
-    );
-    if (selec.includes(e.target.value)) {
-      swal({
-        title: "UPSS!!!",
-        text: "Esa categoria ya fue seleccionada",
-        icon: "error",
-        className: "swal-modal",
-        className: "swal-title",
-      });
-    } else {
-      setValuesNew({
-        ...valuesNew,
-        categories: [...valuesNew.categories, e.target.value],
-      });
-      setValidador(
-        validacion({
-          ...valuesNew,
-          category: [...valuesNew.categories, e.target.value],
-        })
-      );
-    }
-  };
-
-  //manipulo la eliminacion de categorias
-  const eliminarSelectCategory = (e) => {
-    const seleccion = valuesNew.categories.filter(
-      (elemento) => elemento !== e.target.innerHTML
-    );
-
     setValuesNew({
       ...valuesNew,
-      categories: seleccion,
+      categories: e.target.value,
     });
-
-    setValidador(
-      validacion({
-        ...valuesNew,
-        categories: [...seleccion],
-      })
-    );
+    console.log("aca esta el nuevo producto ", valuesNew);
   };
 
   function handelChangueValues() {
@@ -246,9 +203,6 @@ export default function EditProducts() {
       categories: [],
       bestSellers: false,
     });
-    // setTimeout(function () {
-    //   window.location.reload(true);
-    // }, 2000);
   }
 
   if (state) {
@@ -301,8 +255,12 @@ export default function EditProducts() {
             <div>
               <label htmlFor="">Talla</label>
               <select onChange={(e) => handelSizes(e)}>
-                {sizess.map((x) => {
-                  return <option value={x}>{x}</option>;
+                {sizess.map((x, i) => {
+                  return (
+                    <option key={i} value={x}>
+                      {x}
+                    </option>
+                  );
                 })}
               </select>
               <div>
@@ -373,29 +331,23 @@ export default function EditProducts() {
               </select>
             </div>
             <div>
-              <label htmlFor="">Catrogrias:</label>
-              <select onChange={(e) => handelCateogoties(e)}>
-                {cargaCategories &&
-                  cargaCategories.map((elemento, index) => {
-                    return (
-                      <option key={index} value={elemento}>
-                        {elemento}
-                      </option>
-                    );
-                  })}
-              </select>
-              <div>
-                <ul>
-                  {valuesNew.categories.map((elemento) => (
-                    <li
-                      key={elemento}
-                      onClick={(e) => eliminarSelectCategory(e)}
-                    >
+              <label htmlFor="">Categorias:</label>
+              <select
+                defaultValue={"default"}
+                onChange={(e) => handelCateogoties(e)}
+              >
+                <option value="default" disabled>
+                  ELIGE UNA CATEGORIA:
+                </option>
+                {categorias.map((elemento, index) => {
+                  return (
+                    <option key={index} value={elemento}>
                       {elemento}
-                    </li>
-                  ))}
-                </ul>
-              </div>
+                    </option>
+                  );
+                })}
+              </select>
+              <div></div>
             </div>
           </form>
           <button

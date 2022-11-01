@@ -181,7 +181,7 @@ export function login(payload) {
       "https://velvet.up.railway.app/login",
       payload
     );
-    console.log("login respuesta", respuesta);
+    console.log("login respuesta", respuesta.data);
     if (respuesta.data.token) {
       localStorage.setItem("token", respuesta.data.token);
       // Para logout localStorage.removeItem("token");

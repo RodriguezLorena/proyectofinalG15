@@ -2,7 +2,14 @@ import React, { useState } from "react";
 import NavBar from "../NavBar/NavBar";
 import { NavLink } from "react-router-dom";
 import style from "./Sidebar.module.css";
-import { getUser, putUser, searchUserLocal } from "../../redux/action";
+import {
+  getUser,
+  putUser,
+  searchUserLocal,
+  putProduct,
+  getForName,
+  getProducts,
+} from "../../redux/action";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
@@ -11,8 +18,11 @@ import { FiMinusCircle } from "react-icons/fi";
 import { FiSearch } from "react-icons/fi";
 
 const Sidebar = () => {
+  const dispach = useDispatch();
   const user = useSelector((state) => state.user);
   const users = useSelector((state) => state.users);
+  const allProducts = useSelector((state) => state.productsAll);
+
   const [search, setSearch] = useState("");
   const dispatch = useDispatch();
 
@@ -23,15 +33,26 @@ const Sidebar = () => {
   function searchUser(e) {
     e.preventDefault();
     dispatch(searchUserLocal(search));
+    setSearch("");
+  }
+
+  function searchProducts(e) {
+    e.preventDefault();
+    dispach(getForName(search));
+    setSearch("");
   }
 
   function handelSearch(e) {
     setSearch(e.target.value);
   }
-  console.log(user.token);
-  useEffect(() => {
-    console.log("enviooo");
+  function recargar() {
     dispatch(getUser(user.token));
+    dispatch(getProducts());
+  }
+
+  useEffect(() => {
+    dispatch(getUser(user.token));
+    dispatch(getProducts());
   }, [dispatch]);
 
   const [toggleState, setToggleState] = useState(1);
@@ -39,6 +60,10 @@ const Sidebar = () => {
   const toggleTab = (index) => {
     setToggleState(index);
   };
+
+  function handelBan(id) {
+    dispach(putProduct({ value: false }, id));
+  }
 
   return (
     <div className="bg-white">
@@ -51,8 +76,22 @@ const Sidebar = () => {
         </div>
         <div className={style.tabs}>
           <ul>
-            <li onClick={() => toggleTab(1)}>Lista de usuarios</li>
-            <li onClick={() => toggleTab(2)}>Listas de compras</li>
+            <li
+              onClick={() => {
+                toggleTab(1);
+                recargar();
+              }}
+            >
+              Lista de usuarios
+            </li>
+            <li
+              onClick={() => {
+                toggleTab(2);
+                recargar();
+              }}
+            >
+              Listas de productos
+            </li>
           </ul>
         </div>
 
@@ -105,12 +144,57 @@ const Sidebar = () => {
             toggleState === 2 ? style.contentsInfo : style.contentsInfoNo
           }
         >
-          <h5>Lista de compras</h5>
-          <p>
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Deleniti
-            quo adipisci sequi vel modi pariatur? Modi, quam quidem dicta, quis
-            hic dolorem eos, aut perspiciatis rem nulla harum numquam ea.
-          </p>
+          <h5>Lista de productos</h5>
+
+          <form
+            action=""
+            onSubmit={(e) => searchProducts(e)}
+            className={style.search}
+          >
+            <input
+              type="text"
+              placeholder="Buscar producto..."
+              value={search}
+              onChange={(e) => handelSearch(e)}
+              className={style.inputSearch}
+            />
+
+            <button type="submit" name="serach" className=" h-10">
+              <FiSearch size="30" />
+            </button>
+          </form>
+          {allProducts &&
+            allProducts.map((element) => {
+              return (
+                <div className={style.contentProducts}>
+                  <p>
+                    <b>Nombre de producto:</b> {element.name}
+                  </p>
+                  <p>
+                    <b>Imagen:</b>
+                    <img src={element.mainImage} alt="" />
+                  </p>
+                  <p>
+                    <b>Id:</b> {element.id}
+                  </p>
+                  <NavLink
+                    // className="bg-red-700 text-white  py-2 px-2 rounded-3xl rounded-3xl"
+                    onClick={() => handelBan(element.id)}
+                    className={style.butonsCards}
+                  >
+                    Deshabilitar
+                  </NavLink>
+
+                  <NavLink
+                    to={`/editproduct/${element.id}`}
+                    // className="bg-red-700 text-white py-2 px-2 rounded-3xl rounded-3xl"
+                    className={style.butonsCards}
+                  >
+                    Editar
+                  </NavLink>
+                </div>
+              );
+            })}
         </div>
       </div>
     </div>

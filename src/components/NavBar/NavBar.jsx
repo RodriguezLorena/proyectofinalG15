@@ -2,9 +2,12 @@ import React, { useState } from "react";
 import { FiSearch } from "react-icons/fi";
 import { IoPersonOutline } from "react-icons/io5";
 import { MdOutlineShoppingCart } from "react-icons/md";
+import { AiOutlineHeart } from "react-icons/ai";
 import { Dropdown } from "flowbite-react";
 import style from "./NavBar.module.css";
 import CartList from "../CartList/CartList";
+import FavoriteList from "../FavoriteList/FavoriteList";
+
 import Logo from "../../img/logoVelvet.png";
 import { getForName, login, creatAcount, clearUser } from "../../redux/action";
 import { useDispatch, useSelector } from "react-redux";
@@ -294,8 +297,8 @@ export default function NavBar({ home, products }) {
                       Crear cuenta
                     </button>
                     <div>
-                    <CreateAccountWithGoogle text={"Crear con Google"} />
-                  </div>
+                      <CreateAccountWithGoogle text={"Crear con Google"} />
+                    </div>
                   </div>
 
                   <div className="text-sm font-medium text-gray-500 dark:text-gray-300">
@@ -322,6 +325,19 @@ export default function NavBar({ home, products }) {
             >
               <Dropdown.Item>
                 <CartList />
+              </Dropdown.Item>
+            </Dropdown>
+          </div>
+
+          <div className={style.favoritos}>
+            <span className={style.contador}>0</span>
+            <Dropdown
+              label={<AiOutlineHeart size="30" />}
+              inline={true}
+              arrowIcon={false}
+            >
+              <Dropdown.Item>
+                <FavoriteList />
               </Dropdown.Item>
             </Dropdown>
           </div>
