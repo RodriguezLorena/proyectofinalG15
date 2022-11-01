@@ -273,10 +273,9 @@ const Formulario = () => {
 
     if (nuevoProduct.name.length > 50)
       validar.name = "NO PUEDE TENER MAS DE 50 CARACTERES";
-    if (nuevoProduct.name.length < 5)
-      validar.name = "NECESITA TENER UN MINIMO DE 5 CARACTERES";
+    if (nuevoProduct.name.length < 5) validar.name = "MINIMO DE 5 CARACTERES";
     if (sinEspacios.test(nuevoProduct.name[0]))
-      validar.name = "TIENE QUE PONER TEXTO VALIDO, LOS ESPACIOS NO SE VALEN";
+      validar.name = "TIENE QUE PONER TEXTO VALIDO";
     if (noContieneNumero.test(nuevoProduct.name))
       validar.name = "NO PUEDE CONTENER NUMEROS";
     if (productsAll.find((elemento) => elemento.name === nuevoProduct.name)) {
@@ -299,56 +298,63 @@ const Formulario = () => {
       validar.description = "NO PUEDE SER ESPACIOS EN BLANCO";
 
     if (Number(nuevoProduct.price) < 1)
-      validar.price = "TIENE QUE SER UN PRECIO MAYOR A $1 ";
+      validar.price = "REQUIERE PRECIO MAYOR A $1 ";
     if (Number(nuevoProduct.price) > 90000)
       validar.price = "NO PUEDE SER MAYOR A 150.000";
 
-    if (Number(nuevoProduct.stock) < 1)
-      validar.stock = "TIENE QUE SER UN VALOR MAYOR A 1 ";
+    if (Number(nuevoProduct.stock) < 1) validar.stock = "VALOR MAYOR A 1 ";
 
     return validar;
   };
 
   return (
-    <div>
+    <div className="bg-white">
       <NavBar />
+      <h2 className={style.title}>Cargar Producto</h2>
 
-      <div>
-        <h2 className={style.title}>Cargar Producto</h2>
-      </div>
       <div className={style.contenedor}>
-        <div className={style.cargaImg}>
-          <p>PRIMER PASO: cargar imagenes</p>
-          <div>
-            IMAGEN PRINCIPAL
-            <input name="imagen1" type="file" onChange={handleFiles} />
-            {loading ? (
-              <h3>Cargando...</h3>
-            ) : (
-              <img src={images} alt="img" style={{ width: "50px" }} />
-            )}
-            <button className={style.btnImg} onClick={handleAPI}>
-              SUBIR IMAGEN PRINCIPAL
-            </button>
-          </div>
+        <div>
+          <p className=" text-center">PRIMER PASO: cargar imagenes</p>
+          <div className={style.cargaImg}>
+            <div className={style.contentInputsImg}>
+              <h6>IMAGEN PRINCIPAL</h6>
+              <div className={style.inputsImg}>
+                <p>selecionar img</p>
+                <input name="imagen1" type="file" onChange={handleFiles} />
+              </div>
+              {loading ? (
+                <h3>Cargando...</h3>
+              ) : (
+                <img src={images} style={{ width: "50px" }} />
+              )}
+              <button className={style.btnImg} onClick={handleAPI}>
+                SUBIR IMAGEN PRINCIPAL
+              </button>
+            </div>
 
-          <div>
-            IMAGEN SECUNDARIA
-            <input
-              name="imagen"
-              type="file"
-              multiple
-              onChange={(e) => {
-                setImages(e.target.files);
-              }}
-            ></input>
-            <button className={style.btnImg} onClick={handleImagenes}>
-              SUBIR IMAGENES SECUNDARIAS
-            </button>
+            <div className={style.contentInputsImg}>
+              <h6>IMAGEN SECUNDARIA</h6>
+
+              <div className={style.inputsImg}>
+                <p>selecionar img</p>
+                <input
+                  name="imagen"
+                  type="file"
+                  multiple
+                  onChange={(e) => {
+                    setImages(e.target.files);
+                  }}
+                ></input>
+              </div>
+              <button className={style.btnImg} onClick={handleImagenes}>
+                SUBIR IMAGENES SECUNDARIAS
+              </button>
+            </div>
           </div>
         </div>
+
         <div className={style.cargaDatos}>
-          <p>SEGUNDO PASOS: cargar datos</p>
+          <p className="w-full ">SEGUNDO PASO: cargar datos</p>
           <form
             className={style.contenedorForm}
             onSubmit={manipuladorDeCreacion}
@@ -367,23 +373,6 @@ const Formulario = () => {
               </label>
               {validador.name ? (
                 <p className={style.validacion}>{validador.name}</p>
-              ) : (
-                <p className={style.validacion}> </p>
-              )}
-            </div>
-            <div className={style.form}>
-              <label>
-                DESCRIPCION:
-                <textarea
-                  type="text"
-                  name="description"
-                  value={nuevoProduct.description}
-                  placeholder="ESCRIBA UNA DESCRIPCION DEL PRODUCTO"
-                  onChange={(e) => manipuladorInput(e)}
-                />
-              </label>
-              {validador.description ? (
-                <p className={style.validacion}>{validador.description}</p>
               ) : (
                 <p className={style.validacion}> </p>
               )}
@@ -444,7 +433,7 @@ const Formulario = () => {
 
             <div className={style.form}>
               <label>
-                SELECCIONA UN TALLE:
+                TALLE:
                 <select
                   defaultValue={"default"}
                   onChange={(e) => manipuladorSelectSize(e)}
@@ -475,7 +464,7 @@ const Formulario = () => {
 
             <div className={style.form}>
               <label>
-                SELECCIONA UNA CATEGORIA:
+                CATEGORIA:
                 <select
                   defaultValue={"default"}
                   onChange={(e) => manipuladorSelectCategory(e)}
@@ -494,6 +483,23 @@ const Formulario = () => {
                 </select>
               </label>
             </div>
+            <div className={style.form}>
+              <label>
+                DESCRIPCION:
+                <textarea
+                  type="text"
+                  name="description"
+                  value={nuevoProduct.description}
+                  placeholder="Descrpcion de el producto"
+                  onChange={(e) => manipuladorInput(e)}
+                />
+              </label>
+              {validador.description ? (
+                <p className={style.validacion}>{validador.description}</p>
+              ) : (
+                <p className={style.validacion}> </p>
+              )}
+            </div>
             <div>
               <ul>
                 {nuevoProduct.category.map((elemento) => (
@@ -503,34 +509,35 @@ const Formulario = () => {
                 ))}
               </ul>
             </div>
+            <div className={style.contentCheckboxs}>
+              <div className={style.contentCheckbox}>
+                <label>
+                  VALUE:
+                  <input
+                    type="checkbox"
+                    name="value"
+                    checked={nuevoProduct.value}
+                    onChange={(e) => manipuladorCheckbox(e)}
+                  />
+                </label>
+              </div>
 
-            <div>
-              <label>
-                VALUE:
-                <input
-                  type="checkbox"
-                  name="value"
-                  checked={nuevoProduct.value}
-                  onChange={(e) => manipuladorCheckbox(e)}
-                />
-              </label>
-            </div>
-
-            <div>
-              <label>
-                MAS VENDIDOS:
-                <input
-                  type="checkbox"
-                  name="bestSeller"
-                  checked={nuevoProduct.bestSeller}
-                  onChange={(e) => manipuladorCheckbox(e)}
-                />
-              </label>
+              <div className={style.contentCheckbox}>
+                <label>
+                  MAS VENDIDOS:
+                  <input
+                    type="checkbox"
+                    name="bestSeller"
+                    checked={nuevoProduct.bestSeller}
+                    onChange={(e) => manipuladorCheckbox(e)}
+                  />
+                </label>
+              </div>
             </div>
 
             <div className={style.contentBtn}>
               <button
-                className={style.btnImg}
+                className={style.btnCrear}
                 onClick={(e) => {
                   manipuladorDeCreacion(e);
                 }}
@@ -545,7 +552,6 @@ const Formulario = () => {
         <div className={style.previsualizaciones}>
           <div className={style.content}>
             <MdOutlineShoppingCart className={style.carrito} size="40px" />
-
             <img src={nuevoProduct.mainImage} alt="" className={style.fondo} />
 
             <div className={style.contentInfo}>
@@ -565,8 +571,6 @@ const Formulario = () => {
           </div>
 
           <div className={style.contenedorDetalle}>
-            <h2>PREVISUALIZACION</h2>
-
             <div className={style.contentDetail}>
               <div className={style.contentImages}>
                 <div className={style.images}>

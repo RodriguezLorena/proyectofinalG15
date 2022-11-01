@@ -181,8 +181,17 @@ export function login(payload) {
       "https://velvet.up.railway.app/login",
       payload
     );
-    console.log(respuesta.data, "login respuestsa");
-    const users = await axios("https://velvet.up.railway.app/users");
+    console.log("login respuesta", respuesta);
+    if (respuesta.data.token) {
+      localStorage.setItem("token", respuesta.data.token);
+      // Para logout localStorage.removeItem("token");
+    }
+    const users = await axios("https://velvet.up.railway.app/users", {
+      headers: {
+        authorization: `Bearer ${localStorage.getItem("token")}`,
+      },
+    });
+    console.log("users con auth", users.data);
     const user = users.data.filter(
       (element) => element.id === respuesta.data.id
     );
@@ -236,6 +245,12 @@ export function clearUser(payload) {
 
 //---------------------Usuarios---------------------//
 
+export const searchUserLocal = (name) => {
+  return {
+    type: "SEARCH_USER_FOR_NAME",
+    payload: name,
+  };
+};
 export const putUser = (id, payload) => {
   return async (dispatch) => {
     console.log("tendria que ser los input", payload);
@@ -251,9 +266,11 @@ export const putUser = (id, payload) => {
   };
 };
 
-export const getUser = () => {
+export const getUser = (payload) => {
   return async (dispatch) => {
-    let json = await axios.get("https://velvet.up.railway.app/users");
+    let json = await axios.get("https://velvet.up.railway.app/users", {
+      headers: { authorization: payload },
+    });
     return dispatch({
       type: CONSTANTES.GET_USER,
       payload: json.data,

@@ -10,8 +10,7 @@ const CreateAccountAndLoginWithGoogle = ({ text }) => {
   const onSuccess = (res) => {
     console.log("Login Success: currentUser:", res.profileObj);
     // Obtenemos el email, el name y el id de google
-    const { email, givenName, familyName, googleId, imageUrl
-    } = res.profileObj;
+    const { email, givenName, familyName, googleId, imageUrl } = res.profileObj;
     // Creamos un objeto con los datos que necesitamos
     const data = {
       userName: givenName + " " + familyName,
