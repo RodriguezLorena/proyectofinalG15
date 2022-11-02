@@ -11,6 +11,7 @@
     "aos": "^2.3.4",
     "flowbite": "^1.5.3",
     "flowbite-react": "^0.2.0",
+    "gapi-script": "^1.2.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-icons": "^4.6.0",
@@ -23,9 +24,7 @@
     "redux-thunk": "^2.3.0",
     "styled-components": "^5.3.6",
     "sweetalert": "^2.1.2",
-    "web-vitals": "^2.1.4",
-    "gapi-script": "^1.2.0",
-    "react-google-login": "^5.2.2"
+    "web-vitals": "^2.1.4"
   },
   "scripts": {
     "start": "react-scripts start",

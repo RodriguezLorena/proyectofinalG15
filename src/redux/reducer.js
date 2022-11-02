@@ -18,6 +18,8 @@ const initialState = {
   user: localStorage.getItem("user")
     ? JSON.parse(localStorage.getItem("user"))
     : {},
+
+  orders: [],
   users: [],
 
   favorite: localStorage.getItem("favorite")
@@ -310,6 +312,14 @@ export default function reducer(state = initialState, { payload, type }) {
         ...state,
         user: a[0],
       };
+
+    //------------ORDERS-----------------
+    case CONSTANTES.GET_ODERS:
+      return {
+        ...state,
+        orders: payload,
+      };
+
     default:
       return { ...state };
   }
