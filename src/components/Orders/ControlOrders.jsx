@@ -34,12 +34,12 @@ export default function ControlOrders() {
     async function changeStatus(e) {
         e.preventDefault()
 
-        const cambiar = await axios.put(`http://localhost:3001/order/${order_id}`, {
+        const cambiar = await axios.put(`https://velvet.up.railway.app/order/${order_id}`, {
             status: "created"
         })
         console.log(cambiar);
 
-        const mandaremail = await axios.post(`http://localhost:3001/order/sendingEmail`, {
+        const mandaremail = await axios.post(`https://velvet.up.railway.app/order/sendingEmail`, {
             firstName: obj.firstName,
             lastName: obj.lastName,
             email: obj.email,   //cambiar aca por el que tiene el user en localstorage

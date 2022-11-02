@@ -20,6 +20,7 @@ export default function Order() {
     const dataUser = useSelector((state) => state.user);
     console.log(dataUser);
 
+
     //recibe el link de mp 
     const [pago, setPago] = useState('');
 
@@ -53,7 +54,7 @@ export default function Order() {
     }
     console.log(orderData);
     async function handlePay(e) {
-        const mp = await axios.post(`http://localhost:3001/payment`, orderData)
+        const mp = await axios.post(`https://velvet.up.railway.app/payment`, orderData)
         console.log(mp);
         console.log(mp.data);
         setPago(mp.data)
@@ -77,11 +78,14 @@ export default function Order() {
     }
 
     console.log(input);
+    const user_id = dataUser.id;
 
     async function handleUpdate(e) {
-        let a = "217b2537-b8aa-4dea-89b1-a7f095c0e700";
+
+        // let a = "217b2537-b8aa-4dea-89b1-a7f095c0e700";
+
         e.preventDefault()
-        const crearorder = await axios.post(`http://localhost:3001/users/cart/${a}`, {
+        const crearorder = await axios.post(`https://velvet.up.railway.app/users/cart/${user_id}`, {
             firstName: input.firstName,
             lastName: input.lastName,
             email: input.email,   //cambiar aca por el que tiene el user en localstorage
@@ -98,7 +102,7 @@ export default function Order() {
         console.log(crearorder, 'esta es la orden')
 
 
-        const mandaremail = await axios.post(`http://localhost:3001/order/sendingEmail`, {
+        const mandaremail = await axios.post(`https://velvet.up.railway.app/order/sendingEmail`, {
             firstName: input.firstName,
             lastName: input.lastName,
             email: input.email,   //cambiar aca por el que tiene el user en localstorage
@@ -158,6 +162,7 @@ export default function Order() {
 
                     <div>
                         <button type="submit" onClick={e => handlePay(e)} >Metodo de Pago</button>
+                        
                         {
                             cambiar ?
                                 <button className={style.botonMP} type="button" onClick={e => Redirecionar(e)}>PAGAR</button> :
