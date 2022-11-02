@@ -11,10 +11,15 @@ import Review from "./components/Review/Review";
 import Reviews from "./components/Review/Reviews";
 import CreateProduct from "./components/createProduct/createProduct";
 import Verifico from "./Verification/Verification";
-import Sidebar from "./components/Sidebar/sidebar";
+import Sidebar from "./components/Sidebar/Sidebar";
 import EditProducts from "./components/EditProducts/EditProducts";
+
 import Order from "./components/Orders/Order";
 import ControlOrders from "./components/Orders/ControlOrders";
+
+// import Error401 from "./components/Error401/Error401";
+
+
 function App() {
   return (
     <div className="App">
@@ -33,6 +38,7 @@ function App() {
           element={<CreateProduct></CreateProduct>}
         />
         <Route path="/user/:id" element={<PutUser />} />
+        {/* <Route path="/error" element={<Error401 />} /> */}
         <Route path="/admin" element={<Sidebar />} />
         <Route path="/editProduct/:id" element={<EditProducts />} />
 

@@ -24,6 +24,19 @@ export default function Card({ name, image, price, id, sizes, categories }) {
     });
   };
 
+  const addFavorite = (id) => {
+    console.log(id, "holaa");
+
+    swal({
+      title: "Producto agregado a favoritos exitosamente",
+      icon: "success",
+      button: "Aceptar",
+      className: "swal-modal",
+      className: "swal-overlay",
+      className: "swal-title",
+    });
+  };
+
   function handelBan() {
     dispach(putProduct({ value: false }, id));
   }
@@ -48,7 +61,11 @@ export default function Card({ name, image, price, id, sizes, categories }) {
       <div className={style.contentInfo}>
         <div className={style.fondoRotado}></div>
         <div className={style.contnetMeGusta}>
-          <AiFillHeart className={style.meGusta} size="30px" />
+          <AiFillHeart
+            className={style.meGusta}
+            size="30px"
+            onClick={() => addFavorite(id)}
+          />
         </div>
         <NavLink to={`/product/${id}`} className={style.link}>
           <h5>{name}</h5>
@@ -75,7 +92,7 @@ export default function Card({ name, image, price, id, sizes, categories }) {
             className="bg-emerald-300 py-2 px-2 rounded-3xl rounded-3xl"
             onClick={() => handelBan()}
           >
-            Banear
+            Deshabilitar
           </NavLink>
         </div>
       ) : null}

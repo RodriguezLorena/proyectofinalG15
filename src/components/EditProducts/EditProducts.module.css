@@ -1,9 +1,8 @@
 .content {
-  height: 100vh;
+  min-height: 100vh;
   display: flex;
   justify-content: space-evenly;
-  align-items: center;
-  margin-bottom: 10rem;
+  padding-bottom: 5rem;
 }
 
 .card {
@@ -11,8 +10,17 @@
   width: max-content;
   display: flex;
   width: 30%;
-  margin-top: 10rem;
   flex-wrap: wrap;
+  background-color: #fff;
+  padding: 1rem;
+  border-radius: 30px;
+  box-shadow: 2px 2px 10px rgb(0, 0, 0, 0.5);
+}
+
+.card h5 {
+  font-size: 1.5rem;
+  border-bottom: 1px solid #999;
+  margin-bottom: 1rem;
 }
 
 .card img {
@@ -30,13 +38,12 @@
   padding: 0.5rem 1rem;
 }
 
-.card h5 {
-  font-size: 1.5rem;
-  border-bottom: 1px solid #999;
-}
-
 .productModifi {
   width: 42%;
+  height: max-content;
+  background-color: #fff;
+  border-radius: 30px;
+  box-shadow: 2px 2px 10px rgb(0, 0, 0, 0.5);
 }
 
 .productModifi h5 {
@@ -61,7 +68,22 @@
 .productModifi div {
   display: flex;
   flex-direction: column;
-  margin: 0.5rem 1rem;
+  margin: 0.1rem 1rem;
+}
+
+.productModifi div p {
+  width: max-content;
+  font-size: 0.7rem;
+  color: red;
+}
+
+.productModifi div ul {
+  display: flex;
+}
+
+.productModifi div ul li {
+  margin-right: 5px;
+  cursor: pointer;
 }
 
 .productModifi input {
@@ -80,7 +102,8 @@
   padding: 0.5rem 1rem;
   color: #fff;
   border-radius: 40px;
-  margin: 1rem;
+  width: 70%;
+  margin: 1rem 5rem;
   transition: all 0.5s ease;
 }
 
