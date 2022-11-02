@@ -1,6 +1,7 @@
 .content {
   display: flex;
   flex-wrap: wrap;
+  justify-content: center;
   background-color: #fff;
   padding-bottom: 4rem;
 }
@@ -9,6 +10,10 @@
   display: flex;
   justify-content: center;
   width: 100%;
+}
+
+.confirmarEmail {
+  margin-top: 1rem;
 }
 
 .content form {
@@ -69,7 +74,9 @@
 }
 
 .carrito {
-  margin: 5rem;
+  box-shadow: 1px 2px 4px rgba(0, 0, 0, 0.5);
+  border-radius: 20px;
+  padding: 1rem 0;
   width: 600px;
   height: max-content;
   text-align: center;
@@ -79,15 +86,54 @@
 }
 
 .carrito h5 {
-  margin-left: 3rem;
   font-size: 2.5rem;
   border-bottom: 1px solid #ea047e;
   width: max-content;
 }
+.carrito h6 {
+  font-size: 2rem;
+  margin-top: 1rem;
+  border-radius: 40px;
+  padding: 0 1rem;
+  border: 1px solid #ddd;
+}
+
 .viewAll {
   border-radius: 40px;
   padding: 0.6rem 1rem;
   border: 1px solid #999;
   width: max-content;
   margin-top: 2rem;
+}
+
+.contentCarrFav {
+  width: 100%;
+  gap: 5rem;
+  display: flex;
+  justify-content: center;
+}
+
+.favoritos {
+  box-shadow: 1px 2px 4px rgba(0, 0, 0, 0.5);
+  border-radius: 20px;
+  padding: 1rem 0;
+  width: 600px;
+  height: max-content;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.favoritos h5 {
+  font-size: 2.5rem;
+  border-bottom: 1px solid #ea047e;
+  width: max-content;
+}
+.favoritos h6 {
+  font-size: 2rem;
+  margin-top: 1rem;
+  border-radius: 40px;
+  padding: 0 1rem;
+  border: 1px solid #ddd;
 }

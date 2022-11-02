@@ -181,8 +181,17 @@ export function login(payload) {
       "https://velvet.up.railway.app/login",
       payload
     );
-    console.log(respuesta.data, "login respuestsa");
-    const users = await axios("https://velvet.up.railway.app/users");
+    console.log("login respuesta", respuesta.data);
+    if (respuesta.data.token) {
+      localStorage.setItem("token", respuesta.data.token);
+      // Para logout localStorage.removeItem("token");
+    }
+    const users = await axios("https://velvet.up.railway.app/users", {
+      headers: {
+        authorization: `Bearer ${localStorage.getItem("token")}`,
+      },
+    });
+    console.log("users con auth", users.data);
     const user = users.data.filter(
       (element) => element.id === respuesta.data.id
     );
@@ -194,6 +203,8 @@ export function login(payload) {
       });
     }
     if (user[0].role == "admin") {
+      console.log(user[0], "users admin");
+      user[0].token = respuesta.data.token;
       swal({
         title: "Bienvenido ADMIN",
         icon: "success",
@@ -214,7 +225,18 @@ export function creatAcount(payload) {
       "https://velvet.up.railway.app/users",
       payload
     );
-    const users = await axios("https://velvet.up.railway.app/users");
+
+    console.log(respuesta, "ress create");
+    if (respuesta.data == "email ya registrado")
+      return swal({
+        title: "Email ya registrado",
+        icon: "error",
+      });
+    const users = await axios("https://velvet.up.railway.app/users", {
+      headers: {
+        authorization: `Bearer ${localStorage.getItem("token")}`,
+      },
+    });
     const user = users.data.filter(
       (element) => element.userName === payload.userName
     );
@@ -236,6 +258,12 @@ export function clearUser(payload) {
 
 //---------------------Usuarios---------------------//
 
+export const searchUserLocal = (name) => {
+  return {
+    type: "SEARCH_USER_FOR_NAME",
+    payload: name,
+  };
+};
 export const putUser = (id, payload) => {
   return async (dispatch) => {
     console.log("tendria que ser los input", payload);
@@ -251,9 +279,11 @@ export const putUser = (id, payload) => {
   };
 };
 
-export const getUser = () => {
+export const getUser = (payload) => {
   return async (dispatch) => {
-    let json = await axios.get("https://velvet.up.railway.app/users");
+    let json = await axios.get("https://velvet.up.railway.app/users", {
+      headers: { authorization: payload },
+    });
     return dispatch({
       type: CONSTANTES.GET_USER,
       payload: json.data,

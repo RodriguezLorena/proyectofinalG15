@@ -103,3 +103,27 @@
   color: #ea047e;
   cursor: pointer;
 }
+
+.favoritos {
+  display: flex;
+  cursor: pointer;
+  justify-content: end;
+  margin-left: 2rem;
+}
+
+.favoritos span {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-weight: bold;
+  font-size: 1.2rem;
+  background-color: #ea047e;
+  width: 1.5rem;
+  height: 1.5rem;
+  border-radius: 50%;
+  text-align: center;
+  position: relative;
+  top: 0.7rem;
+  left: 1rem;
+  color: #fff;
+}
