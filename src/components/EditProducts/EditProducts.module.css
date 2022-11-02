@@ -14,7 +14,7 @@
   background-color: #fff;
   padding: 1rem;
   border-radius: 30px;
-  box-shadow: 2px 2px 10px rgb(0, 0, 0, 0.5);
+  box-shadow: 0 0 15px #ddd;
 }
 
 .card h5 {
@@ -43,7 +43,7 @@
   height: max-content;
   background-color: #fff;
   border-radius: 30px;
-  box-shadow: 2px 2px 10px rgb(0, 0, 0, 0.5);
+  box-shadow: 0 0 15px #ddd;
 }
 
 .productModifi h5 {

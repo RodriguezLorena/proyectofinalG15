@@ -15,6 +15,7 @@ import NavBar from "../NavBar/NavBar";
 import { addToCart } from "../../redux/action";
 import Review from "../Review/Review";
 import Reviews from "../Review/Reviews";
+import { Hearts } from "react-loading-icons";
 
 export default function ProductDetail() {
   const dispatch = useDispatch();
@@ -49,7 +50,16 @@ export default function ProductDetail() {
   //   (element) => element.category == IdProduct[0].category
   // );
   if (state) {
-    return <div>Cargando...</div>;
+    return (
+      <div className={style.cargando}>
+        <div>
+          <Hearts fill="#ea047e" stroke="#ea047e" />
+        </div>
+        <div>
+          <p>Cargando...</p>
+        </div>
+      </div>
+    );
   }
 
   return (
@@ -104,14 +114,20 @@ export default function ProductDetail() {
             <AiOutlineHeart className={style.like} size="30px" />
           </div>
           <h2 className={style.title}> {IdProduct[0].name}</h2>
-          <span className={style.price}> $USD {IdProduct[0].price}</span>
           {/* <h3 className={style.stock}>Stock: {IdProduct[0].stock}</h3> */}
           <h3 className={style.description}>{IdProduct[0].description}</h3>
-          <h3>
+          <div className={style.sizes}>
+            <h3>Sizes:</h3>
+            {IdProduct[0].sizes.map((x) => (
+              <p>{x}</p>
+            ))}
+          </div>
+          {/* <h3>
             <b>Category:</b> {IdProduct[0].categories.map((e) => e.name)}
-          </h3>
+          </h3> */}
           <div className={style.buyCarrito}>
-            <div>
+            <span className={style.price}> $USD {IdProduct[0].price}</span>
+            <div className={style.contentbuy}>
               <button
                 className={IdUser.role == "inactive" ? style.buyNo : style.buy}
               >
@@ -120,13 +136,12 @@ export default function ProductDetail() {
               {IdUser.role == "inactive" ? (
                 <p>Debes confirmar tu correo para comprar</p>
               ) : null}
+              <MdOutlineShoppingCart
+                className={style.carrito}
+                size="30px"
+                onClick={() => addCart(id)}
+              />
             </div>
-
-            <MdOutlineShoppingCart
-              className={style.carrito}
-              size="40px"
-              onClick={() => addCart(id)}
-            />
           </div>
         </div>
       </div>

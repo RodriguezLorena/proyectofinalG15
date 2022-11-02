@@ -127,3 +127,10 @@
   left: 1rem;
   color: #fff;
 }
+
+.order {
+  display: flex;
+  cursor: pointer;
+  justify-content: end;
+  margin-left: 2rem;
+}

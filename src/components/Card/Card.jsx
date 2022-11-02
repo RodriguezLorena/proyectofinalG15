@@ -3,13 +3,14 @@ import style from "./Card.module.css";
 import { NavLink } from "react-router-dom";
 import { MdOutlineShoppingCart } from "react-icons/md";
 import { AiFillHeart } from "react-icons/ai";
-import { addToCart, putProduct } from "../../redux/action";
+import { addToCart, putProduct, addToFavorite } from "../../redux/action";
 import { useDispatch, useSelector } from "react-redux";
 import swal from "sweetalert";
 
 export default function Card({ name, image, price, id, sizes, categories }) {
   const dispach = useDispatch();
   const user = useSelector((state) => state.user);
+  const favorite = useSelector((state) => state.favorite);
 
   const addCart = (id) => {
     console.log(id);
@@ -26,7 +27,14 @@ export default function Card({ name, image, price, id, sizes, categories }) {
 
   const addFavorite = (id) => {
     console.log(id, "holaa");
-
+    const compro = favorite.filter((element) => element.id === id);
+    if (compro.length > 0) {
+      return swal({
+        title: "Este producto ya se encuentra añadido",
+        icon: "error",
+      });
+    }
+    dispach(addToFavorite(id));
     swal({
       title: "Producto agregado a favoritos exitosamente",
       icon: "success",

@@ -127,7 +127,30 @@ export function clearCart() {
     type: CONSTANTES.CLEAR_CART,
   };
 }
+//-------------------------//
 
+//----------favorito-----------//
+
+export function addToFavorite(payload) {
+  return {
+    type: "ADD_TO_FAVORITE",
+    payload,
+  };
+}
+export function removeOneProductFavorite(id) {
+  return {
+    type: "DELETE_ONE_FAVORITE",
+    payload: id,
+  };
+}
+export function removeAllFavorite(id) {
+  return {
+    type: "DELETE_ALL_FAVORITE",
+    payload: id,
+  };
+}
+
+//------------------------------//
 export function desmontarDetalle() {
   return {
     type: CONSTANTES.DESMONTAR_DETALLE,
@@ -177,45 +200,55 @@ export function postImages() {
 export function login(payload) {
   console.log(payload, "loginnnnn");
   return async function (dispatch) {
-    const respuesta = await axios.post(
+    const user = await axios.post(
       "https://velvet.up.railway.app/login",
       payload
     );
-    console.log("login respuesta", respuesta.data);
-    if (respuesta.data.token) {
-      localStorage.setItem("token", respuesta.data.token);
+    console.log(user, "hola");
+    // console.log("login respuesta", respuesta.data);
+    if (user.data[1]) {
+      localStorage.setItem("token", user.data);
       // Para logout localStorage.removeItem("token");
     }
-    const users = await axios("https://velvet.up.railway.app/users", {
-      headers: {
-        authorization: `Bearer ${localStorage.getItem("token")}`,
-      },
-    });
-    console.log("users con auth", users.data);
-    const user = users.data.filter(
-      (element) => element.id === respuesta.data.id
-    );
-    console.log(respuesta.data, "respuesta");
-    if (respuesta.data.hasOwnProperty("menssage")) {
+
+    if (user.data.hasOwnProperty("menssage")) {
       return swal({
         title: "Usuario y/o password son incorrectos",
         icon: "error",
       });
     }
-    if (user[0].role == "admin") {
-      console.log(user[0], "users admin");
-      user[0].token = respuesta.data.token;
+    if (user.data[0].role == "admin") {
+      // console.log(user[0], "users admin");
+
       swal({
         title: "Bienvenido ADMIN",
         icon: "success",
       });
-      return dispatch({ type: "LOGIN", payload: user[0] });
+      return dispatch({
+        type: "LOGIN",
+        payload: {
+          role: user.data[0].role,
+          email: user.data[0].email,
+          id: user.data[0].id,
+          userName: user.data[0].userName,
+          Token: user.data[1].token,
+        },
+      });
     }
     swal({
       title: "Ingreasaste correctamente",
       icon: "success",
     });
-    return dispatch({ type: "LOGIN", payload: user[0] });
+    return dispatch({
+      type: "LOGIN",
+      payload: {
+        role: user.data[0].role,
+        email: user.data[0].email,
+        id: user.data[0].id,
+        userName: user.data[0].userName,
+        Token: user.data[1].token,
+      },
+    });
   };
 }
 export function creatAcount(payload) {
@@ -255,7 +288,6 @@ export function clearUser(payload) {
   });
   return { type: "CLEAR_USER", payload };
 }
-
 //---------------------Usuarios---------------------//
 
 export const searchUserLocal = (name) => {

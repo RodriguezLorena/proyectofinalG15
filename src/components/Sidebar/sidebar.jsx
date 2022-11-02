@@ -65,6 +65,8 @@ const Sidebar = () => {
     dispach(putProduct({ value: false }, id));
   }
 
+  console.log(users, "imagen");
+
   return (
     <div className="bg-white">
       <NavBar />
@@ -91,6 +93,14 @@ const Sidebar = () => {
               }}
             >
               Listas de productos
+            </li>
+            <li
+              onClick={() => {
+                toggleTab(3);
+                recargar();
+              }}
+            >
+              Ordendes de compra
             </li>
           </ul>
         </div>
@@ -121,7 +131,13 @@ const Sidebar = () => {
           {users &&
             users.map((element) => {
               return (
-                <div className={style.contentUsers}>
+                <div
+                  className={
+                    element.role === "inactive"
+                      ? style.contentUsersB
+                      : style.contentUsers
+                  }
+                >
                   <p>
                     <b>Nombre de usuario:</b> {element.userName}
                   </p>
@@ -195,6 +211,50 @@ const Sidebar = () => {
                 </div>
               );
             })}
+        </div>
+        <div
+          className={
+            toggleState === 3 ? style.contentsOrder : style.contentsOrderNo
+          }
+        >
+          <h5>Ordenes de compra</h5>
+          {/* <form
+            action=""
+            onSubmit={(e) => searchUser(e)}
+            className={style.search}
+          >
+            <input
+              type="text"
+              placeholder="Buscar por nombre de usuario..."
+              value={search}
+              onChange={(e) => handelSearch(e)}
+              className={style.inputSearch}
+            />
+
+            <button type="submit" name="serach" className=" h-10">
+              <FiSearch size="30" />
+            </button>
+          </form> */}
+          {/* {users &&
+            users.map((element) => {
+              return (
+                <div className={style.contentUsers}>
+                  <p>
+                    <b>Nombre de usuario:</b> {element.userName}
+                  </p>
+                  <p>
+                    <b>Id:</b> {element.id}
+                  </p>
+                  <p>
+                    <b>Email:</b> {element.email}
+                  </p>
+                  <p>
+                    <b>Estado:</b> {element.role}
+                  </p>
+                  <button onClick={() => handelBan(element.id)}>Banear</button>
+                </div>
+              );
+            })} */}
         </div>
       </div>
     </div>

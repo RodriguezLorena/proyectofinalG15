@@ -8,6 +8,7 @@ import { useDispatch } from "react-redux";
 import NavBar from "../NavBar/NavBar";
 import { IoReload } from "react-icons/io5";
 import swal from "sweetalert";
+import axios from "axios";
 
 export default function EditProducts() {
   const dispatch = useDispatch();
@@ -96,6 +97,25 @@ export default function EditProducts() {
 
     return validar;
   };
+  //----------------manipuladores de imagen----------------
+
+  const [mainImageEdit, setMainImageEdit] = useState("");
+  valuesNew.mainImage = mainImageEdit;
+
+  console.log(valuesNew.mainImage, "este es el body");
+
+  const handleFiles = (e) => {
+    setMainImageEdit(e.target.files[0]);
+  };
+
+  const handleAPI = async () => {
+    const url = "https://velvet.up.railway.app/product/image";
+    let formData = new FormData();
+    formData.append("imagen1", mainImageEdit);
+    const pedidoCloudUno = await axios.post(url, formData);
+    setMainImageEdit(pedidoCloudUno.data);
+  };
+
   const handelEditProduct = (e) => {
     e.preventDefault();
     setValuesNew({
@@ -166,13 +186,6 @@ export default function EditProducts() {
       })
     );
   };
-
-  function handelImages(e) {
-    setValuesNew({
-      ...valuesNew,
-      images: [...valuesNew.images, e.target.value],
-    });
-  }
 
   const categorias = ["mujer", "hombre", "varios", "niños"];
   const handelCateogoties = (e) => {
@@ -350,6 +363,14 @@ export default function EditProducts() {
               <div></div>
             </div>
           </form>
+          <div>
+            <input
+              type="file"
+              name="imagen1"
+              onChange={(e) => handleFiles(e)}
+            ></input>
+            <button onClick={handleAPI}>CAMBIAR IMAGEN DE PERFIL</button>
+          </div>
           <button
             onClick={() => handelChangueValues()}
             className={style.butonSaveChangue}

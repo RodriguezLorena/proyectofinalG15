@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { FiSearch } from "react-icons/fi";
 import { IoPersonOutline } from "react-icons/io5";
-import { MdOutlineShoppingCart } from "react-icons/md";
+import { MdOutlineShoppingCart, MdOutlineShoppingBag } from "react-icons/md";
 import { AiOutlineHeart } from "react-icons/ai";
 import { Dropdown } from "flowbite-react";
 import style from "./NavBar.module.css";
@@ -21,6 +21,7 @@ import Admin from "../Admin/Admin";
 import CreateAcountWithGoogle from "../Login/CreateAccountAndLoginWithGoogle";
 import { gapi } from "gapi-script";
 import CreateAccountWithGoogle from "../Login/CreateAccountAndLoginWithGoogle";
+import OrderList from "../OrderList/OrderList";
 const clientId = process.env.REACT_APP_GOOGLE_CLIENT_ID;
 
 export default function NavBar({ home, products }) {
@@ -28,6 +29,7 @@ export default function NavBar({ home, products }) {
   const navegation = useNavigate();
   const [search, setSearch] = useState("");
   const cantidadCarrito = useSelector((state) => state.cartTotalItems);
+  const favoriteTotalItems = useSelector((state) => state.favoriteTotalItems);
   const user = useSelector((state) => state.user);
 
   function handelSearch(e) {
@@ -330,7 +332,7 @@ export default function NavBar({ home, products }) {
           </div>
 
           <div className={style.favoritos}>
-            <span className={style.contador}>0</span>
+            <span className={style.contador}>{favoriteTotalItems}</span>
             <Dropdown
               label={<AiOutlineHeart size="30" />}
               inline={true}
@@ -338,6 +340,17 @@ export default function NavBar({ home, products }) {
             >
               <Dropdown.Item>
                 <FavoriteList />
+              </Dropdown.Item>
+            </Dropdown>
+          </div>
+          <div className={style.order}>
+            <Dropdown
+              label={<MdOutlineShoppingBag size="30" />}
+              inline={true}
+              arrowIcon={false}
+            >
+              <Dropdown.Item>
+                <OrderList />
               </Dropdown.Item>
             </Dropdown>
           </div>

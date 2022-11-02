@@ -1,5 +1,5 @@
 import React from "react";
-import { GoogleLogin } from "react-google-login";
+import { GoogleLogin } from "@leecheuk/react-google-login";
 import { creatAcount, login } from "../../redux/action";
 import { useDispatch } from "react-redux";
 

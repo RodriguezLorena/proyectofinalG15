@@ -1,23 +1,27 @@
 import React from "react";
-import style from "./FavoriteList.modeule.css";
+import style from "./FavoriteList.module.css";
 import { NavLink } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { clearCart, removeOneProduct, removeAll } from "../../redux/action";
+import {
+  clearCart,
+  removeOneProductFavorite,
+  removeAllFavorite,
+} from "../../redux/action";
 import swal from "sweetalert";
 import FavoriteCart from "../FavoriteCard/FavoriteCart";
 
 export default function CartList() {
-  const cartState = useSelector((state) => state.cart);
-  const total = useSelector((state) => state.cartTotal);
+  const favorite = useSelector((state) => state.favorite);
+  const favoriteTotal = useSelector((state) => state.favoriteTotal);
   const user = useSelector((state) => state.user);
   const dispach = useDispatch();
 
-  const deleteCart = (id, todos = false) => {
-    if (todos) {
-      dispach(removeAll(id));
+  const deleteFavorite = (id, favoriteTotal = false) => {
+    if (favoriteTotal) {
+      dispach(removeAllFavorite(id));
       swal("todos los productos eliminados");
     } else {
-      dispach(removeOneProduct(id));
+      dispach(removeOneProductFavorite(id));
       swal({
         title: "Producto eliminado correctamente",
         icon: "success",
@@ -26,15 +30,24 @@ export default function CartList() {
       });
     }
   };
+  console.log(favorite, "favorite");
 
   return (
-    <div className={style.favoriteList}>
-      <FavoriteCart />
-      <FavoriteCart />
-      <div className={style.contentAll}>
-        <NavLink to={`/user/${user.id}`} className={style.viewAll}>
-          Mostrar todos
-        </NavLink>
+    <div className={style.list}>
+      {favorite.length < 1 ? (
+        <h6>Favoritos vacio</h6>
+      ) : (
+        favorite.map((ele) => (
+          <FavoriteCart data={ele} deleteFavorite={deleteFavorite} />
+        ))
+      )}
+
+      <div className={style.viewAll}>
+        {favorite.length < 1 || Object.entries(user).length === 0 ? null : (
+          <NavLink to={`/user/${user.id}`} className={style.viewAll}>
+            Mostrar todos
+          </NavLink>
+        )}
       </div>
     </div>
   );

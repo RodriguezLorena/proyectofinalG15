@@ -14,6 +14,7 @@
   color: #fff;
   height: max-content;
   margin: 1rem;
+  box-shadow: 0 0 15px #ddd;
 }
 .tabs {
   width: 100%;
@@ -82,10 +83,21 @@
   border-radius: 20px;
   padding: 1rem;
   margin: 1rem;
-  box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.5);
+  box-shadow: 0 0 15px #ddd;
 }
 
-.contentUsers button {
+.contentUsersB {
+  width: 400px;
+  height: max-content;
+  border-radius: 20px;
+  padding: 1rem;
+  margin: 1rem;
+  background-color: #ddd;
+  box-shadow: 0 0 15px #ddd;
+}
+
+.contentUsers button,
+.contentUsersB button {
   background-color: #d90429;
   padding: 0.5rem 1rem;
   margin-top: 1rem;
@@ -96,10 +108,11 @@
 
 .contentProducts {
   width: 400px;
+  height: max-content;
   border-radius: 20px;
   padding: 1rem;
   margin: 1rem;
-  box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.5);
+  box-shadow: 0 0 15px #ddd;
 }
 
 .contentProducts img {
@@ -115,4 +128,24 @@
   display: inline-block;
   width: max-content;
   margin: 1rem 1rem 0 0;
+}
+
+.contentsOrder {
+  border-radius: 40px;
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  width: 100%;
+  min-height: 100vh;
+}
+
+.contentsOrder h5 {
+  font-size: 2rem;
+}
+
+.contentsOrderNo {
+  visibility: hidden;
+  height: 20px;
+  position: absolute;
+  overflow: hidden;
 }
