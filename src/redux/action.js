@@ -259,12 +259,12 @@ export const getUser = () => {
     });
   };
 };
-export const Verify = (id,payload)=>{
+export const Verify = (id, payload) => {
   console.log(payload)
-  return async (dispatch)=>{
-    let json = await axios.put(`https://velvet.up.railway.app/verification/${id}`,payload);
+  return async (dispatch) => {
+    let json = await axios.put(`https://velvet.up.railway.app/verification/${id}`, payload);
     return dispatch({
-      type : "VERIFY",
+      type: "VERIFY",
       payload: json.data
     })
   }
@@ -275,3 +275,44 @@ export const getUserId = (id) => {
     payload: id,
   };
 };
+
+
+
+//-------------ORDERS--------------------
+
+export const changeStatus = (payload, order_id) => {
+
+  console.log(payload, "<--PAYLOAD", order_id, "<----NUMERO DE ORDEN");
+  return async (dispatch) => {
+    dispatch()
+    let cambiar = await axios.put(`http://localhost:3001/order/${order_id}`, { payload })
+    console.log(cambiar);
+    return dispatch()
+
+  }
+
+}
+
+export const getOrders = (payload) => {
+  return async (dispatch) => {
+
+    let traerPedidos = await axios.get(`http://localhost:3001/order`);
+    console.log(traerPedidos);
+
+    return dispatch({
+      type: CONSTANTES.GET_ODERS,
+      payload: traerPedidos.data
+    })
+  }
+}
+
+// export function getProducts() {
+//   return async function (dispatch) {
+//     try {
+//       const data = (await axios(datosdeploy)).data;
+//       return dispatch({ type: "GET_PRODUCTS", payload: data });
+//     } catch (error) {
+//       console.log(error, "error en la ruta principal");
+//     }
+//   };
+// }

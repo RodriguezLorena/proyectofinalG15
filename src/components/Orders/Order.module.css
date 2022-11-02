@@ -1,0 +1,29 @@
+.content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  border: solid black 1px;
+  margin: auto;
+  width: 50%;
+  padding: 10px;
+  margin-top: 2rem;
+}
+
+.tagFrom input {
+  display: block;
+}
+
+.botonMP {
+  background-color: blue;
+  color: #fff;
+  border-radius: 10px;
+  padding: 5px 20px 5px 20px;
+  margin: 0px;
+}
+
+.botonMP:hover {
+  /* Tus atributos CSS */
+  background-color: blue;
+
+}
