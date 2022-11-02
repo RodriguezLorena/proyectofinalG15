@@ -53,11 +53,13 @@ export default function NavBar({ home, products }) {
   const [valuesInputs, setValuesInputs] = useState({
     userName: "",
     password: "",
+    googleId: false,
   });
   const [valuesCreate, setValuesCreate] = useState({
     email: "",
     password: "",
     userName: "",
+    googleId: false,
   });
   // const [admin, setAdmin] = useState({ email: "", password : "" });
 

@@ -204,13 +204,120 @@ export function postImages() {
 //-------------LOGIN------------------//
 export function login(payload) {
   console.log(payload, "loginnnnn");
+  console.log(payload.googleId);
+  if (!payload.googleId) {
+    return async function (dispatch) {
+      const user = await axios.post(
+        "https://velvet.up.railway.app/login",
+        payload
+      );
+      console.log(user, "hola");
+      // console.log("login respuesta", respuesta.data);
+      if (user.data[1]) {
+        localStorage.setItem("token", user.data);
+        // Para logout localStorage.removeItem("token");
+      }
+
+      if (user.data.hasOwnProperty("menssage")) {
+        return swal({
+          title: "Usuario y/o password son incorrectos",
+          icon: "error",
+        });
+      }
+      if (user.data[0].role == "admin") {
+        // console.log(user[0], "users admin");
+
+        swal({
+          title: "Bienvenido ADMIN",
+          icon: "success",
+        });
+        return dispatch({
+          type: "LOGIN",
+          payload: {
+            role: user.data[0].role,
+            email: user.data[0].email,
+            id: user.data[0].id,
+            userName: user.data[0].userName,
+            Token: user.data[1].token,
+          },
+        });
+      }
+      swal({
+        title: "Ingreasaste correctamente",
+        icon: "success",
+      });
+      return dispatch({
+        type: "LOGIN",
+        payload: {
+          role: user.data[0].role,
+          email: user.data[0].email,
+          id: user.data[0].id,
+          userName: user.data[0].userName,
+          Token: user.data[1].token,
+        },
+      });
+    };
+  } else {
+    return async function (dispatch) {
+      const user = await axios.post(
+        "https://velvet.up.railway.app/users",
+        payload
+      );
+      if (user.data[1]) {
+        localStorage.setItem("token", user.data);
+        // Para logout localStorage.removeItem("token");
+      }
+
+      if (user.data.hasOwnProperty("menssage")) {
+        return swal({
+          title: "Usuario y/o password son incorrectos",
+          icon: "error",
+        });
+      }
+      if (user.data[0].role == "admin") {
+        // console.log(user[0], "users admin");
+
+        swal({
+          title: "Bienvenido ADMIN",
+          icon: "success",
+        });
+        return dispatch({
+          type: "LOGIN",
+          payload: {
+            role: user.data[0].role,
+            email: user.data[0].email,
+            id: user.data[0].id,
+            userName: user.data[0].userName,
+            Token: user.data[1].token,
+          },
+        });
+      }
+      swal({
+        title: "Ingreasaste correctamente",
+        icon: "success",
+      });
+      return dispatch({
+        type: "LOGIN",
+        payload: {
+          role: user.data[0].role,
+          email: user.data[0].email,
+          id: user.data[0].id,
+          userName: user.data[0].userName,
+          Token: user.data[1].token,
+        },
+      });
+    };
+  }
+}
+
+export function creatAcount(payload) {
+  console.log(payload, "creandoooo");
   return async function (dispatch) {
     const user = await axios.post(
-      "https://velvet.up.railway.app/login",
+      "https://velvet.up.railway.app/users",
       payload
     );
-    console.log(user, "hola");
-    // console.log("login respuesta", respuesta.data);
+
     if (user.data[1]) {
       localStorage.setItem("token", user.data);
       // Para logout localStorage.removeItem("token");
@@ -254,35 +361,6 @@ export function login(payload) {
         Token: user.data[1].token,
       },
     });
-  };
-}
-export function creatAcount(payload) {
-  console.log(payload, "creandoooo");
-  return async function (dispatch) {
-    const respuesta = await axios.post(
-      "https://velvet.up.railway.app/users",
-      payload
-    );
-
-    console.log(respuesta, "ress create");
-    if (respuesta.data == "email ya registrado")
-      return swal({
-        title: "Email ya registrado",
-        icon: "error",
-      });
-    const users = await axios("https://velvet.up.railway.app/users", {
-      headers: {
-        authorization: `Bearer ${localStorage.getItem("token")}`,
-      },
-    });
-    const user = users.data.filter(
-      (element) => element.userName === payload.userName
-    );
-    swal({
-      title: "Usuario crado correctamente",
-      icon: "success",
-    });
-    return dispatch({ type: "LOGIN", payload: user[0] });
   };
 }
 

@@ -16,6 +16,8 @@ const CreateAccountAndLoginWithGoogle = ({ text }) => {
       userName: givenName + " " + familyName,
       email,
       password: googleId,
+      googleId: true,
+      role: "active",
       //   password: googleId, // Esto no es bueno. Pero es lo que hay
     };
     // Llamamos a la action que nos permite crear un usuario si el text es "Crear cuenta"
