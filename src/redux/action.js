@@ -152,7 +152,7 @@ export function postProducts(payload) {
   console.log(payload, " payload de postProducts");
 
   return async function (dispatch) {
-    const postJson = await axios.post(`http://localhost:3001/product`, payload);
+    const postJson = await axios.post(`https://velvet.up.railway.app/product`, payload);
     return dispatch({
       type: CONSTANTES.POST_PRODUCT,
       payload: postJson,
@@ -166,7 +166,7 @@ export function postImages() {
   // console.log(payload, ' payload de post imagenes');
 
   return async function (dispatch) {
-    const postJson1 = await axios.post(`http://localhost:3001/product/images`);
+    const postJson1 = await axios.post(`https://velvet.up.railway.app/product/images`);
     return dispatch({
       type: CONSTANTES.POST_IMAGES,
     });
@@ -302,3 +302,44 @@ export const getUserId = (id) => {
     payload: id,
   };
 };
+
+
+
+//-------------ORDERS--------------------
+
+export const changeStatus = (payload, order_id) => {
+
+  console.log(payload, "<--PAYLOAD", order_id, "<----NUMERO DE ORDEN");
+  return async (dispatch) => {
+    dispatch()
+    let cambiar = await axios.put(`https://velvet.up.railway.app/order/${order_id}`, { payload })
+    console.log(cambiar);
+    return dispatch()
+
+  }
+
+}
+
+export const getOrders = (payload) => {
+  return async (dispatch) => {
+
+    let traerPedidos = await axios.get(`https://velvet.up.railway.app/order`);
+    console.log(traerPedidos);
+
+    return dispatch({
+      type: CONSTANTES.GET_ODERS,
+      payload: traerPedidos.data
+    })
+  }
+}
+
+// export function getProducts() {
+//   return async function (dispatch) {
+//     try {
+//       const data = (await axios(datosdeploy)).data;
+//       return dispatch({ type: "GET_PRODUCTS", payload: data });
+//     } catch (error) {
+//       console.log(error, "error en la ruta principal");
+//     }
+//   };
+// }

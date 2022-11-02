@@ -17,7 +17,10 @@ const initialState = {
   user: localStorage.getItem("user")
     ? JSON.parse(localStorage.getItem("user"))
     : {},
+
+  orders: [],
   users: [],
+
 };
 
 function setInLocalStorage(key, state) {
@@ -63,8 +66,8 @@ export default function reducer(state = initialState, { payload, type }) {
         payload === "all"
           ? info
           : info.filter((e) =>
-              e.categories.map((e) => e.name).includes(payload)
-            );
+            e.categories.map((e) => e.name).includes(payload)
+          );
       return {
         ...state,
         productsAll: dataC,
@@ -86,8 +89,8 @@ export default function reducer(state = initialState, { payload, type }) {
         productsAll: infoPrice3.length
           ? infoPrice3
           : infoPrice.length
-          ? infoPrice
-          : infoPrice2,
+            ? infoPrice
+            : infoPrice2,
       };
 
     case "FILTER_SIZE":
@@ -113,8 +116,8 @@ export default function reducer(state = initialState, { payload, type }) {
         productsAll: filtrado3.length
           ? filtrado3
           : filtrado.length
-          ? filtrado
-          : filtrado2,
+            ? filtrado
+            : filtrado2,
       };
 
     case "FILTER_TYPE":
@@ -159,11 +162,13 @@ export default function reducer(state = initialState, { payload, type }) {
 
       let newCart = itemExist
         ? state.cart.map((ele) =>
+
             itemExist.id === ele.id
               ? { ...ele, cantidad: controlStock(ele.cantidad + 1) }
               : ele
           )
         : [...state.cart, { ...product, cantidad: controlStock(1) }];
+
 
       return {
         ...state,
@@ -176,6 +181,8 @@ export default function reducer(state = initialState, { payload, type }) {
       };
     case CONSTANTES.DELETE_ONE_PRODUCT:
       const productExist = state.cart.find((ele) => ele.id === payload);
+
+
 
       if (productExist) {
         const newCart2 = state.cart.filter((ele) => ele.id === payload)[0];
@@ -270,6 +277,15 @@ export default function reducer(state = initialState, { payload, type }) {
         ...state,
         user: a[0],
       };
+
+    //------------ORDERS-----------------
+    case CONSTANTES.GET_ODERS:
+      return {
+        ...state,
+        orders: payload
+      };
+
+
     default:
       return { ...state };
   }
