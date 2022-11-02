@@ -145,7 +145,7 @@ export default function reducer(state = initialState, { payload, type }) {
         ...state,
         productCreado: payload,
       };
- 
+
     //--------------------------//
     case CONSTANTES.ADD_TO_CART:
       const product = state.productsAll.find((ele) => ele.id === payload);

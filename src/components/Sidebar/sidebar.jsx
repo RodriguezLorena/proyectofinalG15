@@ -13,8 +13,8 @@ import {
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
-import { findRenderedComponentWithType } from "react-dom/test-utils";
-import { FiMinusCircle } from "react-icons/fi";
+//import { findRenderedComponentWithType } from "react-dom/test-utils";
+// import { FiMinusCircle } from "react-icons/fi";
 import { FiSearch } from "react-icons/fi";
 
 const Sidebar = () => {
