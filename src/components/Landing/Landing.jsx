@@ -19,14 +19,32 @@ export default function Landing() {
   const productsBuy = productsAll.filter(
     (element) => element.bestSellers === true
   );
-  const [valueFilters, setValueFilters] = useState("");
 
-  function handelFinters() {
+  function handelFintersH() {
     navegation("/home");
     setTimeout(function () {
-      dispatch(filterByCategorys(valueFilters));
-    }, 500);
+      dispatch(filterByCategorys("hombre"));
+    }, 2000);
   }
+  function handelFintersM() {
+    navegation("/home");
+    setTimeout(function () {
+      dispatch(filterByCategorys("mujer"));
+    }, 2000);
+  }
+  function handelFintersN() {
+    navegation("/home");
+    setTimeout(function () {
+      dispatch(filterByCategorys("niños"));
+    }, 2000);
+  }
+  function handelFintersV() {
+    navegation("/home");
+    setTimeout(function () {
+      dispatch(filterByCategorys("varios"));
+    }, 2000);
+  }
+
   useEffect(() => {
     dispatch(getProducts());
   }, [dispatch]);
@@ -110,9 +128,8 @@ export default function Landing() {
             <div className="flex items-center justify-center">
               <div
                 className={style.categotiImportant}
-                onClick={() => {
-                  setValueFilters("hombre");
-                  handelFinters();
+                onClick={(e) => {
+                  handelFintersH(e);
                 }}
               >
                 <h4>Hombre</h4>
@@ -125,8 +142,7 @@ export default function Landing() {
                 <div
                   className={style.card}
                   onClick={() => {
-                    setValueFilters("mujer");
-                    handelFinters();
+                    handelFintersM();
                   }}
                 >
                   <h4>Mujer</h4>
@@ -138,8 +154,7 @@ export default function Landing() {
                 <div
                   className={style.card}
                   onClick={() => {
-                    setValueFilters("niños");
-                    handelFinters();
+                    handelFintersN();
                   }}
                 >
                   <h4>Niños</h4>
@@ -151,8 +166,7 @@ export default function Landing() {
                 <div
                   className={style.card}
                   onClick={() => {
-                    setValueFilters("varios");
-                    handelFinters();
+                    handelFintersV();
                   }}
                 >
                   <h4>Varios</h4>
