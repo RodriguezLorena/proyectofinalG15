@@ -11,9 +11,8 @@ import Review from "./components/Review/Review";
 import Reviews from "./components/Review/Reviews";
 import CreateProduct from "./components/createProduct/createProduct";
 import Verifico from "./Verification/Verification";
-import Sidebar from "./components/Sidebar/Sidebar";
+import Sidebar from "./components/Sidebar/sidebar";
 import EditProducts from "./components/EditProducts/EditProducts";
-
 import Order from "./components/Orders/Order";
 import ControlOrders from "./components/Orders/ControlOrders";
 
@@ -42,7 +41,7 @@ function App() {
         <Route path="/admin" element={<Sidebar />} />
         <Route path="/editProduct/:id" element={<EditProducts />} />
 
-
+        <Route path="/pagos" element={<Pagos></Pagos>} />
 
         <Route path="/Order" element={<Order></Order>} />
         <Route path="/ControlOrders" element={<ControlOrders></ControlOrders>} />
