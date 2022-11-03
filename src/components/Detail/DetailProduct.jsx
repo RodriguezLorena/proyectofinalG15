@@ -16,6 +16,7 @@ import { addToCart } from "../../redux/action";
 import Review from "../Review/Review";
 import Reviews from "../Review/Reviews";
 import { Hearts } from "react-loading-icons";
+import swal from "sweetalert";
 
 export default function ProductDetail() {
   const dispatch = useDispatch();
@@ -33,8 +34,15 @@ export default function ProductDetail() {
 
   const dispath = useDispatch();
   const addCart = (id) => {
-    console.log(id);
-    dispath(addToCart(id));
+    dispath(addToCart(id))
+    swal({
+      title: "Producto agregado al carrito",
+      icon: "success",
+      button: "Aceptar",
+      className: "swal-modal",
+      className: "swal-overlay",
+      className: "swal-title",
+    });
   };
 
   const [state, setState] = useState(true);
