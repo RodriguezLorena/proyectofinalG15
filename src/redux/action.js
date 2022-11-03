@@ -29,6 +29,7 @@ export function getDetail(id) {
   };
 }
 export function putProduct(payload, id) {
+  console.log(payload, id, "datos de ban");
   return async function (dispatch) {
     let respuesta = await axios.put(
       `https://velvet.up.railway.app/product/${id}`,
@@ -239,6 +240,7 @@ export function login(payload) {
             id: user.data[0].id,
             userName: user.data[0].userName,
             Token: user.data[1].token,
+            image: user.data[0].image,
           },
         });
       }
@@ -254,6 +256,7 @@ export function login(payload) {
           id: user.data[0].id,
           userName: user.data[0].userName,
           Token: user.data[1].token,
+          image: user.data[0].image,
         },
       });
     };
@@ -289,6 +292,7 @@ export function login(payload) {
             id: user.data[0].id,
             userName: user.data[0].userName,
             Token: user.data[1].token,
+            image: user.data[0].image,
           },
         });
       }
@@ -304,6 +308,7 @@ export function login(payload) {
           id: user.data[0].id,
           userName: user.data[0].userName,
           Token: user.data[1].token,
+          image: user.data[0].image,
         },
       });
     };
@@ -344,6 +349,7 @@ export function creatAcount(payload) {
           id: user.data[0].id,
           userName: user.data[0].userName,
           Token: user.data[1].token,
+          image: user.data[0].image,
         },
       });
     }
@@ -359,6 +365,7 @@ export function creatAcount(payload) {
         id: user.data[0].id,
         userName: user.data[0].userName,
         Token: user.data[1].token,
+        image: user.data[0].image,
       },
     });
   };
@@ -386,7 +393,7 @@ export const putUser = (id, payload) => {
       `https://velvet.up.railway.app/users/${id}`,
       payload
     );
-    console.log("esto es el put", json);
+    console.log("esto es el put", json.data);
     return dispatch({
       type: CONSTANTES.PUT_USER,
       payload: json.data,

@@ -115,7 +115,18 @@
   box-shadow: 0 0 15px #ddd;
 }
 
-.contentProducts img {
+.contentProductsDes {
+  width: 400px;
+  height: max-content;
+  border-radius: 20px;
+  padding: 1rem;
+  margin: 1rem;
+  box-shadow: 0 0 15px #ddd;
+  background-color: #ddd;
+}
+
+.contentProducts img,
+.contentProductsDes img {
   width: 100px;
   height: 100px;
 }
@@ -128,6 +139,18 @@
   display: inline-block;
   width: max-content;
   margin: 1rem 1rem 0 0;
+}
+
+.butonsCardsDes {
+  background-color: #ddd;
+  border: 1px solid #999;
+  color: #fff;
+  border-radius: 40px;
+  padding: 0.5rem 1rem;
+  display: inline-block;
+  width: max-content;
+  margin: 1rem 1rem 0 0;
+  pointer-events: none;
 }
 
 .contentsOrder {

@@ -28,7 +28,6 @@
   border-radius: 40px;
   color: #fff;
   margin-top: 4rem;
-  margin-left: 13rem;
 }
 
 .botonMP {
@@ -42,7 +41,6 @@
 .botonMP:hover {
   /* Tus atributos CSS */
   background-color: blue;
-
 }
 
 .titleorder {

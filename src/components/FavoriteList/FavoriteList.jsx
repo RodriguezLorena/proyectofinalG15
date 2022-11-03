@@ -2,6 +2,8 @@ import React from "react";
 import style from "./FavoriteList.module.css";
 import { NavLink } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
+import { IoHeartDislikeOutline } from "react-icons/io5";
+
 import {
   clearCart,
   removeOneProductFavorite,
@@ -34,7 +36,10 @@ export default function CartList() {
   return (
     <div className={style.list}>
       {favorite.length < 1 ? (
-        <h6>Favoritos vacio</h6>
+        <div className="flex flex-col items-center">
+          <IoHeartDislikeOutline size="30" />
+          <h6>Favoritos vacio</h6>
+        </div>
       ) : (
         favorite.map((ele) => (
           <FavoriteCart data={ele} deleteFavorite={deleteFavorite} />

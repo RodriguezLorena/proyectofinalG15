@@ -46,7 +46,10 @@ export default function Card({ name, image, price, id, sizes, categories }) {
   };
 
   function handelBan() {
-    dispach(putProduct({ value: false }, id));
+    dispach(putProduct({ value: "false" }, id));
+    setTimeout(function () {
+      window.location.reload(true);
+    }, 1000);
   }
 
   return (

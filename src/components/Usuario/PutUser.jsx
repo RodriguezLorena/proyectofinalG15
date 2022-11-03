@@ -20,12 +20,41 @@ import { HiOutlineMail } from "react-icons/hi";
 import FavoriteList from "../FavoriteList/FavoriteList";
 import OrderList from "../OrderList/OrderList";
 import OrderCard from "../OrderCard/OrderCard";
+import axios from "axios";
 
 const PutUser = () => {
   const dispatch = useDispatch();
   let params = useParams();
   const user = useSelector((state) => state.user);
   const cartState = useSelector((state) => state.cart);
+
+  //----------Order--------------//
+
+  const order = useSelector((state) => state.orders);
+  const orderProducts = useSelector((state) => state.ordersProducts);
+  const productsAll = useSelector((state) => state.productsAll);
+  const res = order.filter((element) => element.user_id === user.id);
+  const ids = res.map((element) => element.order_id);
+
+  const array = [];
+  for (let i = 0; i < orderProducts.length; i++) {
+    for (let j = 0; j < orderProducts.length - 1; j++) {
+      if (orderProducts[i].orderOrderId == ids[j]) {
+        array.push(orderProducts[i]);
+      }
+    }
+  }
+
+  let products = [];
+  for (let i = 0; i < productsAll.length; i++) {
+    for (let j = 0; j < productsAll.length - 1; j++) {
+      if (productsAll[i]?.id == array[j]?.productId) {
+        products.push(productsAll[i]);
+      }
+    }
+  }
+
+  //----------------------------//
 
   useEffect(() => {
     dispatch(getUser());
@@ -70,12 +99,34 @@ const PutUser = () => {
   function handleSubmit(e, use) {
     e.preventDefault();
     dispatch(putUser(id, input));
-    alert("Congratulations");
-    // dispatch(clearUser());
-    // dispatch(login({ userName: user.userName, password: user.password }));
+    swal({
+      title: "Usuario modificado correctamente",
+      text: "Vuelve a iniciar sesion para ver los cambios",
+      icon: "success",
+      className: "swal-title",
+      className: "swal-modal",
+    });
   }
 
-  const { email, id, password, phoneNumber, role, userName, image } = user;
+  //----------------manipuladores de imagen----------------
+
+  const [mainImageEdit, setMainImageEdit] = useState("");
+  input.image = mainImageEdit;
+
+  console.log(input.image, "este es el body");
+
+  const handleFiles = (e) => {
+    setMainImageEdit(e.target.files[0]);
+  };
+
+  const handleAPI = async () => {
+    const url = "https://velvet.up.railway.app/product/image";
+    let formData = new FormData();
+    formData.append("imagen1", mainImageEdit);
+    const pedidoCloudUno = await axios.post(url, formData);
+    setMainImageEdit(pedidoCloudUno.data);
+  };
+  const { email, id, phoneNumber, userName, image } = user;
 
   return (
     <div className="bg-white">
@@ -110,6 +161,48 @@ const PutUser = () => {
               onChange={(e) => handleChange(e)}
             ></input>
           </div>
+          <div>
+            <div className={style.perileImage}>
+              {input.image.length ? (
+                <img src={image} alt="perfil" />
+              ) : (
+                <img src={image} />
+              )}
+            </div>
+            <div>
+              <input
+                type="file"
+                name="imagen1"
+                onChange={(e) => handleFiles(e)}
+              ></input>
+              <div>
+                <button onClick={handleAPI}>SUBIR IMAGEN</button>
+              </div>
+            </div>
+          </div>
+
+          <div className={style.contentPerfile}>
+            <div>
+              <div className={style.perileImage}>
+                {input.image.length ? (
+                  <img src={image} alt="perfil" />
+                ) : (
+                  <img src={image} />
+                )}
+              </div>
+              <div>
+                <input
+                  type="file"
+                  name="imagen1"
+                  onChange={(e) => handleFiles(e)}
+                ></input>
+                <div>
+                  <button onClick={handleAPI}>SUBIR IMAGEN</button>
+                </div>
+              </div>
+            </div>
+          </div>
+
           <form>
             {/* <button onClick={z}>bton</button> */}
             <div className={style.inputs}>
@@ -199,7 +292,11 @@ const PutUser = () => {
 
           <div className={style.products}>
             <h5>Productos comprados</h5>
-            <OrderCard />
+            {products.map((element) => {
+              return (
+                <OrderCard name={element.name} image={element.mainImage} />
+              );
+            })}
           </div>
         </div>
       </div>

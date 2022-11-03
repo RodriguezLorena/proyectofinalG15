@@ -12,7 +12,7 @@ import axios from "axios";
 
 export default function CartView() {
   const cartState = useSelector((state) => state.cart);
-  const userState = useSelector((state) => state.user)
+  const userState = useSelector((state) => state.user);
   const total = useSelector((state) => state.cartTotal);
   const dispach = useDispatch();
 
@@ -46,7 +46,7 @@ export default function CartView() {
         <div className={style.pagos}>
           {<h2>Total a pagar: {total}</h2>}
           <NavLink to="/Order">
-            <button>Siguiente</button>
+            <button>Pagar</button>
           </NavLink>
         </div>
       </div>

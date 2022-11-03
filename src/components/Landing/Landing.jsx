@@ -17,6 +17,9 @@ export default function Landing() {
   const dispatch = useDispatch();
   const navegation = useNavigate();
   const productsAll = useSelector((state) => state.productsAll);
+  const productsFilters = productsAll.filter(
+    (element) => element.value === true
+  );
   const productsBuy = productsAll.filter(
     (element) => element.bestSellers === true
   );

@@ -358,6 +358,7 @@ export default function NavBar({ home, products }) {
               </Dropdown.Item>
             </Dropdown>
           </div>
+
           {Object.entries(user).length > 0 ? (
             <div className={style.order}>
               <Dropdown

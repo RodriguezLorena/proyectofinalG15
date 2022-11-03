@@ -9,33 +9,33 @@ import NavBar from "../NavBar/NavBar";
 import { IoReload } from "react-icons/io5";
 import swal from "sweetalert";
 import axios from "axios";
+import { Hearts } from "react-loading-icons";
 
 export default function EditProducts() {
   const dispatch = useDispatch();
   const { id } = useParams();
+  const product = useSelector((state) => state.detailProduct);
+  const [state, setState] = useState(true);
 
   useEffect(() => {
     dispatch(getDetail(id)).then(() => setState(false));
     return () => {
       dispatch(desmontarDetalle());
     };
-  }, [dispatch]);
-
-  const product = useSelector((state) => state.detailProduct);
-  const [state, setState] = useState(true);
+  }, [dispatch, id]);
 
   const [valuesNew, setValuesNew] = useState({
     name: "",
     price: 0,
     stock: 0,
     description: "",
-    value: true,
+
     type: "",
     mainImage: "",
     sizes: [],
     images: [],
     categories: "",
-    bestSellers: false,
+    bestSellers: "false",
   });
 
   const sizess = [
@@ -130,6 +130,15 @@ export default function EditProducts() {
     );
   };
 
+  //--------------manipuladores de mas vendido----------------
+  const manipuladorCheckbox = (e) => {
+    console.log("e.target.checked", e.target.checked);
+    setValuesNew({
+      ...valuesNew,
+      [e.target.name]: e.target.checked,
+    });
+  };
+
   function handelMasVendido(e) {
     setValuesNew({
       ...valuesNew,
@@ -201,7 +210,7 @@ export default function EditProducts() {
     else valuesNew.value = false;
     if (valuesNew.bestSellers == "1") valuesNew.bestSellers = true;
     else valuesNew.bestSellers = false;
-    console.log(valuesNew, "valoresss");
+
     dispatch(putProduct(valuesNew, id));
     setValuesNew({
       name: "",
@@ -216,10 +225,29 @@ export default function EditProducts() {
       categories: [],
       bestSellers: false,
     });
+    swal({
+      title: "Producto editado con exito",
+      text: "El producto fue editado con exito",
+      icon: "success",
+      className: "swal-modal",
+    }).then(() => {
+      setTimeout(function () {
+        window.location.reload(true);
+      }, 1000);
+    });
   }
 
   if (state) {
-    return <div>Cargando...</div>;
+    return (
+      <div className={style.cargando}>
+        <div>
+          <Hearts fill="#ea047e" stroke="#ea047e" />
+        </div>
+        <div>
+          <p>Cargando...</p>
+        </div>
+      </div>
+    );
   }
   return (
     <div className="bg-white">
@@ -243,7 +271,7 @@ export default function EditProducts() {
           <p>Descripcion: {product[0].description}</p>
         </div>
         <div className={style.productModifi}>
-          <h5>Nuevos datos de el producto</h5>
+          <h5>Nuevos datos del producto</h5>
           <form action="">
             <div>
               <label htmlFor="">Nombre</label>
@@ -278,8 +306,8 @@ export default function EditProducts() {
               </select>
               <div>
                 <ul>
-                  {valuesNew.sizes.map((elemento) => (
-                    <li key={elemento} onClick={(e) => eliminarSelect(e)}>
+                  {valuesNew.sizes.map((elemento, i) => (
+                    <li key={i} onClick={(e) => eliminarSelect(e)}>
                       {elemento},
                     </li>
                   ))}
@@ -313,14 +341,12 @@ export default function EditProducts() {
             </div>
             <div>
               <label htmlFor="">Value</label>
-              <select name="" id="" onChange={(e) => handelSelectValue(e)}>
-                <option name="value" value={1}>
-                  true
-                </option>
-                <option name="value" value={0}>
-                  false
-                </option>
-              </select>
+              <input
+                type="checkbox"
+                name="value"
+                checked={valuesNew.value}
+                onChange={(e) => manipuladorCheckbox(e)}
+              />
             </div>
             <div>
               <label htmlFor="">Tipo</label>
@@ -334,14 +360,12 @@ export default function EditProducts() {
             </div>
             <div>
               <label htmlFor="">Mas vendido:</label>
-              <select name="" id="" onChange={(e) => handelMasVendido(e)}>
-                <option name="bestSellers" value={1}>
-                  true
-                </option>
-                <option name="bestSellers" value={0}>
-                  false
-                </option>
-              </select>
+              <input
+                type="checkbox"
+                name="bestSellers"
+                checked={valuesNew.bestSellers}
+                onChange={(e) => manipuladorCheckbox(e)}
+              />
             </div>
             <div>
               <label htmlFor="">Categorias:</label>
@@ -369,7 +393,7 @@ export default function EditProducts() {
               name="imagen1"
               onChange={(e) => handleFiles(e)}
             ></input>
-            <button onClick={handleAPI}>CAMBIAR IMAGEN DE PERFIL</button>
+            <button onClick={handleAPI}>CAMBIAR IMAGEN DEl PRODUCTO</button>
           </div>
           <button
             onClick={() => handelChangueValues()}

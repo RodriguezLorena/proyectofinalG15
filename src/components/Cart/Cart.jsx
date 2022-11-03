@@ -23,8 +23,9 @@ export default function Cart({ data, deleteCart }) {
         </p>
       </div>
       <div className={style.butons}>
-        <button>Comprar ya</button>
-        <NavLink className={style.viewDetail}>Ver detalles</NavLink>
+        <NavLink to={`/product/${id}`} className={style.viewDetail}>
+          Ver detalles
+        </NavLink>
       </div>
     </div>
   );

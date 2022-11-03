@@ -16,7 +16,8 @@
 }
 
 .viewAll {
-  border-bottom: 1px solid #999;
+  font-size: 1.2rem;
+  border-bottom: 1px solid #ea047e;
 }
 
 .cart h2 {

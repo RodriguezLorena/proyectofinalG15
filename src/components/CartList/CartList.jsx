@@ -46,9 +46,9 @@ export default function CartList() {
           </NavLink>
         )}
       </div>
-      {cartState.length < 1 ? null : (
+      {/* {cartState.length < 1 ? null : (
         <div>{<h2>Total de compra ${total}</h2>}</div>
-      )}
+      )} */}
     </div>
   );
 }

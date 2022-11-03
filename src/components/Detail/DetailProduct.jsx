@@ -35,7 +35,7 @@ export default function ProductDetail() {
 
   const dispath = useDispatch();
   const addCart = (id) => {
-    dispath(addToCart(id))
+    dispath(addToCart(id));
     swal({
       title: "Producto agregado al carrito",
       icon: "success",
@@ -160,22 +160,17 @@ export default function ProductDetail() {
           </h3> */}
           <div className={style.buyCarrito}>
             <span className={style.price}> $USD {IdProduct[0].price}</span>
-            <div className={style.contentbuy}>
-              <button
-                className={IdUser.role == "inactive" ? style.buyNo : style.buy}
-              >
-                Comparar ya
-              </button>
-              {IdUser.role == "inactive" ? (
-                <p>Debes confirmar tu correo para comprar</p>
-              ) : null}
-              <MdOutlineShoppingCart
-                className={style.carrito}
-                size="30px"
-                onClick={() => addCart(id)}
-              />
+            <div className={style.contentbuy} onClick={() => addCart(id)}>
+              <button className={style.buy}>Añadir al carrito</button>
+
+              <MdOutlineShoppingCart className={style.carrito} size="30px" />
             </div>
           </div>
+          {IdUser.role == "inactive" ? (
+            <p className={style.noComprar}>
+              Debes confirmar tu correo para comprar
+            </p>
+          ) : null}
         </div>
       </div>
 
