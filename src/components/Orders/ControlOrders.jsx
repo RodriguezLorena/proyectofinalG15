@@ -2,12 +2,15 @@ import axios from "axios";
 import React from "react";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { Link } from "react-router-dom";
+import { Link} from "react-router-dom";
 import { getOrders } from "../../redux/action";
+import { clearCart } from "../../redux/action";
+import style from "./Order.module.css";
 
 
 export default function ControlOrders() {
     const dispatch = useDispatch();
+
     // dispatch(getOrders);
     useEffect(() => {
         dispatch(getOrders());
@@ -25,9 +28,13 @@ export default function ControlOrders() {
         }
     }
 
-    // console.log(obj)
+    console.log(obj, 'OBJETO')
     const order_id = a;
+    console.log(order_id, 'IDDDDDDDDD');
 
+    function Redirecionar() {
+        window.location.href = "/home";
+    }
 
     // const arraydeStatus = ['created', 'pending', 'completed', 'canceled'];
 
@@ -35,7 +42,7 @@ export default function ControlOrders() {
         e.preventDefault()
 
         const cambiar = await axios.put(`https://velvet.up.railway.app/order/${order_id}`, {
-            status: "created"
+            status: "completed"
         })
         console.log(cambiar);
 
@@ -47,68 +54,46 @@ export default function ControlOrders() {
             direction: obj.direction,
             department: obj.department,
             precioFinal: preciototal,
-
+            status: 'completed',
             postalCode: obj.postalCode
         })
 
         console.log(mandaremail, "okey se mando");
 
+        limpiarCart()
+
+        Redirecionar()
+
+
 
     }
 
 
+
+
+    function limpiarCart() {
+        dispatch(clearCart());
+        // swal("Su carrito esta vacio");
+    };
+
+
+
     return (
         <div>
-            <h3>GRACIAS POR SU COMPRA</h3>
-            {/* <Link to="/"> */}
-            <button onClick={changeStatus}>Click Aqui para finalizar!</button>
-            {/* </Link> */}
+            <h3 className={style.titleorder}>GRACIAS POR SU COMPRA!!!</h3>
+            <a>
+
+            </a>
+            <Link to="/home">
+                <button onClick={e => {
+                    changeStatus(e)
+                }}
+                className={style.butonPago}
+                >Click Aqui para finalizar</button>
+            </Link>
         </div>
 
 
     );
 }
-
-{/* 
-            <div>
-                {
-                    pedidos?.map(pedi => {
-                        return (
-                            <div>
-                                <p>{pedi.order_id}</p>
-                                <div>
-                                    <h1>{pedi.firstName + " " + pedi.lastName} </h1>
-                                </div>
-                                <div>
-                                    <h1>{pedi.email}</h1>
-                                </div>
-                                <div>
-                                    <select >
-                                        {
-
-                                            arraydeStatus?.map(e => {
-                                                return (
-                                                    <option >{e}</option>
-                                                );
-                                            })
-                                        }
-                                    </select>
-                                </div>
-                            </div>
-
-                        );
-                    })
-                } */}
-{/* <h1>ESTADO: </h1> */ }
-
-{/* <select onChange={e => e}>
-                    <option value="pending">pending</option>
-                    <option value="completed">completed</option>
-                    <option value="canceled">canceled</option>
-                    <option value="created">created</option>
-                    <option value="cart">cart</option>
-
-                </select> */}
-{/* </div> */ }
-
 

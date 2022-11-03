@@ -94,8 +94,8 @@
 }
 
 .categotiImportant {
-  width: 50%;
-  height: 100%;
+  width: 600px;
+  height: 700px;
   display: flex;
   align-items: flex-end;
   justify-content: center;
@@ -123,8 +123,8 @@
 }
 
 .contentSecundari {
-  height: 100%;
-  width: 60%;
+  height: 700px;
+  width: 700px;
   display: flex;
   flex-wrap: wrap;
 }

@@ -85,7 +85,7 @@ export default function Order() {
         // let a = "217b2537-b8aa-4dea-89b1-a7f095c0e700";
 
         e.preventDefault()
-        const crearorder = await axios.post(`https://velvet.up.railway.app/users/cart/${user_id}`, {
+        const crearorder = await axios.post(`http://localhost:3001/users/cart/${user_id}`, {
             firstName: input.firstName,
             lastName: input.lastName,
             email: input.email,   //cambiar aca por el que tiene el user en localstorage
@@ -129,6 +129,9 @@ export default function Order() {
                 <div>
                     <p>Completa tus datos para el envio de la compra</p>
                 </div>
+                <div>
+                    <h1></h1>
+                </div>
 
                 <form className={style.tagFrom} onSubmit={handleUpdate}>
 
@@ -161,7 +164,7 @@ export default function Order() {
 
 
                     <div>
-                        <button type="submit" onClick={e => handlePay(e)} >Metodo de Pago</button>
+                        <button type="submit" onClick={e => handlePay(e)} className={style.butonPago} >Metodo de Pago</button>
                         
                         {
                             cambiar ?

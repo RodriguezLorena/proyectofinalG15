@@ -140,6 +140,8 @@
 }
 
 .contentsOrder h5 {
+  width: 100%;
+  text-align: center;
   font-size: 2rem;
 }
 
@@ -148,4 +150,13 @@
   height: 20px;
   position: absolute;
   overflow: hidden;
+}
+
+.contentOderProduct {
+  width: 400px;
+  height: max-content;
+  border-radius: 20px;
+  padding: 1rem;
+  margin: 1rem;
+  box-shadow: 0 0 15px #ddd;
 }

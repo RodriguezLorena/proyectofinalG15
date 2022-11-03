@@ -20,6 +20,7 @@ const initialState = {
     : {},
 
   orders: [],
+  ordersProducts: [],
   users: [],
 
   favorite: localStorage.getItem("favorite")
@@ -319,6 +320,9 @@ export default function reducer(state = initialState, { payload, type }) {
         ...state,
         orders: payload,
       };
+
+    case "GET_ORDER_PRODUCTS":
+      return { ...state, ordersProducts: payload };
 
     default:
       return { ...state };

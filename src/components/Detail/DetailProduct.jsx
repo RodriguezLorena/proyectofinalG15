@@ -12,16 +12,18 @@ import Card from "../Card/Card";
 import { Carousel } from "flowbite-react";
 import { IoIosArrowBack, IoIosArrowForward } from "react-icons/io";
 import NavBar from "../NavBar/NavBar";
-import { addToCart } from "../../redux/action";
+import { addToCart, addToFavorite } from "../../redux/action";
 import Review from "../Review/Review";
 import Reviews from "../Review/Reviews";
 import { Hearts } from "react-loading-icons";
+import swal from "sweetalert";
 
 export default function ProductDetail() {
   const dispatch = useDispatch();
   const { id } = useParams();
   const IdProduct = useSelector((state) => state.detailProduct);
   const productsAll = useSelector((state) => state.productsAll);
+  const favorite = useSelector((state) => state.favorite);
   const IdUser = useSelector((state) => state.user);
   const [imageProduct, setImageProduct] = useState("");
 
@@ -33,8 +35,35 @@ export default function ProductDetail() {
 
   const dispath = useDispatch();
   const addCart = (id) => {
-    console.log(id);
-    dispath(addToCart(id));
+    dispath(addToCart(id))
+    swal({
+      title: "Producto agregado al carrito",
+      icon: "success",
+      button: "Aceptar",
+      className: "swal-modal",
+      className: "swal-overlay",
+      className: "swal-title",
+    });
+  };
+
+  const addFavorite = (id) => {
+    console.log(id, "holaa");
+    const compro = favorite.filter((element) => element.id === id);
+    if (compro.length > 0) {
+      return swal({
+        title: "Este producto ya se encuentra añadido",
+        icon: "error",
+      });
+    }
+    dispatch(addToFavorite(id));
+    swal({
+      title: "Producto agregado a favoritos exitosamente",
+      icon: "success",
+      button: "Aceptar",
+      className: "swal-modal",
+      className: "swal-overlay",
+      className: "swal-title",
+    });
   };
 
   const [state, setState] = useState(true);
@@ -111,7 +140,11 @@ export default function ProductDetail() {
 
         <div className={style.textContent}>
           <div className={style.contentLike}>
-            <AiOutlineHeart className={style.like} size="30px" />
+            <AiOutlineHeart
+              className={style.like}
+              size="30px"
+              onClick={() => addFavorite(IdProduct[0].id)}
+            />
           </div>
           <h2 className={style.title}> {IdProduct[0].name}</h2>
           {/* <h3 className={style.stock}>Stock: {IdProduct[0].stock}</h3> */}

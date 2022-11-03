@@ -18,6 +18,8 @@ import swal from "sweetalert";
 import { Toast } from "flowbite-react";
 import { HiOutlineMail } from "react-icons/hi";
 import FavoriteList from "../FavoriteList/FavoriteList";
+import OrderList from "../OrderList/OrderList";
+import OrderCard from "../OrderCard/OrderCard";
 
 const PutUser = () => {
   const dispatch = useDispatch();
@@ -193,6 +195,11 @@ const PutUser = () => {
           <div className={style.favoritos}>
             <h5>Favoritos</h5>
             <FavoriteList />
+          </div>
+
+          <div className={style.products}>
+            <h5>Productos comprados</h5>
+            <OrderCard />
           </div>
         </div>
       </div>
