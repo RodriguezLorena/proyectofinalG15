@@ -13,6 +13,7 @@ import style from "./Home.module.css";
 import Footer from "../Footer/Footer";
 import NavBar from "../NavBar/NavBar";
 import Paginado from "../Paginado/Paginado";
+import { Hearts } from "react-loading-icons";
 
 export default function Home() {
   const dispatch = useDispatch();
@@ -61,11 +62,23 @@ export default function Home() {
       auxiliarType.push(elemento);
     }
   });
-
+  const [state, setState] = useState(true);
   useEffect(() => {
-    dispatch(getProducts());
+    dispatch(getProducts()).then(() => setState(false));
   }, [dispatch]);
 
+  if (state) {
+    return (
+      <div className={style.cargando}>
+        <div>
+          <Hearts fill="#ea047e" stroke="#ea047e" />
+        </div>
+        <div>
+          <p>Cargando...</p>
+        </div>
+      </div>
+    );
+  }
   const handleFilterCategory = (e) => {
     e.preventDefault();
     dispatch(filterByCategorys(e.target.value));

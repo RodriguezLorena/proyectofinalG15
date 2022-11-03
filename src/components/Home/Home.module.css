@@ -57,6 +57,17 @@
   padding: 15px 15px 20px 15px;
   border-radius: 10px;
 }
+.cargando {
+  height: 100vh;
+  width: 100%;
+  object-fit: contain;
+  color: #ea047e;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  font-weight: bold;
+}
 
 .rangePrecie {
   display: flex;

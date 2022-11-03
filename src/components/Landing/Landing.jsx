@@ -11,6 +11,7 @@ import { Carousel } from "flowbite-react";
 import { filterByCategorys } from "../../redux/action";
 import { IoIosArrowDropright, IoIosArrowDropleft } from "react-icons/io";
 import { findRenderedComponentWithType } from "react-dom/test-utils";
+import { Hearts } from "react-loading-icons";
 
 export default function Landing() {
   const dispatch = useDispatch();
@@ -44,11 +45,22 @@ export default function Landing() {
       dispatch(filterByCategorys("varios"));
     }, 2000);
   }
-
+  const [state, setState] = useState(true);
   useEffect(() => {
-    dispatch(getProducts());
+    dispatch(getProducts()).then(() => setState(false));
   }, [dispatch]);
-
+  if (state) {
+    return (
+      <div className={style.cargando}>
+        <div>
+          <Hearts fill="#ea047e" stroke="#ea047e" />
+        </div>
+        <div>
+          <p>Cargando...</p>
+        </div>
+      </div>
+    );
+  }
   return (
     <div>
       <div className={style.content}>
