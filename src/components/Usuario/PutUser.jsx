@@ -148,19 +148,6 @@ const PutUser = () => {
         ) : null}
 
         <div className={style.contentPerfile}>
-          <div className={style.perileImage}>
-            {input.image.length ? (
-              <img src={input.image} />
-            ) : (
-              <img src="https://green.excertia.com/wp-content/uploads/2020/04/perfil-empty.png" />
-            )}
-            <input
-              type="file"
-              name="image"
-              value={input.image}
-              onChange={(e) => handleChange(e)}
-            ></input>
-          </div>
           <div>
             <div className={style.perileImage}>
               {input.image.length ? (
@@ -168,28 +155,6 @@ const PutUser = () => {
               ) : (
                 <img src={image} />
               )}
-            </div>
-            <div>
-              <input
-                type="file"
-                name="imagen1"
-                onChange={(e) => handleFiles(e)}
-              ></input>
-              <div>
-                <button onClick={handleAPI}>SUBIR IMAGEN</button>
-              </div>
-            </div>
-          </div>
-
-          <div className={style.contentPerfile}>
-            <div>
-              <div className={style.perileImage}>
-                {input.image.length ? (
-                  <img src={image} alt="perfil" />
-                ) : (
-                  <img src={image} />
-                )}
-              </div>
               <div>
                 <input
                   type="file"
