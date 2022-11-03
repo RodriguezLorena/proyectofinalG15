@@ -34,9 +34,15 @@ export default function OrderList() {
 
   return (
     <div className={style.content}>
-      {products.slice(0, 3).map((element) => {
-        return <OrderCard name={element.name} image={element.mainImage} />;
-      })}
+      {products.length > 1 ? (
+        products.slice(0, 3).map((element) => {
+          return <OrderCard name={element.name} image={element.mainImage} />;
+        })
+      ) : (
+        <div className={style.list}>
+          <h6>Sin ordenes de compra</h6>
+        </div>
+      )}
 
       {array.length < 1 || Object.entries(user).length === 0 ? null : (
         <NavLink to={`/user/${user.id}`} className={style.viewAll}>
