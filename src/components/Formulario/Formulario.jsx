@@ -24,8 +24,6 @@ const Formulario = () => {
     dispatch(getProducts());
   }, [dispatch]);
 
-  const navegacionAutomatica = useNavigate();
-
   useEffect(() => {
     if (creacion === "creada") {
       swal({
@@ -34,7 +32,7 @@ const Formulario = () => {
         icon: "success",
         className: "swal-modal",
         className: "swal-title",
-      }).then(navegacionAutomatica("/admin"));
+      });
     }
     if (creacion === "noCreada") {
       swal({
@@ -45,7 +43,7 @@ const Formulario = () => {
         className: "swal-title",
       });
     }
-  }, [creacion, navegacionAutomatica]);
+  }, [creacion]);
 
   const [nuevoProduct, setNuevoProduct] = useState({
     name: "",
@@ -216,6 +214,19 @@ const Formulario = () => {
         formularioDeCreacion(nuevoProduct)
           .then(() => {
             setCreacion("creada");
+            setNuevoProduct({
+              name: "",
+              price: 0,
+              stock: 0,
+              description: "",
+              value: true,
+              type: "",
+              size: [],
+              mainImage: "",
+              image: [],
+              category: "",
+              bestSellers: false,
+            });
           })
           .catch(() => {
             setCreacion("noCreada");

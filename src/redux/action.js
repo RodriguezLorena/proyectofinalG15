@@ -452,6 +452,20 @@ export const getOrders = (payload) => {
   };
 };
 
+export const getOrdersProducts = (payload) => {
+  return async (dispatch) => {
+    let traerPedidos = await axios.get(
+      `https://velvet.up.railway.app/orderProduct`
+    );
+    console.log(traerPedidos);
+
+    return dispatch({
+      type: "GET_ORDER_PRODUCTS",
+      payload: traerPedidos.data,
+    });
+  };
+};
+
 // export function getProducts() {
 //   return async function (dispatch) {
 //     try {

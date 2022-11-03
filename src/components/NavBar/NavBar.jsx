@@ -9,7 +9,14 @@ import CartList from "../CartList/CartList";
 import FavoriteList from "../FavoriteList/FavoriteList";
 
 import Logo from "../../img/logoVelvet.png";
-import { getForName, login, creatAcount, clearUser } from "../../redux/action";
+import {
+  getForName,
+  login,
+  creatAcount,
+  clearUser,
+  getOrdersProducts,
+  getOrders,
+} from "../../redux/action";
 import { useDispatch, useSelector } from "react-redux";
 import { NavLink, useNavigate } from "react-router-dom";
 import { Button, Modal, Label, TextInput, Checkbox } from "flowbite-react";
@@ -22,6 +29,7 @@ import CreateAcountWithGoogle from "../Login/CreateAccountAndLoginWithGoogle";
 import { gapi } from "gapi-script";
 import CreateAccountWithGoogle from "../Login/CreateAccountAndLoginWithGoogle";
 import OrderList from "../OrderList/OrderList";
+import { useEffect } from "react";
 const clientId = process.env.REACT_APP_GOOGLE_CLIENT_ID;
 
 export default function NavBar({ home, products }) {
@@ -93,6 +101,13 @@ export default function NavBar({ home, products }) {
     navegation("/");
   }
 
+  useEffect(() => {
+    dispatch(getOrdersProducts());
+    if (Object.entries(user).length > 0) {
+      dispatch(getOrders());
+    }
+  }, [dispatch]);
+
   //-------------------//
 
   return (
@@ -138,14 +153,12 @@ export default function NavBar({ home, products }) {
                   inline={true}
                   arrowIcon={false}
                 >
-                  <Dropdown.Item>
-                    <NavLink
-                      to={`/user/${user.id}`}
-                      className="flex colum justify-center flex-col items-center"
-                    >
-                      perfil
-                    </NavLink>
-                  </Dropdown.Item>
+                  <NavLink
+                    to={`/user/${user.id}`}
+                    className="flex colum justify-center flex-col items-center"
+                  >
+                    <Dropdown.Item>perfil</Dropdown.Item>
+                  </NavLink>
                   <Dropdown.Item onClick={(e) => handelClearUser(e)}>
                     Cerrar sesion
                   </Dropdown.Item>
@@ -219,7 +232,7 @@ export default function NavBar({ home, products }) {
                       Crear cuenta
                     </button>
                   </div>
-                  <div>
+                  <div className={style.contentLoginGoogle}>
                     <CreateAccountWithGoogle text={"Iniciar con Google"} />
                   </div>
                 </div>
@@ -296,7 +309,7 @@ export default function NavBar({ home, products }) {
                         setShowCreate(false);
                         handelCreateacount(e);
                       }}
-                      className="bg-blue-700 text-white p-2 rounded-3xl text-xl "
+                      className="bg-blue-700 text-white p-2 rounded-3xl text-xl mb-10 "
                     >
                       Crear cuenta
                     </button>
@@ -345,17 +358,19 @@ export default function NavBar({ home, products }) {
               </Dropdown.Item>
             </Dropdown>
           </div>
-          <div className={style.order}>
-            <Dropdown
-              label={<MdOutlineShoppingBag size="30" />}
-              inline={true}
-              arrowIcon={false}
-            >
-              <Dropdown.Item>
-                <OrderList />
-              </Dropdown.Item>
-            </Dropdown>
-          </div>
+          {Object.entries(user).length > 0 ? (
+            <div className={style.order}>
+              <Dropdown
+                label={<MdOutlineShoppingBag size="30" />}
+                inline={true}
+                arrowIcon={false}
+              >
+                <Dropdown.Item>
+                  <OrderList />
+                </Dropdown.Item>
+              </Dropdown>
+            </div>
+          ) : null}
 
           <form action="" onSubmit={(e) => searchForName(e)}>
             <input

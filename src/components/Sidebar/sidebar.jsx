@@ -9,6 +9,8 @@ import {
   putProduct,
   getForName,
   getProducts,
+  getOrdersProducts,
+  getOrders,
 } from "../../redux/action";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
@@ -16,12 +18,33 @@ import { useDispatch, useSelector } from "react-redux";
 //import { findRenderedComponentWithType } from "react-dom/test-utils";
 // import { FiMinusCircle } from "react-icons/fi";
 import { FiSearch } from "react-icons/fi";
+import { Dropdown } from "flowbite-react";
 
 const Sidebar = () => {
   const dispach = useDispatch();
   const user = useSelector((state) => state.user);
   const users = useSelector((state) => state.users);
   const allProducts = useSelector((state) => state.productsAll);
+  const ordersProducts = useSelector((state) => state.ordersProducts);
+  const orders = useSelector((state) => state.orders);
+
+  // const res = ordersProducts.map((x, i) => {
+  //   if (x.orderOrderId === orders[i]?.order_id)
+  //     return {
+  //       product: x.productId,
+  //       emailDePersona: orders[i].email,
+  //       precio: x.price,
+  //       idDeLaOrden: x.orderOrderId,
+  //       quantity: x.quantity,
+  //     };
+  // });
+
+  // console.log(res, "acaaaaaaaaaaa");
+
+  // const [productEse, setProductEse] = useState("");
+  // function handelCualquiera(id) {
+  //   setProductEse(res);
+  // }
 
   const [search, setSearch] = useState("");
   const dispatch = useDispatch();
@@ -53,6 +76,8 @@ const Sidebar = () => {
   useEffect(() => {
     dispatch(getUser(user.token));
     dispatch(getProducts());
+    dispatch(getOrdersProducts());
+    dispatch(getOrders());
   }, [dispatch]);
 
   const [toggleState, setToggleState] = useState(1);
@@ -218,6 +243,48 @@ const Sidebar = () => {
           }
         >
           <h5>Ordenes de compra</h5>
+          {orders &&
+            orders.map((element) => {
+              let res = ordersProducts.filter(
+                (x) => x.orderOrderId === element.order_id
+              );
+              console.log(res, "holaaaaaaaaaaaa");
+              return (
+                <div className={style.contentOderProduct}>
+                  <Dropdown
+                    label="Detalles"
+                    inline={true}
+                    // onClick={() => handelCualquiera(element.order_id)}
+                  >
+                    <Dropdown.Item>
+                      <div>
+                        <p>
+                          <b>cantidad: </b> {res[0].quantity}
+                        </p>
+                        <p>
+                          <b>Id del producto: </b> {res[0].productId}
+                        </p>
+                      </div>
+                    </Dropdown.Item>
+                  </Dropdown>
+                  <p>
+                    <b>Id de la orden:</b> {element?.order_id}
+                  </p>
+                  <p>
+                    <b>Estado de la orden:</b> {element?.status}
+                  </p>
+                  <p>
+                    <b>Nombre de el usuario:</b>{" "}
+                    {element?.firstName + " " + element?.lastName}
+                  </p>
+                  <p>
+                    <b>Email de el usuario:</b> {element?.email}
+                  </p>
+
+                  {/* <button onClick={() => handelBan(element.id)}>Banear</button> */}
+                </div>
+              );
+            })}
           {/* <form
             action=""
             onSubmit={(e) => searchUser(e)}

@@ -1,5 +1,5 @@
 .content {
-  background-color: #eee;
+  background-color: #fff;
   display: flex;
 }
 
@@ -34,6 +34,7 @@
   background-color: #fff;
   padding: 15px 15px 20px 15px;
   border-radius: 10px;
+  box-shadow: 0 0 10px #ddd;
 }
 
 .contentFilterCategory select {
@@ -52,6 +53,7 @@
 .contentFilterPrice {
   margin-top: 20px;
   background-color: #fff;
+  box-shadow: 0 0 10px #ddd;
   padding: 15px 15px 20px 15px;
   border-radius: 10px;
 }
@@ -59,6 +61,7 @@
 .rangePrecie {
   display: flex;
   align-items: center;
+
   width: 50%;
 }
 
@@ -84,8 +87,8 @@
 }
 
 .fiterSize {
-  background-color: #fff;
   margin-top: 1.5rem;
+  box-shadow: 0 0 10px #ddd;
   background-color: #fff;
   padding: 15px 15px 20px 15px;
   border-radius: 10px;
@@ -99,7 +102,7 @@
 .filterType {
   background-color: #fff;
   margin-top: 1.5rem;
-  background-color: #fff;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
   padding: 15px 15px 20px 15px;
   border-radius: 10px;
 }

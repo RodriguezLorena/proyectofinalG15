@@ -30,7 +30,6 @@ export default function CartList() {
       });
     }
   };
-  console.log(favorite, "favorite");
 
   return (
     <div className={style.list}>

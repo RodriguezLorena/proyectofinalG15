@@ -134,3 +134,8 @@
   justify-content: end;
   margin-left: 2rem;
 }
+
+.contentLoginGoogle {
+  display: flex;
+  justify-content: center;
+}
