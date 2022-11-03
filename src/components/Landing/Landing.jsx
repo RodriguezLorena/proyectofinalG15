@@ -6,54 +6,69 @@ import style from "./Landing.module.css";
 import { useDispatch, useSelector } from "react-redux";
 import { getProducts } from "../../redux/action";
 import { useEffect, useState } from "react";
-import { NavLink } from "react-router-dom";
+import { NavLink, Link, useNavigate } from "react-router-dom";
 import { Carousel } from "flowbite-react";
-
-import { IoIosArrowBack, IoIosArrowForward } from "react-icons/io";
-import Navegation from "../Navegation/Navegation";
+import { filterByCategorys } from "../../redux/action";
+import { IoIosArrowDropright, IoIosArrowDropleft } from "react-icons/io";
+import { findRenderedComponentWithType } from "react-dom/test-utils";
+import { Hearts } from "react-loading-icons";
 
 export default function Landing() {
   const dispatch = useDispatch();
+  const navegation = useNavigate();
   const productsAll = useSelector((state) => state.productsAll);
+  const productsFilters = productsAll.filter(
+    (element) => element.value === true
+  );
   const productsBuy = productsAll.filter(
     (element) => element.bestSellers === true
   );
-  const productsCategotyWoman = productsAll.filter(
-    (element) => element.category == "mujer"
-  );
-  const productsCategotyMan = productsAll.filter(
-    (element) => element.category == "hombre"
-  );
-  useEffect(() => {
-    dispatch(getProducts());
-  }, [dispatch]);
 
+  function handelFintersH() {
+    navegation("/home");
+    setTimeout(function () {
+      dispatch(filterByCategorys("hombre"));
+    }, 2000);
+  }
+  function handelFintersM() {
+    navegation("/home");
+    setTimeout(function () {
+      dispatch(filterByCategorys("mujer"));
+    }, 2000);
+  }
+  function handelFintersN() {
+    navegation("/home");
+    setTimeout(function () {
+      dispatch(filterByCategorys("niños"));
+    }, 2000);
+  }
+  function handelFintersV() {
+    navegation("/home");
+    setTimeout(function () {
+      dispatch(filterByCategorys("varios"));
+    }, 2000);
+  }
+  const [state, setState] = useState(true);
+  useEffect(() => {
+    dispatch(getProducts()).then(() => setState(false));
+  }, [dispatch]);
+  if (state) {
+    return (
+      <div className={style.cargando}>
+        <div>
+          <Hearts fill="#ea047e" stroke="#ea047e" />
+        </div>
+        <div>
+          <p>Cargando...</p>
+        </div>
+      </div>
+    );
+  }
   return (
     <div>
       <div className={style.content}>
-        <NavBar />
-        <Navegation home={true} products={false} />
         <div className={style.carrusel}>
-          <ul>
-            <li>
-              <img
-                src="https://www.bezzia.com/wp-content/uploads/2021/01/prendas-pata-gallo.jpg.webp"
-                alt=""
-              />
-            </li>
-            <li>
-              <img
-                src="https://www.bezzia.com/wp-content/uploads/2021/12/un-estampado-varios-colores.jpg"
-                alt=""
-              />
-            </li>
-            <li>
-              <img
-                src="https://www.moncloa.com/wp-content/uploads/2020/12/Zapatos-de-piel-para-hombre-y-mujer-por-menos-de-30-euros-hoy-en-Aliexpress.jpg"
-                alt=""
-              />
-            </li>
-          </ul>
+          <NavBar home={true} products={false} />
         </div>
 
         <div className={style.contentCarrousel}>
@@ -61,10 +76,13 @@ export default function Landing() {
             <h3 className={style.titleCarrusel}>Productos mas vendidos</h3>
             <Carousel
               leftControl={
-                <IoIosArrowBack size="40px" className={style.butonsCarrosuel} />
+                <IoIosArrowDropleft
+                  size="40px"
+                  className={style.butonsCarrosuel}
+                />
               }
               rightControl={
-                <IoIosArrowForward
+                <IoIosArrowDropright
                   size="40px"
                   className={style.butonsCarrosuel}
                 />
@@ -77,7 +95,7 @@ export default function Landing() {
                       <div className="flex items-center justify-center  h-full w-full  px-10">
                         <Card
                           name={element.name}
-                          image={element.images[0].img}
+                          image={element.mainImage}
                           price={element.price}
                           id={element.id}
                           key={element.id}
@@ -93,7 +111,7 @@ export default function Landing() {
                       <div className="flex items-center justify-center  h-full w-full px-10">
                         <Card
                           name={element.name}
-                          image={element.images[0].img}
+                          image={element.mainImage}
                           price={element.price}
                           id={element.id}
                           key={element.id}
@@ -109,7 +127,7 @@ export default function Landing() {
                       <div className="flex items-center justify-center h-full w-full px-10">
                         <Card
                           name={element.name}
-                          image={element.images[0].img}
+                          image={element.mainImage}
                           price={element.price}
                           id={element.id}
                           key={element.id}
@@ -123,7 +141,12 @@ export default function Landing() {
 
           <div className={style.categoris}>
             <div className="flex items-center justify-center">
-              <div className={style.categotiImportant}>
+              <div
+                className={style.categotiImportant}
+                onClick={(e) => {
+                  handelFintersH(e);
+                }}
+              >
                 <h4>Hombre</h4>
                 <img
                   src="https://thumbs.dreamstime.com/b/hombre-joven-hermoso-modelo-de-moda-en-la-ropa-sport-elegante-que-mira-c%C3%A1mara-sobre-fondo-gris-154379876.jpg"
@@ -131,21 +154,36 @@ export default function Landing() {
                 />
               </div>
               <div className={style.contentSecundari}>
-                <div className={style.card}>
+                <div
+                  className={style.card}
+                  onClick={() => {
+                    handelFintersM();
+                  }}
+                >
                   <h4>Mujer</h4>
                   <img
                     src="https://st3.depositphotos.com/1441511/13049/i/450/depositphotos_130492510-stock-photo-fashion-model-style-fashionable-woman.jpg"
                     alt=""
                   />
                 </div>
-                <div className={style.card}>
+                <div
+                  className={style.card}
+                  onClick={() => {
+                    handelFintersN();
+                  }}
+                >
                   <h4>Niños</h4>
                   <img
                     src="https://childrens-spaces.com/wp-content/uploads/2019/02/moda-infantil-4.jpg"
                     alt=""
                   />
                 </div>
-                <div className={style.card}>
+                <div
+                  className={style.card}
+                  onClick={() => {
+                    handelFintersV();
+                  }}
+                >
                   <h4>Varios</h4>
                   <img
                     src="https://hips.hearstapps.com/hmg-prod.s3.amazonaws.com/images/burro-ropa-armario-abierto-westwing-almacenaje-y-orden-armario-1633514060.jpg?crop=1.00xw:0.834xh;0,0.0534xh&resize=480:*"
@@ -160,10 +198,13 @@ export default function Landing() {
             <h4 className={style.titleGalery}>Tus marcas favoritas</h4>
             <Carousel
               leftControl={
-                <IoIosArrowBack size="40px" className={style.butonsCarrosuel} />
+                <IoIosArrowDropleft
+                  size="40px"
+                  className={style.butonsCarrosuel}
+                />
               }
               rightControl={
-                <IoIosArrowForward
+                <IoIosArrowDropright
                   size="40px"
                   className={style.butonsCarrosuel}
                 />

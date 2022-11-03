@@ -7,9 +7,12 @@ import NavBar from "../NavBar/NavBar";
 import { Tooltip } from "flowbite-react";
 import { MdOutlineDelete } from "react-icons/md";
 import { NavLink } from "react-router-dom";
+import swal from "sweetalert";
+import axios from "axios";
 
 export default function CartView() {
   const cartState = useSelector((state) => state.cart);
+  const userState = useSelector((state) => state.user);
   const total = useSelector((state) => state.cartTotal);
   const dispach = useDispatch();
 
@@ -22,6 +25,7 @@ export default function CartView() {
   };
   const limpiarCart = () => {
     dispach(clearCart());
+    swal("Su carrito esta vacio");
   };
 
   return (
@@ -40,9 +44,9 @@ export default function CartView() {
           />
         </Tooltip>
         <div className={style.pagos}>
-          {<h2>total a pagar: {total}</h2>}
-          <NavLink to="/pagos">
-            <button>Pagar Compra</button>
+          {<h2>Total a pagar: {total}</h2>}
+          <NavLink to="/Order">
+            <button>Pagar</button>
           </NavLink>
         </div>
       </div>

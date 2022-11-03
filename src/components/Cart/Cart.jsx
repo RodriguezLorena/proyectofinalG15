@@ -4,7 +4,7 @@ import { MdOutlineDelete } from "react-icons/md";
 import { NavLink } from "react-router-dom";
 
 export default function Cart({ data, deleteCart }) {
-  const { id, name, price, images, cantidad } = data;
+  const { id, name, price, mainImage, cantidad } = data;
   return (
     <div className={style.content}>
       <div className={style.contentButonDelate}>
@@ -15,7 +15,7 @@ export default function Cart({ data, deleteCart }) {
         />
         <button onClick={() => deleteCart(id, true)}></button>
       </div>
-      <img src={images[0].img} alt="" />
+      <img src={mainImage} alt="" />
       <div className={style.preceTitle}>
         <h3>{name}</h3>
         <p>
@@ -23,8 +23,9 @@ export default function Cart({ data, deleteCart }) {
         </p>
       </div>
       <div className={style.butons}>
-        <button>Comprar ya</button>
-        <NavLink className={style.viewDetail}>Ver detalles</NavLink>
+        <NavLink to={`/product/${id}`} className={style.viewDetail}>
+          Ver detalles
+        </NavLink>
       </div>
     </div>
   );

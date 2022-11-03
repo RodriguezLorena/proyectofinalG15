@@ -13,11 +13,14 @@ import style from "./Home.module.css";
 import Footer from "../Footer/Footer";
 import NavBar from "../NavBar/NavBar";
 import Paginado from "../Paginado/Paginado";
-import Navegation from "../Navegation/Navegation";
+import { Hearts } from "react-loading-icons";
 
 export default function Home() {
   const dispatch = useDispatch();
   const productsAll = useSelector((state) => state.productsAll);
+  const productsFilters = productsAll.filter(
+    (element) => element.value === true
+  );
   const [range, setRange] = useState(0);
   const [Order, setOrder] = useState("");
 
@@ -26,12 +29,56 @@ export default function Home() {
   const cantidadPorPagina = 12;
   const indiceUno = paginaEnEsteMomento * cantidadPorPagina;
   const ultimoIndice = indiceUno - cantidadPorPagina;
-  const productsList = productsAll.slice(ultimoIndice, indiceUno);
+  const productsList = productsFilters.slice(ultimoIndice, indiceUno);
+  //  <<<¡POR FAVOR NO BORRAR ESTO!>>>
+  //ACA SE HACE EL FILTRO POR CATEGORIA:
+  // const auxiliar = [];
+  // const data = productsAll
+  //   ?.map((elemento) => elemento.categories.map((e) => e.name))
+  //   .flat();
 
+  // data.forEach((elemento) => {
+  //   if (!auxiliar.includes(elemento)) {
+  //     auxiliar.push(elemento);
+  //   }
+  // });
+
+  // //ACA ESTA ARREGLO DE TALLAS:
+  const auxiliarSize = [];
+  const dataSize = productsAll
+    ?.map((elemento) => elemento.sizes?.map((elem) => elem))
+    .flat();
+  dataSize.forEach((elemento) => {
+    if (!auxiliarSize.includes(elemento)) {
+      auxiliarSize.push(elemento);
+    }
+  });
+
+  // //ACA ESTA EL ARREGLO DE TIPOS:
+  const auxiliarType = [];
+  const dataType = productsAll?.map((elemento) => elemento.type);
+  dataType.forEach((elemento) => {
+    if (!auxiliarType.includes(elemento)) {
+      auxiliarType.push(elemento);
+    }
+  });
+  const [state, setState] = useState(true);
   useEffect(() => {
-    dispatch(getProducts());
+    dispatch(getProducts()).then(() => setState(false));
   }, [dispatch]);
 
+  if (state) {
+    return (
+      <div className={style.cargando}>
+        <div>
+          <Hearts fill="#ea047e" stroke="#ea047e" />
+        </div>
+        <div>
+          <p>Cargando...</p>
+        </div>
+      </div>
+    );
+  }
   const handleFilterCategory = (e) => {
     e.preventDefault();
     dispatch(filterByCategorys(e.target.value));
@@ -56,11 +103,11 @@ export default function Home() {
     dispatch(filterType(e.target.value));
     setPaginaEnEsteMomento(1);
   }
+  const arrayCategories = ["mujer", "hombre", "varios", "niños"];
 
   return (
-    <div>
-      <NavBar />
-      <Navegation home={false} products={true} />
+    <div className="bg-white">
+      <NavBar home={false} products={true} />
       <div className={style.content}>
         <div className={style.filters}>
           <h2>Filtros:</h2>
@@ -68,9 +115,14 @@ export default function Home() {
             <h3 className={style.titleFilters}>Productos</h3>
             <select onChange={(e) => handleFilterCategory(e)}>
               <option value="all">Todos los productos</option>
-              <option value="varios">Variedades</option>;
-              <option value="mujer">Mujer</option>;
-              <option value="hombre">Hombre</option>;
+
+              {arrayCategories?.map((e, index) => {
+                return (
+                  <option key={index} value={e}>
+                    {e}
+                  </option>
+                );
+              })}
             </select>
           </div>
           <div>
@@ -80,7 +132,7 @@ export default function Home() {
                 type="range"
                 onChange={(e) => handleSelectPrice(e)}
                 min="0"
-                max="13000"
+                max="500"
                 className={style.range}
               />
 
@@ -96,23 +148,20 @@ export default function Home() {
           <div className={style.fiterSize}>
             <h3 className={style.titleFilters}>Talla</h3>
             <select name="" id="" onChange={(e) => handelFilterSize(e)}>
-              <option value="todos">Todos</option>
-              <option value="m">M</option>
-              <option value="s">S</option>
-              <option value="xl">XL</option>
-              <option value="xxl">XXL</option>
+              <option value="all">Todos</option>
+              {auxiliarSize?.map((e) => {
+                return <option value={e}>{e}</option>;
+              })}
             </select>
           </div>
 
           <div className={style.filterType}>
             <h3 className={style.titleFilters}>Tipo</h3>
-            <select name="" id="" onChange={(e) => handelFilterType(e)}>
-              <option value="todos">Todos</option>
-              <option value="hogar">Hogar</option>
-              <option value="remera">Remeras</option>
-              <option value="pantalon">Pantalones</option>
-              <option value="buzos">Buzos</option>
-              <option value="accesorio">Accesorios</option>
+            <select onChange={(e) => handelFilterType(e)}>
+              <option value="all">Todos</option>
+              {auxiliarType?.map((e) => {
+                return <option value={e}>{e}</option>;
+              })}
             </select>
           </div>
         </div>
@@ -122,9 +171,11 @@ export default function Home() {
               return (
                 <Card
                   name={element.name}
-                  image={element.images[0].img}
+                  image={element.mainImage}
                   price={element.price}
                   id={element.id}
+                  sizes={element.sizes}
+                  categories={element.categories}
                   key={element.id}
                 />
               );
