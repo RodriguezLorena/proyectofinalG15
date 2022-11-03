@@ -5,6 +5,8 @@ import { useDispatch, useSelector } from "react-redux";
 import { Link} from "react-router-dom";
 import { getOrders } from "../../redux/action";
 import { clearCart } from "../../redux/action";
+import style from "./Order.module.css";
+
 
 export default function ControlOrders() {
     const dispatch = useDispatch();
@@ -78,58 +80,20 @@ export default function ControlOrders() {
 
     return (
         <div>
-            <h3>GRACIAS POR SU COMPRA</h3>
+            <h3 className={style.titleorder}>GRACIAS POR SU COMPRA!!!</h3>
+            <a>
+
+            </a>
             <Link to="/home">
                 <button onClick={e => {
                     changeStatus(e)
-                }}>Click Aqui para finalizar!</button>
+                }}
+                className={style.butonPago}
+                >Click Aqui para finalizar</button>
             </Link>
         </div>
 
 
     );
 }
-
-{/* 
-            <div>
-                {
-                    pedidos?.map(pedi => {
-                        return (
-                            <div>
-                                <p>{pedi.order_id}</p>
-                                <div>
-                                    <h1>{pedi.firstName + " " + pedi.lastName} </h1>
-                                </div>
-                                <div>
-                                    <h1>{pedi.email}</h1>
-                                </div>
-                                <div>
-                                    <select >
-                                        {
-
-                                            arraydeStatus?.map(e => {
-                                                return (
-                                                    <option >{e}</option>
-                                                );
-                                            })
-                                        }
-                                    </select>
-                                </div>
-                            </div>
-
-                        );
-                    })
-                } */}
-{/* <h1>ESTADO: </h1> */ }
-
-{/* <select onChange={e => e}>
-                    <option value="pending">pending</option>
-                    <option value="completed">completed</option>
-                    <option value="canceled">canceled</option>
-                    <option value="created">created</option>
-                    <option value="cart">cart</option>
-
-                </select> */}
-{/* </div> */ }
-
 
