@@ -3,7 +3,9 @@ import { MdArrowBackIos } from "react-icons/md";
 import swal from "sweetalert";
 import { CONSTANTES } from "./constantes";
 
+
 const datosdeploy = "https://velvet.up.railway.app/product";
+
 export function getProducts() {
   return async function (dispatch) {
     try {
@@ -87,7 +89,12 @@ export function filterType(payload) {
     payload,
   };
 }
-
+export function agreadoNuevoEstado(payload){
+  return{
+    type: "AGREGAR",
+    payload,
+  }
+}
 export const formularioDeCreacion = async (payload) => {
   try {
     let crearProduct = await axios.post(

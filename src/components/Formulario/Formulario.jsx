@@ -1,7 +1,7 @@
 import React from "react";
 import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { formularioDeCreacion, getProducts } from "../../redux/action";
+import { formularioDeCreacion, getProducts,agreadoNuevoEstado,dataa } from "../../redux/action";
 import { Link, useNavigate } from "react-router-dom";
 import NavBar from "../NavBar/NavBar";
 import style from "./Formulario.module.css";
@@ -46,6 +46,7 @@ const Formulario = () => {
   }, [creacion]);
 
   const [nuevoProduct, setNuevoProduct] = useState({
+    id:"123",
     name: "",
     price: 0,
     stock: 0,
@@ -57,6 +58,7 @@ const Formulario = () => {
     image: [],
     category: "",
     bestSellers: false,
+
   });
 
   const manipuladorInput = (e) => {
@@ -211,6 +213,7 @@ const Formulario = () => {
           className: "swal-title",
         });
       } else {
+       dataa.push(nuevoProduct)
         formularioDeCreacion(nuevoProduct)
           .then(() => {
             setCreacion("creada");

@@ -1,7 +1,7 @@
 import { CONSTANTES } from "./constantes";
 import swal from "sweetalert";
 
-const initialState = {
+let initialState = {
   productsAll: [],
   filterProducts: [],
   detailProduct: {},
@@ -48,7 +48,9 @@ export default function reducer(state = initialState, { payload, type }) {
   switch (type) {
     case "GET_PRODUCTS":
       return { ...state, productsAll: payload, filterProducts: payload };
-
+    case "AGREGAR":
+   
+      return initialState.productsAll.push(payload)
     case "GET_ID":
       return {
         ...state,
