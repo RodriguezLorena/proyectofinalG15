@@ -5,12 +5,13 @@ import { formularioDeCreacion, getProducts } from "../../redux/action";
 import { Link, useNavigate } from "react-router-dom";
 import NavBar from "../NavBar/NavBar";
 import style from "./Formulario.module.css";
-
+import Error401 from "../Error401/Error401.jsx"
 import swal from "sweetalert";
 import "../../App.css";
 import axios from "axios";
 import { MdOutlineShoppingCart } from "react-icons/md";
 import { AiFillHeart } from "react-icons/ai";
+import { AiOutlineHeart } from "react-icons/ai";
 
 const Formulario = () => {
   const dispatch = useDispatch();
@@ -18,12 +19,11 @@ const Formulario = () => {
   const [creacion, setCreacion] = useState("inicial");
 
   const productsAll = useSelector((state) => state.productsAll);
-
+  const user = useSelector((state) => state.user);
+  console.log(user,"holaaaaa")
   useEffect(() => {
     dispatch(getProducts());
   }, [dispatch]);
-
-  const navegacionAutomatica = useNavigate();
 
   useEffect(() => {
     if (creacion === "creada") {
@@ -33,7 +33,7 @@ const Formulario = () => {
         icon: "success",
         className: "swal-modal",
         className: "swal-title",
-      }).then(navegacionAutomatica("/admin"));
+      });
     }
     if (creacion === "noCreada") {
       swal({
@@ -44,7 +44,7 @@ const Formulario = () => {
         className: "swal-title",
       });
     }
-  }, [creacion, navegacionAutomatica]);
+  }, [creacion]);
 
   const [nuevoProduct, setNuevoProduct] = useState({
     name: "",
@@ -56,7 +56,8 @@ const Formulario = () => {
     size: [],
     mainImage: "",
     image: [],
-    category: [],
+    category: "",
+    bestSellers: false,
   });
 
   const manipuladorInput = (e) => {
@@ -71,61 +72,30 @@ const Formulario = () => {
       })
     );
   };
+  //manipulador de checkbox
 
-  //manipulo la seleccion de categorias
-  const arrayCategories = ["mujer", "hombre", "varios", "niños"];
-  const manipuladorSelectCategory = (e) => {
-    const selec = nuevoProduct.category.filter(
-      (elemento) => elemento !== e.target.innerHTML
-    );
-    if (selec.includes(e.target.value)) {
-      swal({
-        title: "UPSS!!!",
-        text: "Esa categoria ya fue seleccionada",
-        icon: "error",
-        className: "swal-modal",
-        className: "swal-title",
-      });
-    } else {
-      setNuevoProduct({
-        ...nuevoProduct,
-        category: [...nuevoProduct.category, e.target.value],
-      });
-      setValidador(
-        validacion({
-          ...nuevoProduct,
-          category: [...nuevoProduct.category, e.target.value],
-        })
-      );
-    }
-  };
-
-  //manipulo la eliminacion de categorias
-  const eliminarSelectCategory = (e) => {
-    const seleccion = nuevoProduct.mainImage.filter(
-      (elemento) => elemento !== e.target.innerHTML
-    );
-
+  const manipuladorCheckbox = (e) => {
+    console.log("e.target.checked", e.target.checked);
     setNuevoProduct({
       ...nuevoProduct,
-      category: seleccion,
+      [e.target.name]: e.target.checked,
     });
-
-    setValidador(
-      validacion({
-        ...nuevoProduct,
-        category: [...seleccion],
-      })
-    );
   };
 
-  //manipulo la seleccion de talles
+  // manipular category
+  const categorias = ["mujer", "hombre", "varios", "niños"];
+  const manipuladorCategory = (e) => {
+    console.log("aca esta el nuevo producto ", nuevoProduct);
+    setNuevoProduct({
+      ...nuevoProduct,
+      category: e.target.value,
+    });
+  };
+  //Manipulo el array de talle
   const talles = [
     "s",
     "m",
     "l",
-    "xl",
-    "U",
     "1",
     "1.5",
     "2",
@@ -245,6 +215,19 @@ const Formulario = () => {
         formularioDeCreacion(nuevoProduct)
           .then(() => {
             setCreacion("creada");
+            setNuevoProduct({
+              name: "",
+              price: 0,
+              stock: 0,
+              description: "",
+              value: true,
+              type: "",
+              size: [],
+              mainImage: "",
+              image: [],
+              category: "",
+              bestSellers: false,
+            });
           })
           .catch(() => {
             setCreacion("noCreada");
@@ -263,10 +246,9 @@ const Formulario = () => {
 
     if (nuevoProduct.name.length > 50)
       validar.name = "NO PUEDE TENER MAS DE 50 CARACTERES";
-    if (nuevoProduct.name.length < 5)
-      validar.name = "NECESITA TENER UN MINIMO DE 5 CARACTERES";
+    if (nuevoProduct.name.length < 5) validar.name = "MINIMO DE 5 CARACTERES";
     if (sinEspacios.test(nuevoProduct.name[0]))
-      validar.name = "TIENE QUE PONER TEXTO VALIDO, LOS ESPACIOS NO SE VALEN";
+      validar.name = "TIENE QUE PONER TEXTO VALIDO";
     if (noContieneNumero.test(nuevoProduct.name))
       validar.name = "NO PUEDE CONTENER NUMEROS";
     if (productsAll.find((elemento) => elemento.name === nuevoProduct.name)) {
@@ -283,62 +265,72 @@ const Formulario = () => {
 
     if (nuevoProduct.description.length > 100)
       validar.description = "NO PUEDE TENER MAS DE 100 CARACTERES";
-    if (nuevoProduct.description.length < 30)
-      validar.description = "NECESITA TENER UN MINIMO DE 30 CARACTERES";
+    if (nuevoProduct.description.length < 20)
+      validar.description = "NECESITA TENER UN MINIMO DE 20 CARACTERES";
     if (sinEspacios.test(nuevoProduct.description[0]))
       validar.description = "NO PUEDE SER ESPACIOS EN BLANCO";
 
     if (Number(nuevoProduct.price) < 1)
-      validar.price = "TIENE QUE SER UN PRECIO MAYOR A $1 ";
+      validar.price = "REQUIERE PRECIO MAYOR A A $USD1 ";
     if (Number(nuevoProduct.price) > 90000)
-      validar.price = "NO PUEDE SER MAYOR A 150.000";
+      validar.price = "NO PUEDE SER MAYOR A $USD 500";
 
-    if (Number(nuevoProduct.stock) < 1)
-      validar.stock = "TIENE QUE SER UN VALOR MAYOR A 1 ";
+    if (Number(nuevoProduct.stock) < 1) validar.stock = "VALOR MAYOR A 0 ";
+    if (Number(nuevoProduct.stock) > 10000000)
+      validar.stock = "NO ES RECIONAL LA CANTIDAD QUE INTENTA PONER";
 
     return validar;
   };
 
   return (
-    <div>
+    user.role === "admin"? 
+    <div className="bg-white">
       <NavBar />
+      <h2 className={style.title}>Cargar Producto</h2>
 
-      <div>
-        <h2 className={style.title}>Cargar Producto</h2>
-      </div>
       <div className={style.contenedor}>
-        <div className={style.cargaImg}>
-          <p>PRIMER PASO: cargar imagenes</p>
-          <div>
-            IMAGEN PRINCIPAL
-            <input name="imagen1" type="file" onChange={handleFiles} />
-            {loading ? (
-              <h3>Cargando...</h3>
-            ) : (
-              <img src={images} alt="img" style={{ width: "50px" }} />
-            )}
-            <button className={style.btnImg} onClick={handleAPI}>
-              SUBIR IMAGEN PRINCIPAL
-            </button>
-          </div>
+        <div>
+          <p className=" text-center">PRIMER PASO: cargar imagenes</p>
+          <div className={style.cargaImg}>
+            <div className={style.contentInputsImg}>
+              <h6>IMAGEN PRINCIPAL</h6>
+              <div className={style.inputsImg}>
+                <p>selecionar img</p>
+                <input name="imagen1" type="file" onChange={handleFiles} />
+              </div>
+              {loading ? (
+                <h3>Cargando...</h3>
+              ) : (
+                <img src={images} style={{ width: "50px" }} />
+              )}
+              <button className={style.btnImg} onClick={handleAPI}>
+                SUBIR IMAGEN PRINCIPAL
+              </button>
+            </div>
 
-          <div>
-            IMAGEN SECUNDARIA
-            <input
-              name="imagen"
-              type="file"
-              multiple
-              onChange={(e) => {
-                setImages(e.target.files);
-              }}
-            ></input>
-            <button className={style.btnImg} onClick={handleImagenes}>
-              SUBIR IMAGENES SECUNDARIAS
-            </button>
+            <div className={style.contentInputsImg}>
+              <h6>IMAGEN SECUNDARIA</h6>
+
+              <div className={style.inputsImg}>
+                <p>selecionar img</p>
+                <input
+                  name="imagen"
+                  type="file"
+                  multiple
+                  onChange={(e) => {
+                    setImages(e.target.files);
+                  }}
+                ></input>
+              </div>
+              <button className={style.btnImg} onClick={handleImagenes}>
+                SUBIR IMAGENES SECUNDARIAS
+              </button>
+            </div>
           </div>
         </div>
+
         <div className={style.cargaDatos}>
-          <p>SEGUNDO PASOS: cargar datos</p>
+          <p className="w-full ">SEGUNDO PASO: cargar datos</p>
           <form
             className={style.contenedorForm}
             onSubmit={manipuladorDeCreacion}
@@ -357,23 +349,6 @@ const Formulario = () => {
               </label>
               {validador.name ? (
                 <p className={style.validacion}>{validador.name}</p>
-              ) : (
-                <p className={style.validacion}> </p>
-              )}
-            </div>
-            <div className={style.form}>
-              <label>
-                DESCRIPCION:
-                <textarea
-                  type="text"
-                  name="description"
-                  value={nuevoProduct.description}
-                  placeholder="ESCRIBA UNA DESCRIPCION DEL PRODUCTO"
-                  onChange={(e) => manipuladorInput(e)}
-                />
-              </label>
-              {validador.description ? (
-                <p className={style.validacion}>{validador.description}</p>
               ) : (
                 <p className={style.validacion}> </p>
               )}
@@ -434,7 +409,7 @@ const Formulario = () => {
 
             <div className={style.form}>
               <label>
-                SELECCIONA UN TALLE:
+                TALLE:
                 <select
                   defaultValue={"default"}
                   onChange={(e) => manipuladorSelectSize(e)}
@@ -464,8 +439,7 @@ const Formulario = () => {
             </div>
 
             <div className={style.form}>
-              <label>
-                SELECCIONA UNA CATEGORIA:
+              {/* CATEGORIA:
                 <select
                   defaultValue={"default"}
                   onChange={(e) => manipuladorSelectCategory(e)}
@@ -481,10 +455,44 @@ const Formulario = () => {
                         </option>
                       );
                     })}
-                </select>
-              </label>
+
+                </select> */}
+              <select
+                defaultValue={"default"}
+                onChange={(e) => manipuladorCategory(e)}
+              >
+                <option value="default" disabled>
+                  ELIGE UNA CATEGORIA:
+                </option>
+                {categorias &&
+                  categorias.map((elemento, index) => {
+                    return (
+                      <option key={index} value={elemento}>
+                        {elemento}
+                      </option>
+                    );
+                  })}
+              </select>
             </div>
-            <div>
+            <div className={style.form}>
+              <label>
+                DESCRIPCION:
+                <textarea
+                  type="text"
+                  name="description"
+                  value={nuevoProduct.description}
+                  placeholder="Descrpcion de el producto"
+                  onChange={(e) => manipuladorInput(e)}
+                />
+              </label>
+              {validador.description ? (
+                <p className={style.validacion}>{validador.description}</p>
+              ) : (
+                <p className={style.validacion}> </p>
+              )}
+            </div>
+
+            {/* <div>
               <ul>
                 {nuevoProduct.category.map((elemento) => (
                   <li key={elemento} onClick={(e) => eliminarSelectCategory(e)}>
@@ -492,10 +500,24 @@ const Formulario = () => {
                   </li>
                 ))}
               </ul>
+            </div> */}
+            <div className={style.contentCheckboxs}>
+              <div className={style.contentCheckbox}>
+                <label>
+                  MAS VENDIDOS:
+                  <input
+                    type="checkbox"
+                    name="bestSeller"
+                    checked={nuevoProduct.bestSellers}
+                    onChange={(e) => manipuladorCheckbox(e)}
+                  />
+                </label>
+              </div>
             </div>
+
             <div className={style.contentBtn}>
               <button
-                className={style.btnImg}
+                className={style.btnCrear}
                 onClick={(e) => {
                   manipuladorDeCreacion(e);
                 }}
@@ -505,12 +527,11 @@ const Formulario = () => {
             </div>
           </form>
         </div>
-
-        <div>
-          <h2>PREVISUALIZACION</h2>
+      </div>
+      <div>
+        <div className={style.previsualizaciones}>
           <div className={style.content}>
             <MdOutlineShoppingCart className={style.carrito} size="40px" />
-
             <img src={nuevoProduct.mainImage} alt="" className={style.fondo} />
 
             <div className={style.contentInfo}>
@@ -524,17 +545,61 @@ const Formulario = () => {
                 <div className={style.tallas}>
                   <p>{nuevoProduct.size}</p>
                 </div>
-                <div>
-                  <p> descripcion: {nuevoProduct.description}</p>
-                </div>
                 <h6>${nuevoProduct.price}</h6>
+              </div>
+            </div>
+          </div>
+
+          <div className={style.contenedorDetalle}>
+            <div className={style.contentDetail}>
+              <div className={style.contentImages}>
+                <div className={style.images}>
+                  <button>
+                    <img src={nuevoProduct.image[0]} alt="img no fount" />
+                  </button>
+                  <button>
+                    <img src={nuevoProduct.image[1]} alt="img no fount" />
+                  </button>
+                  <button>
+                    <img src={nuevoProduct.image[2]} alt="img no fount" />
+                  </button>
+                  <button>
+                    <img src={nuevoProduct.image[3]} alt="img no fount" />
+                  </button>
+                </div>
+                <img
+                  src={nuevoProduct.mainImage}
+                  alt="img no fount"
+                  className={style.imageP}
+                />
+              </div>
+
+              <div className={style.textContent}>
+                <div className={style.contentLike}>
+                  <AiOutlineHeart className={style.like} size="30px" />
+                </div>
+                <h2 className={style.title}> {nuevoProduct.name}</h2>
+                <span className={style.price}> ${nuevoProduct.price}</span>
+                <h3 className={style.stock}>Stock: {nuevoProduct.stock}</h3>
+                <h3 className={style.description}>
+                  {nuevoProduct.description}
+                </h3>
+                <div className={style.buyCarrito}>
+                  <button className={style.buy}>Comparar ya</button>
+                  <MdOutlineShoppingCart
+                    className={style.carrito}
+                    size="30px"
+                  />
+                </div>
               </div>
             </div>
           </div>
         </div>
       </div>
     </div>
+    :  <Error401></Error401>
   );
+  
 };
 
 export default Formulario;

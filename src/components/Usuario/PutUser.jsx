@@ -15,7 +15,12 @@ import NavBar from "../NavBar/NavBar";
 import style from "./PutUser.module.css";
 import Cart from "../Cart/Cart";
 import swal from "sweetalert";
-
+import { Toast } from "flowbite-react";
+import { HiOutlineMail } from "react-icons/hi";
+import FavoriteList from "../FavoriteList/FavoriteList";
+import OrderList from "../OrderList/OrderList";
+import OrderCard from "../OrderCard/OrderCard";
+import Error401 from "../Error401/Error401";
 const PutUser = () => {
   const dispatch = useDispatch();
   let params = useParams();
@@ -23,7 +28,7 @@ const PutUser = () => {
   const cartState = useSelector((state) => state.cart);
 
   useEffect(() => {
-    dispatch(getUser(user.token));
+    dispatch(getUser());
   }, []);
 
   const [input, setInput] = useState({
@@ -73,9 +78,25 @@ const PutUser = () => {
   const { email, id, password, phoneNumber, role, userName, image } = user;
 
   return (
+    user.role?
     <div className="bg-white">
       <NavBar />
+
       <div className={style.content}>
+        {user.role == "inactive" ? (
+          <Toast>
+            <div className="inline-flex h-8 w-8 shrink-0 items-center justify-center rounded-lg bg-blue-100 text-blue-500 dark:bg-blue-800 dark:text-blue-200">
+              <NavLink to={`/verification/${user.id}`}>
+                <HiOutlineMail size="30" />
+              </NavLink>
+            </div>
+            <NavLink to={`/verification/${user.id}`}>
+              <div className="ml-3 text-sm font-normal"> Confirmar email</div>
+            </NavLink>
+            <Toast.Toggle />
+          </Toast>
+        ) : null}
+
         <div className={style.contentPerfile}>
           <div className={style.perileImage}>
             {input.image.length ? (
@@ -157,20 +178,35 @@ const PutUser = () => {
             ) : null}
           </form>
         </div>
-
-        <div className={style.carrito}>
-          <h5>Carrito</h5>
-          {cartState.length < 1
-            ? "Carrito vacio"
-            : cartState.slice(0, 3).map((ele) => {
+        <div className={style.contentCarrFav}>
+          <div className={style.carrito}>
+            <h5>Carrito</h5>
+            {cartState.length < 1 ? (
+              <h6>Carrito vacio</h6>
+            ) : (
+              cartState.slice(0, 3).map((ele) => {
                 return <Cart key={ele.id} data={ele} deleteCart={deleteCart} />;
-              })}
-          <NavLink to="/carrito" className={style.viewAll}>
-            Mostrar todos
-          </NavLink>
+              })
+            )}
+            <NavLink to="/carrito" className={style.viewAll}>
+              Mostrar todos
+            </NavLink>
+          </div>
+
+          <div className={style.favoritos}>
+            <h5>Favoritos</h5>
+            <FavoriteList />
+          </div>
+
+          <div className={style.products}>
+            <h5>Productos comprados</h5>
+            <OrderCard />
+          </div>
         </div>
       </div>
     </div>
+    :
+    <Error401></Error401>
   );
 };
 

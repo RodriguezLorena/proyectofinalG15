@@ -1,6 +1,7 @@
 import { CONSTANTES } from "./constantes";
+import swal from "sweetalert";
 
-const initialState = {
+export const initialState = {
   productsAll: [],
   filterProducts: [],
   detailProduct: {},
@@ -17,6 +18,16 @@ const initialState = {
   user: localStorage.getItem("user")
     ? JSON.parse(localStorage.getItem("user"))
     : {},
+
+  orders: [],
+  ordersProducts: [],
+  users: [],
+
+  favorite: localStorage.getItem("favorite")
+    ? JSON.parse(localStorage.getItem("favorite"))
+    : [],
+  favoriteTotalItems:
+    JSON.parse(localStorage.getItem("favoriteTotalItems")) || 0,
 };
 
 function setInLocalStorage(key, state) {
@@ -146,17 +157,23 @@ export default function reducer(state = initialState, { payload, type }) {
       };
 
     //--------------------------//
-
     case CONSTANTES.ADD_TO_CART:
       const product = state.productsAll.find((ele) => ele.id === payload);
       const itemExist = state.cart.find((ele) => ele.id === product.id);
+
+      const controlStock = (qty) => {
+        console.log("aca esta el name", product.name);
+        console.log("ACA ESTA EL STOCK ", product.stock);
+        return qty > product.stock ? product.stock : qty;
+      };
+
       let newCart = itemExist
         ? state.cart.map((ele) =>
             itemExist.id === ele.id
-              ? { ...ele, cantidad: ele.cantidad + 1 }
+              ? { ...ele, cantidad: controlStock(ele.cantidad + 1) }
               : ele
           )
-        : [...state.cart, { ...product, cantidad: 1 }];
+        : [...state.cart, { ...product, cantidad: controlStock(1) }];
 
       return {
         ...state,
@@ -164,31 +181,33 @@ export default function reducer(state = initialState, { payload, type }) {
         cartTotal: setInLocalStorage("cartTotal", calcularTotal(newCart)),
         cartTotalItems: setInLocalStorage(
           "cartTotalItems",
-          state.cartTotalItems + 1
+          newCart.reduce((acc, ele) => acc + ele.cantidad, 0)
         ),
       };
     case CONSTANTES.DELETE_ONE_PRODUCT:
       const productExist = state.cart.find((ele) => ele.id === payload);
-      const newCart2 =
-        productExist && productExist.cantidad > 1
-          ? state.cart.map((item) =>
-              item.id === productExist.id
-                ? { ...item, cantidad: item.cantidad - 1 }
-                : item
-            )
-          : productExist
-          ? state.cart.filter((item) => item.id !== productExist.id)
-          : state.cart;
 
-      return {
-        ...state,
-        cart: setInLocalStorage("cart", newCart2),
-        cartTotal: setInLocalStorage("cartTotal", calcularTotal(newCart2)),
-        cartTotalItems: setInLocalStorage(
-          "cartTotalItems",
-          state.cartTotalItems - 1
-        ),
-      };
+      if (productExist) {
+        const newCart2 = state.cart.filter((ele) => ele.id === payload)[0];
+        const newCartAuxiliar = state.cart.filter((ele) => ele.id !== payload);
+        if (newCart2.cantidad > 1) {
+          newCart2.cantidad = newCart2.cantidad - 1;
+          newCartAuxiliar.push(newCart2);
+        }
+        return {
+          ...state,
+          cart: setInLocalStorage("cart", newCartAuxiliar),
+          cartTotal: setInLocalStorage(
+            "cartTotal",
+            calcularTotal(newCartAuxiliar)
+          ),
+          cartTotalItems: setInLocalStorage(
+            "cartTotalItems",
+            newCartAuxiliar.reduce((acc, ele) => acc + ele.cantidad, 0)
+          ),
+        };
+      }
+
     case CONSTANTES.DELETE_ALL_PRODUCT:
       const existProduct = state.cart.find((ele) => ele.id === payload);
       const newCart3 = existProduct
@@ -200,7 +219,7 @@ export default function reducer(state = initialState, { payload, type }) {
         cartTotal: setInLocalStorage("cartTotal", calcularTotal(newCart3)),
         cartTotalItems: setInLocalStorage(
           "cartTotalItems",
-          state.cartTotalItems - existProduct.cantidad
+          state.cart.reduce((acc, ele) => acc + ele.cantidad, 0)
         ),
       };
 
@@ -233,6 +252,46 @@ export default function reducer(state = initialState, { payload, type }) {
         ...state,
       };
 
+    case "ADD_TO_FAVORITE":
+      const productFav = state.productsAll.find((ele) => ele.id === payload);
+      // const itemExist = state.cart.find((ele) => ele.id === product.id);
+
+      let newFav = [...state.favorite, { ...productFav }];
+
+      return {
+        ...state,
+        favorite: setInLocalStorage("favorite", newFav),
+        favoriteTotalItems: setInLocalStorage(
+          "favoriteTotalItems",
+          state.favorite.length + 1
+        ),
+      };
+
+    case "DELETE_ONE_FAVORITE":
+      const productFavDelete = state.productsAll.find(
+        (ele) => ele.id === payload
+      );
+      let newfavoriteList = state.favorite.filter(
+        (element) => element.id !== productFavDelete.id
+      );
+      // const itemExist = state.cart.find((ele) => ele.id === product.id);
+
+      return {
+        ...state,
+        favorite: setInLocalStorage("favorite", newfavoriteList),
+        favoriteTotalItems: setInLocalStorage(
+          "favoriteTotalItems",
+          state.favorite.length - 1
+        ),
+      };
+
+    case "SEARCH_USER_FOR_NAME":
+      let users = state.users;
+      let filterForName = users.filter(
+        (element) => element.userName == payload
+      );
+      return { ...state, users: filterForName };
+
     case "LOGIN":
       return { ...state, user: setInLocalStorage("user", payload) };
 
@@ -254,6 +313,17 @@ export default function reducer(state = initialState, { payload, type }) {
         ...state,
         user: a[0],
       };
+
+    //------------ORDERS-----------------
+    case CONSTANTES.GET_ODERS:
+      return {
+        ...state,
+        orders: payload,
+      };
+
+    case "GET_ORDER_PRODUCTS":
+      return { ...state, ordersProducts: payload };
+
     default:
       return { ...state };
   }

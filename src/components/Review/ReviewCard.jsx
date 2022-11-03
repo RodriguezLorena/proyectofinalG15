@@ -1,32 +1,31 @@
-import React from "react";
-import styles from "../Review/ReviewCard.module.css"
-import Stars from "../Stars/Stars"
+import React, { useEffect } from "react";
+import styles from "../Review/ReviewCard.module.css";
+import Stars from "../Stars/Stars";
+import AOS from "aos";
+import "aos/dist/aos.css";
 export default function ReviewCard({ username, score, description }) {
+  console.log("ACA ESTA SCORE", score);
+  useEffect(() => {
+    AOS.init({
+      duration: 2000,
+    });
+  }, []);
+  return (
+    <div className={styles.container} data-aos="fade-down-right">
+      <ul>
+        <li>
+          <div>
+            <a>{username}</a>
+          </div>
 
-    console.log(score);
-    return (
-
-        <div className={styles.container}>
-
-            <ul>
-                <li>
-
-
-                    <div>
-                        {description}
-                    </div>
-                    <div>
-                        <a>{username}</a>
-                    </div>
-                    <div className={styles.commentsIcons}>
-                        <i className={styles.iconsPosition}><Stars score={score}></Stars></i>
-                    </div>
-
-                </li>
-
-            </ul>
-
-        </div>
-    );
-
+          <div>{description}</div>
+        </li>
+        <li>
+          <div className={styles.commentsIcons}>
+            <Stars score={score}></Stars>
+          </div>
+        </li>
+      </ul>
+    </div>
+  );
 }

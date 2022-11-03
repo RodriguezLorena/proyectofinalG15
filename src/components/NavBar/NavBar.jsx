@@ -1,12 +1,22 @@
 import React, { useState } from "react";
 import { FiSearch } from "react-icons/fi";
 import { IoPersonOutline } from "react-icons/io5";
-import { MdOutlineShoppingCart } from "react-icons/md";
+import { MdOutlineShoppingCart, MdOutlineShoppingBag } from "react-icons/md";
+import { AiOutlineHeart } from "react-icons/ai";
 import { Dropdown } from "flowbite-react";
 import style from "./NavBar.module.css";
 import CartList from "../CartList/CartList";
+import FavoriteList from "../FavoriteList/FavoriteList";
+
 import Logo from "../../img/logoVelvet.png";
-import { getForName, login, creatAcount, clearUser } from "../../redux/action";
+import {
+  getForName,
+  login,
+  creatAcount,
+  clearUser,
+  getOrdersProducts,
+  getOrders,
+} from "../../redux/action";
 import { useDispatch, useSelector } from "react-redux";
 import { NavLink, useNavigate } from "react-router-dom";
 import { Button, Modal, Label, TextInput, Checkbox } from "flowbite-react";
@@ -14,11 +24,20 @@ import { IoClose } from "react-icons/io5";
 import { BsArrowLeftShort } from "react-icons/bs";
 import Admin from "../Admin/Admin";
 
+//-----------------importaciones de google----------------
+import CreateAcountWithGoogle from "../Login/CreateAccountAndLoginWithGoogle";
+import { gapi } from "gapi-script";
+import CreateAccountWithGoogle from "../Login/CreateAccountAndLoginWithGoogle";
+import OrderList from "../OrderList/OrderList";
+import { useEffect } from "react";
+const clientId = process.env.REACT_APP_GOOGLE_CLIENT_ID;
+
 export default function NavBar({ home, products }) {
   const dispatch = useDispatch();
   const navegation = useNavigate();
   const [search, setSearch] = useState("");
   const cantidadCarrito = useSelector((state) => state.cartTotalItems);
+  const favoriteTotalItems = useSelector((state) => state.favoriteTotalItems);
   const user = useSelector((state) => state.user);
 
   function handelSearch(e) {
@@ -28,7 +47,10 @@ export default function NavBar({ home, products }) {
 
   function searchForName(e) {
     e.preventDefault();
-    dispatch(getForName(search));
+    navegation("/home");
+    setTimeout(function () {
+      dispatch(getForName(search));
+    }, 500);
     setSearch("");
   }
 
@@ -39,11 +61,13 @@ export default function NavBar({ home, products }) {
   const [valuesInputs, setValuesInputs] = useState({
     userName: "",
     password: "",
+    googleId: false,
   });
   const [valuesCreate, setValuesCreate] = useState({
     email: "",
     password: "",
     userName: "",
+    googleId: false,
   });
   // const [admin, setAdmin] = useState({ email: "", password : "" });
 
@@ -76,6 +100,13 @@ export default function NavBar({ home, products }) {
     dispatch(clearUser());
     navegation("/");
   }
+
+  useEffect(() => {
+    dispatch(getOrdersProducts());
+    if (Object.entries(user).length > 0) {
+      dispatch(getOrders());
+    }
+  }, [dispatch]);
 
   //-------------------//
 
@@ -122,14 +153,12 @@ export default function NavBar({ home, products }) {
                   inline={true}
                   arrowIcon={false}
                 >
-                  <Dropdown.Item>
-                    <NavLink
-                      to={`/user/${user.id}`}
-                      className="flex colum justify-center flex-col items-center"
-                    >
-                      perfil
-                    </NavLink>
-                  </Dropdown.Item>
+                  <NavLink
+                    to={`/user/${user.id}`}
+                    className="flex colum justify-center flex-col items-center"
+                  >
+                    <Dropdown.Item>perfil</Dropdown.Item>
+                  </NavLink>
                   <Dropdown.Item onClick={(e) => handelClearUser(e)}>
                     Cerrar sesion
                   </Dropdown.Item>
@@ -202,6 +231,9 @@ export default function NavBar({ home, products }) {
                     >
                       Crear cuenta
                     </button>
+                  </div>
+                  <div className={style.contentLoginGoogle}>
+                    <CreateAccountWithGoogle text={"Iniciar con Google"} />
                   </div>
                 </div>
               </Modal.Body>
@@ -277,11 +309,15 @@ export default function NavBar({ home, products }) {
                         setShowCreate(false);
                         handelCreateacount(e);
                       }}
-                      className="bg-blue-700 text-white p-2 rounded-3xl text-xl "
+                      className="bg-blue-700 text-white p-2 rounded-3xl text-xl mb-10 "
                     >
                       Crear cuenta
                     </button>
+                    <div>
+                      <CreateAccountWithGoogle text={"Crear con Google"} />
+                    </div>
                   </div>
+
                   <div className="text-sm font-medium text-gray-500 dark:text-gray-300">
                     <button
                       onClick={() => {
@@ -310,16 +346,41 @@ export default function NavBar({ home, products }) {
             </Dropdown>
           </div>
 
+          <div className={style.favoritos}>
+            <span className={style.contador}>{favoriteTotalItems}</span>
+            <Dropdown
+              label={<AiOutlineHeart size="30" />}
+              inline={true}
+              arrowIcon={false}
+            >
+              <Dropdown.Item>
+                <FavoriteList />
+              </Dropdown.Item>
+            </Dropdown>
+          </div>
+          {Object.entries(user).length > 0 ? (
+            <div className={style.order}>
+              <Dropdown
+                label={<MdOutlineShoppingBag size="30" />}
+                inline={true}
+                arrowIcon={false}
+              >
+                <Dropdown.Item>
+                  <OrderList />
+                </Dropdown.Item>
+              </Dropdown>
+            </div>
+          ) : null}
+
           <form action="" onSubmit={(e) => searchForName(e)}>
-            <NavLink to="/home">
-              <input
-                type="text"
-                placeholder="Buscar..."
-                value={search}
-                onChange={(e) => handelSearch(e)}
-                className={style.inputSearch}
-              />
-            </NavLink>
+            <input
+              type="text"
+              placeholder="Buscar..."
+              value={search}
+              onChange={(e) => handelSearch(e)}
+              className={style.inputSearch}
+            />
+
             <button type="submit" name="serach" className=" h-10">
               <FiSearch size="30" />
             </button>

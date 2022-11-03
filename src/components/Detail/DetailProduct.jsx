@@ -12,25 +12,58 @@ import Card from "../Card/Card";
 import { Carousel } from "flowbite-react";
 import { IoIosArrowBack, IoIosArrowForward } from "react-icons/io";
 import NavBar from "../NavBar/NavBar";
-import { addToCart } from "../../redux/action";
+import { addToCart, addToFavorite } from "../../redux/action";
 import Review from "../Review/Review";
 import Reviews from "../Review/Reviews";
+import { Hearts } from "react-loading-icons";
+import swal from "sweetalert";
 
 export default function ProductDetail() {
   const dispatch = useDispatch();
   const { id } = useParams();
   const IdProduct = useSelector((state) => state.detailProduct);
   const productsAll = useSelector((state) => state.productsAll);
-  const IdUser=useSelector((state)=>state.user)
+  const favorite = useSelector((state) => state.favorite);
+  const IdUser = useSelector((state) => state.user);
+  const [imageProduct, setImageProduct] = useState("");
 
-  // console.log(IdUser.id,'PROBANMDO ID USER'); 
-
-
+  function handelChangueImagens(e) {
+    e.preventDefault();
+    setImageProduct(e.target.src);
+  }
+  // console.log(IdUser.id,'PROBANMDO ID USER');
 
   const dispath = useDispatch();
   const addCart = (id) => {
-    console.log(id);
-    dispath(addToCart(id));
+    dispath(addToCart(id))
+    swal({
+      title: "Producto agregado al carrito",
+      icon: "success",
+      button: "Aceptar",
+      className: "swal-modal",
+      className: "swal-overlay",
+      className: "swal-title",
+    });
+  };
+
+  const addFavorite = (id) => {
+    console.log(id, "holaa");
+    const compro = favorite.filter((element) => element.id === id);
+    if (compro.length > 0) {
+      return swal({
+        title: "Este producto ya se encuentra añadido",
+        icon: "error",
+      });
+    }
+    dispatch(addToFavorite(id));
+    swal({
+      title: "Producto agregado a favoritos exitosamente",
+      icon: "success",
+      button: "Aceptar",
+      className: "swal-modal",
+      className: "swal-overlay",
+      className: "swal-title",
+    });
   };
 
   const [state, setState] = useState(true);
@@ -46,7 +79,16 @@ export default function ProductDetail() {
   //   (element) => element.category == IdProduct[0].category
   // );
   if (state) {
-    return <div>Cargando...</div>;
+    return (
+      <div className={style.cargando}>
+        <div>
+          <Hearts fill="#ea047e" stroke="#ea047e" />
+        </div>
+        <div>
+          <p>Cargando...</p>
+        </div>
+      </div>
+    );
   }
 
   return (
@@ -56,20 +98,41 @@ export default function ProductDetail() {
         <div className={style.contentImages}>
           <div className={style.images}>
             <button>
-              <img src={IdProduct[0].images[0]} alt="img no fount" />
+              <img
+                src={IdProduct[0].mainImage}
+                alt=""
+                onClick={(e) => handelChangueImagens(e)}
+              />
+              <img
+                src={IdProduct[0].images[0]}
+                alt="img no fount"
+                onClick={(e) => handelChangueImagens(e)}
+              />
             </button>
             <button>
-              <img src={IdProduct[0].images[0]} alt="img no fount" />
+              <img
+                src={IdProduct[0].images[1]}
+                alt="img no fount"
+                onClick={(e) => handelChangueImagens(e)}
+              />
             </button>
             <button>
-              <img src={IdProduct[0].images[0]} alt="img no fount" />
+              <img
+                src={IdProduct[0].images[2]}
+                alt="img no fount"
+                onClick={(e) => handelChangueImagens(e)}
+              />
             </button>
             <button>
-              <img src={IdProduct[0].images[0]} alt="img no fount" />
+              <img
+                src={IdProduct[0].images[3]}
+                alt="img no fount"
+                onClick={(e) => handelChangueImagens(e)}
+              />
             </button>
           </div>
           <img
-            src={IdProduct[0].mainImage}
+            src={imageProduct == "" ? IdProduct[0].mainImage : imageProduct}
             alt="img no fount"
             className={style.imageP}
           />
@@ -77,22 +140,41 @@ export default function ProductDetail() {
 
         <div className={style.textContent}>
           <div className={style.contentLike}>
-            <AiOutlineHeart className={style.like} size="30px" />
+            <AiOutlineHeart
+              className={style.like}
+              size="30px"
+              onClick={() => addFavorite(IdProduct[0].id)}
+            />
           </div>
           <h2 className={style.title}> {IdProduct[0].name}</h2>
-          <span className={style.price}> ${IdProduct[0].price}</span>
-          <h3 className={style.stock}>Stock: {IdProduct[0].stock}</h3>
+          {/* <h3 className={style.stock}>Stock: {IdProduct[0].stock}</h3> */}
           <h3 className={style.description}>{IdProduct[0].description}</h3>
-          <h3>
+          <div className={style.sizes}>
+            <h3>Sizes:</h3>
+            {IdProduct[0].sizes.map((x) => (
+              <p>{x}</p>
+            ))}
+          </div>
+          {/* <h3>
             <b>Category:</b> {IdProduct[0].categories.map((e) => e.name)}
-          </h3>
+          </h3> */}
           <div className={style.buyCarrito}>
-            <button className={style.buy}>Comparar ya</button>
-            <MdOutlineShoppingCart
-              className={style.carrito}
-              size="40px"
-              onClick={() => addCart(id)}
-            />
+            <span className={style.price}> $USD {IdProduct[0].price}</span>
+            <div className={style.contentbuy}>
+              <button
+                className={IdUser.role == "inactive" ? style.buyNo : style.buy}
+              >
+                Comparar ya
+              </button>
+              {IdUser.role == "inactive" ? (
+                <p>Debes confirmar tu correo para comprar</p>
+              ) : null}
+              <MdOutlineShoppingCart
+                className={style.carrito}
+                size="30px"
+                onClick={() => addCart(id)}
+              />
+            </div>
           </div>
         </div>
       </div>

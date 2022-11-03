@@ -6,22 +6,27 @@ import style from "./Landing.module.css";
 import { useDispatch, useSelector } from "react-redux";
 import { getProducts } from "../../redux/action";
 import { useEffect, useState } from "react";
-import { NavLink, Link } from "react-router-dom";
+import { NavLink, Link, useNavigate } from "react-router-dom";
 import { Carousel } from "flowbite-react";
+import { filterByCategorys } from "../../redux/action";
 import { IoIosArrowDropright, IoIosArrowDropleft } from "react-icons/io";
+import { findRenderedComponentWithType } from "react-dom/test-utils";
 
 export default function Landing() {
   const dispatch = useDispatch();
+  const navegation = useNavigate();
   const productsAll = useSelector((state) => state.productsAll);
   const productsBuy = productsAll.filter(
     (element) => element.bestSellers === true
   );
-  const productsCategotyWoman = productsAll.filter(
-    (element) => element.category == "mujer"
-  );
-  const productsCategotyMan = productsAll.filter(
-    (element) => element.category == "hombre"
-  );
+  const [valueFilters, setValueFilters] = useState("");
+
+  function handelFinters() {
+    navegation("/home");
+    setTimeout(function () {
+      dispatch(filterByCategorys(valueFilters));
+    }, 500);
+  }
   useEffect(() => {
     dispatch(getProducts());
   }, [dispatch]);
@@ -100,42 +105,66 @@ export default function Landing() {
               </div>
             </Carousel>
           </div>
-          <Link to="/home">
-            <div className={style.categoris}>
-              <div className="flex items-center justify-center">
-                <div className={style.categotiImportant}>
-                  <h4>Hombre</h4>
+
+          <div className={style.categoris}>
+            <div className="flex items-center justify-center">
+              <div
+                className={style.categotiImportant}
+                onClick={() => {
+                  setValueFilters("hombre");
+                  handelFinters();
+                }}
+              >
+                <h4>Hombre</h4>
+                <img
+                  src="https://thumbs.dreamstime.com/b/hombre-joven-hermoso-modelo-de-moda-en-la-ropa-sport-elegante-que-mira-c%C3%A1mara-sobre-fondo-gris-154379876.jpg"
+                  alt=""
+                />
+              </div>
+              <div className={style.contentSecundari}>
+                <div
+                  className={style.card}
+                  onClick={() => {
+                    setValueFilters("mujer");
+                    handelFinters();
+                  }}
+                >
+                  <h4>Mujer</h4>
                   <img
-                    src="https://thumbs.dreamstime.com/b/hombre-joven-hermoso-modelo-de-moda-en-la-ropa-sport-elegante-que-mira-c%C3%A1mara-sobre-fondo-gris-154379876.jpg"
+                    src="https://st3.depositphotos.com/1441511/13049/i/450/depositphotos_130492510-stock-photo-fashion-model-style-fashionable-woman.jpg"
                     alt=""
                   />
                 </div>
-                <div className={style.contentSecundari}>
-                  <div className={style.card}>
-                    <h4>Mujer</h4>
-                    <img
-                      src="https://st3.depositphotos.com/1441511/13049/i/450/depositphotos_130492510-stock-photo-fashion-model-style-fashionable-woman.jpg"
-                      alt=""
-                    />
-                  </div>
-                  <div className={style.card}>
-                    <h4>Niños</h4>
-                    <img
-                      src="https://childrens-spaces.com/wp-content/uploads/2019/02/moda-infantil-4.jpg"
-                      alt=""
-                    />
-                  </div>
-                  <div className={style.card}>
-                    <h4>Varios</h4>
-                    <img
-                      src="https://hips.hearstapps.com/hmg-prod.s3.amazonaws.com/images/burro-ropa-armario-abierto-westwing-almacenaje-y-orden-armario-1633514060.jpg?crop=1.00xw:0.834xh;0,0.0534xh&resize=480:*"
-                      alt=""
-                    />
-                  </div>
+                <div
+                  className={style.card}
+                  onClick={() => {
+                    setValueFilters("niños");
+                    handelFinters();
+                  }}
+                >
+                  <h4>Niños</h4>
+                  <img
+                    src="https://childrens-spaces.com/wp-content/uploads/2019/02/moda-infantil-4.jpg"
+                    alt=""
+                  />
+                </div>
+                <div
+                  className={style.card}
+                  onClick={() => {
+                    setValueFilters("varios");
+                    handelFinters();
+                  }}
+                >
+                  <h4>Varios</h4>
+                  <img
+                    src="https://hips.hearstapps.com/hmg-prod.s3.amazonaws.com/images/burro-ropa-armario-abierto-westwing-almacenaje-y-orden-armario-1633514060.jpg?crop=1.00xw:0.834xh;0,0.0534xh&resize=480:*"
+                    alt=""
+                  />
                 </div>
               </div>
             </div>
-          </Link>
+          </div>
+
           <div className="h-96 w-full sm:h-96 w-full xl:h-96 mb-0 w-full  2xl:h-96 w-full">
             <h4 className={style.titleGalery}>Tus marcas favoritas</h4>
             <Carousel

@@ -1,17 +1,14 @@
-import React, { useState,useSelector } from "react";
+import React, { useState } from "react";
 import { useDispatch } from "react-redux";
 import style from "../createProduct/createProduct.module.css"
 import { postProducts } from "../../redux/action";
 import MainImage from "./mainImage";
 import Imagenes from "./Imagenes"
 import axios from "axios";
-import { useEffect } from "react";
 
 export default function CreateProduct() {
 
- const cartState = useSelector((state) => state.user)
- useEffect(() => {
-  }, []);
+
     const dispatch = useDispatch();
     const [input, setInput] = useState({
         name: '',
@@ -30,13 +27,12 @@ export default function CreateProduct() {
     const [images, setImages] = useState([])
     input.image = images
 
-    //console.log(images);
+    console.log(images);
 
     input.mainImage = mainImage;
 
     // console.log(mainImage, 'este es mi estado');
     console.log(input, 'este es el body');
-    console.log(cartState)
 
     const handleFiles = (e) => {
         setMainImage(e.target.files[0])

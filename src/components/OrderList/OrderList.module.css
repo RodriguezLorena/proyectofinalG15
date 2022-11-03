@@ -1,0 +1,9 @@
+.content {
+  width: 30rem;
+  min-height: 10rem;
+  border-radius: 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}

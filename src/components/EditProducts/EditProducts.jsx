@@ -7,6 +7,8 @@ import { getDetail, desmontarDetalle, putProduct } from "../../redux/action";
 import { useDispatch } from "react-redux";
 import NavBar from "../NavBar/NavBar";
 import { IoReload } from "react-icons/io5";
+import swal from "sweetalert";
+import axios from "axios";
 
 export default function EditProducts() {
   const dispatch = useDispatch();
@@ -21,6 +23,7 @@ export default function EditProducts() {
 
   const product = useSelector((state) => state.detailProduct);
   const [state, setState] = useState(true);
+
   const [valuesNew, setValuesNew] = useState({
     name: "",
     price: 0,
@@ -31,7 +34,7 @@ export default function EditProducts() {
     mainImage: "",
     sizes: [],
     images: [],
-    categories: [],
+    categories: "",
     bestSellers: false,
   });
 
@@ -39,8 +42,6 @@ export default function EditProducts() {
     "s",
     "m",
     "l",
-    "xl",
-    "U",
     "1",
     "1.5",
     "2",
@@ -51,6 +52,69 @@ export default function EditProducts() {
     "40",
     "41",
   ];
+  //VALIDACIONES:
+  const [validador, setValidador] = useState({});
+
+  const validacion = (valuesNew) => {
+    let validar = {};
+    let noContieneNumero = /[1-9]/;
+    let sinEspacios = /[\s]/;
+
+    if (valuesNew.name.length > 50)
+      validar.name = "NO PUEDE TENER MAS DE 50 CARACTERES";
+    if (valuesNew.name.length < 5)
+      validar.name = "NECESITA TENER UN MINIMO DE 5 CARACTERES";
+    if (sinEspacios.test(valuesNew.type[0]))
+      validar.name = "TIENE QUE PONER TEXTO VALIDO, LOS ESPACIOS NO SE VALEN";
+    if (noContieneNumero.test(valuesNew.name))
+      validar.name = "NO PUEDE CONTENER NUMEROS";
+
+    if (valuesNew.description.length > 100)
+      validar.description = "NO PUEDE TENER MAS DE 100 CARACTERES";
+    if (valuesNew.description.length < 20)
+      validar.description = "NECESITA TENER UN MINIMO DE 20 CARACTERES";
+    if (sinEspacios.test(valuesNew.description[0]))
+      validar.description = "NO PUEDE SER ESPACIOS EN BLANCO";
+
+    if (Number(valuesNew.price) < 1)
+      validar.price = "TIENE QUE SER UN PRECIO MAYOR A $USD 0 ";
+    if (Number(valuesNew.price) > 500)
+      validar.price = "NO PUEDE SER MAYOR A $USD 500";
+
+    if (Number(valuesNew.stock) < 1)
+      validar.stock = "TIENE QUE SER UN VALOR MAYOR A 0 ";
+    if (Number(valuesNew.stock) > 10000000)
+      validar.stock = "NO ES RECIONAL LA CANTIDAD QUE INTENTA PONER";
+
+    if (valuesNew.type.length > 15)
+      validar.type = "NO PUEDE TENER MAS DE 15 CARACTERES";
+    if (valuesNew.type.length < 5)
+      validar.type = "NECESITA TENER UN MINIMO DE 5 CARACTERES";
+    if (sinEspacios.test(valuesNew.type[0]))
+      validar.type = "TIENE QUE PONER TEXTO VALIDO, LOS ESPACIOS NO SE VALEN";
+    if (noContieneNumero.test(valuesNew.type))
+      validar.type = "NO PUEDE CONTENER NUMEROS";
+
+    return validar;
+  };
+  //----------------manipuladores de imagen----------------
+
+  const [mainImageEdit, setMainImageEdit] = useState("");
+  valuesNew.mainImage = mainImageEdit;
+
+  console.log(valuesNew.mainImage, "este es el body");
+
+  const handleFiles = (e) => {
+    setMainImageEdit(e.target.files[0]);
+  };
+
+  const handleAPI = async () => {
+    const url = "https://velvet.up.railway.app/product/image";
+    let formData = new FormData();
+    formData.append("imagen1", mainImageEdit);
+    const pedidoCloudUno = await axios.post(url, formData);
+    setMainImageEdit(pedidoCloudUno.data);
+  };
 
   const handelEditProduct = (e) => {
     e.preventDefault();
@@ -58,6 +122,12 @@ export default function EditProducts() {
       ...valuesNew,
       [e.target.name]: e.target.value,
     });
+    setValidador(
+      validacion({
+        ...valuesNew,
+        [e.target.name]: e.target.value,
+      })
+    );
   };
 
   function handelMasVendido(e) {
@@ -74,31 +144,64 @@ export default function EditProducts() {
     });
   }
 
-  function handelSizes(e) {
-    setValuesNew({
-      ...valuesNew,
-      sizes: [...valuesNew.sizes, e.target.value],
-    });
-  }
+  const handelSizes = (e) => {
+    console.log("aca esta el nuevo producto ", valuesNew);
+    const selec = valuesNew.sizes.filter(
+      (elemento) => elemento !== e.target.innerHTML
+    );
+    if (selec.includes(e.target.value)) {
+      swal({
+        title: "UPSS!!!",
+        text: "Ese talle ya fue seleccionado",
+        icon: "error",
+        className: "swal-modal",
+        className: "swal-title",
+      });
+    } else {
+      setValuesNew({
+        ...valuesNew,
+        sizes: [...valuesNew.sizes, e.target.value],
+      });
+      setValidador(
+        validacion({
+          ...valuesNew,
+          sizes: [...valuesNew.sizes, e.target.value],
+        })
+      );
+    }
+  };
 
-  function handelImages(e) {
+  const eliminarSelect = (e) => {
+    const seleccion = valuesNew.sizes.filter(
+      (elemento) => elemento !== e.target.innerHTML
+    );
     setValuesNew({
       ...valuesNew,
-      images: [...valuesNew.images, e.target.value],
+      sizes: seleccion,
     });
-  }
-  function handelCateogoties(e) {
+    setValidador(
+      validacion({
+        ...valuesNew,
+        sizes: [...seleccion],
+      })
+    );
+  };
+
+  const categorias = ["mujer", "hombre", "varios", "niños"];
+  const handelCateogoties = (e) => {
     setValuesNew({
       ...valuesNew,
-      categories: [...valuesNew.categories, e.target.value],
+      categories: e.target.value,
     });
-  }
+    console.log("aca esta el nuevo producto ", valuesNew);
+  };
 
   function handelChangueValues() {
     if (valuesNew.value == "1") valuesNew.value = true;
     else valuesNew.value = false;
     if (valuesNew.bestSellers == "1") valuesNew.bestSellers = true;
     else valuesNew.bestSellers = false;
+    console.log(valuesNew, "valoresss");
     dispatch(putProduct(valuesNew, id));
     setValuesNew({
       name: "",
@@ -113,16 +216,13 @@ export default function EditProducts() {
       categories: [],
       bestSellers: false,
     });
-    setTimeout(function () {
-      window.location.reload(true);
-    }, 2000);
   }
 
   if (state) {
     return <div>Cargando...</div>;
   }
   return (
-    <div>
+    <div className="bg-white">
       <NavBar />
       <div className={style.content}>
         <div className={style.card}>
@@ -153,32 +253,49 @@ export default function EditProducts() {
                 name="name"
                 onChange={(e) => handelEditProduct(e)}
               />
+              {validador.name ? <p>{validador.name}</p> : <p> </p>}
             </div>
             <div>
               <label htmlFor="">Precio</label>
               <input
-                type="text"
+                type="number"
                 name="price"
                 value={valuesNew.price}
                 onChange={(e) => handelEditProduct(e)}
               />
+              {validador.price ? <p>{validador.price}</p> : <p> </p>}
             </div>
             <div>
               <label htmlFor="">Talla</label>
               <select onChange={(e) => handelSizes(e)}>
-                {sizess.map((x) => {
-                  return <option value={x}>{x}</option>;
+                {sizess.map((x, i) => {
+                  return (
+                    <option key={i} value={x}>
+                      {x}
+                    </option>
+                  );
                 })}
               </select>
+              <div>
+                <ul>
+                  {valuesNew.sizes.map((elemento) => (
+                    <li key={elemento} onClick={(e) => eliminarSelect(e)}>
+                      {elemento},
+                    </li>
+                  ))}
+                </ul>
+              </div>
             </div>
+
             <div>
               <label htmlFor="">stock</label>
               <input
-                type="text"
+                type="number"
                 name="stock"
                 value={valuesNew.stock}
                 onChange={(e) => handelEditProduct(e)}
               />
+              {validador.stock ? <p>{validador.stock}</p> : <p> </p>}
             </div>
             <div>
               <label htmlFor="">Descripcion</label>
@@ -188,6 +305,11 @@ export default function EditProducts() {
                 value={valuesNew.description}
                 onChange={(e) => handelEditProduct(e)}
               />
+              {validador.description ? (
+                <p>{validador.description}</p>
+              ) : (
+                <p> </p>
+              )}
             </div>
             <div>
               <label htmlFor="">Value</label>
@@ -208,6 +330,7 @@ export default function EditProducts() {
                 value={valuesNew.type}
                 onChange={(e) => handelEditProduct(e)}
               />
+              {validador.type ? <p>{validador.type}</p> : <p> </p>}
             </div>
             <div>
               <label htmlFor="">Mas vendido:</label>
@@ -221,15 +344,33 @@ export default function EditProducts() {
               </select>
             </div>
             <div>
-              <label htmlFor="">Catrogrias:</label>
-              <select onChange={(e) => handelCateogoties(e)}>
-                <option value="hombre">hombre</option>
-                <option value="mujer">mujer</option>
-                <option value="niños">niños</option>
-                <option value="varios">varios</option>
+              <label htmlFor="">Categorias:</label>
+              <select
+                defaultValue={"default"}
+                onChange={(e) => handelCateogoties(e)}
+              >
+                <option value="default" disabled>
+                  ELIGE UNA CATEGORIA:
+                </option>
+                {categorias.map((elemento, index) => {
+                  return (
+                    <option key={index} value={elemento}>
+                      {elemento}
+                    </option>
+                  );
+                })}
               </select>
+              <div></div>
             </div>
           </form>
+          <div>
+            <input
+              type="file"
+              name="imagen1"
+              onChange={(e) => handleFiles(e)}
+            ></input>
+            <button onClick={handleAPI}>CAMBIAR IMAGEN DE PERFIL</button>
+          </div>
           <button
             onClick={() => handelChangueValues()}
             className={style.butonSaveChangue}
