@@ -35,8 +35,15 @@ export default function ProductDetail() {
 
   const dispath = useDispatch();
   const addCart = (id) => {
-    console.log(id);
-    dispath(addToCart(id));
+    dispath(addToCart(id))
+    swal({
+      title: "Producto agregado al carrito",
+      icon: "success",
+      button: "Aceptar",
+      className: "swal-modal",
+      className: "swal-overlay",
+      className: "swal-title",
+    });
   };
 
   const addFavorite = (id) => {
