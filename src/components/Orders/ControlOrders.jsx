@@ -2,12 +2,13 @@ import axios from "axios";
 import React from "react";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { Link } from "react-router-dom";
+import { Link} from "react-router-dom";
 import { getOrders } from "../../redux/action";
-
+import { clearCart } from "../../redux/action";
 
 export default function ControlOrders() {
     const dispatch = useDispatch();
+
     // dispatch(getOrders);
     useEffect(() => {
         dispatch(getOrders());
@@ -25,9 +26,13 @@ export default function ControlOrders() {
         }
     }
 
-    // console.log(obj)
+    console.log(obj, 'OBJETO')
     const order_id = a;
+    console.log(order_id, 'IDDDDDDDDD');
 
+    function Redirecionar() {
+        window.location.href = "/home";
+    }
 
     // const arraydeStatus = ['created', 'pending', 'completed', 'canceled'];
 
@@ -35,7 +40,7 @@ export default function ControlOrders() {
         e.preventDefault()
 
         const cambiar = await axios.put(`https://velvet.up.railway.app/order/${order_id}`, {
-            status: "created"
+            status: "completed"
         })
         console.log(cambiar);
 
@@ -47,22 +52,38 @@ export default function ControlOrders() {
             direction: obj.direction,
             department: obj.department,
             precioFinal: preciototal,
-
+            status: 'completed',
             postalCode: obj.postalCode
         })
 
         console.log(mandaremail, "okey se mando");
 
+        limpiarCart()
+
+        Redirecionar()
+
+
 
     }
+
+
+
+
+    function limpiarCart() {
+        dispatch(clearCart());
+        // swal("Su carrito esta vacio");
+    };
+
 
 
     return (
         <div>
             <h3>GRACIAS POR SU COMPRA</h3>
-            {/* <Link to="/"> */}
-            <button onClick={changeStatus}>Click Aqui para finalizar!</button>
-            {/* </Link> */}
+            <Link to="/home">
+                <button onClick={e => {
+                    changeStatus(e)
+                }}>Click Aqui para finalizar!</button>
+            </Link>
         </div>
 
 
