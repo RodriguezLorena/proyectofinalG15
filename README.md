@@ -42,4 +42,18 @@ y en el catalogo:
 
 Sector de productos mas vendidos
 Sector de productos con las categorias de Velvet
-## PD: el proyecto es un inicial que se puede llegar a agregar mas contenido por parte de los desarrolladores
+## PD: el proyecto es un inicial y se puede llegar a agregar mas contenido por parte de los desarrolladores
+
+## Imagenes del proyecto
+
+###Home 
+![velvet5](https://user-images.githubusercontent.com/91568324/200688504-3fd07ca8-d589-4353-8936-651595593b8d.jpg)
+
+###Detalle de producto
+![velvet4](https://user-images.githubusercontent.com/91568324/200688608-8d15fe06-7676-46ea-9fec-e457630c1eca.jpg)
+
+###Favoritos
+![velvet1](https://user-images.githubusercontent.com/91568324/200688728-db463fcb-8ebf-4b94-9602-44828180e53d.jpg)
+
+###Carrito de compras
+![velvr](https://user-images.githubusercontent.com/91568324/200689237-d4a3a8c5-40b4-49e2-b64e-b5893a74641f.jpg)
