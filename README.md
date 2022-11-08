@@ -2,7 +2,7 @@
 
 Proyecto Grupal de finalizacion  del Bootcamp Henry
 Dev Team:
-Pm: Felipe Ciro (Instructor de Henry y mentor)
+- Pm: Felipe Ciro (Instructor de Henry y mentor)
 
 ### Integrantes del Equipo:
 
