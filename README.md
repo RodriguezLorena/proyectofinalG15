@@ -1,10 +1,10 @@
-#### VELVET - E-commerce.
+# VELVET - E-commerce.
 
 Proyecto Grupal de finalizacion  del Bootcamp Henry
 Dev Team:
 Pm: Felipe Ciro (Instructor de Henry y mentor)
 
-## Integrantes del Equipo:
+### Integrantes del Equipo:
 
 - Marcos H
 - Heiner Arevalo
@@ -15,7 +15,7 @@ Pm: Felipe Ciro (Instructor de Henry y mentor)
 
 
 
-## Proyecto: E-commerce de indumentaria -
+### Proyecto: E-commerce de indumentaria -
 
 la App esta diseñada integramente con Javascript, NodeJS, React, Redux, Styled components, module CSS en el front del cliente de la App, y se hizo el deploy en Vercel
 
@@ -24,7 +24,7 @@ el sector de administracion de la pagina se diseño en Javascript, NodeJS, React
 
 
 
-## Catalogo
+### Catalogo
 creacion y modificacion de usuario.
 historial de compras del usuario.
 login con Google
@@ -33,7 +33,7 @@ filtrado de productos por categoria, precio,tipo y talla
 buscado por nombre de producto
 carro de compras
 
-# agregando utilidades al usuario como:
+### agregando utilidades al usuario como:
 
 favoritos.
 la posibilidad de dejar un rankeo y un comentario del producto comprado
