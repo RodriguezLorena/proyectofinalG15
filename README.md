@@ -46,14 +46,14 @@ Sector de productos con las categorias de Velvet
 
 ## Imagenes del proyecto
 
-###Home 
+### Home 
 ![velvet5](https://user-images.githubusercontent.com/91568324/200688504-3fd07ca8-d589-4353-8936-651595593b8d.jpg)
 
-###Detalle de producto
+### Detalle de producto
 ![velvet4](https://user-images.githubusercontent.com/91568324/200688608-8d15fe06-7676-46ea-9fec-e457630c1eca.jpg)
 
-###Favoritos
+### Favoritos
 ![velvet1](https://user-images.githubusercontent.com/91568324/200688728-db463fcb-8ebf-4b94-9602-44828180e53d.jpg)
 
-###Carrito de compras
+### Carrito de compras
 ![velvr](https://user-images.githubusercontent.com/91568324/200689237-d4a3a8c5-40b4-49e2-b64e-b5893a74641f.jpg)
