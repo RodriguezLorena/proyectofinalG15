@@ -1,4 +1,5 @@
 # VELVET - E-commerce.
+![velvet](https://user-images.githubusercontent.com/91568324/200687715-30c23a5d-4633-4041-aadf-f71475d30b9b.jpg)
 
 Proyecto Grupal de finalizacion  del Bootcamp Henry
 Dev Team:
@@ -20,7 +21,7 @@ Dev Team:
 la App esta diseñada integramente con Javascript, NodeJS, React, Redux, Styled components, module CSS en el front del cliente de la App, y se hizo el deploy en Vercel
 
 https://velvetpf.vercel.app/
-el sector de administracion de la pagina se diseño en Javascript, NodeJS, React, redux y tailwind css  se realizo el deploy en Vercel
+el sector de administracion de la pagina se diseño en Javascript, NodeJS, React, redux y tailwind css,  se realizo el deploy en Vercel
 
 
 
