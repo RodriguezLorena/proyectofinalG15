@@ -1,70 +1,39 @@
-# Getting Started with Create React App
+### HenryShoes - E-commerce.
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Proyecto Grupal de finalizacion HenryLabs del Bootcamp Henry
+Dev Team:
+Pm: Amatt, Ignacio (Instructor de Henry y corrector del proyecto para la aprobacion)
 
-## Available Scripts
+Integrantes del Equipo:
 
-In the project directory, you can run:
+- Blandon, kimberly. - Echegaray, Lucas. - Navarre, Joaquin. - Santana, Angela. - Siri, Federico. - Toloza, Federico.
 
-### `npm start`
+Po: Matias Cavallo (instructor de Henry y corrector del proyecto para la aprobacion)
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+Proyecto: E-commerce de venta de zapatillas -
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+la App esta diseñada integramente con Javascript, NodeJS, React, Redux, Styled components, module CSS en el front del cliente de la App, y se hizo el deploy en Vercel
 
-### `npm test`
+https://client-henryshoes.vercel.app/
+el sector de administracion de la pagina se diseño en Javascript, NodeJS, React, redux y Material UI y se realizo el deploy en Vercel
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+https://admin-henryshoes.vercel.app/signin. la parte del BackEnd de la App se realizo con Postgres, sequelize, NodeJS y Javascript y realizado el deploy en HEROKU
+La App se realizo con contenido basico necesario para un E-commerce,
 
-### `npm run build`
+catalogo
+creacion y modificacion de usuario.
+historial de compras del usuario.
+login con Google
+pasarela de pagos
+filtrado de productos por marca, genero y categoria
+buscado por nombre de producto
+carro de compras
+agregando utilidades al usuario como:
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+lista de deseados.
+la posibilidad de dejar un rankeo y un comentario del producto comprado
+y en el catalogo:
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
-
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+Sector de productos mas vendidos
+Sector de productos con descuentos que se ven reflejados en la compra.
+PD: el proyecto es un inicial que se puede llegar a agregar mas contenido por parte de los desarrolladores
