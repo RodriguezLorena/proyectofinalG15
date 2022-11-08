@@ -59,7 +59,7 @@ Sector de productos con las categorias de Velvet
 ![velvr](https://user-images.githubusercontent.com/91568324/200689237-d4a3a8c5-40b4-49e2-b64e-b5893a74641f.jpg)
 
 
-<p align="center">
+<p align="right">
  
   <img height="200" src="https://media.tenor.com/RTYaIF25dDMAAAAd/mi-trabajo-aqui-ha-terminado-my-work-here-is-over.gif" />
 </p>
