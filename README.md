@@ -1,39 +1,44 @@
-### HenryShoes - E-commerce.
+#### VELVET - E-commerce.
 
-Proyecto Grupal de finalizacion HenryLabs del Bootcamp Henry
+Proyecto Grupal de finalizacion  del Bootcamp Henry
 Dev Team:
-Pm: Amatt, Ignacio (Instructor de Henry y corrector del proyecto para la aprobacion)
+Pm: Felipe Ciro (Instructor de Henry y mentor)
 
-Integrantes del Equipo:
+## Integrantes del Equipo:
 
-- Blandon, kimberly. - Echegaray, Lucas. - Navarre, Joaquin. - Santana, Angela. - Siri, Federico. - Toloza, Federico.
+- Marcos H
+- Heiner Arevalo
+- Lorena 
+- Kevin 
+- Carlos Pana
+- Guillermo
 
-Po: Matias Cavallo (instructor de Henry y corrector del proyecto para la aprobacion)
 
-Proyecto: E-commerce de venta de zapatillas -
+
+## Proyecto: E-commerce de indumentaria -
 
 la App esta diseñada integramente con Javascript, NodeJS, React, Redux, Styled components, module CSS en el front del cliente de la App, y se hizo el deploy en Vercel
 
-https://client-henryshoes.vercel.app/
-el sector de administracion de la pagina se diseño en Javascript, NodeJS, React, redux y Material UI y se realizo el deploy en Vercel
+https://velvetpf.vercel.app/
+el sector de administracion de la pagina se diseño en Javascript, NodeJS, React, redux y tailwind css  se realizo el deploy en Vercel
 
-https://admin-henryshoes.vercel.app/signin. la parte del BackEnd de la App se realizo con Postgres, sequelize, NodeJS y Javascript y realizado el deploy en HEROKU
-La App se realizo con contenido basico necesario para un E-commerce,
 
-catalogo
+
+## Catalogo
 creacion y modificacion de usuario.
 historial de compras del usuario.
 login con Google
 pasarela de pagos
-filtrado de productos por marca, genero y categoria
+filtrado de productos por categoria, precio,tipo y talla
 buscado por nombre de producto
 carro de compras
-agregando utilidades al usuario como:
 
-lista de deseados.
+# agregando utilidades al usuario como:
+
+favoritos.
 la posibilidad de dejar un rankeo y un comentario del producto comprado
 y en el catalogo:
 
 Sector de productos mas vendidos
-Sector de productos con descuentos que se ven reflejados en la compra.
-PD: el proyecto es un inicial que se puede llegar a agregar mas contenido por parte de los desarrolladores
+Sector de productos con las categorias de Velvet
+## PD: el proyecto es un inicial que se puede llegar a agregar mas contenido por parte de los desarrolladores
