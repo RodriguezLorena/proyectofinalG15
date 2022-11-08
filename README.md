@@ -61,5 +61,5 @@ Sector de productos con las categorias de Velvet
 
 <p align="right">
  
-  <img height="200" src="https://media.tenor.com/RTYaIF25dDMAAAAd/mi-trabajo-aqui-ha-terminado-my-work-here-is-over.gif" />
+  <img height="100" src="https://media.tenor.com/RTYaIF25dDMAAAAd/mi-trabajo-aqui-ha-terminado-my-work-here-is-over.gif" />
 </p>
